@@ -1,9 +1,9 @@
-Handle,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Variant Price,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Requires Shipping,Variant Taxable
-mens-basketball-shorts,Color,White,Size,XS,25.00,1,deny,manual,TRUE,TRUE
-mens-basketball-shorts,Color,White,Size,S,25.00,1,deny,manual,TRUE,TRUE
-mens-basketball-shorts,Color,White,Size,M,25.00,2,deny,manual,TRUE,TRUE
-mens-basketball-shorts,Color,White,Size,L,25.00,3,deny,manual,TRUE,TRUE
-mens-basketball-shorts,Color,White,Size,XL,25.00,2,deny,manual,TRUE,TRUE
-mens-basketball-shorts,Color,Black,Size,M,25.00,2,deny,manual,TRUE,TRUE
-mens-basketball-shorts,Color,Black,Size,L,25.00,2,deny,manual,TRUE,TRUE
-mens-basketball-shorts,Color,Black,Size,XL,25.00,2,deny,manual,TRUE,TRUE
+Handle,Title,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Variant Price,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Requires Shipping,Variant Taxable
+mens-basketball-shorts,Men's Basketball Shorts,Color,White,Size,XS,25.00,1,deny,manual,TRUE,TRUE
+mens-basketball-shorts,,Color,White,Size,S,25.00,1,deny,manual,TRUE,TRUE
+mens-basketball-shorts,,Color,White,Size,M,25.00,2,deny,manual,TRUE,TRUE
+mens-basketball-shorts,,Color,White,Size,L,25.00,3,deny,manual,TRUE,TRUE
+mens-basketball-shorts,,Color,White,Size,XL,25.00,2,deny,manual,TRUE,TRUE
+mens-basketball-shorts,,Color,Black,Size,M,25.00,2,deny,manual,TRUE,TRUE
+mens-basketball-shorts,,Color,Black,Size,L,25.00,2,deny,manual,TRUE,TRUE
+mens-basketball-shorts,,Color,Black,Size,XL,25.00,2,deny,manual,TRUE,TRUE
