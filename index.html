@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAGLINE — To the Moon!</title>
+<meta name="description" content="Christian athletic clothing brand. GOD. HEALTH. WEALTH. Built for believers. Designed for champions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #FFB700;
+  --gold-bright: #FFD700;
+  --gold-dark: #C98F00;
+  --blue: #1B3DD8;
+  --blue-bright: #4361EE;
+  --white: #FFFFFF;
+  --space: #06060F;
+  --space2: #0C0C1E;
+  --space3: #111126;
+  --muted: #8A8AAA;
+  --text: #DDE0F0;
+  --card: #0D0D25;
+  --border-gold: rgba(255,183,0,0.18);
+  --border-soft: rgba(255,255,255,0.07);
+  --gold-grad: linear-gradient(135deg,#FFD700 0%,#FFB700 50%,#C98F00 100%);
+  --blue-grad: linear-gradient(135deg,#4361EE 0%,#1B3DD8 100%);
+  --hero-bg: radial-gradient(ellipse at 50% 20%,#0D1B4D 0%,#060614 55%,#03030A 100%);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* ── UTILITY ── */
+.gold-text{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section{padding:100px 60px}
+.section-label{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,5rem);line-height:.95;letter-spacing:.04em;color:var(--white);margin-bottom:56px}
+.section-title .g{color:var(--gold)}
+.btn-primary{display:inline-block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;background:var(--gold-grad);color:var(--space);padding:16px 40px;text-decoration:none;transition:opacity .3s,transform .2s}
+.btn-primary:hover{opacity:.85;transform:translateY(-2px)}
+.btn-ghost{display:inline-block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;border:1.5px solid rgba(255,255,255,.2);color:var(--white);padding:15px 40px;text-decoration:none;transition:border-color .3s,color .3s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── CURSOR (pointer devices only) ── */
+@media(pointer:fine){
+  body{cursor:none}
+  .cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s}
+  .cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(255,183,0,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+  a,button,[onclick]{cursor:none!important}
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,backdrop-filter .3s}
+nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-gold)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.12em;text-decoration:none;color:var(--white)}
+.nav-logo .g{color:var(--gold)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-grad);color:var(--space);padding:10px 24px;text-decoration:none;font-weight:700;transition:opacity .3s,transform .2s}
+.nav-cta:hover{opacity:.85;transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-burger span{display:block;width:24px;height:2px;background:var(--white);transition:.3s}
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(6,6,15,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:.1em;color:var(--white);text-decoration:none;transition:color .3s}
+.mob-menu a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:24px;right:28px;background:none;border:none;font-size:1.8rem;color:var(--muted);cursor:pointer}
+@media(max-width:900px){
+  nav{padding:20px 24px}
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}
+}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--hero-bg);position:relative;overflow:hidden;display:flex;align-items:center}
+.stars-wrap{position:absolute;inset:0;pointer-events:none}
+.s{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+.hero-glow-a{position:absolute;bottom:-120px;left:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(255,183,0,.1) 0%,transparent 70%);pointer-events:none}
+.hero-glow-b{position:absolute;top:-60px;right:-60px;width:560px;height:560px;background:radial-gradient(circle,rgba(67,97,238,.1) 0%,transparent 70%);pointer-events:none}
+.moon-wrap{position:absolute;right:6%;top:8%;width:260px;height:260px;pointer-events:none;opacity:.7}
+@keyframes moonpulse{0%,100%{opacity:.7;filter:drop-shadow(0 0 30px rgba(255,183,0,.5))}50%{opacity:.9;filter:drop-shadow(0 0 50px rgba(255,183,0,.8))}}
+.moon-wrap{animation:moonpulse 5s ease-in-out infinite}
+.hero-content{position:relative;z-index:5;padding:150px 60px 100px;max-width:960px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,183,0,.1);border:1px solid rgba(255,183,0,.35);padding:6px 18px;border-radius:100px;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .7s ease .2s forwards}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero-h1{font-family:'Bebas Neue',sans-serif;line-height:.88;letter-spacing:.02em;margin-bottom:22px;opacity:0;animation:fadeUp .9s ease .4s forwards}
+.hero-h1 .l1{display:block;font-size:clamp(4rem,10vw,10rem);color:var(--white)}
+.hero-h1 .l2{display:block;font-size:clamp(5.5rem,15vw,14rem);background:linear-gradient(135deg,#FFE234 0%,#FFB700 40%,#FF8C00 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 60px rgba(255,183,0,.5))}
+.hero-h1 .l3{display:block;font-size:clamp(4rem,10vw,10rem);color:var(--white)}
+.hero-motto{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,2.5vw,1.8rem);letter-spacing:.5em;color:var(--blue-bright);margin-bottom:16px;opacity:0;animation:fadeUp .9s ease .6s forwards}
+.hero-motto .dot{color:var(--gold);letter-spacing:.1em}
+.hero-verse{font-family:'Cinzel',serif;font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.7;margin-bottom:44px;opacity:0;animation:fadeUp .9s ease .75s forwards}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp .9s ease .9s forwards}
+.hero-scroll{position:absolute;bottom:40px;left:60px;display:flex;align-items:center;gap:12px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeIn 1s ease 1.3s forwards}
+.scroll-line{width:36px;height:1px;background:var(--gold)}
+@media(max-width:768px){
+  .hero-content{padding:120px 24px 80px}
+  .hero-scroll{left:24px}
+  .moon-wrap{width:160px;height:160px;right:4%;top:14%}
+}
+
+/* ── MARQUEE ── */
+.marquee{background:var(--space3);border-top:1px solid rgba(255,183,0,.2);border-bottom:1px solid rgba(255,183,0,.2);padding:13px 0;overflow:hidden}
+.marquee-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap}
+.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.3em;color:var(--muted);flex-shrink:0;padding:0 28px}
+.marquee-item .star{color:var(--gold)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── VALUES ── */
+.values-sec{background:var(--space2);padding:100px 60px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.val-card{background:var(--card);border:1px solid var(--border-gold);padding:48px 36px;position:relative;overflow:hidden;transition:transform .3s,border-color .35s}
+.val-card:hover{transform:translateY(-5px);border-color:rgba(255,183,0,.5)}
+.val-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.val-card:hover::after{transform:scaleX(1)}
+.val-icon{font-size:2.4rem;margin-bottom:18px;display:block}
+.val-word{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;letter-spacing:.06em;line-height:1;margin-bottom:16px;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.val-desc{font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:22px}
+.val-verse{font-family:'Cinzel',serif;font-size:.72rem;line-height:1.75;color:rgba(255,183,0,.55);border-left:2px solid rgba(255,183,0,.25);padding-left:14px}
+@media(max-width:900px){.values-grid{grid-template-columns:1fr};.values-sec{padding:70px 24px}}
+@media(max-width:768px){.values-sec{padding:70px 20px}}
+
+/* ── SHOP ── */
+.shop-sec{background:var(--space);padding:100px 60px}
+.shop-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px}
+.view-all-link{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--muted);padding-bottom:2px;transition:color .3s,border-color .3s}
+.view-all-link:hover{color:var(--gold);border-color:var(--gold)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.prod-card{background:var(--card);border:1px solid var(--border-soft);overflow:hidden;position:relative;transition:border-color .3s,transform .3s;cursor:pointer}
+.prod-card:hover{border-color:rgba(255,183,0,.4);transform:translateY(-4px)}
+.prod-img{height:320px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--space3) 0%,var(--space2) 100%)}
+.prod-img svg{transition:transform .55s ease}
+.prod-card:hover .prod-img svg{transform:scale(1.07) translateY(-6px)}
+.badge{position:absolute;top:14px;left:14px;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;padding:4px 12px}
+.badge-new{background:var(--gold-grad);color:var(--space)}
+.badge-hot{background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff}
+.badge-ltd{background:linear-gradient(135deg,#7C3AED,#4C1D95);color:#fff}
+.prod-hover-btn{position:absolute;bottom:14px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--gold-grad);color:var(--space);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;padding:9px 22px;border:none;cursor:pointer;opacity:0;transition:opacity .3s,transform .3s;white-space:nowrap}
+.prod-card:hover .prod-hover-btn{opacity:1;transform:translateX(-50%) translateY(0)}
+.prod-info{padding:18px 22px 22px;display:flex;justify-content:space-between;align-items:flex-start}
+.prod-name{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.06em;color:var(--white);margin-bottom:3px}
+.prod-cat{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.prod-price{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@media(max-width:1100px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.products-grid{grid-template-columns:1fr};.shop-sec{padding:70px 20px}}
+
+/* ── VERSE BANNER ── */
+.verse-banner{padding:80px 60px;background:linear-gradient(135deg,#07072A 0%,#0D1B4D 50%,#07072A 100%);text-align:center;border-top:1px solid rgba(255,183,0,.15);border-bottom:1px solid rgba(255,183,0,.15);position:relative;overflow:hidden}
+.verse-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(67,97,238,.12) 0%,transparent 70%)}
+.verse-banner blockquote{position:relative;z-index:2;font-family:'Cinzel',serif;font-size:clamp(1.2rem,2.8vw,2rem);font-weight:600;color:var(--white);line-height:1.55;max-width:820px;margin:0 auto 12px}
+.verse-banner cite{position:relative;z-index:2;font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold);letter-spacing:.25em;text-transform:uppercase;display:block;font-style:normal}
+@media(max-width:768px){.verse-banner{padding:60px 24px}}
+
+/* ── CUSTOM BUILDER ── */
+.builder-sec{background:var(--space2);padding:100px 60px}
+.builder-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px}
+.builder-preview{position:sticky;top:96px;background:var(--card);border:1px solid var(--border-gold);padding:44px 32px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.prev-lbl{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.prev-wrap{width:100%;max-width:260px;position:relative;aspect-ratio:3/4}
+#prevSvg{width:100%;height:100%}
+#logoOverlay{position:absolute;pointer-events:none;object-fit:contain;display:none}
+#textOverlay{position:absolute;pointer-events:none;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;color:rgba(0,0,0,.4);white-space:nowrap;transform:translate(-50%,-50%)}
+.prev-garment-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--gold)}
+.prev-color-name{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.builder-controls{display:flex;flex-direction:column;gap:24px}
+.ctrl-block{background:var(--card);border:1px solid var(--border-soft);padding:26px 22px}
+.ctrl-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,183,0,.1)}
+.ctrl-num{font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:var(--gold-grad);color:var(--space);width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ctrl-title{font-size:.66rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.garment-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.g-opt{border:1px solid rgba(255,255,255,.08);padding:14px 8px;text-align:center;cursor:pointer;background:transparent;transition:border-color .3s,background .3s;width:100%}
+.g-opt:hover,.g-opt.active{border-color:var(--gold);background:rgba(255,183,0,.06)}
+.g-opt-icon{font-size:1.5rem;margin-bottom:5px;display:block}
+.g-opt-name{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.g-opt.active .g-opt-name{color:var(--gold)}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
+.sw:hover{transform:scale(1.2)}
+.sw.active{border-color:var(--gold)}
+.sw.active::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(255,255,255,.85)}
+.upload-zone{border:2px dashed rgba(255,183,0,.3);background:rgba(255,183,0,.03);padding:28px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s;position:relative}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--gold);background:rgba(255,183,0,.07)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:2rem;margin-bottom:8px;opacity:.5}
+.upload-txt{font-size:.78rem;color:var(--muted);line-height:1.65}
+.upload-txt strong{color:var(--gold)}
+#uploadPreviewImg{width:72px;height:72px;object-fit:contain;border:1px solid rgba(255,183,0,.2);margin:10px auto 0;display:none}
+.place-wrap{display:flex;gap:24px;align-items:flex-start}
+.place-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:150px;flex-shrink:0}
+.p-btn{aspect-ratio:1;border:1px solid rgba(255,255,255,.08);background:transparent;cursor:pointer;transition:background .2s,border-color .2s;font-size:.7rem;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.p-btn:hover,.p-btn.active{background:rgba(255,183,0,.12);border-color:var(--gold);color:var(--gold)}
+.place-hint{font-size:.75rem;color:var(--muted);line-height:1.7}
+.text-inputs{display:flex;flex-direction:column;gap:10px}
+.c-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;padding:12px 16px;outline:none;width:100%;transition:border-color .3s}
+.c-input:focus{border-color:var(--gold)}
+.c-input::placeholder{color:var(--muted)}
+.font-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.f-opt{padding:6px 16px;border:1px solid rgba(255,255,255,.1);font-size:.7rem;cursor:pointer;color:var(--muted);background:transparent;transition:border-color .3s,color .3s}
+.f-opt:hover,.f-opt.active{border-color:var(--gold);color:var(--gold)}
+.order-sum{background:var(--card);border:1px solid var(--border-gold);padding:26px 22px}
+.price-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);padding:10px 0;border-bottom:1px solid rgba(255,183,0,.08)}
+.price-row strong{color:var(--text)}
+.price-total-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0 18px;border-top:1px solid rgba(255,183,0,.2);margin-top:4px}
+.price-total-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.price-total-val{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn-order{width:100%;padding:18px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:opacity .3s,transform .2s}
+.btn-order:hover{opacity:.85;transform:translateY(-2px)}
+.order-note{text-align:center;font-size:.6rem;color:var(--muted);letter-spacing:.08em;margin-top:8px}
+.order-success{display:none;text-align:center;padding:20px;border:1px solid rgba(255,183,0,.3);background:rgba(255,183,0,.05)}
+.order-success .check{font-size:2.2rem;display:block;margin-bottom:10px}
+.order-success p{font-size:.85rem;color:var(--text);line-height:1.6}
+@media(max-width:900px){.builder-layout{grid-template-columns:1fr;gap:32px};.builder-preview{position:static};.builder-sec{padding:70px 24px}}
+@media(max-width:768px){.builder-sec{padding:70px 20px}}
+
+/* ── ABOUT ── */
+.about-sec{background:var(--space);padding:100px 60px}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-card{background:var(--card);border:1px solid var(--border-gold);padding:60px 40px;text-align:center;position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,183,0,.07) 0%,transparent 60%)}
+.about-moon{font-size:5rem;display:block;position:relative;z-index:2;margin-bottom:18px;filter:drop-shadow(0 0 24px rgba(255,183,0,.5));animation:moonpulse 5s ease-in-out infinite}
+.about-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4vw,3.8rem);letter-spacing:.2em;line-height:1.2;position:relative;z-index:2}
+.about-big .g{color:var(--gold)}
+.about-big .dot{color:var(--gold)}
+.about-card-verse{font-family:'Cinzel',serif;font-size:.74rem;color:rgba(255,183,0,.5);margin-top:26px;line-height:1.75;position:relative;z-index:2}
+.about-content .section-title{font-size:clamp(2.5rem,4vw,4rem);margin-bottom:24px}
+.about-p{font-size:.95rem;line-height:1.85;color:var(--muted);margin-bottom:18px}
+.about-pillars{display:flex;flex-direction:column;gap:14px;margin:28px 0 32px}
+.pillar{display:flex;align-items:flex-start;gap:12px;font-size:.88rem;color:var(--text);line-height:1.6}
+.pillar-dot{width:8px;height:8px;border-radius:50%;background:var(--gold-grad);flex-shrink:0;margin-top:6px}
+@media(max-width:900px){.about-layout{grid-template-columns:1fr;gap:40px};.about-sec{padding:70px 24px}}
+@media(max-width:768px){.about-sec{padding:70px 20px}}
+
+/* ── CONTACT ── */
+.contact-sec{background:var(--space2);padding:100px 60px}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-info .section-title{font-size:clamp(2.5rem,4vw,4rem);margin-bottom:20px}
+.contact-desc{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:36px}
+.c-item{display:flex;gap:14px;margin-bottom:18px;align-items:center}
+.c-icon{width:44px;height:44px;flex-shrink:0;background:rgba(255,183,0,.08);border:1px solid rgba(255,183,0,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.c-item-txt{font-size:.85rem;color:var(--muted)}
+.c-item-txt strong{display:block;font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-g{display:flex;flex-direction:column;gap:6px}
+.form-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.f-in,.f-sel,.f-ta{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;padding:12px 16px;outline:none;width:100%;transition:border-color .3s;appearance:none}
+.f-in:focus,.f-sel:focus,.f-ta:focus{border-color:var(--gold)}
+.f-in::placeholder,.f-ta::placeholder{color:var(--muted)}
+.f-ta{min-height:120px;resize:vertical}
+.f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8AAA' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.f-sel option{background:var(--space3)}
+.btn-send{padding:16px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:opacity .3s,transform .2s}
+.btn-send:hover{opacity:.85;transform:translateY(-2px)}
+.form-success{display:none;text-align:center;padding:24px;border:1px solid rgba(255,183,0,.3);background:rgba(255,183,0,.05);margin-top:8px}
+.form-success span{font-size:1.8rem;display:block;margin-bottom:10px}
+.form-success p{font-size:.85rem;color:var(--text);line-height:1.6}
+@media(max-width:900px){.contact-layout{grid-template-columns:1fr;gap:40px};.contact-sec{padding:70px 24px}}
+@media(max-width:600px){.form-row{grid-template-columns:1fr};.contact-sec{padding:70px 20px}}
+
+/* ── FOOTER ── */
+footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba(255,183,0,.1)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.footer-logo-link{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.12em;text-decoration:none;color:var(--white);display:block;margin-bottom:8px}
+.footer-logo-link .g{color:var(--gold)}
+.footer-tagline{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.35em;color:var(--gold);margin-bottom:14px}
+.footer-desc{font-size:.8rem;color:var(--muted);line-height:1.85;max-width:270px}
+.footer-col-h{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .3s}
+.footer-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid rgba(255,255,255,.06);font-size:.65rem;color:var(--muted);letter-spacing:.08em;flex-wrap:wrap;gap:10px}
+.footer-social{display:flex;gap:10px}
+.soc{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.95rem;color:var(--muted);transition:border-color .3s,color .3s}
+.soc:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px};footer{padding:60px 24px 32px}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr}}
+
+/* ── SHARED ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.float{animation:float 5s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+  <a href="#home" onclick="closeMob()">Home</a>
+  <a href="#shop" onclick="closeMob()">Shop</a>
+  <a href="#builder" onclick="closeMob()">Build Yours</a>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">TAG<span class="g">LINE</span></a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#builder">Build Yours</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#builder" class="nav-cta">Design Yours</a>
+  <button class="nav-burger" id="burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HERO -->
+<section class="hero" id="home">
+  <div class="stars-wrap" id="starsWrap"></div>
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+
+  <!-- Crescent Moon -->
+  <div class="moon-wrap">
+    <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="crescentMask">
+          <circle cx="130" cy="130" r="100" fill="white"/>
+          <circle cx="164" cy="112" r="82" fill="black"/>
+        </mask>
+        <radialGradient id="moonG" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#FFFDE0"/>
+          <stop offset="40%" stop-color="#FFD700"/>
+          <stop offset="100%" stop-color="#FFB700"/>
+        </radialGradient>
+      </defs>
+      <circle cx="130" cy="130" r="100" fill="url(#moonG)" mask="url(#crescentMask)"/>
+      <!-- Stars around moon -->
+      <circle cx="60" cy="50" r="3" fill="#FFD700" opacity=".7"/>
+      <circle cx="220" cy="80" r="2" fill="#FFD700" opacity=".5"/>
+      <circle cx="240" cy="170" r="2.5" fill="#FFD700" opacity=".6"/>
+      <circle cx="30" cy="190" r="2" fill="#FFD700" opacity=".4"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      New Collection — Spring 2026
+    </div>
+    <h1 class="hero-h1">
+      <span class="l1">TO THE</span>
+      <span class="l2">MOON!</span>
+    </h1>
+    <p class="hero-motto">
+      GOD<span class="dot"> · </span>HEALTH<span class="dot"> · </span>WEALTH
+    </p>
+    <p class="hero-verse">"I can do all things through Christ who strengthens me." — Philippians 4:13</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn-primary">Shop the Collection</a>
+      <a href="#builder" class="btn-ghost">Build Yours</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item"><span class="star">✦</span> TO THE MOON</span>
+    <span class="marquee-item"><span class="star">✦</span> GOD. HEALTH. WEALTH.</span>
+    <span class="marquee-item"><span class="star">✦</span> FAITH OVER FEAR</span>
+    <span class="marquee-item"><span class="star">✦</span> BUILT FOR GREATNESS</span>
+    <span class="marquee-item"><span class="star">✦</span> PHILIPPIANS 4:13</span>
+    <span class="marquee-item"><span class="star">✦</span> KINGDOM ATHLETES</span>
+    <span class="marquee-item"><span class="star">✦</span> BLESSED & PRESSED</span>
+    <span class="marquee-item"><span class="star">✦</span> TO THE MOON</span>
+    <span class="marquee-item"><span class="star">✦</span> GOD. HEALTH. WEALTH.</span>
+    <span class="marquee-item"><span class="star">✦</span> FAITH OVER FEAR</span>
+    <span class="marquee-item"><span class="star">✦</span> BUILT FOR GREATNESS</span>
+    <span class="marquee-item"><span class="star">✦</span> PHILIPPIANS 4:13</span>
+    <span class="marquee-item"><span class="star">✦</span> KINGDOM ATHLETES</span>
+    <span class="marquee-item"><span class="star">✦</span> BLESSED & PRESSED</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ VALUES -->
+<section class="values-sec" id="values">
+  <span class="section-label reveal">Our Foundation</span>
+  <h2 class="section-title reveal">Three Pillars<span class="g">.</span></h2>
+  <div class="values-grid">
+
+    <div class="val-card reveal">
+      <span class="val-icon">✝️</span>
+      <div class="val-word">GOD</div>
+      <p class="val-desc">Faith is your foundation. Every rep, every stride, every grind — do it for His glory. When you wear Tagline, you carry a reminder that your strength comes from something greater than yourself.</p>
+      <p class="val-verse">"Whether you eat or drink, or whatever you do, do all to the glory of God." — 1 Corinthians 10:31</p>
+    </div>
+
+    <div class="val-card reveal" style="transition-delay:.1s">
+      <span class="val-icon">⚡</span>
+      <div class="val-word">HEALTH</div>
+      <p class="val-desc">Your body is a temple. Train it like one. Push harder, recover smarter, and treat every workout as an act of stewardship over what God gave you. No excuses — just excellence.</p>
+      <p class="val-verse">"Do you not know that your body is a temple of the Holy Spirit within you?" — 1 Corinthians 6:19</p>
+    </div>
+
+    <div class="val-card reveal" style="transition-delay:.2s">
+      <span class="val-icon">🚀</span>
+      <div class="val-word">WEALTH</div>
+      <p class="val-desc">Abundance is a blessing, not a sin. Chase financial freedom with integrity, purpose, and relentless faith. Build generational wealth. Give generously. Stack blessings, not just bags.</p>
+      <p class="val-verse">"The blessing of the LORD makes rich, and he adds no sorrow with it." — Proverbs 10:22</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SHOP -->
+<section class="shop-sec" id="shop">
+
+  <!-- Shared SVG gradient defs for product icons -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden">
+    <defs>
+      <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FFD700"/>
+        <stop offset="100%" stop-color="#C98F00"/>
+      </linearGradient>
+      <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#4361EE"/>
+        <stop offset="100%" stop-color="#1B3DD8"/>
+      </linearGradient>
+      <linearGradient id="gWhite" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#F0F0F0"/>
+        <stop offset="100%" stop-color="#C8C8C8"/>
+      </linearGradient>
+      <linearGradient id="gNavy" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1E3A6E"/>
+        <stop offset="100%" stop-color="#0A1A3A"/>
+      </linearGradient>
+      <linearGradient id="gPurple" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#7C3AED"/>
+        <stop offset="100%" stop-color="#4C1D95"/>
+      </linearGradient>
+      <linearGradient id="gCharcoal" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#3A3A4A"/>
+        <stop offset="100%" stop-color="#1A1A28"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="shop-header reveal">
+    <div>
+      <span class="section-label">The Collection</span>
+      <h2 class="section-title" style="margin-bottom:0">Shop <span class="g">Tagline</span></h2>
+    </div>
+    <a href="#" class="view-all-link">View All →</a>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Product 1: Hoodie -->
+    <div class="prod-card reveal">
+      <div class="prod-img">
+        <div class="badge badge-new">New</div>
+        <svg width="130" height="160" viewBox="0 0 130 160" fill="none">
+          <path d="M28 44 L12 90 L12 145 L118 145 L118 90 L102 44 Z" fill="url(#gGold)"/>
+          <path d="M42 44 Q65 18 88 44 L84 64 Q65 40 46 64 Z" fill="url(#gGold)" opacity=".9"/>
+          <path d="M28 44 L4 78 L18 102 L42 82 Z" fill="url(#gGold)" opacity=".8"/>
+          <path d="M102 44 L126 78 L112 102 L88 82 Z" fill="url(#gGold)" opacity=".8"/>
+          <path d="M45 102 Q65 97 85 102 L85 122 Q65 128 45 122 Z" fill="rgba(0,0,0,.15)"/>
+          <circle cx="55" cy="66" r="2.5" fill="rgba(0,0,0,.2)"/>
+          <circle cx="75" cy="66" r="2.5" fill="rgba(0,0,0,.2)"/>
+          <text x="65" y="90" font-family="'Bebas Neue',sans-serif" font-size="10" fill="rgba(0,0,0,.3)" text-anchor="middle" letter-spacing="2.5">TAGLINE</text>
+        </svg>
+        <button class="prod-hover-btn" onclick="scrollToBuilder()">Customize This</button>
+      </div>
+      <div class="prod-info">
+        <div>
+          <p class="prod-name">To the Moon Hoodie</p>
+          <p class="prod-cat">Hoodies</p>
+        </div>
+        <p class="prod-price">$89</p>
+      </div>
+    </div>
+
+    <!-- Product 2: Tee -->
+    <div class="prod-card reveal" style="transition-delay:.08s">
+      <div class="prod-img">
+        <div class="badge badge-hot">Bestseller</div>
+        <svg width="130" height="160" viewBox="0 0 130 160" fill="none">
+          <path d="M30 18 Q65 2 100 18 L108 150 L22 150 Z" fill="url(#gBlue)"/>
+          <path d="M52 18 Q65 32 78 18" stroke="#0A1228" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M30 18 L4 54 L22 80 L44 58 Z" fill="url(#gBlue)" opacity=".75"/>
+          <path d="M100 18 L126 54 L108 80 L86 58 Z" fill="url(#gBlue)" opacity=".75"/>
+          <text x="65" y="90" font-family="'Bebas Neue',sans-serif" font-size="12" fill="rgba(255,255,255,.3)" text-anchor="middle" letter-spacing="3">GOD.</text>
+          <text x="65" y="106" font-family="'Bebas Neue',sans-serif" font-size="12" fill="rgba(255,255,255,.3)" text-anchor="middle" letter-spacing="2">HEALTH.</text>
+          <text x="65" y="122" font-family="'Bebas Neue',sans-serif" font-size="12" fill="rgba(255,255,255,.3)" text-anchor="middle" letter-spacing="2">WEALTH.</text>
+        </svg>
+        <button class="prod-hover-btn" onclick="scrollToBuilder()">Customize This</button>
+      </div>
+      <div class="prod-info">
+        <div>
+          <p class="prod-name">God. Health. Wealth. Tee</p>
+          <p class="prod-cat">T-Shirts</p>
+        </div>
+        <p class="prod-price">$45</p>
+      </div>
+    </div>
+
+    <!-- Product 3: Shorts -->
+    <div class="prod-card reveal" style="transition-delay:.16s">
+      <div class="prod-img">
+        <svg width="130" height="160" viewBox="0 0 130 160" fill="none">
+          <path d="M20 20 L110 20 L110 100 Q65 115 20 100 Z" fill="url(#gWhite)"/>
+          <path d="M20 20 L35 100 Q65 115 65 140 Q65 115 95 100 L110 20 Z" fill="url(#gWhite)"/>
+          <line x1="65" y1="20" x2="65" y2="140" stroke="rgba(0,0,0,.08)" stroke-width="2"/>
+          <rect x="20" y="20" width="90" height="10" fill="rgba(0,0,0,.08)" rx="0"/>
+          <text x="65" y="72" font-family="'Bebas Neue',sans-serif" font-size="9" fill="rgba(0,0,0,.3)" text-anchor="middle" letter-spacing="2">TAGLINE</text>
+        </svg>
+        <button class="prod-hover-btn" onclick="scrollToBuilder()">Customize This</button>
+      </div>
+      <div class="prod-info">
+        <div>
+          <p class="prod-name">Phil 4:13 Shorts</p>
+          <p class="prod-cat">Shorts</p>
+        </div>
+        <p class="prod-price">$55</p>
+      </div>
+    </div>
+
+    <!-- Product 4: Jacket -->
+    <div class="prod-card reveal" style="transition-delay:.06s">
+      <div class="prod-img">
+        <div class="badge badge-ltd">Limited</div>
+        <svg width="130" height="160" viewBox="0 0 130 160" fill="none">
+          <path d="M26 36 L10 88 L10 148 L120 148 L120 88 L104 36 Z" fill="url(#gNavy)"/>
+          <path d="M52 36 L42 55 L65 50 L88 55 L78 36 Z" fill="#0A1228"/>
+          <path d="M26 36 L4 70 L20 100 L44 78 Z" fill="url(#gNavy)" opacity=".8"/>
+          <path d="M104 36 L126 70 L110 100 L86 78 Z" fill="url(#gNavy)" opacity=".8"/>
+          <line x1="65" y1="52" x2="65" y2="146" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+          <rect x="44" y="68" width="42" height="3" fill="rgba(255,183,0,.35)" rx="1.5"/>
+          <text x="65" y="100" font-family="'Bebas Neue',sans-serif" font-size="9" fill="rgba(255,183,0,.4)" text-anchor="middle" letter-spacing="2">TAGLINE</text>
+        </svg>
+        <button class="prod-hover-btn" onclick="scrollToBuilder()">Customize This</button>
+      </div>
+      <div class="prod-info">
+        <div>
+          <p class="prod-name">Faith Over Fear Jacket</p>
+          <p class="prod-cat">Outerwear</p>
+        </div>
+        <p class="prod-price">$129</p>
+      </div>
+    </div>
+
+    <!-- Product 5: Compression -->
+    <div class="prod-card reveal" style="transition-delay:.14s">
+      <div class="prod-img">
+        <svg width="110" height="160" viewBox="0 0 110 160" fill="none">
+          <path d="M22 10 L88 10 L95 90 L75 155 L55 155 L55 90 Z" fill="url(#gPurple)"/>
+          <path d="M88 10 L95 90 L75 155 L55 155 L55 90 L88 10 Z" fill="url(#gPurple)" opacity=".85"/>
+          <path d="M22 10 L15 90 L35 155 L55 155 L55 90 Z" fill="url(#gPurple)" opacity=".9"/>
+          <rect x="22" y="10" width="66" height="8" fill="rgba(0,0,0,.15)" rx="0"/>
+          <line x1="55" y1="18" x2="55" y2="155" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+        </svg>
+        <button class="prod-hover-btn" onclick="scrollToBuilder()">Customize This</button>
+      </div>
+      <div class="prod-info">
+        <div>
+          <p class="prod-name">Kingdom Grind Leggings</p>
+          <p class="prod-cat">Bottoms</p>
+        </div>
+        <p class="prod-price">$75</p>
+      </div>
+    </div>
+
+    <!-- Product 6: Joggers -->
+    <div class="prod-card reveal" style="transition-delay:.22s">
+      <div class="prod-img">
+        <svg width="130" height="160" viewBox="0 0 130 160" fill="none">
+          <path d="M18 18 L112 18 L108 95 Q65 108 22 95 Z" fill="url(#gCharcoal)"/>
+          <path d="M22 95 Q40 108 58 95 L52 155 L28 155 Z" fill="url(#gCharcoal)" opacity=".9"/>
+          <path d="M108 95 Q90 108 72 95 L78 155 L102 155 Z" fill="url(#gCharcoal)" opacity=".9"/>
+          <rect x="18" y="18" width="94" height="10" fill="rgba(255,255,255,.06)" rx="0"/>
+          <circle cx="25" cy="23" r="2" fill="rgba(255,183,0,.3)"/>
+          <circle cx="105" cy="23" r="2" fill="rgba(255,183,0,.3)"/>
+          <text x="65" y="70" font-family="'Bebas Neue',sans-serif" font-size="10" fill="rgba(255,183,0,.3)" text-anchor="middle" letter-spacing="2">TAGLINE</text>
+        </svg>
+        <button class="prod-hover-btn" onclick="scrollToBuilder()">Customize This</button>
+      </div>
+      <div class="prod-info">
+        <div>
+          <p class="prod-name">To the Moon! Joggers</p>
+          <p class="prod-cat">Bottoms</p>
+        </div>
+        <p class="prod-price">$65</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ VERSE BANNER -->
+<div class="verse-banner reveal">
+  <blockquote>"And whatever you do, work at it with all your heart, as working for the Lord, not for human masters."</blockquote>
+  <cite>— Colossians 3:23</cite>
+</div>
+
+<!-- ═══════════════════════════════════════════ CUSTOM BUILDER -->
+<section class="builder-sec" id="builder">
+  <span class="section-label reveal">Make It Yours</span>
+  <h2 class="section-title reveal">Custom <span class="g">Builder</span></h2>
+
+  <div class="builder-layout">
+
+    <!-- LIVE PREVIEW -->
+    <div class="builder-preview reveal">
+      <p class="prev-lbl">Live Preview</p>
+      <div class="prev-wrap">
+        <!-- Garment SVG -->
+        <svg id="prevSvg" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <defs>
+            <linearGradient id="pvGrad" x1="0" y1="0" x2="260" y2="320" gradientUnits="userSpaceOnUse">
+              <stop id="pvStop1" offset="0%" stop-color="#FFD700"/>
+              <stop id="pvStop2" offset="100%" stop-color="#C98F00"/>
+            </linearGradient>
+          </defs>
+          <!-- Body -->
+          <path id="pvBody" d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="url(#pvGrad)"/>
+          <!-- Collar -->
+          <path id="pvCollar" d="M96 52 Q130 78 164 52 L172 38 Q130 18 88 38 Z" fill="#111"/>
+          <!-- Left sleeve -->
+          <path id="pvSlL" d="M62 52 L8 98 L28 148 L74 112 Z" fill="url(#pvGrad)" opacity=".85"/>
+          <!-- Right sleeve -->
+          <path id="pvSlR" d="M198 52 L252 98 L232 148 L186 112 Z" fill="url(#pvGrad)" opacity=".85"/>
+          <!-- Center seam -->
+          <line x1="130" y1="78" x2="130" y2="288" stroke="rgba(0,0,0,.1)" stroke-width="1.5"/>
+          <!-- Shine -->
+          <path d="M72 60 Q130 42 188 60 L196 145 Q130 128 64 145 Z" fill="rgba(255,255,255,.08)"/>
+          <!-- Preview text -->
+          <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>
+        </svg>
+        <!-- Logo overlay (shows uploaded image) -->
+        <img id="logoOverlay" alt="Logo preview" style="position:absolute;pointer-events:none;object-fit:contain;display:none;transform:translate(-50%,-50%);width:80px;height:80px;opacity:.75"/>
+      </div>
+      <p class="prev-garment-name" id="pvGarmentName">Sport Hoodie</p>
+      <p class="prev-color-name" id="pvColorName">Gold Rush</p>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="builder-controls reveal" style="transition-delay:.12s">
+
+      <!-- Step 1: Garment -->
+      <div class="ctrl-block">
+        <div class="ctrl-head">
+          <div class="ctrl-num">1</div>
+          <p class="ctrl-title">Choose Your Garment</p>
+        </div>
+        <div class="garment-opts">
+          <button class="g-opt active" onclick="selGarment(this,'Sport Hoodie')">
+            <span class="g-opt-icon">🧥</span>
+            <span class="g-opt-name">Hoodie</span>
+          </button>
+          <button class="g-opt" onclick="selGarment(this,'Training Tee')">
+            <span class="g-opt-icon">👕</span>
+            <span class="g-opt-name">Tee</span>
+          </button>
+          <button class="g-opt" onclick="selGarment(this,'Performance Shorts')">
+            <span class="g-opt-icon">🩳</span>
+            <span class="g-opt-name">Shorts</span>
+          </button>
+          <button class="g-opt" onclick="selGarment(this,'Track Jacket')">
+            <span class="g-opt-icon">🎽</span>
+            <span class="g-opt-name">Jacket</span>
+          </button>
+          <button class="g-opt" onclick="selGarment(this,'Compression Leggings')">
+            <span class="g-opt-icon">🩱</span>
+            <span class="g-opt-name">Leggings</span>
+          </button>
+          <button class="g-opt" onclick="selGarment(this,'Jogger Pants')">
+            <span class="g-opt-icon">👖</span>
+            <span class="g-opt-name">Joggers</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Color -->
+      <div class="ctrl-block">
+        <div class="ctrl-head">
+          <div class="ctrl-num">2</div>
+          <p class="ctrl-title">Primary Color</p>
+        </div>
+        <div class="swatches">
+          <div class="sw active" style="background:#FFB700" onclick="selColor(this,'Gold Rush','#FFD700','#C98F00')" title="Gold Rush"></div>
+          <div class="sw" style="background:#1B3DD8" onclick="selColor(this,'Royal Blue','#4361EE','#1B3DD8')" title="Royal Blue"></div>
+          <div class="sw" style="background:#F0F0F0;border-color:rgba(255,255,255,.3)" onclick="selColor(this,'Pure White','#F5F5F5','#D0D0D0')" title="Pure White"></div>
+          <div class="sw" style="background:#0A0A1A;border-color:rgba(255,255,255,.2)" onclick="selColor(this,'Midnight Black','#1A1A2E','#0A0A18')" title="Midnight Black"></div>
+          <div class="sw" style="background:#1E3A6E" onclick="selColor(this,'Navy','#1E3A6E','#0A1A3A')" title="Navy"></div>
+          <div class="sw" style="background:#7C3AED" onclick="selColor(this,'Kingdom Purple','#7C3AED','#4C1D95')" title="Kingdom Purple"></div>
+          <div class="sw" style="background:#DC2626" onclick="selColor(this,'Crimson','#EF4444','#B91C1C')" title="Crimson"></div>
+          <div class="sw" style="background:#059669" onclick="selColor(this,'Forest Green','#10B981','#047857')" title="Forest Green"></div>
+        </div>
+      </div>
+
+      <!-- Step 3: Upload Logo -->
+      <div class="ctrl-block">
+        <div class="ctrl-head">
+          <div class="ctrl-num">3</div>
+          <p class="ctrl-title">Upload Your Logo / Artwork</p>
+        </div>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="logoInput" accept="image/*" onchange="handleLogoUpload(this)">
+          <div class="upload-icon">☁️</div>
+          <p class="upload-txt"><strong>Click to upload</strong> or drag & drop<br>PNG, JPG, SVG — max 10MB</p>
+          <img id="uploadPreviewImg" alt="Uploaded logo preview">
+        </div>
+      </div>
+
+      <!-- Step 4: Placement -->
+      <div class="ctrl-block">
+        <div class="ctrl-head">
+          <div class="ctrl-num">4</div>
+          <p class="ctrl-title">Logo / Text Placement</p>
+        </div>
+        <div class="place-wrap">
+          <div class="place-grid">
+            <button class="p-btn" onclick="selPlace(this,0)" title="Top Left">↖</button>
+            <button class="p-btn" onclick="selPlace(this,1)" title="Top Center">↑</button>
+            <button class="p-btn" onclick="selPlace(this,2)" title="Top Right">↗</button>
+            <button class="p-btn" onclick="selPlace(this,3)" title="Mid Left">←</button>
+            <button class="p-btn active" onclick="selPlace(this,4)" title="Center">●</button>
+            <button class="p-btn" onclick="selPlace(this,5)" title="Mid Right">→</button>
+            <button class="p-btn" onclick="selPlace(this,6)" title="Bottom Left">↙</button>
+            <button class="p-btn" onclick="selPlace(this,7)" title="Bottom Center">↓</button>
+            <button class="p-btn" onclick="selPlace(this,8)" title="Bottom Right">↘</button>
+          </div>
+          <p class="place-hint">Click a zone to<br>set where your<br>logo or text<br>appears on<br>the garment.</p>
+        </div>
+      </div>
+
+      <!-- Step 5: Custom Text -->
+      <div class="ctrl-block">
+        <div class="ctrl-head">
+          <div class="ctrl-num">5</div>
+          <p class="ctrl-title">Custom Text (Optional)</p>
+        </div>
+        <div class="text-inputs">
+          <input class="c-input" type="text" id="customTextIn" placeholder="Your name, team name, or motto…" maxlength="24" oninput="updateText(this.value)">
+          <div class="font-opts">
+            <button class="f-opt active" onclick="selFont(this,'Bebas Neue')">Block</button>
+            <button class="f-opt" onclick="selFont(this,'Cinzel')">Serif</button>
+            <button class="f-opt" onclick="selFont(this,'Inter')">Clean</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6: Size + Order -->
+      <div class="ctrl-block">
+        <div class="ctrl-head">
+          <div class="ctrl-num">6</div>
+          <p class="ctrl-title">Size & Order Details</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="form-g">
+            <label class="form-lbl">Your Name</label>
+            <input class="c-input" type="text" id="ordName" placeholder="Full name">
+          </div>
+          <div class="form-g">
+            <label class="form-lbl">Email</label>
+            <input class="c-input" type="email" id="ordEmail" placeholder="you@example.com">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="form-g">
+              <label class="form-lbl">Size</label>
+              <select class="c-input f-sel" id="ordSize">
+                <option value="">— Size —</option>
+                <option>XS</option><option>S</option><option>M</option>
+                <option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+              </select>
+            </div>
+            <div class="form-g">
+              <label class="form-lbl">Qty</label>
+              <select class="c-input f-sel" id="ordQty" onchange="updatePrice()">
+                <option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="5">5</option>
+                <option value="10">10+</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-g">
+            <label class="form-lbl">Special Notes</label>
+            <textarea class="c-input" id="ordNotes" rows="3" placeholder="Specific requests, pantone colors, print notes…" style="resize:vertical"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="order-sum">
+        <div class="price-row">
+          <span>Garment</span>
+          <strong id="sumGarment">Sport Hoodie</strong>
+        </div>
+        <div class="price-row">
+          <span>Color</span>
+          <strong id="sumColor">Gold Rush</strong>
+        </div>
+        <div class="price-row">
+          <span>Base price</span>
+          <strong id="sumBase">$89</strong>
+        </div>
+        <div class="price-row" id="logoFeeRow" style="display:none">
+          <span>Logo print fee</span>
+          <strong>+$25</strong>
+        </div>
+        <div class="price-row" id="textFeeRow" style="display:none">
+          <span>Custom text fee</span>
+          <strong>+$15</strong>
+        </div>
+        <div class="price-total-row">
+          <span class="price-total-lbl">Total Per Piece</span>
+          <span class="price-total-val" id="sumTotal">$89</span>
+        </div>
+        <button class="btn-order" onclick="submitOrder()">Submit Custom Order →</button>
+        <p class="order-note">Production: 5–7 business days · Free shipping over $150</p>
+        <div class="order-success" id="orderSuccess">
+          <span class="check">🙏</span>
+          <p><strong>Order received! To the moon!</strong><br>We'll email you within 24 hours to confirm your design and payment details. Philippians 4:13.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ABOUT -->
+<section class="about-sec" id="about">
+  <div class="about-layout">
+
+    <div class="about-card reveal">
+      <span class="about-moon">🌙</span>
+      <div class="about-big">
+        <span class="g">GOD</span><span class="dot">.</span><br>
+        HEALTH<span class="dot">.</span><br>
+        <span class="g">WEALTH</span><span class="dot">.</span>
+      </div>
+      <p class="about-card-verse">"For I know the plans I have for you, declares the LORD, plans to prosper you and not to harm you, plans to give you hope and a future."<br><br>— Jeremiah 29:11</p>
+    </div>
+
+    <div class="about-content reveal" style="transition-delay:.12s">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">Built for <span class="g">Believers</span></h2>
+      <p class="about-p">Tagline was born at the intersection of faith, fitness, and financial freedom. We believe God created you for greatness — in the gym, in the marketplace, and in every area of life. "To the Moon!" isn't just a phrase. It's a declaration that with God, there are no limits to how high you can go.</p>
+      <p class="about-p">We're not your typical athletic brand. We're a movement. Every hoodie, every tee, every pair of shorts you put on is a reminder of who you are and Whose you are. You grind with purpose. You train with intention. You build wealth as an act of worship.</p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-dot"></div>
+          <span><strong>Faith-forward design</strong> — Every piece carries a message worth wearing.</span>
+        </div>
+        <div class="pillar">
+          <div class="pillar-dot"></div>
+          <span><strong>Premium quality</strong> — Performance fabrics built to move with you through every workout.</span>
+        </div>
+        <div class="pillar">
+          <div class="pillar-dot"></div>
+          <span><strong>Custom everything</strong> — Your vision, your brand, your kingdom-building gear.</span>
+        </div>
+        <div class="pillar">
+          <div class="pillar-dot"></div>
+          <span><strong>Community-driven</strong> — Athletes, entrepreneurs, and believers living out GOD. HEALTH. WEALTH.</span>
+        </div>
+      </div>
+      <a href="#shop" class="btn-primary">Shop the Collection</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="contact-layout">
+
+    <div class="contact-info reveal">
+      <span class="section-label">Get in Touch</span>
+      <h2 class="section-title">Let's <span class="g">Connect</span></h2>
+      <p class="contact-desc">Got questions about a custom order? Want to talk wholesale? Just want to say what's up? We'd love to hear from you. Every message is read — no bots, just people who care.</p>
+      <div class="c-item">
+        <div class="c-icon">✉️</div>
+        <div class="c-item-txt">
+          <strong>Email Us</strong>
+          hello@taglineapparel.com
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">📱</div>
+        <div class="c-item-txt">
+          <strong>Follow Along</strong>
+          @tagline.apparel
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">🕐</div>
+        <div class="c-item-txt">
+          <strong>Response Time</strong>
+          Within 24 hours, Mon–Fri
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">📦</div>
+        <div class="c-item-txt">
+          <strong>Custom Orders</strong>
+          5–7 business day production
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay:.1s">
+      <!-- Replace action URL with your Formspree or backend endpoint -->
+      <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div class="form-g">
+            <label class="form-lbl">First Name</label>
+            <input class="f-in" type="text" required placeholder="First">
+          </div>
+          <div class="form-g">
+            <label class="form-lbl">Last Name</label>
+            <input class="f-in" type="text" required placeholder="Last">
+          </div>
+        </div>
+        <div class="form-g">
+          <label class="form-lbl">Email</label>
+          <input class="f-in" type="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-g">
+          <label class="form-lbl">Subject</label>
+          <select class="f-sel">
+            <option value="">— Choose a topic —</option>
+            <option>Custom Order</option>
+            <option>Wholesale / Bulk</option>
+            <option>Order Status</option>
+            <option>Press / Media</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-g">
+          <label class="form-lbl">Message</label>
+          <textarea class="f-ta" required placeholder="Tell us what's on your heart…"></textarea>
+        </div>
+        <button class="btn-send" type="submit">Send Message →</button>
+        <div class="form-success" id="contactSuccess">
+          <span>✦</span>
+          <p><strong>Message sent!</strong><br>We'll get back to you within 24 hours. Stay blessed.</p>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#home" class="footer-logo-link">TAG<span class="g">LINE</span></a>
+      <p class="footer-tagline">To the Moon!</p>
+      <p class="footer-desc">Christian athletic clothing for believers who chase greatness. GOD. HEALTH. WEALTH. — every piece, a declaration.</p>
+    </div>
+    <div>
+      <span class="footer-col-h">Shop</span>
+      <ul class="footer-links">
+        <li><a href="#shop">New Arrivals</a></li>
+        <li><a href="#shop">Hoodies</a></li>
+        <li><a href="#shop">Tees</a></li>
+        <li><a href="#shop">Bottoms</a></li>
+        <li><a href="#shop">Outerwear</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-h">Services</span>
+      <ul class="footer-links">
+        <li><a href="#builder">Custom Builder</a></li>
+        <li><a href="#contact">Wholesale</a></li>
+        <li><a href="#contact">Size Guide</a></li>
+        <li><a href="#contact">Track Order</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-h">Company</span>
+      <ul class="footer-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#values">Our Values</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Tagline Apparel. All rights reserved. · GOD. HEALTH. WEALTH.</span>
+    <div class="footer-social">
+      <a class="soc" href="#" aria-label="Instagram">◈</a>
+      <a class="soc" href="#" aria-label="TikTok">▷</a>
+      <a class="soc" href="#" aria-label="Twitter/X">✕</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+if (cur && ring) {
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function tick() {
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+    rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,[onclick]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cur.style.width='16px'; cur.style.height='16px'; ring.style.width='48px'; ring.style.height='48px'; });
+    el.addEventListener('mouseleave',()=>{ cur.style.width='8px'; cur.style.height='8px'; ring.style.width='32px'; ring.style.height='32px'; });
+  });
+}
+
+/* ── STARS ── */
+(function createStars() {
+  const wrap = document.getElementById('starsWrap');
+  if (!wrap) return;
+  for (let i=0; i<160; i++) {
+    const s = document.createElement('div');
+    s.className='s';
+    const sz = Math.random()*2.4+0.4;
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${(Math.random()*4+2).toFixed(1)}s;--dl:${(Math.random()*5).toFixed(1)}s`;
+    wrap.appendChild(s);
+  }
+})();
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', ()=>{
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── MOBILE MENU ── */
+const burger=document.getElementById('burger');
+const mobMenu=document.getElementById('mobMenu');
+const mobClose=document.getElementById('mobClose');
+burger.addEventListener('click',()=>mobMenu.classList.add('open'));
+mobClose.addEventListener('click',()=>mobMenu.classList.remove('open'));
+function closeMob(){ mobMenu.classList.remove('open'); }
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── UPLOAD DRAG/DROP ── */
+const uploadZone = document.getElementById('uploadZone');
+['dragover','dragleave','drop'].forEach(evt=>{
+  uploadZone.addEventListener(evt, e=>{
+    e.preventDefault();
+    if(evt==='dragover') uploadZone.classList.add('drag');
+    else uploadZone.classList.remove('drag');
+    if(evt==='drop' && e.dataTransfer.files[0]) handleLogoUpload({files:e.dataTransfer.files});
+  });
+});
+
+/* ── BUILDER STATE ── */
+const prices = {
+  'Sport Hoodie':89,'Training Tee':45,'Performance Shorts':55,
+  'Track Jacket':129,'Compression Leggings':75,'Jogger Pants':65
+};
+let curGarment='Sport Hoodie', curColor='Gold Rush';
+let hasLogo=false, hasText=false;
+
+const pvPositions = [
+  {x:'78',y:'112'},{x:'130',y:'100'},{x:'182',y:'112'},
+  {x:'82',y:'162'},{x:'130',y:'188'},{x:'178',y:'162'},
+  {x:'82',y:'242'},{x:'130',y:'258'},{x:'178',y:'242'}
+];
+const logoPositions = [
+  {left:'30%',top:'35%'},{left:'50%',top:'32%'},{left:'70%',top:'35%'},
+  {left:'31%',top:'51%'},{left:'50%',top:'59%'},{left:'69%',top:'51%'},
+  {left:'31%',top:'76%'},{left:'50%',top:'81%'},{left:'69%',top:'76%'}
+];
+let curPlaceIdx=4;
+
+function selGarment(el, name) {
+  document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  curGarment=name;
+  document.getElementById('pvGarmentName').textContent=name;
+  document.getElementById('sumGarment').textContent=name;
+  document.getElementById('sumBase').textContent='$'+prices[name];
+  updatePrice();
+}
+
+function selColor(el, name, c1, c2) {
+  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  curColor=name;
+  document.getElementById('pvColorName').textContent=name;
+  document.getElementById('sumColor').textContent=name;
+  document.getElementById('pvStop1').setAttribute('stop-color',c1);
+  document.getElementById('pvStop2').setAttribute('stop-color',c2);
+  if(name==='Pure White'){
+    document.getElementById('pvCollar').setAttribute('fill','#666');
+    document.getElementById('pvText').setAttribute('fill','rgba(40,40,40,.35)');
+  } else if(name==='Midnight Black'){
+    document.getElementById('pvCollar').setAttribute('fill','#333');
+    document.getElementById('pvText').setAttribute('fill','rgba(255,183,0,.4)');
+  } else {
+    document.getElementById('pvCollar').setAttribute('fill','#111');
+    document.getElementById('pvText').setAttribute('fill','rgba(0,0,0,.38)');
+  }
+}
+
+function selPlace(el, idx) {
+  document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  curPlaceIdx=idx;
+  const p=pvPositions[idx];
+  document.getElementById('pvText').setAttribute('x',p.x);
+  document.getElementById('pvText').setAttribute('y',p.y);
+  const logo=document.getElementById('logoOverlay');
+  if(logo.style.display!=='none'){
+    const lp=logoPositions[idx];
+    logo.style.left=lp.left;
+    logo.style.top=lp.top;
+  }
+}
+
+function updateText(val) {
+  hasText=val.trim().length>0;
+  document.getElementById('pvText').textContent = val.trim()||'TAGLINE';
+  document.getElementById('textFeeRow').style.display=hasText?'flex':'none';
+  updatePrice();
+}
+
+function selFont(el, font) {
+  document.querySelectorAll('.f-opt').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pvText').style.fontFamily=`'${font}',sans-serif`;
+}
+
+function handleLogoUpload(input) {
+  const file = input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const previewImg=document.getElementById('uploadPreviewImg');
+    previewImg.src=e.target.result;
+    previewImg.style.display='block';
+    const logo=document.getElementById('logoOverlay');
+    logo.src=e.target.result;
+    logo.style.display='block';
+    const lp=logoPositions[curPlaceIdx];
+    logo.style.left=lp.left;
+    logo.style.top=lp.top;
+    hasLogo=true;
+    document.getElementById('logoFeeRow').style.display='flex';
+    updatePrice();
+  };
+  reader.readAsDataURL(file);
+}
+
+function updatePrice() {
+  const base=prices[curGarment]||89;
+  const qty=parseInt(document.getElementById('ordQty').value)||1;
+  const logo=hasLogo?25:0;
+  const text=hasText?15:0;
+  const total=base+logo+text;
+  document.getElementById('sumTotal').textContent='$'+total;
+}
+
+function submitOrder() {
+  const name=document.getElementById('ordName').value.trim();
+  const email=document.getElementById('ordEmail').value.trim();
+  const size=document.getElementById('ordSize').value;
+  if(!name||!email||!size){
+    alert('Please fill in your name, email, and size before submitting.');
+    return;
+  }
+  document.getElementById('orderSuccess').style.display='block';
+  document.querySelector('.btn-order').style.display='none';
+  document.getElementById('orderSuccess').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function scrollToBuilder(){
+  document.getElementById('builder').scrollIntoView({behavior:'smooth'});
+}
+
+/* ── CONTACT FORM ── */
+function submitContact(e) {
+  e.preventDefault();
+  document.getElementById('contactSuccess').style.display='block';
+  e.target.reset();
+  document.getElementById('contactSuccess').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>
