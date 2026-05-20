@@ -177,11 +177,16 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .ctrl-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,183,0,.1)}
 .ctrl-num{font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:var(--gold-grad);color:var(--space);width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ctrl-title{font-size:.66rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:600}
-.garment-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.g-opt{border:1px solid rgba(255,255,255,.08);padding:14px 8px;text-align:center;cursor:pointer;background:transparent;transition:border-color .3s,background .3s;width:100%}
+.garment-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:320px;overflow-y:auto;padding-right:4px}
+.garment-opts::-webkit-scrollbar{width:4px}
+.garment-opts::-webkit-scrollbar-track{background:transparent}
+.garment-opts::-webkit-scrollbar-thumb{background:rgba(255,183,0,.3);border-radius:2px}
+.g-opt{border:1px solid rgba(255,255,255,.08);padding:0;text-align:left;cursor:pointer;background:var(--card);transition:border-color .3s,background .3s;width:100%;display:flex;align-items:center;gap:10px;overflow:hidden}
 .g-opt:hover,.g-opt.active{border-color:var(--gold);background:rgba(255,183,0,.06)}
-.g-opt-icon{font-size:1.5rem;margin-bottom:5px;display:block}
-.g-opt-name{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.g-opt-thumb{width:52px;height:52px;object-fit:cover;flex-shrink:0;display:block}
+.g-opt-info{padding:6px 8px 6px 0;flex:1;min-width:0}
+.g-opt-name{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .3s;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-opt-price{font-size:.65rem;color:var(--gold);font-weight:600;display:block;margin-top:2px}
 .g-opt.active .g-opt-name{color:var(--gold)}
 .swatches{display:flex;flex-wrap:wrap;gap:10px}
 .sw{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
@@ -479,14 +484,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     <div class="builder-controls reveal" style="transition-delay:.12s">
       <div class="ctrl-block">
         <div class="ctrl-head"><div class="ctrl-num">1</div><p class="ctrl-title">Choose Your Garment</p></div>
-        <div class="garment-opts">
-          <button class="g-opt active" onclick="selGarment(this,'Sport Hoodie')"><span class="g-opt-icon">🧥</span><span class="g-opt-name">Hoodie</span></button>
-          <button class="g-opt" onclick="selGarment(this,'Training Tee')"><span class="g-opt-icon">👕</span><span class="g-opt-name">Tee</span></button>
-          <button class="g-opt" onclick="selGarment(this,'Performance Shorts')"><span class="g-opt-icon">🩳</span><span class="g-opt-name">Shorts</span></button>
-          <button class="g-opt" onclick="selGarment(this,'Track Jacket')"><span class="g-opt-icon">🎽</span><span class="g-opt-name">Jacket</span></button>
-          <button class="g-opt" onclick="selGarment(this,'Compression Leggings')"><span class="g-opt-icon">🩱</span><span class="g-opt-name">Leggings</span></button>
-          <button class="g-opt" onclick="selGarment(this,'Jogger Pants')"><span class="g-opt-icon">👖</span><span class="g-opt-name">Joggers</span></button>
-        </div>
+        <div class="garment-opts" id="garmentOpts"></div>
       </div>
       <div class="ctrl-block">
         <div class="ctrl-head"><div class="ctrl-num">2</div><p class="ctrl-title">Primary Color</p></div>
@@ -572,7 +570,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
           <span class="price-total-val" id="sumTotal">$89</span>
         </div>
         <button class="btn-order" onclick="submitOrder()">Submit Custom Order →</button>
-        <p class="order-note">Production: 5–7 business days · Free shipping over $150</p>
+        <p class="order-note">Production: 30 days minimum from order date · Free shipping over $150</p>
         <div class="order-success" id="orderSuccess">
           <span class="check">🙏</span>
           <p><strong>Order received! To the moon!</strong><br>We'll email you within 24 hours to confirm your design and payment details. Philippians 4:13.</p>
@@ -620,7 +618,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
       <div class="c-item"><div class="c-icon">✉️</div><div class="c-item-txt"><strong>Email Us</strong>hello@taglineapparel.com</div></div>
       <div class="c-item"><div class="c-icon">📱</div><div class="c-item-txt"><strong>Follow Along</strong>@tagline.apparel</div></div>
       <div class="c-item"><div class="c-icon">🕐</div><div class="c-item-txt"><strong>Response Time</strong>Within 24 hours, Mon–Fri</div></div>
-      <div class="c-item"><div class="c-icon">📦</div><div class="c-item-txt"><strong>Custom Orders</strong>5–7 business day production</div></div>
+      <div class="c-item"><div class="c-icon">📦</div><div class="c-item-txt"><strong>Custom Orders</strong>30 day minimum production from order date</div></div>
     </div>
     <div class="reveal" style="transition-delay:.1s">
       <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
@@ -1059,7 +1057,33 @@ const uploadZone=document.getElementById('uploadZone');
 });
 
 /* ── BUILDER STATE ── */
-const prices={'Sport Hoodie':89,'Training Tee':45,'Performance Shorts':55,'Track Jacket':129,'Compression Leggings':75,'Jogger Pants':65};
+function renderGarmentPicker(){
+  const wrap = document.getElementById('garmentOpts');
+  wrap.innerHTML = PRODUCTS.map((p,i)=>`
+    <button class="g-opt${i===0?' active':''}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price},'${p.img}')">
+      <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
+      <span class="g-opt-info">
+        <span class="g-opt-name">${p.title}</span>
+        <span class="g-opt-price">$${p.price}</span>
+      </span>
+    </button>
+  `).join('');
+  const first = PRODUCTS[0];
+  curGarment = first.title;
+  document.getElementById('pvGarmentName').textContent = first.title;
+  document.getElementById('sumGarment').textContent = first.title;
+  document.getElementById('sumBase').textContent = '$'+first.price;
+  updatePrice();
+}
+function selGarmentProduct(el,name,price){
+  document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  curGarment=name;
+  document.getElementById('pvGarmentName').textContent=name;
+  document.getElementById('sumGarment').textContent=name;
+  document.getElementById('sumBase').textContent='$'+price;
+  updatePrice();
+}
 let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
 const pvPos=[
   {x:'78',y:'112'},{x:'130',y:'100'},{x:'182',y:'112'},
@@ -1078,7 +1102,6 @@ function selGarment(el,name){
   el.classList.add('active');curGarment=name;
   document.getElementById('pvGarmentName').textContent=name;
   document.getElementById('sumGarment').textContent=name;
-  document.getElementById('sumBase').textContent='$'+(prices[name]||89);
   updatePrice();
 }
 function selColor(el,name,c1,c2){
@@ -1127,7 +1150,9 @@ function handleLogoUpload(input){
   reader.readAsDataURL(file);
 }
 function updatePrice(){
-  const base=prices[curGarment]||89;
+  const prod = PRODUCTS.find(p=>p.title===curGarment);
+  const base = prod ? prod.price : 0;
+  document.getElementById('sumBase').textContent='$'+base;
   document.getElementById('sumTotal').textContent='$'+(base+(hasLogo?25:0)+(hasText?15:0));
 }
 function submitOrder(){
@@ -1151,6 +1176,7 @@ function submitContact(e){
 
 /* ── INITIAL RENDER ── */
 renderShop();
+renderGarmentPicker();
 </script>
 </body>
 </html>
