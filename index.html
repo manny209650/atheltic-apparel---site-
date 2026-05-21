@@ -26,7 +26,7 @@
   --border-soft: rgba(255,255,255,0.07);
   --gold-grad: linear-gradient(135deg,#FFD700 0%,#FFB700 50%,#C98F00 100%);
   --blue-grad: linear-gradient(135deg,#4361EE 0%,#1B3DD8 100%);
-  --hero-bg: radial-gradient(ellipse at 50% 20%,#0D1B4D 0%,#060614 55%,#03030A 100%);
+  --hero-bg: radial-gradient(ellipse at 50% 0%,#0B1640 0%,#060610 50%,#020208 100%);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -79,11 +79,12 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 /* ── HERO ── */
 .hero{min-height:100vh;background:var(--hero-bg);position:relative;overflow:hidden;display:flex;align-items:center}
 .stars-wrap{position:absolute;inset:0;pointer-events:none}
-.s{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite;animation-delay:var(--dl,0s)}
-@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
-.hero-glow-a{position:absolute;bottom:-120px;left:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(255,183,0,.1) 0%,transparent 70%);pointer-events:none}
-.hero-glow-b{position:absolute;top:-60px;right:-60px;width:560px;height:560px;background:radial-gradient(circle,rgba(67,97,238,.1) 0%,transparent 70%);pointer-events:none}
-.moon-wrap{position:absolute;right:6%;top:8%;width:260px;height:260px;pointer-events:none;opacity:.7;animation:moonpulse 5s ease-in-out infinite}
+.s{position:absolute;border-radius:50%;background:var(--sc,#fff);animation:twinkle var(--d,5s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+@keyframes twinkle{0%,100%{opacity:var(--o1,.08)}50%{opacity:var(--o2,.55)}}
+.hero-glow-a{position:absolute;bottom:-120px;left:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(255,183,0,.05) 0%,transparent 70%);pointer-events:none}
+.hero-glow-b{position:absolute;top:-60px;right:-60px;width:560px;height:560px;background:radial-gradient(circle,rgba(67,97,238,.05) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+.moon-wrap{position:absolute;right:6%;top:8%;width:260px;height:260px;pointer-events:none;opacity:.82;animation:moonpulse 8s ease-in-out infinite}
 .rocket-wrap{position:absolute;pointer-events:none;z-index:4;animation:rocketFly 8s ease-in-out infinite}
 @keyframes rocketFly{
   0%{left:-120px;bottom:-80px;opacity:0;transform:rotate(45deg)}
@@ -93,14 +94,14 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 }
 .rocket-trail{animation:trailFlicker .12s ease-in-out infinite alternate;transform-origin:top center}
 @keyframes trailFlicker{0%{opacity:.8;transform:scaleX(.9) scaleY(.95)}100%{opacity:1;transform:scaleX(1.1) scaleY(1.05)}}
-@keyframes moonpulse{0%,100%{opacity:.7;filter:drop-shadow(0 0 30px rgba(255,183,0,.5))}50%{opacity:.9;filter:drop-shadow(0 0 50px rgba(255,183,0,.8))}}
+@keyframes moonpulse{0%,100%{filter:drop-shadow(0 0 12px rgba(210,195,155,.2))}50%{filter:drop-shadow(0 0 22px rgba(210,195,155,.32))}}
 .hero-content{position:relative;z-index:5;padding:150px 60px 100px;max-width:960px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,183,0,.1);border:1px solid rgba(255,183,0,.35);padding:6px 18px;border-radius:100px;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .7s ease .2s forwards}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 .hero-h1{font-family:'Bebas Neue',sans-serif;line-height:.88;letter-spacing:.02em;margin-bottom:22px;opacity:0;animation:fadeUp .9s ease .4s forwards}
 .hero-h1 .l1{display:block;font-size:clamp(4rem,10vw,10rem);color:var(--white)}
-.hero-h1 .l2{display:block;font-size:clamp(5.5rem,15vw,14rem);background:linear-gradient(135deg,#FFE234 0%,#FFB700 40%,#FF8C00 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 60px rgba(255,183,0,.5))}
+.hero-h1 .l2{display:block;font-size:clamp(5.5rem,15vw,14rem);background:linear-gradient(135deg,#FFD97A 0%,#C8921A 45%,#A87010 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 28px rgba(200,146,26,.25))}
 .hero-h1 .l3{display:block;font-size:clamp(4rem,10vw,10rem);color:var(--white)}
 .hero-motto{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,2.5vw,1.8rem);letter-spacing:.5em;color:var(--blue-bright);margin-bottom:16px;opacity:0;animation:fadeUp .9s ease .6s forwards}
 .hero-motto .dot{color:var(--gold);letter-spacing:.1em}
@@ -241,7 +242,7 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .about-card{background:var(--card);border:1px solid var(--border-gold);padding:60px 40px;text-align:center;position:relative;overflow:hidden}
 .about-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,183,0,.07) 0%,transparent 60%)}
-.about-moon{font-size:5rem;display:block;position:relative;z-index:2;margin-bottom:18px;filter:drop-shadow(0 0 24px rgba(255,183,0,.5));animation:moonpulse 5s ease-in-out infinite}
+.about-moon{font-size:5rem;display:block;position:relative;z-index:2;margin-bottom:18px;filter:drop-shadow(0 0 12px rgba(210,185,120,.25));animation:moonpulse 8s ease-in-out infinite}
 .about-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4vw,3.8rem);letter-spacing:.2em;line-height:1.2;position:relative;z-index:2}
 .about-big .g{color:var(--gold)}
 .about-big .dot{color:var(--gold)}
@@ -389,19 +390,42 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
       <defs>
         <mask id="crescentMask">
           <circle cx="130" cy="130" r="100" fill="white"/>
-          <circle cx="164" cy="112" r="82" fill="black"/>
+          <circle cx="166" cy="110" r="84" fill="black"/>
         </mask>
-        <radialGradient id="moonG" cx="35%" cy="35%" r="65%">
-          <stop offset="0%" stop-color="#FFFDE0"/>
-          <stop offset="40%" stop-color="#FFD700"/>
-          <stop offset="100%" stop-color="#FFB700"/>
+        <radialGradient id="moonG" cx="32%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#EEE8D8"/>
+          <stop offset="40%" stop-color="#C4B89A"/>
+          <stop offset="75%" stop-color="#9A8E78"/>
+          <stop offset="100%" stop-color="#6A6050"/>
+        </radialGradient>
+        <radialGradient id="cr1" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="rgba(40,35,28,.65)"/>
+          <stop offset="55%" stop-color="rgba(40,35,28,.2)"/>
+          <stop offset="100%" stop-color="rgba(180,165,140,.25)"/>
+        </radialGradient>
+        <radialGradient id="cr2" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="rgba(35,30,24,.55)"/>
+          <stop offset="55%" stop-color="rgba(35,30,24,.15)"/>
+          <stop offset="100%" stop-color="rgba(170,155,130,.2)"/>
+        </radialGradient>
+        <radialGradient id="cr3" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="rgba(45,38,30,.5)"/>
+          <stop offset="100%" stop-color="rgba(45,38,30,.05)"/>
         </radialGradient>
       </defs>
+      <!-- Moon base -->
       <circle cx="130" cy="130" r="100" fill="url(#moonG)" mask="url(#crescentMask)"/>
-      <circle cx="60" cy="50" r="3" fill="#FFD700" opacity=".7"/>
-      <circle cx="220" cy="80" r="2" fill="#FFD700" opacity=".5"/>
-      <circle cx="240" cy="170" r="2.5" fill="#FFD700" opacity=".6"/>
-      <circle cx="30" cy="190" r="2" fill="#FFD700" opacity=".4"/>
+      <!-- Maria (dark regions) -->
+      <ellipse cx="98" cy="118" rx="22" ry="16" fill="rgba(55,48,38,.28)" mask="url(#crescentMask)"/>
+      <ellipse cx="118" cy="158" rx="16" ry="10" fill="rgba(55,48,38,.2)" mask="url(#crescentMask)"/>
+      <!-- Craters -->
+      <circle cx="85" cy="95" r="13" fill="url(#cr1)" mask="url(#crescentMask)"/>
+      <circle cx="112" cy="168" r="9" fill="url(#cr2)" mask="url(#crescentMask)"/>
+      <circle cx="70" cy="155" r="6" fill="url(#cr3)" mask="url(#crescentMask)"/>
+      <circle cx="105" cy="108" r="5" fill="url(#cr3)" mask="url(#crescentMask)"/>
+      <circle cx="92" cy="138" r="4" fill="url(#cr2)" mask="url(#crescentMask)"/>
+      <!-- Subtle limb brightening -->
+      <circle cx="130" cy="130" r="100" fill="none" stroke="rgba(220,210,190,.12)" stroke-width="3" mask="url(#crescentMask)"/>
     </svg>
   </div>
   <div class="hero-content">
@@ -1072,11 +1096,14 @@ if(cur && ring){
 (function(){
   const wrap=document.getElementById('starsWrap');
   if(!wrap)return;
-  for(let i=0;i<160;i++){
+  const starColors=['#ffffff','#ffffff','#ffffff','#E8EEFF','#E8EEFF','#FFF8E8','#D8E8FF'];
+  for(let i=0;i<200;i++){
     const s=document.createElement('div');
     s.className='s';
-    const sz=Math.random()*2.4+0.4;
-    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--d:${(Math.random()*4+2).toFixed(1)}s;--dl:${(Math.random()*5).toFixed(1)}s`;
+    const sz=Math.random()<.06?Math.random()*1.8+1.8:Math.random()*1.2+0.3;
+    const bright=sz>1.8;
+    const col=starColors[Math.floor(Math.random()*starColors.length)];
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--sc:${col};--d:${(Math.random()*6+4).toFixed(1)}s;--dl:${(Math.random()*8).toFixed(1)}s;--o1:${bright?.06:.04};--o2:${bright?.7:.45}`;
     wrap.appendChild(s);
   }
 })();
