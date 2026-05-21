@@ -86,10 +86,10 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .moon-wrap{position:absolute;right:6%;top:8%;width:260px;height:260px;pointer-events:none;opacity:.7;animation:moonpulse 5s ease-in-out infinite}
 .rocket-wrap{position:absolute;pointer-events:none;z-index:4;animation:rocketFly 8s ease-in-out infinite}
 @keyframes rocketFly{
-  0%{left:-120px;bottom:-80px;opacity:0;transform:rotate(-45deg)}
+  0%{left:-120px;bottom:-80px;opacity:0;transform:rotate(45deg)}
   8%{opacity:1}
   85%{opacity:1}
-  100%{left:110%;bottom:95%;opacity:0;transform:rotate(-45deg)}
+  100%{left:110%;bottom:95%;opacity:0;transform:rotate(45deg)}
 }
 .rocket-trail{animation:trailFlicker .12s ease-in-out infinite alternate;transform-origin:top center}
 @keyframes trailFlicker{0%{opacity:.8;transform:scaleX(.9) scaleY(.95)}100%{opacity:1;transform:scaleX(1.1) scaleY(1.05)}}
@@ -342,7 +342,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <div class="hero-glow-a"></div>
   <div class="hero-glow-b"></div>
   <div class="rocket-wrap">
-    <svg width="60" height="140" viewBox="0 0 60 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-45deg)">
+    <svg width="60" height="140" viewBox="0 0 60 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(45deg)">
       <defs>
         <linearGradient id="rBody" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
           <stop offset="0%" stop-color="#F8F8F8"/>
