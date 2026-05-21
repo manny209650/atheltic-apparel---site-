@@ -809,7 +809,6 @@ const PRODUCTS = [
     colors:['blue-1','gray','light-grey']
   },
   {
-  {
     handle:'untitled-nov4_20-32',title:"Women's Hoodie",
     desc:'Loose casual fitness sports hoodie',price:35,badge:'',
     cats:['all','womens','hoodies'],
@@ -865,7 +864,6 @@ const PRODUCTS = [
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/7E62E8C7-9832-4D8F-B46A-AE8249EDD544.jpg?v=1761546662',
     colors:['clear','baby-blue']
   },
-  {
   {
     handle:'men-s-zip-up-shirt',title:'"TTM" Quarter-Zip',
     desc:"Men's quarter-zip shirt",price:35,badge:'',
@@ -936,7 +934,6 @@ const PRODUCTS = [
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/C9A62656-04B4-4D2A-9E0D-198664A3B7C2.jpg?v=1762498097',
     colors:['frost-blue']
   },
-  {
   {
     handle:'women-s-butter-soft-leggings',title:'"Butter-Soft" Leggings',
     desc:'Double-brushed · 80% nylon 20% elastane · High waist',price:30,badge:'',noCustom:true,
@@ -1105,7 +1102,7 @@ if(cur && ring){
     const sz=Math.random()<.06?Math.random()*1.8+1.8:Math.random()*1.2+0.3;
     const bright=sz>1.8;
     const col=starColors[Math.floor(Math.random()*starColors.length)];
-    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--sc:${col};--d:${(Math.random()*6+4).toFixed(1)}s;--dl:${(Math.random()*8).toFixed(1)}s;--o1:${bright?.06:.04};--o2:${bright?.7:.45}`;
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--sc:${col};--d:${(Math.random()*6+4).toFixed(1)}s;--dl:${(Math.random()*8).toFixed(1)}s;--o1:${bright ? .06 : .04};--o2:${bright ? .7 : .45}`;
     wrap.appendChild(s);
   }
 })();
