@@ -816,35 +816,35 @@ const PRODUCTS = [
   },
   {
     handle:'womens-sport-bra',title:"Women's Sport Bra",
-    desc:'95% polyamide 5% elastane · Medium support',price:30,badge:'',
+    desc:'95% polyamide 5% elastane · Medium support',price:30,badge:'',noCustom:true,
     cats:['all','womens','tops'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_70148a65-ac5c-4e67-b9c8-10d2ad789c1c.jpg?v=1775552279',
     colors:['black','khaki','wine-red','pink-1','purple-1']
   },
   {
     handle:'women-s-sports-bra-1',title:'Open-Back Top',
-    desc:"Women's backless top · Removable pad · 79% nylon",price:15,badge:'',
+    desc:"Women's backless top · Removable pad · 79% nylon",price:15,badge:'',noCustom:true,
     cats:['all','womens','tops'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/12F0C544-CB97-40D1-88BC-116B7BEBE75E.jpg?v=1762498096',
     colors:['frost-blue']
   },
   {
     handle:'women-s-sports-bra',title:'Irregular Bra',
-    desc:"Women's irregular strap yoga vest",price:25,badge:'',
+    desc:"Women's irregular strap yoga vest",price:25,badge:'',noCustom:true,
     cats:['all','womens','tops'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B723BBA2-B00A-4C9A-8283-226AFEB8C698.jpg?v=1761548691',
     colors:['warm-tan','white']
   },
   {
     handle:'womens-gym-shorts',title:"Women's Gym Shorts",
-    desc:'90% polyamide 10% elastane · High waist',price:20,badge:'',
+    desc:'90% polyamide 10% elastane · High waist',price:20,badge:'',noCustom:true,
     cats:['all','womens','bottoms'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_1210f229-9c09-47f0-9203-2aa876bb70fb.jpg?v=1775552279',
     colors:['wine-red','pink-1','warm-tan','gray','hard-blue','khaki','purple-1']
   },
   {
     handle:'womens-2-1-shorts',title:"Women's 2-1 Shorts",
-    desc:'Running shorts · 90% polyester 10% spandex',price:30,badge:'',
+    desc:'Running shorts · 90% polyester 10% spandex',price:30,badge:'',noCustom:true,
     cats:['all','womens','bottoms'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_26e60b6f-49f2-4a3a-b34d-2140bfdf784e.jpg?v=1775536820',
     colors:['black','pink-1','emerald-green']
@@ -865,21 +865,21 @@ const PRODUCTS = [
   },
   {
     handle:'women-s-v-back-leggings',title:'V-Back Leggings',
-    desc:'Scrunch flare V-back · 79% nylon 21% spandex',price:30,badge:'',
+    desc:'Scrunch flare V-back · 79% nylon 21% spandex',price:30,badge:'',noCustom:true,
     cats:['all','womens','bottoms'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/C9A62656-04B4-4D2A-9E0D-198664A3B7C2.jpg?v=1762498097',
     colors:['frost-blue']
   },
   {
     handle:'women-s-high-waist-leggings',title:'High Waist Scrunch Leggings',
-    desc:"Women's scrunch high waist leggings",price:25,badge:'',
+    desc:"Women's scrunch high waist leggings",price:25,badge:'',noCustom:true,
     cats:['all','womens','bottoms'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/10E1634C-49D7-4DD4-807E-47C10E802785.jpg?v=1762342748',
     colors:['black-1','red']
   },
   {
     handle:'women-s-butter-soft-leggings',title:'"Butter-Soft" Leggings',
-    desc:'Double-brushed · 80% nylon 20% elastane · High waist',price:30,badge:'',
+    desc:'Double-brushed · 80% nylon 20% elastane · High waist',price:30,badge:'',noCustom:true,
     cats:['all','womens','bottoms'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/AEEB6281-985A-423A-AAA8-097D87601F6D.jpg?v=1762231785',
     colors:['sand','brown-1','warm-tan']
@@ -1170,7 +1170,8 @@ function updateGarmentSVG(title){
 }
 function renderGarmentPicker(){
   const wrap = document.getElementById('garmentOpts');
-  wrap.innerHTML = PRODUCTS.map((p,i)=>`
+  const customProducts = PRODUCTS.filter(p=>!p.noCustom);
+  wrap.innerHTML = customProducts.map((p,i)=>`
     <button class="g-opt${i===0?' active':''}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price},'${p.img}')">
       <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
       <span class="g-opt-info">
@@ -1179,7 +1180,7 @@ function renderGarmentPicker(){
       </span>
     </button>
   `).join('');
-  const first = PRODUCTS[0];
+  const first = customProducts[0];
   curGarment = first.title;
   document.getElementById('pvGarmentName').textContent = first.title;
   document.getElementById('sumGarment').textContent = first.title;
