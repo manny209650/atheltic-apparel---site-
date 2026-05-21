@@ -1079,8 +1079,11 @@ function getGarmentType(title){
   if(t.includes('crewneck')||t.includes('crew')) return 'crewneck';
   if(t.includes('jacket')||t.includes('sweatshirt')) return 'jacket';
   if(t.includes('short')) return 'shorts';
-  if(t.includes('legging')||t.includes('pant')||t.includes('jogger')||t.includes('compression')) return 'pants';
+  if(t.includes('legging')||t.includes('pant')||t.includes('jogger')) return 'pants';
+  if(t.includes('compression')&&(t.includes('shirt')||t.includes('tee')||t.includes('top'))) return 'compression-tee';
+  if(t.includes('compression')) return 'pants';
   if(t.includes('bra')) return 'bra';
+  if(t.includes('box')||t.includes('oversized')) return 'boxy-tee';
   return 'tee';
 }
 function getGarmentPaths(type){
@@ -1128,6 +1131,22 @@ function getGarmentPaths(type){
       <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${g}"/>
       <line x1="130" y1="78" x2="130" y2="118" stroke="${sm}" stroke-width="1.5"/>
       <text id="pvText" x="80" y="195" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="2">TL</text>`;
+    case 'compression-tee': return `
+      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${g}"/>
+      <path d="M100 52 Q130 72 160 52 L166 40 Q130 22 94 40 Z" fill="#111"/>
+      <path d="M68 52 L14 90 L30 130 L72 102 Z" fill="${g}" opacity=".85"/>
+      <path d="M192 52 L246 90 L230 130 L188 102 Z" fill="${g}" opacity=".85"/>
+      <line x1="130" y1="72" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
+      <path d="M50 292 Q130 282 210 292" stroke="${dk}" stroke-width="2" fill="none"/>
+      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'boxy-tee': return `
+      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${g}"/>
+      <path d="M92 52 Q130 80 168 52 L176 36 Q130 14 84 36 Z" fill="#111"/>
+      <path d="M55 52 L2 100 L24 152 L78 114 Z" fill="${g}" opacity=".85"/>
+      <path d="M205 52 L258 100 L236 152 L182 114 Z" fill="${g}" opacity=".85"/>
+      <line x1="130" y1="80" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
+      <path d="M68 62 Q130 44 192 62 L200 148 Q130 130 60 148 Z" fill="rgba(255,255,255,.07)"/>
+      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'bra': return `
       <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${g}"/>
       <path d="M55 95 Q82 130 130 125 Q178 130 205 95 L205 148 Q178 168 130 163 Q82 168 55 148 Z" fill="${g}" opacity=".85"/>
