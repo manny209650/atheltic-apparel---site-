@@ -467,13 +467,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
               <stop id="pvStop2" offset="100%" stop-color="#C98F00"/>
             </linearGradient>
           </defs>
-          <path id="pvBody" d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="url(#pvGrad)"/>
-          <path id="pvCollar" d="M96 52 Q130 78 164 52 L172 38 Q130 18 88 38 Z" fill="#111"/>
-          <path id="pvSlL" d="M62 52 L8 98 L28 148 L74 112 Z" fill="url(#pvGrad)" opacity=".85"/>
-          <path id="pvSlR" d="M198 52 L252 98 L232 148 L186 112 Z" fill="url(#pvGrad)" opacity=".85"/>
-          <line x1="130" y1="78" x2="130" y2="288" stroke="rgba(0,0,0,.1)" stroke-width="1.5"/>
-          <path d="M72 60 Q130 42 188 60 L196 145 Q130 128 64 145 Z" fill="rgba(255,255,255,.08)"/>
-          <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>
+          <g id="pvShape"></g>
         </svg>
         <img id="logoOverlay" alt="Logo preview" style="position:absolute;pointer-events:none;object-fit:contain;display:none;transform:translate(-50%,-50%);width:80px;height:80px;opacity:.75"/>
       </div>
@@ -1079,6 +1073,82 @@ const uploadZone=document.getElementById('uploadZone');
 });
 
 /* ── BUILDER STATE ── */
+function getGarmentType(title){
+  const t=title.toLowerCase();
+  if(t.includes('hoodie')) return 'hoodie';
+  if(t.includes('crewneck')||t.includes('crew')) return 'crewneck';
+  if(t.includes('jacket')||t.includes('sweatshirt')) return 'jacket';
+  if(t.includes('short')) return 'shorts';
+  if(t.includes('legging')||t.includes('pant')||t.includes('jogger')||t.includes('compression')) return 'pants';
+  if(t.includes('bra')) return 'bra';
+  return 'tee';
+}
+function getGarmentPaths(type){
+  const g='url(#pvGrad)',dk='rgba(0,0,0,.12)',sm='rgba(0,0,0,.1)';
+  switch(type){
+    case 'hoodie': return `
+      <path d="M88 62 Q100 8 130 5 Q160 8 172 62 Q155 28 130 25 Q105 28 88 62 Z" fill="${g}" opacity=".75"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${g}"/>
+      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${g}" opacity=".85"/>
+      <path d="M88 62 Q105 48 130 45 Q155 48 172 62" stroke="${dk}" stroke-width="2" fill="none"/>
+      <rect x="90" y="212" width="80" height="35" rx="3" fill="${dk}"/>
+      <line x1="130" y1="62" x2="130" y2="295" stroke="${sm}" stroke-width="1.5"/>
+      <line x1="114" y1="45" x2="106" y2="82" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
+      <line x1="146" y1="45" x2="154" y2="82" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
+      <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'crewneck': return `
+      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${g}"/>
+      <path d="M96 58 Q130 72 164 58 Q150 40 130 38 Q110 40 96 58 Z" fill="#111"/>
+      <path d="M62 58 L8 102 L28 152 L74 116 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 58 L252 102 L232 152 L186 116 Z" fill="${g}" opacity=".85"/>
+      <rect x="22" y="278" width="216" height="17" rx="2" fill="${dk}"/>
+      <line x1="130" y1="72" x2="130" y2="278" stroke="${sm}" stroke-width="1.5"/>
+      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'jacket': return `
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
+      <path d="M130 52 L96 52 L78 95 L118 88 Z" fill="#111" opacity=".65"/>
+      <path d="M130 52 L164 52 L182 95 L142 88 Z" fill="#111" opacity=".65"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
+      <line x1="130" y1="88" x2="130" y2="292" stroke="rgba(0,0,0,.2)" stroke-width="2"/>
+      <path d="M55 205 L55 238 L108 238 L108 205" stroke="rgba(0,0,0,.15)" stroke-width="1.5" fill="none"/>
+      <path d="M152 205 L152 238 L205 238 L205 205" stroke="rgba(0,0,0,.15)" stroke-width="1.5" fill="none"/>
+      <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'shorts': return `
+      <rect x="48" y="72" width="164" height="24" rx="4" fill="${g}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${g}"/>
+      <line x1="130" y1="94" x2="130" y2="135" stroke="${sm}" stroke-width="1.5"/>
+      <line x1="118" y1="72" x2="112" y2="96" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+      <line x1="142" y1="72" x2="148" y2="96" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+      <text id="pvText" x="130" y="168" font-family="'Bebas Neue',sans-serif" font-size="16" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'pants': return `
+      <rect x="58" y="58" width="144" height="22" rx="4" fill="${g}" opacity=".9"/>
+      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${g}"/>
+      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${g}"/>
+      <line x1="130" y1="78" x2="130" y2="118" stroke="${sm}" stroke-width="1.5"/>
+      <text id="pvText" x="80" y="195" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="2">TL</text>`;
+    case 'bra': return `
+      <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${g}"/>
+      <path d="M55 95 Q82 130 130 125 Q178 130 205 95 L205 148 Q178 168 130 163 Q82 168 55 148 Z" fill="${g}" opacity=".85"/>
+      <line x1="130" y1="55" x2="130" y2="125" stroke="${sm}" stroke-width="1.5"/>
+      <path d="M88 55 Q80 38 72 48" stroke="${g}" stroke-width="3" fill="none"/>
+      <path d="M172 55 Q180 38 188 48" stroke="${g}" stroke-width="3" fill="none"/>
+      <text id="pvText" x="130" y="140" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="3">TAGLINE</text>`;
+    default: return `
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
+      <path d="M96 52 Q130 78 164 52 L172 38 Q130 18 88 38 Z" fill="#111"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
+      <line x1="130" y1="78" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
+      <path d="M72 60 Q130 42 188 60 L196 145 Q130 128 64 145 Z" fill="rgba(255,255,255,.08)"/>
+      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+  }
+}
+function updateGarmentSVG(title){
+  const shape=document.getElementById('pvShape');
+  if(shape) shape.innerHTML=getGarmentPaths(getGarmentType(title));
+}
 function renderGarmentPicker(){
   const wrap = document.getElementById('garmentOpts');
   wrap.innerHTML = PRODUCTS.map((p,i)=>`
@@ -1095,6 +1165,7 @@ function renderGarmentPicker(){
   document.getElementById('pvGarmentName').textContent = first.title;
   document.getElementById('sumGarment').textContent = first.title;
   document.getElementById('sumBase').textContent = '$'+first.price;
+  updateGarmentSVG(first.title);
   updatePrice();
 }
 function selGarmentProduct(el,name,price){
@@ -1104,6 +1175,7 @@ function selGarmentProduct(el,name,price){
   document.getElementById('pvGarmentName').textContent=name;
   document.getElementById('sumGarment').textContent=name;
   document.getElementById('sumBase').textContent='$'+price;
+  updateGarmentSVG(name);
   updatePrice();
 }
 let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
