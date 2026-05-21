@@ -1,0 +1,8 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Variant Price,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Requires Shipping,Variant Taxable,Status
+mens-single-leg-compression-pants,Men's Single Leg Compression Pants,Men's single leg compression pants. Without logo.,Tagline,Pants,"compression, single leg, mens, bottoms, new",TRUE,Color,White,Size,M,25.00,2,deny,manual,TRUE,TRUE,active
+mens-single-leg-compression-pants,,,,,,,,White,,L,25.00,2,deny,manual,TRUE,TRUE,
+mens-single-leg-compression-pants,,,,,,,,White,,XL,25.00,1,deny,manual,TRUE,TRUE,
+mens-single-leg-compression-pants,,,,,,,,Black,,M,25.00,1,deny,manual,TRUE,TRUE,
+mens-single-leg-compression-pants,,,,,,,,Black,,L,25.00,2,deny,manual,TRUE,TRUE,
+mens-single-leg-compression-pants,,,,,,,,Black,,XL,25.00,1,deny,manual,TRUE,TRUE,
+mens-single-leg-compression-pants,,,,,,,,Grey,,M,25.00,2,deny,manual,TRUE,TRUE,
