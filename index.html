@@ -913,7 +913,7 @@ const PRODUCTS = [
   },
   {
     handle:'mens-gym-shirt',title:"Men's Gym Shirt",
-    desc:'True to size · 95% polyamide 5% elastane',price:25,badge:'',
+    desc:'True to size · 95% polyamide 5% elastane',price:30,badge:'',
     cats:['all','tops','mens'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_65a0576e-dbba-443f-a04a-5d91f6d91d20.jpg?v=1775552279',
     colors:['navy-blue','black','milk-white','off-brown','grey']
@@ -1144,8 +1144,19 @@ function filterShop(cat, btn){
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
 
+const STRIPE_LINKS={
+  'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00',
+  '3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01',
+  'mens-gym-shirt':'https://buy.stripe.com/28E5kDaZG1nAbFZastasg02',
+  'women-s-slim-jacket':'https://buy.stripe.com/7sY28r8Ry0jweSb8klasg03',
+  'untitled-nov4_20-32':'https://buy.stripe.com/fZucN5ebS1nA6lFastasg04',
+  '3-d-embroidery-hoodie':'https://buy.stripe.com/cNi7sLebS8Q26lF0RTasg05',
+  '3-d-embroidery-t-shirt':'https://buy.stripe.com/bJe3cvd7O3vI4dxcABasg06',
+  'womens-sport-bra':'https://buy.stripe.com/7sYcN5ffW7LYh0jcABasg07',
+};
 function viewProduct(handle){
-  window.open(`${STORE_URL}/products/${handle}`, '_blank');
+  if(STRIPE_LINKS[handle]) window.open(STRIPE_LINKS[handle],'_blank');
+  else window.open(`${STORE_URL}/products/${handle}`,'_blank');
 }
 
 /* ── CURSOR ── */
