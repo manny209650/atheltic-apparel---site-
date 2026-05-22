@@ -384,7 +384,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
   <a href="#home" onclick="event.preventDefault();mobGoTo('home')">Home</a>
   <a href="#shop" onclick="event.preventDefault();mobGoTo('shop')">Shop</a>
-  <a href="#builder" onclick="event.preventDefault();mobGoTo('builder')">Create Merch</a>
+  <a href="builder.html">Create Merch</a>
   <a href="#about" onclick="event.preventDefault();mobGoTo('about')">About</a>
   <a href="#contact" onclick="event.preventDefault();mobGoTo('contact')">Contact</a>
 </div>
@@ -394,11 +394,11 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <a href="#home" class="nav-logo">TAG<span class="g">LINE</span></a>
   <ul class="nav-links">
     <li><a href="#shop">Shop</a></li>
-    <li><a href="#builder" >Create Merch</a></li>
+    <li><a href="builder.html">Create Merch</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#builder" class="nav-cta" >Create Merch</a>
+  <a href="builder.html" class="nav-cta">Create Merch</a>
   <button class="nav-burger" id="burger" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -634,181 +634,30 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <cite>— Colossians 3:23</cite>
 </div>
 
-<!-- ═══════════════════════════════════════════ CUSTOM BUILDER -->
-<section class="builder-sec" id="builder">
-  <span class="section-label reveal">Create Merch</span>
-  <h2 class="section-title reveal">Custom <span class="g">Merch</span></h2>
-  <div class="builder-layout">
-    <!-- LIVE PREVIEW -->
-    <div class="builder-preview reveal">
-      <div style="width:100%;display:flex;align-items:center;justify-content:space-between">
-        <p class="prev-lbl">Live Preview</p>
-        <p class="prev-lbl" id="sideLabel">Front View</p>
-      </div>
-      <div class="side-toggle">
-        <button class="side-btn active" onclick="selSide('front',this)">◼ Front</button>
-        <button class="side-btn" onclick="selSide('back',this)">Back ◼</button>
-      </div>
-      <div class="prev-wrap">
-        <svg id="prevSvg" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 10px 30px rgba(0,0,0,.85))">
-          <defs>
-            <linearGradient id="pvGrad" x1="0" y1="0" x2="260" y2="320" gradientUnits="userSpaceOnUse">
-              <stop id="pvStop1" offset="0%" stop-color="#FF3333"/>
-              <stop id="pvStop2" offset="100%" stop-color="#AA0000"/>
-            </linearGradient>
-            <linearGradient id="pvHighlight" x1="60" y1="20" x2="190" y2="200" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(255,255,255,.24)"/>
-              <stop offset="45%" stop-color="rgba(255,255,255,.06)"/>
-              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-            </linearGradient>
-            <linearGradient id="pvSideShade" x1="0" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(0,0,0,.32)"/>
-              <stop offset="24%" stop-color="rgba(0,0,0,0)"/>
-              <stop offset="76%" stop-color="rgba(0,0,0,0)"/>
-              <stop offset="100%" stop-color="rgba(0,0,0,.32)"/>
-            </linearGradient>
-            <linearGradient id="pvBottomShade" x1="0" y1="195" x2="0" y2="310" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
-              <stop offset="100%" stop-color="rgba(0,0,0,.38)"/>
-            </linearGradient>
-            <filter id="pvBlur"><feGaussianBlur stdDeviation="5"/></filter>
-          </defs>
-          <g id="pvShape"></g>
-        </svg>
-        <img id="logoOverlay" alt="Logo preview" style="position:absolute;pointer-events:none;object-fit:contain;display:none;transform:translate(-50%,-50%);width:80px;height:80px;opacity:.75"/>
-      </div>
-      <p class="prev-garment-name" id="pvGarmentName">Sport Hoodie</p>
-      <p class="prev-color-name" id="pvColorName">Gold Rush</p>
+<!-- ═══════════════════════════════════════════ CUSTOM BUILDER CTA -->
+<section style="background:var(--space2);padding:100px 60px;text-align:center" id="builder">
+  <span class="section-label reveal" style="display:block">Create Merch</span>
+  <h2 class="section-title reveal" style="text-align:center">Custom <span class="g">Kingdom Gear</span></h2>
+  <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.85;max-width:620px;margin:0 auto 48px;transition-delay:.1s">Upload your logos, pick colors, set placement — front and back. We'll send a full quote within 24 hours. A $5 design deposit locks your spot in our queue and counts as credit toward your order.</p>
+  <div class="reveal" style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-bottom:64px;transition-delay:.15s">
+    <a href="builder.html" class="btn-primary" style="font-size:.75rem;padding:20px 52px">Design Your Gear →</a>
+    <a href="#contact" class="btn-ghost" style="font-size:.75rem;padding:20px 52px">Ask a Question</a>
+  </div>
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:860px;margin:0 auto;transition-delay:.2s">
+    <div style="background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left">
+      <div style="font-size:1.6rem;margin-bottom:12px">👕</div>
+      <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px">Jerseys &amp; Sets</p>
+      <p style="font-size:.82rem;color:var(--muted);line-height:1.65">Custom basketball jerseys, jersey + shorts sets — full sublimation or embroidery. Reversible option available.</p>
     </div>
-    <!-- CONTROLS -->
-    <div class="builder-controls reveal" style="transition-delay:.12s">
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">1</div><p class="ctrl-title">Choose Your Garment</p></div>
-        <div class="garment-opts" id="garmentOpts"></div>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">2</div><p class="ctrl-title">Primary Color</p></div>
-        <div class="swatches" id="swatchesWrap"></div>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">3</div><p class="ctrl-title">Upload Logos / Artwork</p></div>
-        <p style="font-size:.75rem;color:var(--muted);margin-bottom:12px;line-height:1.55">Add as many logos as you need — front chest, back, sleeve, whatever. Label each file so we know where it goes (e.g. "front-logo.png", "back-logo.png"). PNG preferred for best quality.</p>
-        <div class="upload-zone" id="uploadZone">
-          <input type="file" id="logoInput" accept="image/*" multiple onchange="handleLogoUpload(this)">
-          <div class="upload-icon">☁️</div>
-          <p class="upload-txt"><strong>Click to upload</strong> or drag &amp; drop<br>PNG, JPG, SVG — multiple files OK · max 10MB each</p>
-          <img id="uploadPreviewImg" alt="Uploaded logo preview">
-        </div>
-        <div id="extraLogos" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
-        <button type="button" onclick="addLogoSlot()" style="margin-top:8px;background:none;border:1px dashed rgba(224,32,32,.35);color:var(--muted);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;cursor:pointer;width:100%;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(224,32,32,.35)'">+ Add Another Logo</button>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">4</div><p class="ctrl-title">Logo / Text Placement</p></div>
-        <div class="place-wrap">
-          <div class="place-grid">
-            <button class="p-btn" onclick="selPlace(this,0)" title="Top Left">↖</button>
-            <button class="p-btn" onclick="selPlace(this,1)" title="Top Center">↑</button>
-            <button class="p-btn" onclick="selPlace(this,2)" title="Top Right">↗</button>
-            <button class="p-btn" onclick="selPlace(this,3)" title="Mid Left">←</button>
-            <button class="p-btn active" onclick="selPlace(this,4)" title="Center">●</button>
-            <button class="p-btn" onclick="selPlace(this,5)" title="Mid Right">→</button>
-            <button class="p-btn" onclick="selPlace(this,6)" title="Bottom Left">↙</button>
-            <button class="p-btn" onclick="selPlace(this,7)" title="Bottom Center">↓</button>
-            <button class="p-btn" onclick="selPlace(this,8)" title="Bottom Right">↘</button>
-          </div>
-          <p class="place-hint">Click a zone to<br>set where your<br>logo or text<br>appears on<br>the garment.</p>
-        </div>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">5</div><p class="ctrl-title">Custom Text (Optional)</p></div>
-        <div class="text-inputs">
-          <input class="c-input" type="text" id="customTextIn" placeholder="Your name, team name, or motto…" maxlength="24" oninput="updateText(this.value)">
-          <div class="font-opts">
-            <button class="f-opt active" onclick="selFont(this,'Bebas Neue')">Block</button>
-            <button class="f-opt" onclick="selFont(this,'Cinzel')">Serif</button>
-            <button class="f-opt" onclick="selFont(this,'Inter')">Clean</button>
-          </div>
-        </div>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">6</div><p class="ctrl-title">Order Details</p></div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="form-g"><label class="form-lbl">Your Name</label><input class="c-input" type="text" id="ordName" placeholder="Full name"></div>
-          <div class="form-g"><label class="form-lbl">Email</label><input class="c-input" type="email" id="ordEmail" placeholder="you@example.com"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div class="form-g">
-              <label class="form-lbl">Size</label>
-              <select class="c-input f-sel" id="ordSize">
-                <option value="">— Size —</option>
-                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
-              </select>
-            </div>
-            <div class="form-g">
-              <label class="form-lbl">Qty</label>
-              <select class="c-input f-sel" id="ordQty">
-                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="10">10+</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Material Preference</label>
-            <select class="c-input f-sel" id="ordMaterial">
-              <option value="">— Fabric feel? —</option>
-              <option>Soft / Fleece (hoodie weight)</option>
-              <option>Lightweight / Breathable (gym wear)</option>
-              <option>Compression / Fitted stretch</option>
-              <option>Cotton / Casual feel</option>
-              <option>Moisture-wicking / Performance</option>
-              <option>No preference — your recommendation</option>
-            </select>
-          </div>
-          <div class="form-g" id="reversibleRow" style="display:none">
-            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
-              <input type="checkbox" id="reversibleCheck" style="width:16px;height:16px;accent-color:var(--red)">
-              <span><span class="form-lbl" style="margin:0">Make jersey reversible</span><br><span style="font-size:.72rem;color:var(--muted)">Two colors, one jersey — additional charge applies. Mention desired 2nd color in notes.</span></span>
-            </label>
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Number &amp; Name on Jersey (if applicable)</label>
-            <input class="c-input" type="text" id="ordJerseyName" placeholder="e.g. BARRAGAN #23 — or leave blank" style="display:none">
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Embroidery or Print?</label>
-            <select class="c-input f-sel" id="ordDecoration">
-              <option value="">— Decoration type? —</option>
-              <option>Embroidery (stitched, premium)</option>
-              <option>Screen print (bold, flat color)</option>
-              <option>DTG / Direct-to-garment (photo quality)</option>
-              <option>Heat transfer / Vinyl</option>
-              <option>Puff / 3D embroidery</option>
-              <option>Not sure — advise me</option>
-            </select>
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Logo Size &amp; Placement Notes</label>
-            <textarea class="c-input" id="ordNotes" rows="4" placeholder="Tell us exactly where each logo goes and how big. Example: 'Front left chest — small logo (3 in), back center — large logo (10 in), right sleeve — mini TL mark.' Also note any pantone colors, thread colors, or special requests." style="resize:vertical"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="order-sum">
-        <div class="price-row"><span>Garment</span><strong id="sumGarment">Sport Hoodie</strong></div>
-        <div class="price-row"><span>Color</span><strong id="sumColor">Gold Rush</strong></div>
-        <div class="price-row"><span>Size</span><strong id="sumSizeDisplay">—</strong></div>
-        <div class="deposit-box">
-          <div class="deposit-box-label">Pricing</div>
-          <div class="deposit-box-body">Final price varies by embroidery style, logo size, and print type. We'll text or email your full quote within 24 hrs — no surprises.</div>
-          <div class="deposit-fee">$5 Design Deposit</div>
-          <div class="deposit-fee-sub">Locks your spot in our queue · Applied as credit toward your final order · Non-refundable if you decide not to order</div>
-        </div>
-        <button class="btn-order" onclick="submitOrder()">Submit Design Request →</button>
-        <p class="order-note">We'll reach out within 24 hrs with your custom quote · Production 3–5 weeks</p>
-        <div class="order-success" id="orderSuccess">
-          <span class="check">🙏</span>
-          <p><strong>Design request submitted!</strong><br>Pay the $5 deposit to lock your spot in our queue. It counts as credit toward your final order.</p>
-          <a id="depositBtn" href="#" target="_blank" rel="noopener" class="btn-deposit">Pay $5 Design Deposit →</a>
-          <p class="deposit-fine">Non-refundable if you decide not to order.<br>We'll reach out within 24 hrs with your quote. Philippians 4:13.</p>
-        </div>
-      </div>
+    <div style="background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left">
+      <div style="font-size:1.6rem;margin-bottom:12px">🎨</div>
+      <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px">Full Custom Build</p>
+      <p style="font-size:.82rem;color:var(--muted);line-height:1.65">Hoodies, tees, crewnecks and more — add your logos front &amp; back, choose colors, pick placement and decoration style.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left">
+      <div style="font-size:1.6rem;margin-bottom:12px">💬</div>
+      <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px">$5 Design Deposit</p>
+      <p style="font-size:.82rem;color:var(--muted);line-height:1.65">Submit your design request and pay $5 to lock your spot. Applied as credit toward your order. Quote in 24 hrs.</p>
     </div>
   </div>
 </section>
@@ -946,7 +795,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     <div>
       <span class="footer-col-h">Services</span>
       <ul class="footer-links">
-        <li><a href="#builder" >Create Merch</a></li>
+        <li><a href="builder.html">Create Merch</a></li>
         <li><a href="#contact">Wholesale</a></li>
         <li><a href="#contact">Size Guide</a></li>
         <li><a href="#contact">Track Order</a></li>
@@ -1291,9 +1140,6 @@ function filterShop(cat, btn){
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
 
-// ← Paste your $5 Stripe payment link here once created in your Stripe dashboard
-const DESIGN_DEPOSIT_URL = '';
-
 const STRIPE_LINKS={
   'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00',
   '3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01',
@@ -1362,481 +1208,8 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* ── UPLOAD DRAG/DROP ── */
-const uploadZone=document.getElementById('uploadZone');
-['dragover','dragleave','drop'].forEach(evt=>{
-  uploadZone.addEventListener(evt,e=>{
-    e.preventDefault();
-    uploadZone.classList.toggle('drag',evt==='dragover');
-    if(evt==='drop'&&e.dataTransfer.files[0]) handleLogoUpload({files:e.dataTransfer.files});
-  });
-});
 
-/* ── BUILDER STATE ── */
-function getGarmentType(title){
-  const t=title.toLowerCase();
-  if(t.includes('jersey')) return 'jersey';
-  if(t.includes('hoodie')) return 'hoodie';
-  if(t.includes('crewneck')||t.includes('crew')) return 'crewneck';
-  if(t.includes('quarter-zip')||t.includes('quarter zip')||t.includes('zip')) return 'quarter-zip';
-  if(t.includes('jacket')||t.includes('sweatshirt')) return 'jacket';
-  if(t.includes('short')) return 'shorts';
-  if(t.includes('legging')||t.includes('pant')||t.includes('jogger')) return 'pants';
-  if(t.includes('compression')&&(t.includes('shirt')||t.includes('tee')||t.includes('top'))) return 'compression-tee';
-  if(t.includes('compression')) return 'pants';
-  if(t.includes('bra')) return 'bra';
-  if(t.includes('box')||t.includes('oversized')) return 'boxy-tee';
-  return 'tee';
-}
-function getGarmentPaths(type){
-  const g='url(#pvGrad)',dk='rgba(0,0,0,.15)',sm='rgba(0,0,0,.1)',hi='url(#pvHighlight)',ss='url(#pvSideShade)',bs='url(#pvBottomShade)';
-  switch(type){
-    case 'jersey': return `
-      <ellipse cx="130" cy="305" rx="65" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${g}"/>
-      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${g}" opacity=".85"/>
-      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${g}" opacity=".85"/>
-      <path d="M22 278 L60 255 L60 292 Z" fill="${dk}"/>
-      <path d="M238 278 L200 255 L200 292 Z" fill="${dk}"/>
-      <path d="M72 38 Q130 58 188 38" stroke="${dk}" stroke-width="1.5" fill="none"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${hi}"/>
-      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${hi}" opacity=".7"/>
-      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${hi}" opacity=".7"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${ss}"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${bs}"/>
-      <line x1="130" y1="55" x2="130" y2="292" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M82 45 Q130 32 178 45 Q155 55 130 53 Q105 55 82 45 Z" fill="rgba(255,255,255,.12)"/>
-      <text x="130" y="160" font-family="'Bebas Neue',sans-serif" font-size="52" fill="rgba(0,0,0,.2)" text-anchor="middle">00</text>
-      <text id="pvText" x="130" y="230" font-family="'Bebas Neue',sans-serif" font-size="16" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'hoodie': return `
-      <ellipse cx="130" cy="305" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M88 62 Q100 8 130 5 Q160 8 172 62 Q155 28 130 25 Q105 28 88 62 Z" fill="${g}" opacity=".78"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${g}"/>
-      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${g}" opacity=".85"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${hi}"/>
-      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${ss}"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${bs}"/>
-      <path d="M88 62 Q105 48 130 45 Q155 48 172 62" stroke="${dk}" stroke-width="2" fill="none"/>
-      <rect x="90" y="212" width="80" height="35" rx="3" fill="${dk}"/>
-      <line x1="130" y1="62" x2="130" y2="295" stroke="${sm}" stroke-width="1.5"/>
-      <line x1="114" y1="45" x2="106" y2="82" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
-      <line x1="146" y1="45" x2="154" y2="82" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
-      <path d="M78 76 Q130 62 182 76 Q158 86 130 84 Q102 86 78 76 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'crewneck': return `
-      <ellipse cx="130" cy="304" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${g}"/>
-      <path d="M96 58 Q130 72 164 58 Q150 40 130 38 Q110 40 96 58 Z" fill="#111"/>
-      <path d="M62 58 L8 102 L28 152 L74 116 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 58 L252 102 L232 152 L186 116 Z" fill="${g}" opacity=".85"/>
-      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${hi}"/>
-      <path d="M62 58 L8 102 L28 152 L74 116 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 58 L252 102 L232 152 L186 116 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${ss}"/>
-      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${bs}"/>
-      <rect x="22" y="278" width="216" height="17" rx="2" fill="${dk}"/>
-      <line x1="130" y1="72" x2="130" y2="278" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M80 70 Q130 56 180 70 Q156 80 130 78 Q104 80 80 70 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'quarter-zip': return `
-      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
-      <path d="M96 52 Q113 68 130 62 Q147 68 164 52 L158 42 Q130 30 102 42 Z" fill="#222"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
-      <line x1="130" y1="62" x2="130" y2="175" stroke="rgba(0,0,0,.28)" stroke-width="3"/>
-      <circle cx="130" cy="175" r="5" fill="rgba(0,0,0,.35)"/>
-      <line x1="122" y1="62" x2="122" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
-      <line x1="138" y1="62" x2="138" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
-      <rect x="22" y="278" width="216" height="14" rx="2" fill="${dk}"/>
-      <path d="M78 62 Q130 48 182 62 Q157 72 130 70 Q103 72 78 62 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="225" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'jacket': return `
-      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
-      <path d="M130 52 L96 52 L78 95 L118 88 Z" fill="#111" opacity=".65"/>
-      <path d="M130 52 L164 52 L182 95 L142 88 Z" fill="#111" opacity=".65"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
-      <line x1="130" y1="88" x2="130" y2="292" stroke="rgba(0,0,0,.2)" stroke-width="2"/>
-      <path d="M55 205 L55 238 L108 238 L108 205" stroke="rgba(0,0,0,.15)" stroke-width="1.5" fill="none"/>
-      <path d="M152 205 L152 238 L205 238 L205 205" stroke="rgba(0,0,0,.15)" stroke-width="1.5" fill="none"/>
-      <path d="M80 62 Q130 48 180 62 Q156 72 130 70 Q104 72 80 62 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'shorts': return `
-      <ellipse cx="130" cy="228" rx="68" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
-      <rect x="48" y="72" width="164" height="24" rx="4" fill="${g}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${g}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${hi}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${ss}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${bs}"/>
-      <line x1="130" y1="94" x2="130" y2="135" stroke="${sm}" stroke-width="1.5"/>
-      <line x1="118" y1="72" x2="112" y2="96" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
-      <line x1="142" y1="72" x2="148" y2="96" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
-      <text id="pvText" x="130" y="168" font-family="'Bebas Neue',sans-serif" font-size="16" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'pants': return `
-      <ellipse cx="130" cy="308" rx="65" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
-      <rect x="58" y="58" width="144" height="22" rx="4" fill="${g}" opacity=".9"/>
-      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${g}"/>
-      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${g}"/>
-      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${hi}"/>
-      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${hi}"/>
-      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${ss}"/>
-      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${ss}"/>
-      <line x1="130" y1="78" x2="130" y2="118" stroke="${sm}" stroke-width="1.5"/>
-      <text id="pvText" x="80" y="195" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="2">TL</text>`;
-    case 'compression-tee': return `
-      <ellipse cx="130" cy="302" rx="62" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
-      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${g}"/>
-      <path d="M100 52 Q130 72 160 52 L166 40 Q130 22 94 40 Z" fill="#111"/>
-      <path d="M68 52 L14 90 L30 130 L72 102 Z" fill="${g}" opacity=".85"/>
-      <path d="M192 52 L246 90 L230 130 L188 102 Z" fill="${g}" opacity=".85"/>
-      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${hi}"/>
-      <path d="M68 52 L14 90 L30 130 L72 102 Z" fill="${hi}" opacity=".7"/>
-      <path d="M192 52 L246 90 L230 130 L188 102 Z" fill="${hi}" opacity=".7"/>
-      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${ss}"/>
-      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${bs}"/>
-      <line x1="130" y1="72" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M50 292 Q130 282 210 292" stroke="${dk}" stroke-width="2" fill="none"/>
-      <path d="M82 62 Q130 48 178 62 Q155 72 130 70 Q105 72 82 62 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'boxy-tee': return `
-      <ellipse cx="130" cy="302" rx="72" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${g}"/>
-      <path d="M92 52 Q130 80 168 52 L176 36 Q130 14 84 36 Z" fill="#111"/>
-      <path d="M55 52 L2 100 L24 152 L78 114 Z" fill="${g}" opacity=".85"/>
-      <path d="M205 52 L258 100 L236 152 L182 114 Z" fill="${g}" opacity=".85"/>
-      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${hi}"/>
-      <path d="M55 52 L2 100 L24 152 L78 114 Z" fill="${hi}" opacity=".7"/>
-      <path d="M205 52 L258 100 L236 152 L182 114 Z" fill="${hi}" opacity=".7"/>
-      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${ss}"/>
-      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${bs}"/>
-      <line x1="130" y1="80" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M68 62 Q130 44 192 62 L200 148 Q130 130 60 148 Z" fill="rgba(255,255,255,.07)"/>
-      <path d="M76 66 Q130 50 184 66 Q160 76 130 74 Q100 76 76 66 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'bra': return `
-      <ellipse cx="130" cy="172" rx="55" ry="5" fill="rgba(0,0,0,.4)" filter="url(#pvBlur)"/>
-      <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${g}"/>
-      <path d="M55 95 Q82 130 130 125 Q178 130 205 95 L205 148 Q178 168 130 163 Q82 168 55 148 Z" fill="${g}" opacity=".85"/>
-      <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${hi}"/>
-      <path d="M55 95 Q82 130 130 125 Q178 130 205 95 L205 148 Q178 168 130 163 Q82 168 55 148 Z" fill="${hi}" opacity=".7"/>
-      <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${ss}"/>
-      <line x1="130" y1="55" x2="130" y2="125" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M88 55 Q80 38 72 48" stroke="${g}" stroke-width="3" fill="none"/>
-      <path d="M172 55 Q180 38 188 48" stroke="${g}" stroke-width="3" fill="none"/>
-      <text id="pvText" x="130" y="140" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="3">TAGLINE</text>`;
-    default: return `
-      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
-      <path d="M96 52 Q130 78 164 52 L172 38 Q130 18 88 38 Z" fill="#111"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
-      <line x1="130" y1="78" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M72 60 Q130 42 188 60 L196 145 Q130 128 64 145 Z" fill="rgba(255,255,255,.07)"/>
-      <path d="M78 62 Q130 46 182 62 Q157 72 130 70 Q103 72 78 62 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-  }
-}
-function updateGarmentSVG(title){
-  const shape=document.getElementById('pvShape');
-  const type=getGarmentType(title);
-  if(shape) shape.innerHTML=curSide==='back'?getGarmentPathsBack(type):getGarmentPaths(type);
-}
-function getGarmentPathsBack(type){
-  const g='url(#pvGrad)',dk='rgba(0,0,0,.15)',sm='rgba(0,0,0,.1)',hi='url(#pvHighlight)',ss='url(#pvSideShade)',bs='url(#pvBottomShade)';
-  switch(type){
-    case 'jersey': return `
-      <ellipse cx="130" cy="305" rx="65" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${g}"/>
-      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${g}" opacity=".85"/>
-      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${g}" opacity=".85"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${hi}"/>
-      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${hi}" opacity=".7"/>
-      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${hi}" opacity=".7"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${ss}"/>
-      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${bs}"/>
-      <line x1="130" y1="30" x2="130" y2="292" stroke="${sm}" stroke-width="1.5"/>
-      <text x="130" y="148" font-family="'Bebas Neue',sans-serif" font-size="26" fill="rgba(0,0,0,.18)" text-anchor="middle" letter-spacing="3">LAST NAME</text>
-      <text x="130" y="205" font-family="'Bebas Neue',sans-serif" font-size="52" fill="rgba(0,0,0,.18)" text-anchor="middle">00</text>
-      <text id="pvText" x="130" y="255" font-family="'Bebas Neue',sans-serif" font-size="14" fill="rgba(0,0,0,.32)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'hoodie': return `
-      <ellipse cx="130" cy="305" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${g}"/>
-      <path d="M82 62 Q100 4 130 1 Q160 4 178 62 Q155 24 130 22 Q105 24 82 62 Z" fill="${g}" opacity=".82"/>
-      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${g}" opacity=".85"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${hi}"/>
-      <path d="M82 62 Q100 4 130 1 Q160 4 178 62 Q155 24 130 22 Q105 24 82 62 Z" fill="${hi}" opacity=".6"/>
-      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${ss}"/>
-      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${bs}"/>
-      <line x1="130" y1="62" x2="130" y2="295" stroke="${sm}" stroke-width="1.5"/>
-      <line x1="130" y1="8" x2="130" y2="65" stroke="rgba(0,0,0,.22)" stroke-width="2.5"/>
-      <path d="M80 72 Q130 58 180 72 Q156 82 130 80 Q104 82 80 72 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="200" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'quarter-zip':
-    case 'crewneck':
-    case 'jacket': return `
-      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M100 52 Q114 40 130 38 Q146 40 160 52" stroke="${dk}" stroke-width="2" fill="none"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
-      <line x1="130" y1="52" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
-      <rect x="22" y="278" width="216" height="14" rx="2" fill="${dk}"/>
-      <path d="M80 60 Q130 46 180 60 Q156 70 130 68 Q104 70 80 60 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-    case 'shorts': return `
-      <ellipse cx="130" cy="228" rx="68" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
-      <rect x="48" y="72" width="164" height="24" rx="4" fill="${g}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${g}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${hi}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${ss}"/>
-      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${bs}"/>
-      <line x1="130" y1="94" x2="130" y2="135" stroke="${sm}" stroke-width="1.5"/>
-      <rect x="78" y="100" width="40" height="26" rx="2" fill="rgba(0,0,0,.12)"/>
-      <rect x="142" y="100" width="40" height="26" rx="2" fill="rgba(0,0,0,.12)"/>
-      <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.32)" text-anchor="middle" letter-spacing="3">TL</text>`;
-    case 'pants': return `
-      <ellipse cx="130" cy="308" rx="65" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
-      <rect x="58" y="58" width="144" height="22" rx="4" fill="${g}" opacity=".9"/>
-      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${g}"/>
-      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${g}"/>
-      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${hi}"/>
-      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${hi}"/>
-      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${ss}"/>
-      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${ss}"/>
-      <rect x="62" y="82" width="52" height="28" rx="2" fill="rgba(0,0,0,.12)"/>
-      <rect x="146" y="82" width="52" height="28" rx="2" fill="rgba(0,0,0,.12)"/>
-      <line x1="130" y1="78" x2="130" y2="118" stroke="${sm}" stroke-width="1.5"/>
-      <text id="pvText" x="80" y="200" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="2">TL</text>`;
-    case 'bra': return `
-      <ellipse cx="130" cy="175" rx="55" ry="5" fill="rgba(0,0,0,.4)" filter="url(#pvBlur)"/>
-      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${g}"/>
-      <path d="M88 55 Q80 38 72 48 L72 120 Q82 126 130 124 Q178 126 188 120 L188 48 Q180 38 172 55" stroke="${g}" stroke-width="4" fill="none"/>
-      <path d="M112 28 Q122 16 130 14 Q138 16 148 28 L148 55 Q138 48 130 46 Q122 48 112 55 Z" fill="${g}"/>
-      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${hi}"/>
-      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${ss}"/>
-      <text id="pvText" x="130" y="148" font-family="'Bebas Neue',sans-serif" font-size="11" fill="rgba(0,0,0,.32)" text-anchor="middle" letter-spacing="3">TAGLINE</text>`;
-    default: return `
-      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
-      <path d="M100 52 Q114 40 130 38 Q146 40 160 52" stroke="${dk}" stroke-width="2" fill="none"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
-      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
-      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
-      <line x1="130" y1="52" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M80 60 Q130 46 180 60 Q156 70 130 68 Q104 70 80 60 Z" fill="rgba(255,255,255,.1)"/>
-      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
-  }
-}
-const COLOR_NAMES={
-  'warm-tan':'Warm Tan','grey':'Grey','gray':'Grey','gray-1':'Grey','gray-2':'Grey',
-  'white':'White','white-1':'White','navy-blue':'Navy Blue','black':'Black','black-1':'Black',
-  'milk-white':'Milk White','off-brown':'Off Brown','khaki':'Khaki','wine-red':'Wine Red',
-  'pink-1':'Pink','purple-1':'Purple','purple':'Purple','orange':'Orange',
-  'light-grey':'Light Grey','brown-2':'Brown','brown-1':'Brown','brown':'Brown',
-  'dark-fog':'Dark Fog','hard-blue':'Hard Blue','emerald-green':'Emerald Green',
-  'blue-1':'Blue','green-1':'Green','green':'Green','yellow':'Yellow','burgundy':'Burgundy',
-  'red':'Red','light-blue':'Light Blue','sand':'Sand','clear':'White','rose-gold':'Rose Gold',
-  'frost-blue':'Frost Blue','frost-blue-1':'Frost Blue','silver':'Silver',
-  'green-gray':'Green Gray','baby-blue':'Baby Blue','beige-1':'Beige',
-  'chinese-red':'Chinese Red','nio-grey':'Nio Grey'
-};
-function colorLabel(key){return COLOR_NAMES[key]||(key.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()));}
-function darkenHex(hex,amt=35){
-  let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-  r=Math.max(0,r-amt);g=Math.max(0,g-amt);b=Math.max(0,b-amt);
-  return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
-}
-function isLight(hex){
-  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-  return(r*299+g*587+b*114)/1000>160;
-}
-function renderSwatches(colors){
-  const wrap=document.getElementById('swatchesWrap');
-  wrap.innerHTML=colors.map((key,i)=>{
-    const hex=gc(key);const name=colorLabel(key);
-    const extra=isLight(hex)?';border-color:rgba(0,0,0,.25)':'';
-    return `<div class="sw${i===0?' active':''}" style="background:${hex}${extra}" onclick="selColor(this,'${name}','${hex}','${darkenHex(hex)}')" title="${name}"></div>`;
-  }).join('');
-  const firstEl=wrap.querySelector('.sw');
-  if(firstEl) firstEl.click();
-}
 
-function renderGarmentPicker(){
-  const wrap = document.getElementById('garmentOpts');
-  const customProducts = PRODUCTS.filter(p=>!p.noCustom);
-  wrap.innerHTML = customProducts.map((p,i)=>`
-    <button class="g-opt${i===0?' active':''}" data-handle="${p.handle}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price})">
-      <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
-      <span class="g-opt-info">
-        <span class="g-opt-name">${p.title}</span>
-        <span class="g-opt-price">${p.price>0?'$'+p.price:'Custom'}</span>
-      </span>
-    </button>
-  `).join('');
-  const first = customProducts[0];
-  curGarment = first.title;
-  document.getElementById('pvGarmentName').textContent = first.title;
-  document.getElementById('sumGarment').textContent = first.title;
-  updateGarmentSVG(first.title);
-  renderSwatches(first.colors);
-}
-function selGarmentProduct(el,name,price){
-  document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
-  el.classList.add('active');
-  curGarment=name;
-  document.getElementById('pvGarmentName').textContent=name;
-  document.getElementById('sumGarment').textContent=name;
-  updateGarmentSVG(name);
-  const handle=el.dataset.handle;
-  const product=PRODUCTS.find(p=>p.handle===handle);
-  renderSwatches(product?product.colors:['black']);
-  const isJersey=name.toLowerCase().includes('jersey');
-  document.getElementById('reversibleRow').style.display=isJersey?'block':'none';
-  document.getElementById('ordJerseyName').style.display=isJersey?'block':'none';
-}
-let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
-let curSide='front';
-const sideState={
-  front:{hasLogo:false,logoSrc:null,placeIdx:4,text:'',font:"'Bebas Neue',sans-serif"},
-  back: {hasLogo:false,logoSrc:null,placeIdx:4,text:'',font:"'Bebas Neue',sans-serif"}
-};
-const pvPos=[
-  {x:'78',y:'112'},{x:'130',y:'100'},{x:'182',y:'112'},
-  {x:'82',y:'162'},{x:'130',y:'188'},{x:'178',y:'162'},
-  {x:'82',y:'242'},{x:'130',y:'258'},{x:'178',y:'242'}
-];
-const lPos=[
-  {left:'30%',top:'35%'},{left:'50%',top:'32%'},{left:'70%',top:'35%'},
-  {left:'31%',top:'51%'},{left:'50%',top:'59%'},{left:'69%',top:'51%'},
-  {left:'31%',top:'76%'},{left:'50%',top:'81%'},{left:'69%',top:'76%'}
-];
-let curPlaceIdx=4;
-function selSide(side,btn){
-  const st=sideState[curSide];
-  st.hasLogo=hasLogo;st.placeIdx=curPlaceIdx;
-  st.text=document.getElementById('customTextIn').value;
-  const pvT=document.getElementById('pvText');
-  if(pvT)st.font=pvT.style.fontFamily||"'Bebas Neue',sans-serif";
-  curSide=side;
-  document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('sideLabel').textContent=side==='front'?'Front View':'Back View';
-  const ns=sideState[side];
-  hasLogo=ns.hasLogo;curPlaceIdx=ns.placeIdx;
-  document.querySelectorAll('.p-btn').forEach((b,i)=>b.classList.toggle('active',i===curPlaceIdx));
-  const textIn=document.getElementById('customTextIn');
-  textIn.value=ns.text;
-  updateGarmentSVG(curGarment);
-  const pvT2=document.getElementById('pvText');
-  if(pvT2){pvT2.textContent=ns.text||'TAGLINE';pvT2.style.fontFamily=ns.font;
-    const pos=pvPos[curPlaceIdx];pvT2.setAttribute('x',pos.x);pvT2.setAttribute('y',pos.y);}
-  const logo=document.getElementById('logoOverlay');
-  if(ns.hasLogo&&ns.logoSrc){logo.src=ns.logoSrc;logo.style.display='block';
-    const lp=lPos[curPlaceIdx];logo.style.left=lp.left;logo.style.top=lp.top;}
-  else{logo.style.display='none';}
-}
-
-function selGarment(el,name){
-  document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
-  el.classList.add('active');curGarment=name;
-  document.getElementById('pvGarmentName').textContent=name;
-  document.getElementById('sumGarment').textContent=name;
-  updatePrice();
-}
-function selColor(el,name,c1,c2){
-  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');curColor=name;
-  document.getElementById('pvColorName').textContent=name;
-  document.getElementById('sumColor').textContent=name;
-  document.getElementById('pvStop1').setAttribute('stop-color',c1);
-  document.getElementById('pvStop2').setAttribute('stop-color',c2);
-  const pvCollar=document.getElementById('pvCollar');
-  const pvTxt=document.getElementById('pvText');
-  if(isLight(c1)){if(pvCollar)pvCollar.setAttribute('fill','#666');if(pvTxt)pvTxt.setAttribute('fill','rgba(40,40,40,.35)');}
-  else if(parseInt(c1.slice(1,3),16)<30&&parseInt(c1.slice(3,5),16)<30&&parseInt(c1.slice(5,7),16)<30){if(pvCollar)pvCollar.setAttribute('fill','#333');if(pvTxt)pvTxt.setAttribute('fill','rgba(224,32,32,.4)');}
-  else{if(pvCollar)pvCollar.setAttribute('fill','#111');if(pvTxt)pvTxt.setAttribute('fill','rgba(0,0,0,.38)');}
-}
-function selPlace(el,idx){
-  document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');curPlaceIdx=idx;
-  sideState[curSide].placeIdx=idx;
-  const p=pvPos[idx];
-  document.getElementById('pvText').setAttribute('x',p.x);
-  document.getElementById('pvText').setAttribute('y',p.y);
-  const logo=document.getElementById('logoOverlay');
-  if(logo.style.display!=='none'){const lp=lPos[idx];logo.style.left=lp.left;logo.style.top=lp.top;}
-}
-function updateText(val){
-  hasText=val.trim().length>0;
-  sideState[curSide].text=val;
-  document.getElementById('pvText').textContent=val.trim()||'TAGLINE';
-}
-function selFont(el,font){
-  document.querySelectorAll('.f-opt').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  const ff=`'${font}',sans-serif`;
-  sideState[curSide].font=ff;
-  document.getElementById('pvText').style.fontFamily=ff;
-}
-function handleLogoUpload(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    document.getElementById('uploadPreviewImg').src=e.target.result;
-    document.getElementById('uploadPreviewImg').style.display='block';
-    const logo=document.getElementById('logoOverlay');
-    logo.src=e.target.result;logo.style.display='block';
-    const lp=lPos[curPlaceIdx];logo.style.left=lp.left;logo.style.top=lp.top;
-    hasLogo=true;
-    sideState[curSide].hasLogo=true;
-    sideState[curSide].logoSrc=e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-function updatePrice(){
-  // Price is quoted after design review — varies by embroidery, logo size, print type
-}
-let extraLogoCount=0;
-function addLogoSlot(){
-  extraLogoCount++;
-  const wrap=document.getElementById('extraLogos');
-  const div=document.createElement('div');
-  div.style.cssText='display:flex;align-items:center;gap:8px';
-  div.innerHTML=`<input type="file" accept="image/*" class="c-input" style="font-size:.78rem;padding:8px 10px;flex:1" placeholder="Logo ${extraLogoCount+1}"><button type="button" onclick="this.parentNode.remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:4px">✕</button>`;
-  wrap.appendChild(div);
-}
 function handleSubscribe(e){
   e.preventDefault();
   const email=e.target.querySelector('input[type=email]').value.trim();
@@ -1849,20 +1222,6 @@ function handleSubscribe(e){
   // fetch('https://YOUR-MAILCHIMP-JSONP-URL&EMAIL='+encodeURIComponent(email)+'&c=?')
 }
 
-function submitOrder(){
-  const name=document.getElementById('ordName').value.trim();
-  const email=document.getElementById('ordEmail').value.trim();
-  const size=document.getElementById('ordSize').value;
-  if(!name||!email||!size){alert('Please fill in your name, email, and size before submitting.');return;}
-  document.getElementById('sumSizeDisplay').textContent=size;
-  const depositLink = DESIGN_DEPOSIT_URL || '#';
-  document.getElementById('depositBtn').href=depositLink;
-  document.getElementById('orderSuccess').style.display='block';
-  document.querySelector('.btn-order').style.display='none';
-  document.getElementById('orderSuccess').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function scrollToBuilder(e){if(e)e.preventDefault();closeMob();const el=document.getElementById('builder');const top=el.getBoundingClientRect().top+window.pageYOffset-72;window.scrollTo({top,behavior:'smooth'});}
-
 /* ── CONTACT FORM ── */
 function submitContact(e){
   e.preventDefault();
@@ -1873,7 +1232,6 @@ function submitContact(e){
 
 /* ── INITIAL RENDER ── */
 renderShop();
-renderGarmentPicker();
 </script>
 </body>
 </html>
