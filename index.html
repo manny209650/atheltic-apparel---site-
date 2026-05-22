@@ -118,6 +118,30 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
   .moon-wrap{width:130px;height:130px;right:-20px;top:auto;bottom:18%}
   .rocket-wrap{display:none}
   .hero-badge{font-size:.55rem;letter-spacing:.18em;padding:5px 14px}
+  .ufo-wrap{display:block}
+}
+/* UFO — mobile only */
+.ufo-wrap{display:none;position:absolute;pointer-events:none;z-index:4;animation:ufoRoam 16s ease-in-out infinite}
+.ufo-svg{animation:ufoBob 2.2s ease-in-out infinite}
+.ufo-beam{animation:beamPulse 2.2s ease-in-out infinite}
+@keyframes ufoRoam{
+  0%{left:105%;bottom:70%;opacity:0}
+  5%{opacity:1}
+  20%{left:65%;bottom:62%}
+  40%{left:30%;bottom:72%}
+  60%{left:55%;bottom:55%}
+  80%{left:15%;bottom:65%}
+  92%{left:-15%;bottom:60%;opacity:1}
+  97%{opacity:0}
+  100%{left:-15%;bottom:70%;opacity:0}
+}
+@keyframes ufoBob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+@keyframes beamPulse{
+  0%,100%{opacity:.18}
+  50%{opacity:.35}
 }
 
 /* ── MARQUEE ── */
@@ -375,6 +399,46 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <div class="stars-wrap" id="starsWrap"></div>
   <div class="hero-glow-a"></div>
   <div class="hero-glow-b"></div>
+  <!-- UFO — mobile only -->
+  <div class="ufo-wrap">
+    <svg class="ufo-svg" width="80" height="54" viewBox="0 0 80 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ufoBeamG" cx="50%" cy="0%" r="100%">
+          <stop offset="0%" stop-color="#88DDFF" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#88DDFF" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="ufoBodyG" cx="40%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#D0D8E8"/>
+          <stop offset="60%" stop-color="#8898B8"/>
+          <stop offset="100%" stop-color="#445070"/>
+        </radialGradient>
+        <radialGradient id="ufoDomeG" cx="35%" cy="25%" r="75%">
+          <stop offset="0%" stop-color="#C8F0FF" stop-opacity="0.95"/>
+          <stop offset="50%" stop-color="#60B8E8" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#2060A0" stop-opacity="0.9"/>
+        </radialGradient>
+      </defs>
+      <!-- Beam -->
+      <polygon class="ufo-beam" points="30,36 50,36 62,54 18,54" fill="url(#ufoBeamG)"/>
+      <!-- Shadow under body -->
+      <ellipse cx="40" cy="37" rx="29" ry="5" fill="rgba(0,0,0,0.25)"/>
+      <!-- Body -->
+      <ellipse cx="40" cy="33" rx="29" ry="9" fill="url(#ufoBodyG)"/>
+      <!-- Body rim highlight -->
+      <ellipse cx="40" cy="29" rx="22" ry="4" fill="rgba(255,255,255,0.12)"/>
+      <!-- Dome -->
+      <ellipse cx="40" cy="28" rx="15" ry="13" fill="url(#ufoDomeG)"/>
+      <!-- Dome shine -->
+      <ellipse cx="35" cy="20" rx="6" ry="4" fill="rgba(255,255,255,0.3)" transform="rotate(-15,35,20)"/>
+      <!-- Lights -->
+      <circle cx="16" cy="34" r="2.5" fill="#FF3333" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="0.8s" repeatCount="indefinite"/></circle>
+      <circle cx="27" cy="38" r="2.5" fill="#FFB700" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.1s" repeatCount="indefinite"/></circle>
+      <circle cx="40" cy="39" r="2.5" fill="#44FF88" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="0.7s" repeatCount="indefinite"/></circle>
+      <circle cx="53" cy="38" r="2.5" fill="#4488FF" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="0.9s" repeatCount="indefinite"/></circle>
+      <circle cx="64" cy="34" r="2.5" fill="#FF3333" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.2s" repeatCount="indefinite"/></circle>
+    </svg>
+  </div>
+
   <div class="rocket-wrap">
     <svg width="44" height="104" viewBox="0 0 60 140" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
