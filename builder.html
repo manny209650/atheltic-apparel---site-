@@ -501,8 +501,8 @@ const PRODUCTS = [
   {handle:'3-d-embroidery-crewneck',title:'3-D Embroidery Crewneck',desc:'3-D embroidered · God. Health. Wealth.',price:40,cats:['all','mens','tops'],img:'PENDING',colors:['chinese-red','navy-blue','nio-grey']},
   {handle:'mens-compression-pants',title:"Men's Compression Pants",desc:'Compression · Without logo',price:20,cats:['all','mens','bottoms'],img:'PENDING',colors:['white','black']},
   {handle:'mens-single-leg-compression-pants',title:"Men's Single Leg Compression Pants",desc:'Single leg compression · Without logo',price:25,cats:['all','mens','bottoms'],img:'PENDING',colors:['white','black','grey']},
-  {handle:'custom-basketball-jersey',title:'Basketball Jersey',desc:'Custom jersey · Full sublimation or embroidery · Can be reversible',price:0,noCustom:false,cats:['all','mens','custom'],img:'PENDING',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']},
-  {handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,noCustom:false,cats:['all','mens','custom'],img:'PENDING',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']}
+  {handle:'custom-basketball-jersey',title:'Basketball Jersey',desc:'Custom jersey · Full sublimation or embroidery · Can be reversible',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-placeholder.svg',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']},
+  {handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-set-placeholder.svg',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']}
 ];
 
 const DESIGN_DEPOSIT_URL = ''; // ← Paste $5 Stripe link here
@@ -884,7 +884,7 @@ function renderGarmentPicker(){
   const wrap=document.getElementById('garmentOpts');
   const customProducts=PRODUCTS.filter(p=>!p.noCustom);
   wrap.innerHTML=customProducts.map((p,i)=>`
-    <button class="g-opt${i===0?' active':''}" data-handle="${p.handle}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price})">
+    <button class="g-opt${i===0?' active':''}" data-handle="${p.handle}" data-price="${p.price}" onclick="selGarmentProduct(this)">
       <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
       <span class="g-opt-info">
         <span class="g-opt-name">${p.title}</span>
@@ -899,15 +899,16 @@ function renderGarmentPicker(){
   updateGarmentSVG(first.title);
   renderSwatches(first.colors);
 }
-function selGarmentProduct(el,name,price){
+function selGarmentProduct(el){
   document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
   el.classList.add('active');
+  const handle=el.dataset.handle;
+  const product=PRODUCTS.find(p=>p.handle===handle);
+  const name=product?product.title:el.querySelector('.g-opt-name').textContent;
   curGarment=name;
   document.getElementById('pvGarmentName').textContent=name;
   document.getElementById('sumGarment').textContent=name;
   updateGarmentSVG(name);
-  const handle=el.dataset.handle;
-  const product=PRODUCTS.find(p=>p.handle===handle);
   renderSwatches(product?product.colors:['black']);
   const isJersey=name.toLowerCase().includes('jersey');
   document.getElementById('reversibleRow').style.display=isJersey?'block':'none';

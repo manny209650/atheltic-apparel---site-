@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="300" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0F1F4A"/>
+    </linearGradient>
+    <linearGradient id="hl" x1="60" y1="20" x2="200" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgba(255,255,255,.22)"/>
+      <stop offset="60%" stop-color="rgba(255,255,255,.05)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <linearGradient id="ss" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgba(0,0,0,.28)"/>
+      <stop offset="22%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="78%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,.28)"/>
+    </linearGradient>
+    <linearGradient id="bs" x1="0" y1="220" x2="0" y2="345" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,.42)"/>
+    </linearGradient>
+  </defs>
+  <!-- background -->
+  <rect width="300" height="360" fill="#07071A"/>
+  <!-- subtle grid -->
+  <rect width="300" height="360" fill="none" stroke="rgba(255,255,255,.025)" stroke-width="0.5"/>
+  <!-- floor shadow -->
+  <ellipse cx="150" cy="348" rx="72" ry="7" fill="rgba(0,0,0,.55)"/>
+  <!-- jersey body -->
+  <path d="M85 44 Q100 26 150 21 Q200 26 215 44 L232 85 L274 340 L26 340 L68 85 Z" fill="url(#body)"/>
+  <!-- left sleeve -->
+  <path d="M85 44 L26 82 L44 130 L70 90 Z" fill="url(#body)" opacity=".9"/>
+  <!-- right sleeve -->
+  <path d="M215 44 L274 82 L256 130 L230 90 Z" fill="url(#body)" opacity=".9"/>
+  <!-- highlight -->
+  <path d="M85 44 Q100 26 150 21 Q200 26 215 44 L232 85 L274 340 L26 340 L68 85 Z" fill="url(#hl)"/>
+  <path d="M85 44 L26 82 L44 130 L70 90 Z" fill="url(#hl)" opacity=".7"/>
+  <path d="M215 44 L274 82 L256 130 L230 90 Z" fill="url(#hl)" opacity=".7"/>
+  <!-- side shade -->
+  <path d="M85 44 Q100 26 150 21 Q200 26 215 44 L232 85 L274 340 L26 340 L68 85 Z" fill="url(#ss)"/>
+  <!-- bottom shade -->
+  <path d="M85 44 Q100 26 150 21 Q200 26 215 44 L232 85 L274 340 L26 340 L68 85 Z" fill="url(#bs)"/>
+  <!-- center seam -->
+  <line x1="150" y1="62" x2="150" y2="340" stroke="rgba(0,0,0,.12)" stroke-width="1.5"/>
+  <!-- collar highlight -->
+  <path d="M96 52 Q125 36 150 34 Q175 36 204 52 Q178 64 150 62 Q122 64 96 52 Z" fill="rgba(255,255,255,.1)"/>
+  <!-- number -->
+  <text x="150" y="215" font-family="Impact, Arial Black, sans-serif" font-size="88" font-weight="900" fill="rgba(255,255,255,.14)" text-anchor="middle" letter-spacing="-2">00</text>
+  <!-- "CUSTOM" badge -->
+  <rect x="98" y="52" width="104" height="1.5" fill="#E02020" opacity=".6"/>
+  <!-- bottom label -->
+  <rect x="75" y="310" width="150" height="24" rx="3" fill="rgba(224,32,32,.15)" stroke="rgba(224,32,32,.3)" stroke-width="1"/>
+  <text x="150" y="326" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#E05050" text-anchor="middle" letter-spacing="3">CUSTOM ORDER</text>
+</svg>

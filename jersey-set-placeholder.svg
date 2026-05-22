@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+  <defs>
+    <linearGradient id="body2" x1="0" y1="0" x2="300" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0F1F4A"/>
+    </linearGradient>
+    <linearGradient id="shorts2" x1="0" y1="230" x2="300" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#162D70"/>
+      <stop offset="100%" stop-color="#0A1640"/>
+    </linearGradient>
+    <linearGradient id="hl2" x1="60" y1="20" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgba(255,255,255,.22)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <linearGradient id="ss2" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgba(0,0,0,.28)"/>
+      <stop offset="22%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="78%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,.28)"/>
+    </linearGradient>
+  </defs>
+  <!-- background -->
+  <rect width="300" height="360" fill="#07071A"/>
+  <!-- floor shadow -->
+  <ellipse cx="150" cy="352" rx="70" ry="6" fill="rgba(0,0,0,.5)"/>
+  <!-- JERSEY (top half) -->
+  <!-- jersey body -->
+  <path d="M92 32 Q104 18 150 14 Q196 18 208 32 L220 62 L250 200 L50 200 L80 62 Z" fill="url(#body2)"/>
+  <path d="M92 32 L38 62 L52 98 L74 72 Z" fill="url(#body2)" opacity=".9"/>
+  <path d="M208 32 L262 62 L248 98 L226 72 Z" fill="url(#body2)" opacity=".9"/>
+  <path d="M92 32 Q104 18 150 14 Q196 18 208 32 L220 62 L250 200 L50 200 L80 62 Z" fill="url(#hl2)"/>
+  <path d="M92 32 L38 62 L52 98 L74 72 Z" fill="url(#hl2)" opacity=".7"/>
+  <path d="M208 32 L262 62 L248 98 L226 72 Z" fill="url(#hl2)" opacity=".7"/>
+  <path d="M92 32 Q104 18 150 14 Q196 18 208 32 L220 62 L250 200 L50 200 L80 62 Z" fill="url(#ss2)"/>
+  <!-- number on jersey -->
+  <text x="150" y="152" font-family="Impact, Arial Black, sans-serif" font-size="68" font-weight="900" fill="rgba(255,255,255,.12)" text-anchor="middle">00</text>
+  <!-- collar highlight -->
+  <path d="M102 40 Q128 26 150 24 Q172 26 198 40 Q174 50 150 48 Q126 50 102 40 Z" fill="rgba(255,255,255,.1)"/>
+  <!-- divider stripe between jersey and shorts -->
+  <rect x="50" y="198" width="200" height="4" fill="rgba(224,32,32,.4)" rx="1"/>
+  <!-- SHORTS (bottom half) -->
+  <rect x="62" y="204" width="176" height="18" rx="3" fill="url(#shorts2)"/>
+  <path d="M62 220 L50 336 Q88 352 132 340 L150 262 L168 340 Q212 352 250 336 L238 220 Z" fill="url(#shorts2)"/>
+  <path d="M62 220 L50 336 Q88 352 132 340 L150 262 L168 340 Q212 352 250 336 L238 220 Z" fill="url(#hl2)" opacity=".5"/>
+  <path d="M62 220 L50 336 Q88 352 132 340 L150 262 L168 340 Q212 352 250 336 L238 220 Z" fill="url(#ss2)"/>
+  <!-- shorts draw-cord lines -->
+  <line x1="138" y1="204" x2="132" y2="222" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+  <line x1="162" y1="204" x2="168" y2="222" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+  <!-- bottom label -->
+  <rect x="75" y="318" width="150" height="22" rx="3" fill="rgba(224,32,32,.15)" stroke="rgba(224,32,32,.3)" stroke-width="1"/>
+  <text x="150" y="333" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#E05050" text-anchor="middle" letter-spacing="2.5">JERSEY + SHORTS</text>
+</svg>
