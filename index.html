@@ -308,6 +308,33 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .float{animation:float 5s ease-in-out infinite}
+/* ── DISCOUNTS ── */
+.discounts-sec{padding:100px 60px;background:var(--space2)}
+.discounts-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto}
+.discount-card{background:var(--card);border:1px solid var(--border);padding:48px 40px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:20px}
+.discount-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad)}
+.discount-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(224,32,32,.1);border:1px solid rgba(224,32,32,.3);padding:5px 14px;border-radius:100px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);width:fit-content}
+.discount-pct{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:.9;letter-spacing:.04em;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.discount-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;color:var(--white);margin-top:-8px}
+.discount-desc{font-size:.88rem;color:var(--muted);line-height:1.7}
+.idme-btn{display:inline-flex;align-items:center;gap:10px;background:#1B4B8B;color:#fff;border:none;padding:14px 24px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .3s;font-family:'Inter',sans-serif;margin-top:auto}
+.idme-btn:hover{opacity:.85}
+.idme-btn svg{flex-shrink:0}
+.idme-note{font-size:.7rem;color:var(--muted);margin-top:8px;line-height:1.6}
+.subscribe-form{display:flex;flex-direction:column;gap:12px;margin-top:auto}
+.subscribe-form input[type=email]{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:13px 16px;font-size:.85rem;font-family:'Inter',sans-serif;width:100%;outline:none;transition:border-color .3s}
+.subscribe-form input[type=email]:focus{border-color:var(--red)}
+.subscribe-form input[type=email]::placeholder{color:var(--muted)}
+.subscribe-form button{background:var(--gold-grad);color:var(--space);padding:14px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .3s}
+.subscribe-form button:hover{opacity:.85}
+.subscribe-success{display:none;text-align:center;padding:20px;border:1px solid rgba(224,32,32,.3);background:rgba(224,32,32,.06);font-size:.85rem;color:var(--text);line-height:1.7}
+.subscribe-success strong{color:var(--red);display:block;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;margin-bottom:6px}
+@media(max-width:768px){
+  .discounts-sec{padding:80px 24px}
+  .discounts-grid{grid-template-columns:1fr}
+  .discount-pct{font-size:4rem}
+  .discount-card{padding:36px 28px}
+}
 </style>
 </head>
 <body>
@@ -650,6 +677,53 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ DISCOUNTS -->
+<section class="discounts-sec" id="discounts">
+  <span class="section-label reveal" style="text-align:center;display:block">Exclusive Offers</span>
+  <h2 class="section-title reveal" style="text-align:center;margin-bottom:48px">You Earned It<span class="g">.</span></h2>
+  <div class="discounts-grid">
+
+    <!-- MILITARY -->
+    <div class="discount-card reveal">
+      <span class="discount-badge">🎖️ Military Discount</span>
+      <div>
+        <div class="discount-pct">15%</div>
+        <div class="discount-title">OFF — Active Duty, Veterans & Military Families</div>
+      </div>
+      <p class="discount-desc">We honor your service. Verify your military status through ID.me — a secure, trusted platform used by the VA, TSA, and hundreds of top retailers. Takes under 2 minutes.</p>
+      <div>
+        <a href="https://groups.id.me/" target="_blank" rel="noopener" class="idme-btn">
+          <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#fff"/><text x="20" y="26" font-size="14" font-weight="bold" fill="#1B4B8B" text-anchor="middle" font-family="Arial">ID</text></svg>
+          Verify with ID.me
+        </a>
+        <p class="idme-note">After verifying, email your confirmation to <strong style="color:var(--text)">tagline@tagline.space</strong> and we'll send your 15% discount code within 24 hours.</p>
+      </div>
+    </div>
+
+    <!-- SUBSCRIBER -->
+    <div class="discount-card reveal" style="transition-delay:.1s">
+      <span class="discount-badge">✉️ Subscriber Discount</span>
+      <div>
+        <div class="discount-pct">10%</div>
+        <div class="discount-title">OFF — Subscribe & Save on Every Order</div>
+      </div>
+      <p class="discount-desc">Join the Tagline family. Drop your email below and we'll send your 10% discount code instantly — plus early access to new drops, restocks, and members-only deals.</p>
+      <div id="subscribeWrap">
+        <!-- Replace the form action URL with your Mailchimp list URL -->
+        <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+          <input type="email" placeholder="your@email.com" required/>
+          <button type="submit">Get My 10% Off</button>
+        </form>
+        <div class="subscribe-success" id="subSuccess">
+          <strong>You're In!</strong>
+          Check your inbox — your <span style="color:var(--red)">10% off code</span> is on its way. Welcome to the family.
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1330,6 +1404,18 @@ function updatePrice(){
   document.getElementById('sumBase').textContent='$'+base;
   document.getElementById('sumTotal').textContent='$'+(base+(hasLogo?25:0)+(hasText?15:0));
 }
+function handleSubscribe(e){
+  e.preventDefault();
+  const email=e.target.querySelector('input[type=email]').value.trim();
+  if(!email)return;
+  // TODO: replace the fetch URL below with your Mailchimp JSONP endpoint
+  // For now, show success message. Wire to Mailchimp once you have your list URL.
+  e.target.style.display='none';
+  document.getElementById('subSuccess').style.display='block';
+  // Uncomment and update once Mailchimp is set up:
+  // fetch('https://YOUR-MAILCHIMP-JSONP-URL&EMAIL='+encodeURIComponent(email)+'&c=?')
+}
+
 function submitOrder(){
   const name=document.getElementById('ordName').value.trim();
   const email=document.getElementById('ordEmail').value.trim();
