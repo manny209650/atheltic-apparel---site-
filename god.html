@@ -49,16 +49,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:fl
 /* DIVIDER */
 .divider{width:60px;height:2px;background:var(--red-grad);margin:60px auto}
 
-/* VERSES */
-.verses-sec{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 40px}
-.verses-inner{max-width:900px;margin:0 auto}
-.section-label{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:12px;text-align:center}
-.verses-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);letter-spacing:.06em;color:var(--white);text-align:center;margin-bottom:60px}
-.verses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
-.verse-card{background:var(--space2);border:1px solid var(--border);padding:36px 28px;position:relative}
-.verse-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red-grad)}
-.verse-text{font-family:'Cinzel',serif;font-size:.9rem;line-height:1.8;color:var(--text);margin-bottom:16px;font-style:italic}
-.verse-ref{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);font-weight:600}
+/* SCATTERED VERSE BANNERS */
+.quote-banner{padding:64px 40px;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--space3)}
+.quote-banner blockquote{font-family:'Cinzel',serif;font-size:clamp(.95rem,1.8vw,1.25rem);line-height:1.85;color:var(--text);max-width:640px;margin:0 auto 14px;font-style:italic}
+.quote-banner cite{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red)}
+.inline-verse{margin:12px 0;padding:20px 24px 20px 28px;border-left:3px solid var(--red);background:rgba(224,32,32,.04)}
+.inline-verse p{font-family:'Cinzel',serif;font-size:.88rem;line-height:1.75;color:var(--text);font-style:italic;margin-bottom:8px}
+.inline-verse cite{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-style:normal}
+.fav-verse{background:var(--card);border:1px solid rgba(224,32,32,.25);padding:36px 32px;margin-top:40px;text-align:center}
+.fav-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:16px}
+.fav-verse blockquote{font-family:'Cinzel',serif;font-size:1rem;line-height:1.8;color:var(--text);font-style:italic;max-width:560px;margin:0 auto 12px}
+.fav-verse cite{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red)}
+.fav-note{font-size:.85rem;color:var(--muted);margin-top:14px;line-height:1.6;font-style:italic;max-width:480px;margin:14px auto 0}
 
 /* FACTS */
 .facts-sec{max-width:900px;margin:0 auto;padding:100px 40px}
@@ -99,39 +101,11 @@ footer a{color:var(--red);text-decoration:none}
   </div>
 </section>
 
-<!-- SCRIPTURE -->
-<section class="verses-sec">
-  <div class="verses-inner">
-    <span class="section-label">Scripture</span>
-    <h2 class="verses-title">Words to Live By</h2>
-    <div class="verses-grid">
-      <div class="verse-card">
-        <p class="verse-text">"I can do all things through Christ who strengthens me."</p>
-        <span class="verse-ref">Philippians 4:13</span>
-      </div>
-      <div class="verse-card">
-        <p class="verse-text">"For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future."</p>
-        <span class="verse-ref">Jeremiah 29:11</span>
-      </div>
-      <div class="verse-card">
-        <p class="verse-text">"Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight."</p>
-        <span class="verse-ref">Proverbs 3:5–6</span>
-      </div>
-      <div class="verse-card">
-        <p class="verse-text">"The LORD is my strength and my shield; my heart trusts in Him, and He helps me."</p>
-        <span class="verse-ref">Psalm 28:7</span>
-      </div>
-      <div class="verse-card">
-        <p class="verse-text">"But those who hope in the LORD will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint."</p>
-        <span class="verse-ref">Isaiah 40:31</span>
-      </div>
-      <div class="verse-card">
-        <p class="verse-text">"Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go."</p>
-        <span class="verse-ref">Joshua 1:9</span>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- VERSE 1 — Brand Motto -->
+<div class="quote-banner">
+  <blockquote>"I can do all things through Christ who strengthens me."</blockquote>
+  <cite>— Philippians 4:13</cite>
+</div>
 
 <!-- FAITH FACTS -->
 <section class="facts-sec">
@@ -152,6 +126,12 @@ footer a{color:var(--red);text-decoration:none}
         <p>A 2016 Harvard study tracking 75,000+ adults found that people who attended religious services regularly had a 33% lower mortality rate than those who didn't — linked to stronger social bonds, sense of purpose, and reduced depression.</p>
       </div>
     </div>
+
+    <div class="inline-verse">
+      <p>"The LORD is my strength and my shield; my heart trusts in Him, and He helps me."</p>
+      <cite>Psalm 28:7</cite>
+    </div>
+
     <div class="fact-item">
       <span class="fact-icon">🏔️</span>
       <div>
@@ -166,6 +146,12 @@ footer a{color:var(--red);text-decoration:none}
         <p>With over 2.4 billion believers worldwide — roughly 31% of the global population — Christianity is the most widely practiced religion on earth. The message of grace, redemption, and purpose has crossed every culture, language, and generation.</p>
       </div>
     </div>
+
+    <div class="inline-verse">
+      <p>"For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future."</p>
+      <cite>Jeremiah 29:11</cite>
+    </div>
+
     <div class="fact-item">
       <span class="fact-icon">📖</span>
       <div>
@@ -189,6 +175,24 @@ footer a{color:var(--red);text-decoration:none}
     </div>
   </div>
 </section>
+
+<!-- VERSE 2 — Athletic/Renewal -->
+<div class="quote-banner">
+  <blockquote>"But those who hope in the LORD will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint."</blockquote>
+  <cite>— Isaiah 40:31</cite>
+</div>
+
+<!-- VERSE 3 — Trust -->
+<div class="quote-banner" style="background:var(--card)">
+  <blockquote>"Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight."</blockquote>
+  <cite>— Proverbs 3:5–6</cite>
+</div>
+
+<!-- VERSE 4 — Courage -->
+<div class="quote-banner">
+  <blockquote>"Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go."</blockquote>
+  <cite>— Joshua 1:9</cite>
+</div>
 
 <div class="divider"></div>
 
@@ -230,6 +234,13 @@ footer a{color:var(--red);text-decoration:none}
   </div>
 
   <p class="paper-credit">Originally featured in 209 Magazine · Modesto, CA</p>
+
+  <div class="fav-verse">
+    <span class="fav-label">Mannuel's Favorite Verse</span>
+    <blockquote>"Let no one look down on your youthfulness, but rather in speech, conduct, love, faith and purity, show yourself an example of those who believe."</blockquote>
+    <cite>— 1 Timothy 4:12</cite>
+    <p class="fav-note">This verse reminds me that anyone can thrive — and that we're all called to be a good example for everyone around us, no matter where we started.</p>
+  </div>
 </section>
 
 <footer>

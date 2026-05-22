@@ -255,11 +255,16 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .order-sum{background:var(--card);border:1px solid var(--border-gold);padding:26px 22px}
 .price-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);padding:10px 0;border-bottom:1px solid rgba(224,32,32,.08)}
 .price-row strong{color:var(--text)}
-.price-total-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0 18px;border-top:1px solid rgba(224,32,32,.2);margin-top:4px}
-.price-total-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.price-total-val{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.deposit-box{background:rgba(224,32,32,.05);border:1px solid rgba(224,32,32,.18);padding:18px 16px;margin:14px 0 18px}
+.deposit-box-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.deposit-box-body{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:14px}
+.deposit-fee{font-family:'Bebas Neue',sans-serif;font-size:2rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+.deposit-fee-sub{font-size:.7rem;color:var(--muted);line-height:1.5}
 .btn-order{width:100%;padding:18px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:opacity .3s,transform .2s}
 .btn-order:hover{opacity:.85;transform:translateY(-2px)}
+.btn-deposit{display:block;text-align:center;padding:15px;background:var(--gold-grad);color:var(--space);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;text-decoration:none;margin-top:14px;transition:opacity .3s}
+.btn-deposit:hover{opacity:.85}
+.deposit-fine{font-size:.7rem;color:var(--muted);margin-top:10px;line-height:1.55;text-align:center}
 .order-note{text-align:center;font-size:.6rem;color:var(--muted);letter-spacing:.08em;margin-top:8px}
 .order-success{display:none;text-align:center;padding:20px;border:1px solid rgba(224,32,32,.3);background:rgba(224,32,32,.05)}
 .order-success .check{font-size:2.2rem;display:block;margin-bottom:10px}
@@ -675,13 +680,16 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         <div class="swatches" id="swatchesWrap"></div>
       </div>
       <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">3</div><p class="ctrl-title">Upload Your Logo / Artwork</p></div>
+        <div class="ctrl-head"><div class="ctrl-num">3</div><p class="ctrl-title">Upload Logos / Artwork</p></div>
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:12px;line-height:1.55">Add as many logos as you need — front chest, back, sleeve, whatever. Label each file so we know where it goes (e.g. "front-logo.png", "back-logo.png"). PNG preferred for best quality.</p>
         <div class="upload-zone" id="uploadZone">
-          <input type="file" id="logoInput" accept="image/*" onchange="handleLogoUpload(this)">
+          <input type="file" id="logoInput" accept="image/*" multiple onchange="handleLogoUpload(this)">
           <div class="upload-icon">☁️</div>
-          <p class="upload-txt"><strong>Click to upload</strong> or drag &amp; drop<br>PNG, JPG, SVG — max 10MB</p>
+          <p class="upload-txt"><strong>Click to upload</strong> or drag &amp; drop<br>PNG, JPG, SVG — multiple files OK · max 10MB each</p>
           <img id="uploadPreviewImg" alt="Uploaded logo preview">
         </div>
+        <div id="extraLogos" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
+        <button type="button" onclick="addLogoSlot()" style="margin-top:8px;background:none;border:1px dashed rgba(224,32,32,.35);color:var(--muted);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;cursor:pointer;width:100%;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(224,32,32,.35)'">+ Add Another Logo</button>
       </div>
       <div class="ctrl-block">
         <div class="ctrl-head"><div class="ctrl-num">4</div><p class="ctrl-title">Logo / Text Placement</p></div>
@@ -712,7 +720,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         </div>
       </div>
       <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">6</div><p class="ctrl-title">Size &amp; Order Details</p></div>
+        <div class="ctrl-head"><div class="ctrl-num">6</div><p class="ctrl-title">Order Details</p></div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <div class="form-g"><label class="form-lbl">Your Name</label><input class="c-input" type="text" id="ordName" placeholder="Full name"></div>
           <div class="form-g"><label class="form-lbl">Email</label><input class="c-input" type="email" id="ordEmail" placeholder="you@example.com"></div>
@@ -726,29 +734,68 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
             </div>
             <div class="form-g">
               <label class="form-lbl">Qty</label>
-              <select class="c-input f-sel" id="ordQty" onchange="updatePrice()">
+              <select class="c-input f-sel" id="ordQty">
                 <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="10">10+</option>
               </select>
             </div>
           </div>
-          <div class="form-g"><label class="form-lbl">Special Notes</label><textarea class="c-input" id="ordNotes" rows="3" placeholder="Specific requests, pantone colors, print notes…" style="resize:vertical"></textarea></div>
+          <div class="form-g">
+            <label class="form-lbl">Material Preference</label>
+            <select class="c-input f-sel" id="ordMaterial">
+              <option value="">— Fabric feel? —</option>
+              <option>Soft / Fleece (hoodie weight)</option>
+              <option>Lightweight / Breathable (gym wear)</option>
+              <option>Compression / Fitted stretch</option>
+              <option>Cotton / Casual feel</option>
+              <option>Moisture-wicking / Performance</option>
+              <option>No preference — your recommendation</option>
+            </select>
+          </div>
+          <div class="form-g" id="reversibleRow" style="display:none">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+              <input type="checkbox" id="reversibleCheck" style="width:16px;height:16px;accent-color:var(--red)">
+              <span><span class="form-lbl" style="margin:0">Make jersey reversible</span><br><span style="font-size:.72rem;color:var(--muted)">Two colors, one jersey — additional charge applies. Mention desired 2nd color in notes.</span></span>
+            </label>
+          </div>
+          <div class="form-g">
+            <label class="form-lbl">Number &amp; Name on Jersey (if applicable)</label>
+            <input class="c-input" type="text" id="ordJerseyName" placeholder="e.g. BARRAGAN #23 — or leave blank" style="display:none">
+          </div>
+          <div class="form-g">
+            <label class="form-lbl">Embroidery or Print?</label>
+            <select class="c-input f-sel" id="ordDecoration">
+              <option value="">— Decoration type? —</option>
+              <option>Embroidery (stitched, premium)</option>
+              <option>Screen print (bold, flat color)</option>
+              <option>DTG / Direct-to-garment (photo quality)</option>
+              <option>Heat transfer / Vinyl</option>
+              <option>Puff / 3D embroidery</option>
+              <option>Not sure — advise me</option>
+            </select>
+          </div>
+          <div class="form-g">
+            <label class="form-lbl">Logo Size &amp; Placement Notes</label>
+            <textarea class="c-input" id="ordNotes" rows="4" placeholder="Tell us exactly where each logo goes and how big. Example: 'Front left chest — small logo (3 in), back center — large logo (10 in), right sleeve — mini TL mark.' Also note any pantone colors, thread colors, or special requests." style="resize:vertical"></textarea>
+          </div>
         </div>
       </div>
       <div class="order-sum">
         <div class="price-row"><span>Garment</span><strong id="sumGarment">Sport Hoodie</strong></div>
         <div class="price-row"><span>Color</span><strong id="sumColor">Gold Rush</strong></div>
-        <div class="price-row"><span>Base price</span><strong id="sumBase">$89</strong></div>
-        <div class="price-row" id="logoFeeRow" style="display:none"><span>Logo print fee</span><strong>+$25</strong></div>
-        <div class="price-row" id="textFeeRow" style="display:none"><span>Custom text fee</span><strong>+$15</strong></div>
-        <div class="price-total-row">
-          <span class="price-total-lbl">Total Per Piece</span>
-          <span class="price-total-val" id="sumTotal">$89</span>
+        <div class="price-row"><span>Size</span><strong id="sumSizeDisplay">—</strong></div>
+        <div class="deposit-box">
+          <div class="deposit-box-label">Pricing</div>
+          <div class="deposit-box-body">Final price varies by embroidery style, logo size, and print type. We'll text or email your full quote within 24 hrs — no surprises.</div>
+          <div class="deposit-fee">$5 Design Deposit</div>
+          <div class="deposit-fee-sub">Locks your spot in our queue · Applied as credit toward your final order · Non-refundable if you decide not to order</div>
         </div>
-        <button class="btn-order" onclick="submitOrder()">Submit Custom Order →</button>
-        <p class="order-note">Production: 3–5 weeks from order date · Free shipping over $150</p>
+        <button class="btn-order" onclick="submitOrder()">Submit Design Request →</button>
+        <p class="order-note">We'll reach out within 24 hrs with your custom quote · Production 3–5 weeks</p>
         <div class="order-success" id="orderSuccess">
           <span class="check">🙏</span>
-          <p><strong>Order received! To the moon!</strong><br>We'll email you within 24 hours to confirm your design and payment details. Philippians 4:13.</p>
+          <p><strong>Design request submitted!</strong><br>Pay the $5 deposit to lock your spot in our queue. It counts as credit toward your final order.</p>
+          <a id="depositBtn" href="#" target="_blank" rel="noopener" class="btn-deposit">Pay $5 Design Deposit →</a>
+          <p class="deposit-fine">Non-refundable if you decide not to order.<br>We'll reach out within 24 hrs with your quote. Philippians 4:13.</p>
         </div>
       </div>
     </div>
@@ -1174,6 +1221,20 @@ const PRODUCTS = [
     cats:['all','mens','bottoms'],
     img:'PENDING',
     colors:['white','black','grey']
+  },
+  {
+    handle:'custom-basketball-jersey',title:'Basketball Jersey',
+    desc:'Custom jersey · Full sublimation or embroidery · Can be reversible',price:0,badge:'Custom',
+    cats:['all','mens','custom'],
+    img:'PENDING',noCustom:false,
+    colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']
+  },
+  {
+    handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',
+    desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,badge:'Custom',
+    cats:['all','mens','custom'],
+    img:'PENDING',noCustom:false,
+    colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']
   }
 ];
 
@@ -1218,6 +1279,9 @@ function filterShop(cat, btn){
   renderShop(cat);
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
+
+// ← Paste your $5 Stripe payment link here once created in your Stripe dashboard
+const DESIGN_DEPOSIT_URL = '';
 
 const STRIPE_LINKS={
   'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00',
@@ -1299,6 +1363,7 @@ const uploadZone=document.getElementById('uploadZone');
 /* ── BUILDER STATE ── */
 function getGarmentType(title){
   const t=title.toLowerCase();
+  if(t.includes('jersey')) return 'jersey';
   if(t.includes('hoodie')) return 'hoodie';
   if(t.includes('crewneck')||t.includes('crew')) return 'crewneck';
   if(t.includes('quarter-zip')||t.includes('quarter zip')||t.includes('zip')) return 'quarter-zip';
@@ -1314,6 +1379,23 @@ function getGarmentType(title){
 function getGarmentPaths(type){
   const g='url(#pvGrad)',dk='rgba(0,0,0,.15)',sm='rgba(0,0,0,.1)',hi='url(#pvHighlight)',ss='url(#pvSideShade)',bs='url(#pvBottomShade)';
   switch(type){
+    case 'jersey': return `
+      <ellipse cx="130" cy="305" rx="65" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${g}"/>
+      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${g}" opacity=".85"/>
+      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${g}" opacity=".85"/>
+      <path d="M22 278 L60 255 L60 292 Z" fill="${dk}"/>
+      <path d="M238 278 L200 255 L200 292 Z" fill="${dk}"/>
+      <path d="M72 38 Q130 58 188 38" stroke="${dk}" stroke-width="1.5" fill="none"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${hi}"/>
+      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${hi}" opacity=".7"/>
+      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${hi}" opacity=".7"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${ss}"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${bs}"/>
+      <line x1="130" y1="55" x2="130" y2="292" stroke="${sm}" stroke-width="1.5"/>
+      <path d="M82 45 Q130 32 178 45 Q155 55 130 53 Q105 55 82 45 Z" fill="rgba(255,255,255,.12)"/>
+      <text x="130" y="160" font-family="'Bebas Neue',sans-serif" font-size="52" fill="rgba(0,0,0,.2)" text-anchor="middle">00</text>
+      <text id="pvText" x="130" y="230" font-family="'Bebas Neue',sans-serif" font-size="16" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'hoodie': return `
       <ellipse cx="130" cy="305" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
       <path d="M88 62 Q100 8 130 5 Q160 8 172 62 Q155 28 130 25 Q105 28 88 62 Z" fill="${g}" opacity=".78"/>
@@ -1516,10 +1598,8 @@ function renderGarmentPicker(){
   curGarment = first.title;
   document.getElementById('pvGarmentName').textContent = first.title;
   document.getElementById('sumGarment').textContent = first.title;
-  document.getElementById('sumBase').textContent = '$'+first.price;
   updateGarmentSVG(first.title);
   renderSwatches(first.colors);
-  updatePrice();
 }
 function selGarmentProduct(el,name,price){
   document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
@@ -1527,12 +1607,13 @@ function selGarmentProduct(el,name,price){
   curGarment=name;
   document.getElementById('pvGarmentName').textContent=name;
   document.getElementById('sumGarment').textContent=name;
-  document.getElementById('sumBase').textContent='$'+price;
   updateGarmentSVG(name);
   const handle=el.dataset.handle;
   const product=PRODUCTS.find(p=>p.handle===handle);
   renderSwatches(product?product.colors:['black']);
-  updatePrice();
+  const isJersey=name.toLowerCase().includes('jersey');
+  document.getElementById('reversibleRow').style.display=isJersey?'block':'none';
+  document.getElementById('ordJerseyName').style.display=isJersey?'block':'none';
 }
 let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
 const pvPos=[
@@ -1579,8 +1660,6 @@ function selPlace(el,idx){
 function updateText(val){
   hasText=val.trim().length>0;
   document.getElementById('pvText').textContent=val.trim()||'TAGLINE';
-  document.getElementById('textFeeRow').style.display=hasText?'flex':'none';
-  updatePrice();
 }
 function selFont(el,font){
   document.querySelectorAll('.f-opt').forEach(b=>b.classList.remove('active'));
@@ -1596,16 +1675,21 @@ function handleLogoUpload(input){
     const logo=document.getElementById('logoOverlay');
     logo.src=e.target.result;logo.style.display='block';
     const lp=lPos[curPlaceIdx];logo.style.left=lp.left;logo.style.top=lp.top;
-    hasLogo=true;document.getElementById('logoFeeRow').style.display='flex';
-    updatePrice();
+    hasLogo=true;
   };
   reader.readAsDataURL(file);
 }
 function updatePrice(){
-  const prod = PRODUCTS.find(p=>p.title===curGarment);
-  const base = prod ? prod.price : 0;
-  document.getElementById('sumBase').textContent='$'+base;
-  document.getElementById('sumTotal').textContent='$'+(base+(hasLogo?25:0)+(hasText?15:0));
+  // Price is quoted after design review — varies by embroidery, logo size, print type
+}
+let extraLogoCount=0;
+function addLogoSlot(){
+  extraLogoCount++;
+  const wrap=document.getElementById('extraLogos');
+  const div=document.createElement('div');
+  div.style.cssText='display:flex;align-items:center;gap:8px';
+  div.innerHTML=`<input type="file" accept="image/*" class="c-input" style="font-size:.78rem;padding:8px 10px;flex:1" placeholder="Logo ${extraLogoCount+1}"><button type="button" onclick="this.parentNode.remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:4px">✕</button>`;
+  wrap.appendChild(div);
 }
 function handleSubscribe(e){
   e.preventDefault();
@@ -1624,6 +1708,9 @@ function submitOrder(){
   const email=document.getElementById('ordEmail').value.trim();
   const size=document.getElementById('ordSize').value;
   if(!name||!email||!size){alert('Please fill in your name, email, and size before submitting.');return;}
+  document.getElementById('sumSizeDisplay').textContent=size;
+  const depositLink = DESIGN_DEPOSIT_URL || '#';
+  document.getElementById('depositBtn').href=depositLink;
   document.getElementById('orderSuccess').style.display='block';
   document.querySelector('.btn-order').style.display='none';
   document.getElementById('orderSuccess').scrollIntoView({behavior:'smooth',block:'nearest'});
