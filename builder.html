@@ -114,6 +114,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:f
 .g-opt-name{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .3s;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .g-opt-price{font-size:.65rem;color:var(--gold);font-weight:600;display:block;margin-top:2px}
 .g-opt.active .g-opt-name{color:var(--gold)}
+.jersey-style-opts{display:flex;flex-direction:column;gap:8px}
+.js-opt{display:flex;align-items:center;gap:14px;background:var(--space2);border:1.5px solid var(--border-soft);padding:12px 16px;cursor:pointer;transition:border-color .25s,background .25s;text-align:left;width:100%}
+.js-opt:hover{border-color:rgba(224,32,32,.35);background:var(--space3)}
+.js-opt.active{border-color:var(--gold);background:rgba(224,32,32,.08)}
+.js-opt-letter{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);line-height:1;min-width:28px;text-align:center}
+.js-opt-info{display:flex;flex-direction:column;gap:3px}
+.js-opt-name{font-size:.78rem;font-weight:600;color:var(--white);letter-spacing:.06em}
+.js-opt-desc{font-size:.68rem;color:var(--muted);line-height:1.4}
+.js-color-chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.js-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:3px 8px;font-size:.62rem;color:var(--muted);letter-spacing:.08em}
+.js-chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .swatches{display:flex;flex-wrap:wrap;gap:10px}
 .sw{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
 .sw:hover{transform:scale(1.2)}
@@ -276,6 +287,60 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
         <div class="ctrl-head"><div class="ctrl-num">1</div><p class="ctrl-title">Choose Your Garment</p></div>
         <div class="garment-opts" id="garmentOpts"></div>
       </div>
+
+      <!-- JERSEY STYLE PICKER — shown only when a jersey product is selected -->
+      <div class="ctrl-block" id="jerseyStyleBlock" style="display:none">
+        <div class="ctrl-head"><div class="ctrl-num" style="background:var(--blue-grad)">✦</div><p class="ctrl-title">Jersey Style / Cut</p></div>
+        <p style="font-size:.73rem;color:var(--muted);margin-bottom:14px;line-height:1.55">Pick a design pattern — each style has different side panels and trim details. All styles can be made in any color.</p>
+        <div class="jersey-style-opts" id="jerseyStyleOpts">
+          <button class="js-opt active" data-style="A" onclick="selJerseyStyle(this,'A')">
+            <div class="js-opt-letter">A</div>
+            <div class="js-opt-info">
+              <span class="js-opt-name">Star Cut</span>
+              <span class="js-opt-desc">Geometric star-shaped side panels · Bold athletic look</span>
+              <div class="js-color-chips">
+                <span class="js-chip"><span class="js-chip-dot" style="background:#1A1A1A;border:1px solid rgba(255,255,255,.2)"></span>Black</span>
+                <span class="js-chip"><span class="js-chip-dot" style="background:#F5F5F5;border:1px solid rgba(0,0,0,.2)"></span>White</span>
+              </div>
+            </div>
+          </button>
+          <button class="js-opt" data-style="B" onclick="selJerseyStyle(this,'B')">
+            <div class="js-opt-letter">B</div>
+            <div class="js-opt-info">
+              <span class="js-opt-name">Wave Accent</span>
+              <span class="js-opt-desc">Curved swoosh side panels · Blue contrast trim</span>
+              <div class="js-color-chips">
+                <span class="js-chip"><span class="js-chip-dot" style="background:#CC0000"></span>Red</span>
+                <span class="js-chip"><span class="js-chip-dot" style="background:#8B1A1A"></span>Maroon</span>
+                <span class="js-chip"><span class="js-chip-dot" style="background:#FFFDD0;border:1px solid rgba(0,0,0,.15)"></span>Cream</span>
+              </div>
+            </div>
+          </button>
+          <button class="js-opt" data-style="C" onclick="selJerseyStyle(this,'C')">
+            <div class="js-opt-letter">C</div>
+            <div class="js-opt-info">
+              <span class="js-opt-name">Block Panel</span>
+              <span class="js-opt-desc">Clean color-block design · Modern contrast panels</span>
+              <div class="js-color-chips">
+                <span class="js-chip"><span class="js-chip-dot" style="background:#CC0000"></span>Red</span>
+                <span class="js-chip"><span class="js-chip-dot" style="background:#1A1A1A;border:1px solid rgba(255,255,255,.2)"></span>Black</span>
+              </div>
+            </div>
+          </button>
+          <button class="js-opt" data-style="D" onclick="selJerseyStyle(this,'D')">
+            <div class="js-opt-letter">D</div>
+            <div class="js-opt-info">
+              <span class="js-opt-name">Side Stripe</span>
+              <span class="js-opt-desc">Angled side stripes · Orange contrast trim · Classic athletic</span>
+              <div class="js-color-chips">
+                <span class="js-chip"><span class="js-chip-dot" style="background:#9BC4E2"></span>Columbia Blue</span>
+                <span class="js-chip"><span class="js-chip-dot" style="background:#F5F5F5;border:1px solid rgba(0,0,0,.2)"></span>White</span>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+
       <div class="ctrl-block">
         <div class="ctrl-head"><div class="ctrl-num">2</div><p class="ctrl-title">Primary Color</p></div>
         <div class="swatches" id="swatchesWrap"></div>
@@ -382,6 +447,7 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
       </div>
       <div class="order-sum">
         <div class="price-row"><span>Garment</span><strong id="sumGarment">Sport Hoodie</strong></div>
+        <div class="price-row" id="sumStyleRow" style="display:none"><span>Jersey Style</span><strong id="sumStyle">Option A — Star Cut</strong></div>
         <div class="price-row"><span>Color</span><strong id="sumColor">Gold Rush</strong></div>
         <div class="price-row"><span>Size</span><strong id="sumSizeDisplay">—</strong></div>
         <div class="deposit-box">
@@ -462,7 +528,8 @@ const CM = {
   'burgundy':'#722F37','red':'#CC0000','light-blue':'#ADD8E6','sand':'#C4A882',
   'clear':'#E8E8E8','rose-gold':'#C8936A','frost-blue':'#6BB4C8','frost-blue-1':'#6BB4C8',
   'silver':'#C0C0C0','green-gray':'#4A7A6A','baby-blue':'#ADD8E6','beige-1':'#D4C5A0',
-  'chinese-red':'#CC2020','nio-grey':'#7A7A7A','kelly-green':'#4CAF50'
+  'chinese-red':'#CC2020','nio-grey':'#7A7A7A','kelly-green':'#4CAF50',
+  'maroon':'#8B1A1A','cream':'#FFFDD0','columbia-blue':'#9BC4E2','royal-blue':'#2255CC','orange':'#E87010'
 };
 const gc = k => CM[k] || '#888';
 
@@ -501,8 +568,8 @@ const PRODUCTS = [
   {handle:'3-d-embroidery-crewneck',title:'3-D Embroidery Crewneck',desc:'3-D embroidered · God. Health. Wealth.',price:40,cats:['all','mens','tops'],img:'PENDING',colors:['chinese-red','navy-blue','nio-grey']},
   {handle:'mens-compression-pants',title:"Men's Compression Pants",desc:'Compression · Without logo',price:20,cats:['all','mens','bottoms'],img:'PENDING',colors:['white','black']},
   {handle:'mens-single-leg-compression-pants',title:"Men's Single Leg Compression Pants",desc:'Single leg compression · Without logo',price:25,cats:['all','mens','bottoms'],img:'PENDING',colors:['white','black','grey']},
-  {handle:'custom-basketball-jersey',title:'Basketball Jersey',desc:'Custom jersey · Full sublimation or embroidery · Can be reversible',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-placeholder.svg',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']},
-  {handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-set-placeholder.svg',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey']}
+  {handle:'custom-basketball-jersey',title:'Basketball Jersey',desc:'Custom jersey · Full sublimation or embroidery · Can be reversible',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-placeholder.svg',colors:['black','white','red','maroon','cream','columbia-blue','navy-blue','royal-blue','kelly-green','yellow','purple','grey']},
+  {handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-set-placeholder.svg',colors:['black','white','red','maroon','cream','columbia-blue','navy-blue','royal-blue','kelly-green','yellow','purple','grey']}
 ];
 
 const DESIGN_DEPOSIT_URL = ''; // ← Paste $5 Stripe link here
@@ -858,7 +925,8 @@ const COLOR_NAMES={
   'red':'Red','light-blue':'Light Blue','sand':'Sand','clear':'White','rose-gold':'Rose Gold',
   'frost-blue':'Frost Blue','frost-blue-1':'Frost Blue','silver':'Silver',
   'green-gray':'Green Gray','baby-blue':'Baby Blue','beige-1':'Beige',
-  'chinese-red':'Chinese Red','nio-grey':'Nio Grey','kelly-green':'Kelly Green'
+  'chinese-red':'Chinese Red','nio-grey':'Nio Grey','kelly-green':'Kelly Green',
+  'maroon':'Maroon','cream':'Cream','columbia-blue':'Columbia Blue','royal-blue':'Royal Blue'
 };
 function colorLabel(key){return COLOR_NAMES[key]||(key.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()));}
 function darkenHex(hex,amt=35){
@@ -898,6 +966,24 @@ function renderGarmentPicker(){
   document.getElementById('sumGarment').textContent=first.title;
   updateGarmentSVG(first.title);
   renderSwatches(first.colors);
+  const firstIsJersey=first.title.toLowerCase().includes('jersey');
+  document.getElementById('jerseyStyleBlock').style.display=firstIsJersey?'block':'none';
+  document.getElementById('sumStyleRow').style.display=firstIsJersey?'flex':'none';
+  if(firstIsJersey){document.getElementById('reversibleRow').style.display='block';document.getElementById('ordJerseyName').style.display='block';}
+}
+const JERSEY_STYLES={
+  A:{name:'Star Cut',desc:'Geometric star-shaped side panels'},
+  B:{name:'Wave Accent',desc:'Curved swoosh panels · Blue trim'},
+  C:{name:'Block Panel',desc:'Clean color-block design'},
+  D:{name:'Side Stripe',desc:'Angled side stripes · Orange trim'}
+};
+let curJerseyStyle='A';
+function selJerseyStyle(el,style){
+  document.querySelectorAll('.js-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  curJerseyStyle=style;
+  const s=JERSEY_STYLES[style];
+  document.getElementById('sumStyle').textContent=`Option ${style} — ${s.name}`;
 }
 function selGarmentProduct(el){
   document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
@@ -913,6 +999,8 @@ function selGarmentProduct(el){
   const isJersey=name.toLowerCase().includes('jersey');
   document.getElementById('reversibleRow').style.display=isJersey?'block':'none';
   document.getElementById('ordJerseyName').style.display=isJersey?'block':'none';
+  document.getElementById('jerseyStyleBlock').style.display=isJersey?'block':'none';
+  document.getElementById('sumStyleRow').style.display=isJersey?'flex':'none';
 }
 let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
 let curSide='front';
