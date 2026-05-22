@@ -625,8 +625,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 </div>
 
 <!-- ═══════════════════════════════════════════ CUSTOM BUILDER -->
-<div id="builder" style="position:relative;top:-80px;visibility:hidden;pointer-events:none"></div>
-<section class="builder-sec">
+<section class="builder-sec" id="builder">
   <span class="section-label reveal">Create Merch</span>
   <h2 class="section-title reveal">Custom <span class="g">Merch</span></h2>
   <div class="builder-layout">
@@ -1262,7 +1261,7 @@ window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scro
 document.getElementById('burger').addEventListener('click',()=>document.getElementById('mobMenu').classList.add('open'));
 document.getElementById('mobClose').addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open'));
 function closeMob(){document.getElementById('mobMenu').classList.remove('open');}
-function mobGoTo(id){closeMob();setTimeout(function(){var el=document.getElementById(id);if(el){var top=el.getBoundingClientRect().top+window.pageYOffset-80;window.scrollTo({top:top,behavior:'smooth'});}},350);}
+function mobGoTo(id){closeMob();setTimeout(function(){var el=document.getElementById(id);if(el){window.scrollTo({top:el.offsetTop-80,behavior:'smooth'});}},350);}
 
 /* ── SCROLL REVEAL ── */
 const obs=new IntersectionObserver(entries=>{
