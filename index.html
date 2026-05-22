@@ -115,7 +115,7 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 @media(max-width:768px){
   .hero-content{padding:120px 24px 80px}
   .hero-scroll{left:24px}
-  .moon-wrap{width:160px;height:160px;right:4%;top:14%}
+  .moon-wrap{width:140px;height:140px;right:4%;top:auto;bottom:6%}
 }
 
 /* ── MARQUEE ── */
@@ -302,6 +302,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 .soc:hover{border-color:var(--gold);color:var(--gold)}
 @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px};footer{padding:60px 24px 32px}}
 @media(max-width:480px){.footer-top{grid-template-columns:1fr}}
+@media(max-width:480px){.moon-wrap{width:110px;height:110px;right:3%;bottom:4%}}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -347,7 +348,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
   <a href="#home" onclick="closeMob()">Home</a>
   <a href="#shop" onclick="closeMob()">Shop</a>
-  <a href="#builder" onclick="closeMob()">Build Yours</a>
+  <a href="#builder" onclick="closeMob()">Create Merch</a>
   <a href="#about" onclick="closeMob()">About</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
 </div>
@@ -357,11 +358,11 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <a href="#home" class="nav-logo">TAG<span class="g">LINE</span></a>
   <ul class="nav-links">
     <li><a href="#shop">Shop</a></li>
-    <li><a href="#builder">Build Yours</a></li>
+    <li><a href="#builder">Create Merch</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#builder" class="nav-cta">Design Yours</a>
+  <a href="#builder" class="nav-cta">Create Merch</a>
   <button class="nav-burger" id="burger" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -471,7 +472,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     <p class="hero-verse">"I can do all things through Christ who strengthens me." — Philippians 4:13</p>
     <div class="hero-actions">
       <a href="#shop" class="btn-primary">Shop the Collection</a>
-      <a href="#builder" class="btn-ghost">Build Yours</a>
+      <a href="#builder" class="btn-ghost">Create Merch</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -559,8 +560,8 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 
 <!-- ═══════════════════════════════════════════ CUSTOM BUILDER -->
 <section class="builder-sec" id="builder">
-  <span class="section-label reveal">Make It Yours</span>
-  <h2 class="section-title reveal">Custom <span class="g">Builder</span></h2>
+  <span class="section-label reveal">Create Merch</span>
+  <h2 class="section-title reveal">Custom <span class="g">Merch</span></h2>
   <div class="builder-layout">
     <!-- LIVE PREVIEW -->
     <div class="builder-preview reveal">
@@ -813,7 +814,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     <div>
       <span class="footer-col-h">Services</span>
       <ul class="footer-links">
-        <li><a href="#builder">Custom Builder</a></li>
+        <li><a href="#builder">Create Merch</a></li>
         <li><a href="#contact">Wholesale</a></li>
         <li><a href="#contact">Size Guide</a></li>
         <li><a href="#contact">Track Order</a></li>
