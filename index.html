@@ -1284,6 +1284,7 @@ function getGarmentType(title){
   const t=title.toLowerCase();
   if(t.includes('hoodie')) return 'hoodie';
   if(t.includes('crewneck')||t.includes('crew')) return 'crewneck';
+  if(t.includes('quarter-zip')||t.includes('quarter zip')||t.includes('zip')) return 'quarter-zip';
   if(t.includes('jacket')||t.includes('sweatshirt')) return 'jacket';
   if(t.includes('short')) return 'shorts';
   if(t.includes('legging')||t.includes('pant')||t.includes('jogger')) return 'pants';
@@ -1315,6 +1316,17 @@ function getGarmentPaths(type){
       <rect x="22" y="278" width="216" height="17" rx="2" fill="${dk}"/>
       <line x1="130" y1="72" x2="130" y2="278" stroke="${sm}" stroke-width="1.5"/>
       <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'quarter-zip': return `
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
+      <path d="M96 52 Q113 68 130 62 Q147 68 164 52 L158 42 Q130 30 102 42 Z" fill="#222"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
+      <line x1="130" y1="62" x2="130" y2="175" stroke="rgba(0,0,0,.25)" stroke-width="3"/>
+      <circle cx="130" cy="175" r="5" fill="rgba(0,0,0,.3)"/>
+      <line x1="122" y1="62" x2="122" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+      <line x1="138" y1="62" x2="138" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+      <rect x="22" y="278" width="216" height="14" rx="2" fill="${dk}"/>
+      <text id="pvText" x="130" y="225" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'jacket': return `
       <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
       <path d="M130 52 L96 52 L78 95 L118 88 Z" fill="#111" opacity=".65"/>
@@ -1470,9 +1482,11 @@ function selColor(el,name,c1,c2){
   document.getElementById('sumColor').textContent=name;
   document.getElementById('pvStop1').setAttribute('stop-color',c1);
   document.getElementById('pvStop2').setAttribute('stop-color',c2);
-  if(isLight(c1)){document.getElementById('pvCollar').setAttribute('fill','#666');document.getElementById('pvText').setAttribute('fill','rgba(40,40,40,.35)');}
-  else if(parseInt(c1.slice(1,3),16)<30&&parseInt(c1.slice(3,5),16)<30&&parseInt(c1.slice(5,7),16)<30){document.getElementById('pvCollar').setAttribute('fill','#333');document.getElementById('pvText').setAttribute('fill','rgba(224,32,32,.4)');}
-  else{document.getElementById('pvCollar').setAttribute('fill','#111');document.getElementById('pvText').setAttribute('fill','rgba(0,0,0,.38)');}
+  const pvCollar=document.getElementById('pvCollar');
+  const pvTxt=document.getElementById('pvText');
+  if(isLight(c1)){if(pvCollar)pvCollar.setAttribute('fill','#666');if(pvTxt)pvTxt.setAttribute('fill','rgba(40,40,40,.35)');}
+  else if(parseInt(c1.slice(1,3),16)<30&&parseInt(c1.slice(3,5),16)<30&&parseInt(c1.slice(5,7),16)<30){if(pvCollar)pvCollar.setAttribute('fill','#333');if(pvTxt)pvTxt.setAttribute('fill','rgba(224,32,32,.4)');}
+  else{if(pvCollar)pvCollar.setAttribute('fill','#111');if(pvTxt)pvTxt.setAttribute('fill','rgba(0,0,0,.38)');}
 }
 function selPlace(el,idx){
   document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
