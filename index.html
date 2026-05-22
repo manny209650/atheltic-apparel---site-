@@ -205,7 +205,8 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .builder-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px}
 .builder-preview{position:sticky;top:96px;background:var(--card);border:1px solid var(--border-gold);padding:44px 32px;display:flex;flex-direction:column;align-items:center;gap:16px}
 .prev-lbl{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.prev-wrap{width:100%;max-width:260px;position:relative;aspect-ratio:3/4}
+.prev-wrap{width:100%;max-width:260px;position:relative;aspect-ratio:3/4;background:radial-gradient(ellipse at 48% 32%,rgba(44,44,75,.85) 0%,rgba(7,7,15,.98) 100%);border:1px solid rgba(255,255,255,.07);overflow:hidden}
+.prev-wrap::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;z-index:0}
 #prevSvg{width:100%;height:100%}
 #logoOverlay{position:absolute;pointer-events:none;object-fit:contain;display:none}
 #textOverlay{position:absolute;pointer-events:none;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;color:rgba(0,0,0,.4);white-space:nowrap;transform:translate(-50%,-50%)}
@@ -633,12 +634,28 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     <div class="builder-preview reveal">
       <p class="prev-lbl">Live Preview</p>
       <div class="prev-wrap">
-        <svg id="prevSvg" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        <svg id="prevSvg" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 10px 30px rgba(0,0,0,.85))">
           <defs>
             <linearGradient id="pvGrad" x1="0" y1="0" x2="260" y2="320" gradientUnits="userSpaceOnUse">
               <stop id="pvStop1" offset="0%" stop-color="#FF3333"/>
               <stop id="pvStop2" offset="100%" stop-color="#AA0000"/>
             </linearGradient>
+            <linearGradient id="pvHighlight" x1="60" y1="20" x2="190" y2="200" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="rgba(255,255,255,.24)"/>
+              <stop offset="45%" stop-color="rgba(255,255,255,.06)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <linearGradient id="pvSideShade" x1="0" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="rgba(0,0,0,.32)"/>
+              <stop offset="24%" stop-color="rgba(0,0,0,0)"/>
+              <stop offset="76%" stop-color="rgba(0,0,0,0)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,.32)"/>
+            </linearGradient>
+            <linearGradient id="pvBottomShade" x1="0" y1="195" x2="0" y2="310" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,.38)"/>
+            </linearGradient>
+            <filter id="pvBlur"><feGaussianBlur stdDeviation="5"/></filter>
           </defs>
           <g id="pvShape"></g>
         </svg>
@@ -1295,91 +1312,153 @@ function getGarmentType(title){
   return 'tee';
 }
 function getGarmentPaths(type){
-  const g='url(#pvGrad)',dk='rgba(0,0,0,.12)',sm='rgba(0,0,0,.1)';
+  const g='url(#pvGrad)',dk='rgba(0,0,0,.15)',sm='rgba(0,0,0,.1)',hi='url(#pvHighlight)',ss='url(#pvSideShade)',bs='url(#pvBottomShade)';
   switch(type){
     case 'hoodie': return `
-      <path d="M88 62 Q100 8 130 5 Q160 8 172 62 Q155 28 130 25 Q105 28 88 62 Z" fill="${g}" opacity=".75"/>
+      <ellipse cx="130" cy="305" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
+      <path d="M88 62 Q100 8 130 5 Q160 8 172 62 Q155 28 130 25 Q105 28 88 62 Z" fill="${g}" opacity=".78"/>
       <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${g}"/>
       <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${g}" opacity=".85"/>
       <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${g}" opacity=".85"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${hi}"/>
+      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${ss}"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${bs}"/>
       <path d="M88 62 Q105 48 130 45 Q155 48 172 62" stroke="${dk}" stroke-width="2" fill="none"/>
       <rect x="90" y="212" width="80" height="35" rx="3" fill="${dk}"/>
       <line x1="130" y1="62" x2="130" y2="295" stroke="${sm}" stroke-width="1.5"/>
-      <line x1="114" y1="45" x2="106" y2="82" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
-      <line x1="146" y1="45" x2="154" y2="82" stroke="rgba(0,0,0,.2)" stroke-width="1.5"/>
+      <line x1="114" y1="45" x2="106" y2="82" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
+      <line x1="146" y1="45" x2="154" y2="82" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
+      <path d="M78 76 Q130 62 182 76 Q158 86 130 84 Q102 86 78 76 Z" fill="rgba(255,255,255,.1)"/>
       <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'crewneck': return `
+      <ellipse cx="130" cy="304" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
       <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${g}"/>
       <path d="M96 58 Q130 72 164 58 Q150 40 130 38 Q110 40 96 58 Z" fill="#111"/>
       <path d="M62 58 L8 102 L28 152 L74 116 Z" fill="${g}" opacity=".85"/>
       <path d="M198 58 L252 102 L232 152 L186 116 Z" fill="${g}" opacity=".85"/>
+      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${hi}"/>
+      <path d="M62 58 L8 102 L28 152 L74 116 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 58 L252 102 L232 152 L186 116 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${ss}"/>
+      <path d="M62 58 L34 122 L22 295 L238 295 L226 122 L198 58 Z" fill="${bs}"/>
       <rect x="22" y="278" width="216" height="17" rx="2" fill="${dk}"/>
       <line x1="130" y1="72" x2="130" y2="278" stroke="${sm}" stroke-width="1.5"/>
+      <path d="M80 70 Q130 56 180 70 Q156 80 130 78 Q104 80 80 70 Z" fill="rgba(255,255,255,.1)"/>
       <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'quarter-zip': return `
+      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
       <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
       <path d="M96 52 Q113 68 130 62 Q147 68 164 52 L158 42 Q130 30 102 42 Z" fill="#222"/>
       <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
       <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
-      <line x1="130" y1="62" x2="130" y2="175" stroke="rgba(0,0,0,.25)" stroke-width="3"/>
-      <circle cx="130" cy="175" r="5" fill="rgba(0,0,0,.3)"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
+      <line x1="130" y1="62" x2="130" y2="175" stroke="rgba(0,0,0,.28)" stroke-width="3"/>
+      <circle cx="130" cy="175" r="5" fill="rgba(0,0,0,.35)"/>
       <line x1="122" y1="62" x2="122" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
       <line x1="138" y1="62" x2="138" y2="175" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
       <rect x="22" y="278" width="216" height="14" rx="2" fill="${dk}"/>
+      <path d="M78 62 Q130 48 182 62 Q157 72 130 70 Q103 72 78 62 Z" fill="rgba(255,255,255,.1)"/>
       <text id="pvText" x="130" y="225" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'jacket': return `
+      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
       <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
       <path d="M130 52 L96 52 L78 95 L118 88 Z" fill="#111" opacity=".65"/>
       <path d="M130 52 L164 52 L182 95 L142 88 Z" fill="#111" opacity=".65"/>
       <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
       <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
       <line x1="130" y1="88" x2="130" y2="292" stroke="rgba(0,0,0,.2)" stroke-width="2"/>
       <path d="M55 205 L55 238 L108 238 L108 205" stroke="rgba(0,0,0,.15)" stroke-width="1.5" fill="none"/>
       <path d="M152 205 L152 238 L205 238 L205 205" stroke="rgba(0,0,0,.15)" stroke-width="1.5" fill="none"/>
+      <path d="M80 62 Q130 48 180 62 Q156 72 130 70 Q104 72 80 62 Z" fill="rgba(255,255,255,.1)"/>
       <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'shorts': return `
+      <ellipse cx="130" cy="228" rx="68" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
       <rect x="48" y="72" width="164" height="24" rx="4" fill="${g}"/>
       <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${g}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${hi}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${ss}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${bs}"/>
       <line x1="130" y1="94" x2="130" y2="135" stroke="${sm}" stroke-width="1.5"/>
-      <line x1="118" y1="72" x2="112" y2="96" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
-      <line x1="142" y1="72" x2="148" y2="96" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+      <line x1="118" y1="72" x2="112" y2="96" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+      <line x1="142" y1="72" x2="148" y2="96" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
       <text id="pvText" x="130" y="168" font-family="'Bebas Neue',sans-serif" font-size="16" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'pants': return `
+      <ellipse cx="130" cy="308" rx="65" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
       <rect x="58" y="58" width="144" height="22" rx="4" fill="${g}" opacity=".9"/>
       <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${g}"/>
       <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${g}"/>
+      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${hi}"/>
+      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${hi}"/>
+      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${ss}"/>
+      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${ss}"/>
       <line x1="130" y1="78" x2="130" y2="118" stroke="${sm}" stroke-width="1.5"/>
       <text id="pvText" x="80" y="195" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="2">TL</text>`;
     case 'compression-tee': return `
+      <ellipse cx="130" cy="302" rx="62" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
       <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${g}"/>
       <path d="M100 52 Q130 72 160 52 L166 40 Q130 22 94 40 Z" fill="#111"/>
       <path d="M68 52 L14 90 L30 130 L72 102 Z" fill="${g}" opacity=".85"/>
       <path d="M192 52 L246 90 L230 130 L188 102 Z" fill="${g}" opacity=".85"/>
+      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${hi}"/>
+      <path d="M68 52 L14 90 L30 130 L72 102 Z" fill="${hi}" opacity=".7"/>
+      <path d="M192 52 L246 90 L230 130 L188 102 Z" fill="${hi}" opacity=".7"/>
+      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${ss}"/>
+      <path d="M68 52 L42 138 L50 292 L210 292 L218 138 L192 52 Z" fill="${bs}"/>
       <line x1="130" y1="72" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
       <path d="M50 292 Q130 282 210 292" stroke="${dk}" stroke-width="2" fill="none"/>
+      <path d="M82 62 Q130 48 178 62 Q155 72 130 70 Q105 72 82 62 Z" fill="rgba(255,255,255,.1)"/>
       <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'boxy-tee': return `
+      <ellipse cx="130" cy="302" rx="72" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
       <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${g}"/>
       <path d="M92 52 Q130 80 168 52 L176 36 Q130 14 84 36 Z" fill="#111"/>
       <path d="M55 52 L2 100 L24 152 L78 114 Z" fill="${g}" opacity=".85"/>
       <path d="M205 52 L258 100 L236 152 L182 114 Z" fill="${g}" opacity=".85"/>
+      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${hi}"/>
+      <path d="M55 52 L2 100 L24 152 L78 114 Z" fill="${hi}" opacity=".7"/>
+      <path d="M205 52 L258 100 L236 152 L182 114 Z" fill="${hi}" opacity=".7"/>
+      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${ss}"/>
+      <path d="M55 52 L28 118 L18 292 L242 292 L232 118 L205 52 Z" fill="${bs}"/>
       <line x1="130" y1="80" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
       <path d="M68 62 Q130 44 192 62 L200 148 Q130 130 60 148 Z" fill="rgba(255,255,255,.07)"/>
+      <path d="M76 66 Q130 50 184 66 Q160 76 130 74 Q100 76 76 66 Z" fill="rgba(255,255,255,.1)"/>
       <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
     case 'bra': return `
+      <ellipse cx="130" cy="172" rx="55" ry="5" fill="rgba(0,0,0,.4)" filter="url(#pvBlur)"/>
       <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${g}"/>
       <path d="M55 95 Q82 130 130 125 Q178 130 205 95 L205 148 Q178 168 130 163 Q82 168 55 148 Z" fill="${g}" opacity=".85"/>
+      <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${hi}"/>
+      <path d="M55 95 Q82 130 130 125 Q178 130 205 95 L205 148 Q178 168 130 163 Q82 168 55 148 Z" fill="${hi}" opacity=".7"/>
+      <path d="M55 95 Q80 60 130 55 Q180 60 205 95 Q178 120 130 115 Q82 120 55 95 Z" fill="${ss}"/>
       <line x1="130" y1="55" x2="130" y2="125" stroke="${sm}" stroke-width="1.5"/>
       <path d="M88 55 Q80 38 72 48" stroke="${g}" stroke-width="3" fill="none"/>
       <path d="M172 55 Q180 38 188 48" stroke="${g}" stroke-width="3" fill="none"/>
       <text id="pvText" x="130" y="140" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="3">TAGLINE</text>`;
     default: return `
+      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
       <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
       <path d="M96 52 Q130 78 164 52 L172 38 Q130 18 88 38 Z" fill="#111"/>
       <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
       <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
       <line x1="130" y1="78" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
-      <path d="M72 60 Q130 42 188 60 L196 145 Q130 128 64 145 Z" fill="rgba(255,255,255,.08)"/>
+      <path d="M72 60 Q130 42 188 60 L196 145 Q130 128 64 145 Z" fill="rgba(255,255,255,.07)"/>
+      <path d="M78 62 Q130 46 182 62 Q157 72 130 70 Q103 72 78 62 Z" fill="rgba(255,255,255,.1)"/>
       <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
   }
 }
