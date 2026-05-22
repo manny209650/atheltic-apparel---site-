@@ -112,6 +112,8 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp .9s ease .9s forwards}
 .hero-scroll{position:absolute;bottom:40px;left:60px;display:flex;align-items:center;gap:12px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeIn 1s ease 1.3s forwards}
 .scroll-line{width:36px;height:1px;background:var(--gold)}
+/* UFO — mobile only */
+.ufo-wrap{display:none;position:absolute;pointer-events:none;z-index:4;animation:ufoRoam 16s ease-in-out infinite}
 @media(max-width:768px){
   .hero-content{padding:120px 24px 80px}
   .hero-scroll{left:24px}
@@ -120,8 +122,6 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
   .hero-badge{font-size:.55rem;letter-spacing:.18em;padding:5px 14px}
   .ufo-wrap{display:block}
 }
-/* UFO — mobile only */
-.ufo-wrap{display:none;position:absolute;pointer-events:none;z-index:4;animation:ufoRoam 16s ease-in-out infinite}
 .ufo-svg{animation:ufoBob 2.2s ease-in-out infinite}
 .ufo-beam{animation:beamPulse 2.2s ease-in-out infinite}
 @keyframes ufoRoam{
@@ -625,7 +625,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 </div>
 
 <!-- ═══════════════════════════════════════════ CUSTOM BUILDER -->
-<section class="builder-sec" id="builder">
+<section class="builder-sec" id="builder" style="scroll-margin-top:70px">
   <span class="section-label reveal">Create Merch</span>
   <h2 class="section-title reveal">Custom <span class="g">Merch</span></h2>
   <div class="builder-layout">
