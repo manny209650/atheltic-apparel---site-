@@ -655,16 +655,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
       </div>
       <div class="ctrl-block">
         <div class="ctrl-head"><div class="ctrl-num">2</div><p class="ctrl-title">Primary Color</p></div>
-        <div class="swatches">
-          <div class="sw active" style="background:#FFB700" onclick="selColor(this,'Gold Rush','#FFD700','#C98F00')" title="Gold Rush"></div>
-          <div class="sw" style="background:#1B3DD8" onclick="selColor(this,'Royal Blue','#4361EE','#1B3DD8')" title="Royal Blue"></div>
-          <div class="sw" style="background:#F0F0F0;border-color:rgba(255,255,255,.3)" onclick="selColor(this,'Pure White','#F5F5F5','#D0D0D0')" title="Pure White"></div>
-          <div class="sw" style="background:#0A0A1A;border-color:rgba(255,255,255,.2)" onclick="selColor(this,'Midnight Black','#1A1A2E','#0A0A18')" title="Midnight Black"></div>
-          <div class="sw" style="background:#1E3A6E" onclick="selColor(this,'Navy','#1E3A6E','#0A1A3A')" title="Navy"></div>
-          <div class="sw" style="background:#7C3AED" onclick="selColor(this,'Kingdom Purple','#7C3AED','#4C1D95')" title="Kingdom Purple"></div>
-          <div class="sw" style="background:#DC2626" onclick="selColor(this,'Crimson','#EF4444','#B91C1C')" title="Crimson"></div>
-          <div class="sw" style="background:#059669" onclick="selColor(this,'Forest Green','#10B981','#047857')" title="Forest Green"></div>
-        </div>
+        <div class="swatches" id="swatchesWrap"></div>
       </div>
       <div class="ctrl-block">
         <div class="ctrl-head"><div class="ctrl-num">3</div><p class="ctrl-title">Upload Your Logo / Artwork</p></div>
@@ -1383,11 +1374,45 @@ function updateGarmentSVG(title){
   const shape=document.getElementById('pvShape');
   if(shape) shape.innerHTML=getGarmentPaths(getGarmentType(title));
 }
+const COLOR_NAMES={
+  'warm-tan':'Warm Tan','grey':'Grey','gray':'Grey','gray-1':'Grey','gray-2':'Grey',
+  'white':'White','white-1':'White','navy-blue':'Navy Blue','black':'Black','black-1':'Black',
+  'milk-white':'Milk White','off-brown':'Off Brown','khaki':'Khaki','wine-red':'Wine Red',
+  'pink-1':'Pink','purple-1':'Purple','purple':'Purple','orange':'Orange',
+  'light-grey':'Light Grey','brown-2':'Brown','brown-1':'Brown','brown':'Brown',
+  'dark-fog':'Dark Fog','hard-blue':'Hard Blue','emerald-green':'Emerald Green',
+  'blue-1':'Blue','green-1':'Green','green':'Green','yellow':'Yellow','burgundy':'Burgundy',
+  'red':'Red','light-blue':'Light Blue','sand':'Sand','clear':'White','rose-gold':'Rose Gold',
+  'frost-blue':'Frost Blue','frost-blue-1':'Frost Blue','silver':'Silver',
+  'green-gray':'Green Gray','baby-blue':'Baby Blue','beige-1':'Beige',
+  'chinese-red':'Chinese Red','nio-grey':'Nio Grey'
+};
+function colorLabel(key){return COLOR_NAMES[key]||(key.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()));}
+function darkenHex(hex,amt=35){
+  let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  r=Math.max(0,r-amt);g=Math.max(0,g-amt);b=Math.max(0,b-amt);
+  return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+}
+function isLight(hex){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return(r*299+g*587+b*114)/1000>160;
+}
+function renderSwatches(colors){
+  const wrap=document.getElementById('swatchesWrap');
+  wrap.innerHTML=colors.map((key,i)=>{
+    const hex=gc(key);const name=colorLabel(key);
+    const extra=isLight(hex)?';border-color:rgba(0,0,0,.25)':'';
+    return `<div class="sw${i===0?' active':''}" style="background:${hex}${extra}" onclick="selColor(this,'${name}','${hex}','${darkenHex(hex)}')" title="${name}"></div>`;
+  }).join('');
+  const firstEl=wrap.querySelector('.sw');
+  if(firstEl) firstEl.click();
+}
+
 function renderGarmentPicker(){
   const wrap = document.getElementById('garmentOpts');
   const customProducts = PRODUCTS.filter(p=>!p.noCustom);
   wrap.innerHTML = customProducts.map((p,i)=>`
-    <button class="g-opt${i===0?' active':''}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price},'${p.img}')">
+    <button class="g-opt${i===0?' active':''}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price},'${p.img}',${JSON.stringify(p.colors)})">
       <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
       <span class="g-opt-info">
         <span class="g-opt-name">${p.title}</span>
@@ -1401,9 +1426,10 @@ function renderGarmentPicker(){
   document.getElementById('sumGarment').textContent = first.title;
   document.getElementById('sumBase').textContent = '$'+first.price;
   updateGarmentSVG(first.title);
+  renderSwatches(first.colors);
   updatePrice();
 }
-function selGarmentProduct(el,name,price){
+function selGarmentProduct(el,name,price,img,colors){
   document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
   el.classList.add('active');
   curGarment=name;
@@ -1411,6 +1437,7 @@ function selGarmentProduct(el,name,price){
   document.getElementById('sumGarment').textContent=name;
   document.getElementById('sumBase').textContent='$'+price;
   updateGarmentSVG(name);
+  renderSwatches(colors);
   updatePrice();
 }
 let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
@@ -1440,8 +1467,8 @@ function selColor(el,name,c1,c2){
   document.getElementById('sumColor').textContent=name;
   document.getElementById('pvStop1').setAttribute('stop-color',c1);
   document.getElementById('pvStop2').setAttribute('stop-color',c2);
-  if(name==='Pure White'){document.getElementById('pvCollar').setAttribute('fill','#666');document.getElementById('pvText').setAttribute('fill','rgba(40,40,40,.35)');}
-  else if(name==='Midnight Black'){document.getElementById('pvCollar').setAttribute('fill','#333');document.getElementById('pvText').setAttribute('fill','rgba(224,32,32,.4)');}
+  if(isLight(c1)){document.getElementById('pvCollar').setAttribute('fill','#666');document.getElementById('pvText').setAttribute('fill','rgba(40,40,40,.35)');}
+  else if(parseInt(c1.slice(1,3),16)<30&&parseInt(c1.slice(3,5),16)<30&&parseInt(c1.slice(5,7),16)<30){document.getElementById('pvCollar').setAttribute('fill','#333');document.getElementById('pvText').setAttribute('fill','rgba(224,32,32,.4)');}
   else{document.getElementById('pvCollar').setAttribute('fill','#111');document.getElementById('pvText').setAttribute('fill','rgba(0,0,0,.38)');}
 }
 function selPlace(el,idx){
