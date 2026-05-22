@@ -93,6 +93,61 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:fl
 .info-block li{font-size:.88rem;color:var(--muted);line-height:1.6;padding-left:16px;position:relative}
 .info-block li::before{content:'—';position:absolute;left:0;color:var(--red)}
 
+/* ── PLAN SECTIONS ── */
+.plan-sec{padding:100px 40px;max-width:960px;margin:0 auto}
+.plan-header-band{display:flex;align-items:center;gap:18px;margin-bottom:14px}
+.plan-badge{font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.3em;padding:6px 18px;border:1px solid currentColor}
+.plan-badge.bulk{color:#FFB800;border-color:rgba(255,184,0,.5);background:rgba(255,184,0,.07)}
+.plan-badge.cali{color:#00C9A7;border-color:rgba(0,201,167,.5);background:rgba(0,201,167,.07)}
+.plan-title-bulk{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5vw,4rem);letter-spacing:.06em;color:#FFB800;line-height:.95;margin-bottom:10px}
+.plan-title-cali{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5vw,4rem);letter-spacing:.06em;color:#00C9A7;line-height:.95;margin-bottom:10px}
+.plan-intro{font-size:.92rem;color:var(--muted);line-height:1.8;max-width:700px;margin-bottom:40px}
+
+/* MACRO ROW */
+.macro-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:48px}
+.macro-box{background:var(--card);border:1px solid var(--border-soft,rgba(255,255,255,.07));padding:20px 16px;text-align:center}
+.macro-box.bulk{border-color:rgba(255,184,0,.2)}
+.macro-box.cali{border-color:rgba(0,201,167,.2)}
+.macro-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1}
+.macro-num.bulk{color:#FFB800}
+.macro-num.cali{color:#00C9A7}
+.macro-lbl{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+/* MEAL PLAN */
+.plan-sub{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em;color:var(--white);margin-bottom:20px}
+.meal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:56px}
+.meal-card{background:var(--card);border:1px solid rgba(255,255,255,.07);padding:22px 20px}
+.meal-card.bulk{border-left:3px solid #FFB800}
+.meal-card.cali{border-left:3px solid #00C9A7}
+.meal-time{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;margin-bottom:6px}
+.meal-time.bulk{color:#FFB800}
+.meal-time.cali{color:#00C9A7}
+.meal-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--white);margin-bottom:8px}
+.meal-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
+.meal-macros{font-size:.72rem;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);letter-spacing:.04em}
+
+/* WEEK GRID */
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:48px}
+.day-card{background:var(--card);border:1px solid rgba(255,255,255,.07);padding:14px 10px;text-align:center}
+.day-card.active.bulk{border-color:#FFB800;background:rgba(255,184,0,.06)}
+.day-card.active.cali{border-color:#00C9A7;background:rgba(0,201,167,.06)}
+.day-card.rest{opacity:.5}
+.day-name{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.day-focus{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.06em;line-height:1.2}
+.day-focus.bulk{color:#FFB800}
+.day-focus.cali{color:#00C9A7}
+.day-detail{font-size:.62rem;color:var(--muted);margin-top:5px;line-height:1.4}
+
+/* EXERCISE TABLE */
+.ex-table{width:100%;border-collapse:collapse;margin-bottom:56px;font-size:.85rem}
+.ex-table th{font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+.ex-table th.bulk{color:#FFB800}
+.ex-table th.cali{color:#00C9A7}
+.ex-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--muted);vertical-align:top}
+.ex-table tr:hover td{background:rgba(255,255,255,.02)}
+.ex-name{color:var(--white);font-weight:600}
+.plan-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0}
+
 footer{text-align:center;padding:60px 40px;border-top:1px solid var(--border);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 footer a{color:var(--red);text-decoration:none}
 
@@ -101,6 +156,9 @@ footer a{color:var(--red);text-decoration:none}
   .stats-bar{padding:40px 24px}
   .content-sec{padding:80px 24px}
   .two-col{grid-template-columns:1fr}
+  .week-grid{grid-template-columns:repeat(4,1fr)}
+  .ex-table{font-size:.78rem}
+  .plan-sec{padding:80px 24px}
 }
 </style>
 </head>
@@ -407,6 +465,325 @@ footer a{color:var(--red);text-decoration:none}
     </div>
   </div>
 </section>
+
+<!-- ════════════════════════════════════════
+     PLAN 1 — BULK / MUSCLE BUILDING
+     ════════════════════════════════════════ -->
+<div style="background:var(--space2);border-top:1px solid rgba(255,184,0,.15);border-bottom:1px solid rgba(255,184,0,.15)">
+<section class="plan-sec">
+
+  <div class="plan-header-band">
+    <span class="plan-badge bulk">Plan 01</span>
+    <span style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Muscle Building</span>
+  </div>
+  <h2 class="plan-title-bulk">Bulk Up.<br>Build Your Temple.</h2>
+  <p class="plan-intro">This plan is for those who want to add lean muscle mass — whether you're a beginner starting from scratch or an athlete looking to get bigger and stronger. It's built around progressive overload, caloric surplus, and high protein. You don't need to be huge. You need to be strong, capable, and disciplined. That's the goal here.</p>
+
+  <!-- MACROS -->
+  <p class="plan-sub">Daily Nutrition Targets</p>
+  <div class="macro-row">
+    <div class="macro-box bulk"><div class="macro-num bulk">3,200</div><div class="macro-lbl">Calories / Day</div></div>
+    <div class="macro-box bulk"><div class="macro-num bulk">200g</div><div class="macro-lbl">Protein</div></div>
+    <div class="macro-box bulk"><div class="macro-num bulk">380g</div><div class="macro-lbl">Carbohydrates</div></div>
+    <div class="macro-box bulk"><div class="macro-num bulk">80g</div><div class="macro-lbl">Healthy Fats</div></div>
+    <div class="macro-box bulk"><div class="macro-num bulk">1g</div><div class="macro-lbl">Protein per lb Bodyweight</div></div>
+  </div>
+
+  <!-- MEAL PLAN -->
+  <p class="plan-sub">Daily Meal Plan</p>
+  <div class="meal-grid">
+    <div class="meal-card bulk">
+      <div class="meal-time bulk">Meal 1 · 7:00 AM</div>
+      <div class="meal-name">Power Breakfast</div>
+      <div class="meal-desc">4 whole eggs + 2 egg whites scrambled in butter · 1 cup oatmeal cooked with whole milk · 1 banana sliced on top · 1 tbsp natural peanut butter · black coffee</div>
+      <div class="meal-macros">~55g protein · ~85g carbs · ~28g fat · ~800 cal</div>
+    </div>
+    <div class="meal-card bulk">
+      <div class="meal-time bulk">Meal 2 · 10:00 AM</div>
+      <div class="meal-name">Mid-Morning Fuel</div>
+      <div class="meal-desc">Protein shake (50g protein) blended with whole milk, 1 banana, and 1 tbsp almond butter · 1 apple on the side · handful of mixed nuts (cashews, almonds, walnuts)</div>
+      <div class="meal-macros">~58g protein · ~55g carbs · ~22g fat · ~650 cal</div>
+    </div>
+    <div class="meal-card bulk">
+      <div class="meal-time bulk">Meal 3 · 1:00 PM</div>
+      <div class="meal-name">Midday Mass Meal</div>
+      <div class="meal-desc">8oz grilled chicken breast · 2 cups white rice (cooked) · 1 cup steamed broccoli · drizzle of olive oil · salt, pepper, garlic — season it right, eat it consistently</div>
+      <div class="meal-macros">~70g protein · ~90g carbs · ~14g fat · ~770 cal</div>
+    </div>
+    <div class="meal-card bulk">
+      <div class="meal-time bulk">Meal 4 · 4:00 PM — Pre-Workout</div>
+      <div class="meal-name">Pre-Workout Loader</div>
+      <div class="meal-desc">6oz lean ground beef or turkey · 1 large sweet potato (baked) · 5–6 Medjool dates for fast carbs · 1 cup coconut water for electrolytes — eat this 60–90 min before training</div>
+      <div class="meal-macros">~48g protein · ~90g carbs · ~12g fat · ~660 cal</div>
+    </div>
+    <div class="meal-card bulk">
+      <div class="meal-time bulk">Post-Workout · ~6:30 PM</div>
+      <div class="meal-name">Anabolic Window</div>
+      <div class="meal-desc">Whey protein shake (40–50g protein) + 1 banana + 1 cup whole milk · Consume within 30–45 minutes after your last set — this is when your muscles are most hungry for amino acids</div>
+      <div class="meal-macros">~55g protein · ~55g carbs · ~8g fat · ~510 cal</div>
+    </div>
+    <div class="meal-card bulk">
+      <div class="meal-time bulk">Meal 5 · 8:00 PM</div>
+      <div class="meal-name">Dinner — Real Food</div>
+      <div class="meal-desc">8oz salmon or ribeye steak · 1 cup cooked quinoa · large side salad (mixed greens, cherry tomatoes, avocado, cucumber) with olive oil + lemon dressing · no junk, no shortcuts</div>
+      <div class="meal-macros">~60g protein · ~45g carbs · ~30g fat · ~680 cal</div>
+    </div>
+    <div class="meal-card bulk">
+      <div class="meal-time bulk">Meal 6 · 10:00 PM — Before Bed</div>
+      <div class="meal-name">Overnight Casein Feed</div>
+      <div class="meal-desc">1.5 cups cottage cheese · 1 tbsp raw honey · 10 walnuts · sprinkle of cinnamon · Casein digests slowly over 5–7 hours, feeding your muscles with amino acids through the night while growth hormone peaks during deep sleep</div>
+      <div class="meal-macros">~38g protein · ~20g carbs · ~14g fat · ~350 cal</div>
+    </div>
+  </div>
+
+  <!-- WEEK SCHEDULE -->
+  <p class="plan-sub">Weekly Workout Schedule</p>
+  <div class="week-grid">
+    <div class="day-card active bulk">
+      <div class="day-name">Mon</div>
+      <div class="day-focus bulk">Chest + Tris</div>
+      <div class="day-detail">Heavy push day</div>
+    </div>
+    <div class="day-card active bulk">
+      <div class="day-name">Tue</div>
+      <div class="day-focus bulk">Back + Bis</div>
+      <div class="day-detail">Deadlift + pull</div>
+    </div>
+    <div class="day-card active bulk">
+      <div class="day-name">Wed</div>
+      <div class="day-focus bulk">Legs</div>
+      <div class="day-detail">Squat heavy</div>
+    </div>
+    <div class="day-card active bulk">
+      <div class="day-name">Thu</div>
+      <div class="day-focus bulk">Shoulders + Core</div>
+      <div class="day-detail">Press + abs</div>
+    </div>
+    <div class="day-card active bulk">
+      <div class="day-name">Fri</div>
+      <div class="day-focus bulk">Arms + Weak Points</div>
+      <div class="day-detail">Volume day</div>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Sat</div>
+      <div class="day-focus" style="color:var(--muted)">Active Rest</div>
+      <div class="day-detail">20 min walk</div>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Sun</div>
+      <div class="day-focus" style="color:var(--muted)">Full Rest</div>
+      <div class="day-detail">Recover + eat</div>
+    </div>
+  </div>
+
+  <!-- EXERCISE TABLE -->
+  <p class="plan-sub">Key Exercises — Sets, Reps & Notes</p>
+  <table class="ex-table">
+    <thead>
+      <tr>
+        <th class="bulk">Exercise</th>
+        <th class="bulk">Sets × Reps</th>
+        <th class="bulk">Day</th>
+        <th class="bulk">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="ex-name">Barbell Back Squat</span></td><td>4 × 6–8</td><td>Wednesday</td><td>Add 5 lbs every week. Full depth. Belt on heavy sets.</td></tr>
+      <tr><td><span class="ex-name">Romanian Deadlift</span></td><td>3 × 8–10</td><td>Wednesday</td><td>Hamstring stretch at bottom. Control the negative.</td></tr>
+      <tr><td><span class="ex-name">Conventional Deadlift</span></td><td>3 × 5</td><td>Tuesday</td><td>The king of mass builders. Add 5–10 lbs weekly. Don't round your back.</td></tr>
+      <tr><td><span class="ex-name">Flat Barbell Bench Press</span></td><td>4 × 6–8</td><td>Monday</td><td>Feet flat, arch in lower back, drive through your heels. Progressive overload every session.</td></tr>
+      <tr><td><span class="ex-name">Incline Dumbbell Press</span></td><td>3 × 10–12</td><td>Monday</td><td>30–45° incline. Stretch at the bottom, squeeze at the top.</td></tr>
+      <tr><td><span class="ex-name">Weighted Pull-Ups</span></td><td>4 × max reps</td><td>Tuesday</td><td>Add a weight belt when you hit 12+ bodyweight reps. Best back builder.</td></tr>
+      <tr><td><span class="ex-name">Barbell Bent-Over Row</span></td><td>4 × 8–10</td><td>Tuesday</td><td>Chest up, hinge at hips, pull to your belly button. Elbows close to body.</td></tr>
+      <tr><td><span class="ex-name">Overhead Barbell Press</span></td><td>4 × 6–8</td><td>Thursday</td><td>Standing. Press through your ears at the top. Big shoulder and trap builder.</td></tr>
+      <tr><td><span class="ex-name">Lateral Raises</span></td><td>4 × 15–20</td><td>Thursday</td><td>Lighter weight, strict form, slight bend in elbows. Raise to ear height.</td></tr>
+      <tr><td><span class="ex-name">Leg Press</span></td><td>3 × 10–15</td><td>Wednesday</td><td>High foot placement for more glutes/hamstrings. Don't lock out knees at top.</td></tr>
+      <tr><td><span class="ex-name">Barbell Bicep Curl</span></td><td>4 × 10–12</td><td>Friday</td><td>No swinging. Full range of motion. Squeeze at the top for 1 second.</td></tr>
+      <tr><td><span class="ex-name">Tricep Skull Crushers</span></td><td>3 × 10–12</td><td>Monday/Friday</td><td>EZ-bar or dumbbells. Lower to forehead, press to full lockout.</td></tr>
+      <tr><td><span class="ex-name">Cable Face Pulls</span></td><td>3 × 15</td><td>Thursday</td><td>Rear delt and rotator cuff health. Do not skip. Prevents shoulder injury long-term.</td></tr>
+      <tr><td><span class="ex-name">Weighted Plank</span></td><td>3 × 45–60 sec</td><td>Thursday</td><td>Plate on back. Squeeze glutes and abs. Don't let hips sag or rise.</td></tr>
+      <tr><td><span class="ex-name">Hanging Leg Raises</span></td><td>4 × 12–15</td><td>Thursday</td><td>From a pull-up bar. Slow and controlled. Don't swing. Full hip flexion.</td></tr>
+    </tbody>
+  </table>
+
+  <div style="background:rgba(255,184,0,.06);border:1px solid rgba(255,184,0,.2);padding:24px 28px">
+    <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:#FFB800;margin-bottom:8px">The Golden Rule of Bulking</p>
+    <p style="font-size:.88rem;color:var(--muted);line-height:1.7">Add weight to the bar every single week — even if it's just 2.5 lbs. That is the principle of progressive overload and it is the only mechanism by which muscle grows. If the weight isn't going up, the muscle isn't growing. Eat your meals, sleep 8 hours, and show up every session. The results are not optional — they are mathematical.</p>
+  </div>
+
+</section>
+</div>
+
+<!-- ════════════════════════════════════════
+     PLAN 2 — CALISTHENICS / GENERAL HEALTH
+     ════════════════════════════════════════ -->
+<div style="background:var(--space3);border-top:1px solid rgba(0,201,167,.12);border-bottom:1px solid rgba(0,201,167,.12)">
+<section class="plan-sec">
+
+  <div class="plan-header-band">
+    <span class="plan-badge cali">Plan 02</span>
+    <span style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Calisthenics & General Health</span>
+  </div>
+  <h2 class="plan-title-cali">Move Well.<br>Live Long. Stay Lean.</h2>
+  <p class="plan-intro">This plan is for people who want to be lean, functional, athletic, and healthy without needing a gym. Calisthenics builds real strength using your own bodyweight — the kind of strength that translates to everyday life, sports, and aging well. Paired with clean eating, this is arguably the most sustainable health lifestyle you can build. No equipment required. Just discipline.</p>
+
+  <!-- MACROS -->
+  <p class="plan-sub">Daily Nutrition Targets</p>
+  <div class="macro-row">
+    <div class="macro-box cali"><div class="macro-num cali">2,400</div><div class="macro-lbl">Calories / Day</div></div>
+    <div class="macro-box cali"><div class="macro-num cali">150g</div><div class="macro-lbl">Protein</div></div>
+    <div class="macro-box cali"><div class="macro-num cali">280g</div><div class="macro-lbl">Carbohydrates</div></div>
+    <div class="macro-box cali"><div class="macro-num cali">70g</div><div class="macro-lbl">Healthy Fats</div></div>
+    <div class="macro-box cali"><div class="macro-num cali">35g+</div><div class="macro-lbl">Fiber Daily</div></div>
+  </div>
+
+  <!-- MEAL PLAN -->
+  <p class="plan-sub">Daily Meal Plan</p>
+  <div class="meal-grid">
+    <div class="meal-card cali">
+      <div class="meal-time cali">Breakfast · 7:00 AM</div>
+      <div class="meal-name">Overnight Oats + Fruit</div>
+      <div class="meal-desc">½ cup rolled oats + ¾ cup Greek yogurt + 1 tbsp chia seeds + mixed berries (blueberries, raspberries, strawberries) + drizzle of raw honey · Prep the night before. Grab and go.</div>
+      <div class="meal-macros">~28g protein · ~65g carbs · ~12g fat · ~480 cal</div>
+    </div>
+    <div class="meal-card cali">
+      <div class="meal-time cali">Snack · 10:00 AM</div>
+      <div class="meal-name">Clean Energy Snack</div>
+      <div class="meal-desc">2 hard-boiled eggs · 1 apple · 20 raw almonds · Protein + healthy fat + fiber = stable energy for hours with no crash. This is what snacking is supposed to look like.</div>
+      <div class="meal-macros">~18g protein · ~30g carbs · ~18g fat · ~340 cal</div>
+    </div>
+    <div class="meal-card cali">
+      <div class="meal-time cali">Lunch · 1:00 PM</div>
+      <div class="meal-name">Power Bowl</div>
+      <div class="meal-desc">Large bed of mixed greens + 6oz grilled chicken or canned tuna · cherry tomatoes · cucumber · ½ avocado · pumpkin seeds · olive oil + fresh lemon dressing · 1 slice of whole grain bread or a small bowl of brown rice on the side</div>
+      <div class="meal-macros">~50g protein · ~45g carbs · ~25g fat · ~590 cal</div>
+    </div>
+    <div class="meal-card cali">
+      <div class="meal-time cali">Pre-Workout · 4:00 PM</div>
+      <div class="meal-name">Natural Energy Boost</div>
+      <div class="meal-desc">1 banana + 2 tbsp almond butter · 1 cup coconut water · Optional: black coffee 20 minutes before training. Simple, effective. Your body will have exactly what it needs for a strong session.</div>
+      <div class="meal-macros">~8g protein · ~55g carbs · ~18g fat · ~390 cal</div>
+    </div>
+    <div class="meal-card cali">
+      <div class="meal-time cali">Dinner · 7:00 PM</div>
+      <div class="meal-name">Whole Food Dinner</div>
+      <div class="meal-desc">6oz baked salmon or grilled tilapia · roasted vegetables (broccoli, bell peppers, zucchini, onion) tossed in olive oil + garlic · ¾ cup cooked quinoa · squeeze of lemon over everything. This is real food. Eat it regularly.</div>
+      <div class="meal-macros">~48g protein · ~50g carbs · ~22g fat · ~570 cal</div>
+    </div>
+    <div class="meal-card cali">
+      <div class="meal-time cali">Evening · 9:00 PM</div>
+      <div class="meal-name">Light Wind-Down</div>
+      <div class="meal-desc">1 kiwi (improves sleep quality) + 1 cup chamomile or ginger tea + 10 walnuts · Avoid heavy meals in the 2–3 hours before bed. Let your gut rest so your body can focus on recovery and repair overnight.</div>
+      <div class="meal-macros">~4g protein · ~18g carbs · ~9g fat · ~165 cal</div>
+    </div>
+  </div>
+
+  <!-- FOODS TO EAT EVERY WEEK -->
+  <div class="two-col" style="margin-bottom:48px">
+    <div class="info-block" style="border-color:rgba(0,201,167,.2)">
+      <h3 style="color:#00C9A7">Eat These Every Week</h3>
+      <ul>
+        <li>Leafy greens (spinach, kale, arugula) — vitamins, minerals, fiber, and anti-inflammatory compounds daily</li>
+        <li>Fatty fish (salmon, sardines, mackerel) — omega-3s for brain, joints, and inflammation at least 2–3× per week</li>
+        <li>Legumes (lentils, black beans, chickpeas) — fiber + protein + slow carbs that fuel sustained energy</li>
+        <li>Berries (blueberries, raspberries, blackberries) — highest antioxidant density of any fruit per calorie</li>
+        <li>Eggs — the most complete food on earth. Eat them whole. The yolk is where the nutrients live.</li>
+        <li>Sweet potatoes — Vitamin A, potassium, fiber, and complex carbs that don't spike blood sugar sharply</li>
+        <li>Fermented foods (yogurt, kimchi, sauerkraut) — gut microbiome health directly affects immunity and mood</li>
+        <li>Nuts and seeds (walnuts, flax, chia) — healthy fats, zinc, magnesium, and anti-inflammatory properties</li>
+      </ul>
+    </div>
+    <div class="info-block" style="border-color:rgba(0,201,167,.2)">
+      <h3 style="color:#00C9A7">Avoid or Minimize</h3>
+      <ul>
+        <li>Seed oils (canola, soybean, vegetable oil) — highly processed, pro-inflammatory. Use olive oil or butter instead.</li>
+        <li>Sugary drinks (sodas, juices, sports drinks) — liquid calories with zero nutritional value and high insulin impact</li>
+        <li>Ultra-processed snacks (chips, crackers, cookies) — engineered to be addictive, low in nutrients, high in seed oils</li>
+        <li>White bread and refined carbs — stripped of fiber and nutrients, spike blood sugar rapidly</li>
+        <li>Alcohol — disrupts sleep quality, suppresses fat burning for up to 24 hours, and lowers testosterone</li>
+        <li>Fast food — calorie-dense, nutrient-poor, loaded with sodium, additives, and artificial ingredients</li>
+        <li>Artificial sweeteners — linked to gut microbiome disruption and potentially increased sugar cravings</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WEEK SCHEDULE -->
+  <p class="plan-sub">Weekly Workout Schedule</p>
+  <div class="week-grid">
+    <div class="day-card active cali">
+      <div class="day-name">Mon</div>
+      <div class="day-focus cali">Push</div>
+      <div class="day-detail">Chest · tris · shoulders</div>
+    </div>
+    <div class="day-card active cali">
+      <div class="day-name">Tue</div>
+      <div class="day-focus cali">Pull</div>
+      <div class="day-detail">Back · bis · rear</div>
+    </div>
+    <div class="day-card active cali">
+      <div class="day-name">Wed</div>
+      <div class="day-focus cali">Legs + Core</div>
+      <div class="day-detail">Lower body power</div>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Thu</div>
+      <div class="day-focus" style="color:var(--muted)">Cardio</div>
+      <div class="day-detail">20 min HIIT or run</div>
+    </div>
+    <div class="day-card active cali">
+      <div class="day-name">Fri</div>
+      <div class="day-focus cali">Full Body</div>
+      <div class="day-detail">Circuit training</div>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Sat</div>
+      <div class="day-focus" style="color:var(--muted)">Active Rest</div>
+      <div class="day-detail">Walk · swim · sport</div>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Sun</div>
+      <div class="day-focus" style="color:var(--muted)">Rest</div>
+      <div class="day-detail">Stretch + recover</div>
+    </div>
+  </div>
+
+  <!-- EXERCISE TABLE -->
+  <p class="plan-sub">Calisthenics Exercises — With Progressions</p>
+  <table class="ex-table">
+    <thead>
+      <tr>
+        <th class="cali">Exercise</th>
+        <th class="cali">Sets × Reps</th>
+        <th class="cali">Day</th>
+        <th class="cali">Progression Path</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="ex-name">Push-Up</span></td><td>4 × max reps</td><td>Monday</td><td>Knee push-up → Standard → Diamond → Archer → One-arm</td></tr>
+      <tr><td><span class="ex-name">Pike Push-Up</span></td><td>3 × 10–15</td><td>Monday</td><td>Pike → Decline pike → Handstand hold → Handstand push-up</td></tr>
+      <tr><td><span class="ex-name">Tricep Dips</span></td><td>3 × 12–15</td><td>Monday</td><td>Bench dip → Parallel bar dip → Weighted dip (backpack)</td></tr>
+      <tr><td><span class="ex-name">Pull-Up / Chin-Up</span></td><td>4 × max reps</td><td>Tuesday</td><td>Dead hang → Negatives → Band-assisted → Full → Weighted</td></tr>
+      <tr><td><span class="ex-name">Inverted Row</span></td><td>3 × 10–15</td><td>Tuesday</td><td>High bar (easier) → Lower bar → Feet elevated → Single arm</td></tr>
+      <tr><td><span class="ex-name">Bodyweight Squat</span></td><td>4 × 20–25</td><td>Wednesday</td><td>Squat → Jump squat → Bulgarian split squat → Pistol squat</td></tr>
+      <tr><td><span class="ex-name">Reverse Lunge</span></td><td>3 × 12 each leg</td><td>Wednesday</td><td>Stationary lunge → Walking lunge → Deficit lunge → Jump lunge</td></tr>
+      <tr><td><span class="ex-name">Glute Bridge</span></td><td>3 × 20</td><td>Wednesday</td><td>Flat → Single leg → Hip thrust (elevated) → Weighted hip thrust</td></tr>
+      <tr><td><span class="ex-name">Plank</span></td><td>3 × 45–90 sec</td><td>Wednesday</td><td>Forearm plank → Extended plank → Plank with shoulder tap → Ab wheel rollout</td></tr>
+      <tr><td><span class="ex-name">Hollow Body Hold</span></td><td>3 × 30 sec</td><td>Wednesday</td><td>Tuck → Extended legs → Arms overhead → Flutter kicks added</td></tr>
+      <tr><td><span class="ex-name">Burpee</span></td><td>5 × 10</td><td>Friday</td><td>Beginner (no jump) → Standard → Burpee pull-up → Box jump burpee</td></tr>
+      <tr><td><span class="ex-name">Mountain Climber</span></td><td>4 × 30 sec</td><td>Friday</td><td>Slow and controlled → Fast pace → Cross-body → Elevated</td></tr>
+      <tr><td><span class="ex-name">Jump Squat</span></td><td>3 × 15</td><td>Friday</td><td>Squat → Jump squat → Tuck jump → 180° jump squat</td></tr>
+      <tr><td><span class="ex-name">L-Sit (on floor/bars)</span></td><td>3 × max hold</td><td>Wednesday</td><td>Tuck L-sit → Single leg → Full L-sit → L-sit on parallel bars</td></tr>
+      <tr><td><span class="ex-name">20-Min HIIT</span></td><td>4 rounds</td><td>Thursday</td><td>30 sec work / 15 sec rest: sprint, jump rope, high knees, burpees. Rotate each week.</td></tr>
+    </tbody>
+  </table>
+
+  <div style="background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.2);padding:24px 28px">
+    <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:#00C9A7;margin-bottom:8px">The Calisthenics Mindset</p>
+    <p style="font-size:.88rem;color:var(--muted);line-height:1.7">Calisthenics isn't just exercise — it's mastery of your own body. The goal isn't to look a certain way. The goal is to move powerfully, age well, and maintain physical capability for life. A 60-year-old who can do 20 pull-ups, a clean pistol squat, and a 2-mile run is wealthier in health than most 25-year-olds in a gym. Invest in your movement. Your future self will thank you. Philippians 4:13 — you can do all things through Christ who strengthens you. That includes one more rep.</p>
+  </div>
+
+</section>
+</div>
 
 <footer>
   <p><a href="index.html">← Back to Tagline Apparel</a></p>
