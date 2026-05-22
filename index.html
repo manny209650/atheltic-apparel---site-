@@ -374,7 +374,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
   <a href="#home" onclick="closeMob()">Home</a>
   <a href="#shop" onclick="closeMob()">Shop</a>
-  <a href="#builder" >Create Merch</a>
+  <a href="#builder" onclick="closeMob()">Create Merch</a>
   <a href="#about" onclick="closeMob()">About</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
 </div>
@@ -1413,7 +1413,7 @@ function renderGarmentPicker(){
   const wrap = document.getElementById('garmentOpts');
   const customProducts = PRODUCTS.filter(p=>!p.noCustom);
   wrap.innerHTML = customProducts.map((p,i)=>`
-    <button class="g-opt${i===0?' active':''}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price},'${p.img}',${JSON.stringify(p.colors)})">
+    <button class="g-opt${i===0?' active':''}" data-handle="${p.handle}" onclick="selGarmentProduct(this,'${p.title.replace(/'/g,"\\'")}',${p.price})">
       <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
       <span class="g-opt-info">
         <span class="g-opt-name">${p.title}</span>
@@ -1430,7 +1430,7 @@ function renderGarmentPicker(){
   renderSwatches(first.colors);
   updatePrice();
 }
-function selGarmentProduct(el,name,price,img,colors){
+function selGarmentProduct(el,name,price){
   document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
   el.classList.add('active');
   curGarment=name;
@@ -1438,7 +1438,9 @@ function selGarmentProduct(el,name,price,img,colors){
   document.getElementById('sumGarment').textContent=name;
   document.getElementById('sumBase').textContent='$'+price;
   updateGarmentSVG(name);
-  renderSwatches(colors);
+  const handle=el.dataset.handle;
+  const product=PRODUCTS.find(p=>p.handle===handle);
+  renderSwatches(product?product.colors:['black']);
   updatePrice();
 }
 let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
