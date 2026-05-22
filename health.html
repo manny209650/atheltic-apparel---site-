@@ -66,6 +66,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:fl
 .verse-banner blockquote{font-family:'Cinzel',serif;font-size:clamp(1rem,2vw,1.3rem);line-height:1.8;color:var(--text);max-width:700px;margin:0 auto 16px;font-style:italic}
 .verse-banner cite{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red)}
 
+/* ALERT / WARNING CARDS */
+.alert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:60px}
+.alert-card{background:rgba(180,10,10,.07);border:1px solid rgba(224,32,32,.3);padding:32px 28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+.alert-card:hover{transform:translateY(-4px);border-color:var(--red)}
+.alert-card::before{content:'⚠';position:absolute;top:16px;right:18px;font-size:1rem;opacity:.25}
+.alert-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;color:#FF6060;margin-bottom:10px}
+.alert-card p{font-size:.88rem;color:var(--muted);line-height:1.7}
+.alert-card .highlight{color:#FF6060;font-weight:600}
+.obesity-stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:60px}
+.ob-stat{background:rgba(180,10,10,.07);border:1px solid rgba(224,32,32,.25);padding:24px 20px;text-align:center}
+.ob-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:#FF5050;line-height:1}
+.ob-stat-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:6px;line-height:1.4}
+.truth-list{display:flex;flex-direction:column;gap:0;margin-bottom:60px}
+.truth-item{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid rgba(224,32,32,.1)}
+.truth-item:last-child{border-bottom:none}
+.truth-icon{font-size:1.6rem;flex-shrink:0;margin-top:2px}
+.truth-item h4{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.08em;color:#FF6060;margin-bottom:6px}
+.truth-item p{font-size:.88rem;color:var(--muted);line-height:1.7}
+
 /* TWO COL */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:80px}
 .info-block{background:var(--card);border:1px solid var(--border);padding:32px 28px}
@@ -216,6 +235,107 @@ footer a{color:var(--red);text-decoration:none}
       <div>
         <h4>Plant Proteins Can Be Complete — With Strategy</h4>
         <p>Most plant proteins are "incomplete" — they're low in one or more essential amino acids. But combining strategically eliminates the gap: <span style="color:var(--red);font-weight:600">rice + beans, pea protein + rice protein, lentils + quinoa</span>. Quinoa and soy are the rare plant proteins that are naturally complete. Hemp seeds deliver all 9 essential amino acids plus omega-3s. You don't need meat to build muscle — but you do need to be intentional about it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMERICA OBESITY + FAST FOOD TRUTH SECTION -->
+<section class="content-sec" style="padding-top:80px">
+  <span class="section-label">Wake Up Call</span>
+  <h2 class="section-title">America Is Sick — <span>And It's Not an Accident</span></h2>
+  <p style="font-size:.95rem;color:var(--muted);max-width:720px;line-height:1.8;margin-bottom:48px">The United States is one of the wealthiest nations on Earth — and also one of the sickest. This isn't a coincidence. It's the result of a food industry that prioritizes profit over people, engineered addiction over nutrition, and shelf life over your life. Here's the truth they don't advertise.</p>
+
+  <!-- OBESITY STATS -->
+  <div class="obesity-stat-row">
+    <div class="ob-stat">
+      <div class="ob-stat-num">42%</div>
+      <div class="ob-stat-label">of U.S. Adults Are Clinically Obese — CDC 2023</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">73%</div>
+      <div class="ob-stat-label">of Americans Are Overweight or Obese</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">$173B</div>
+      <div class="ob-stat-label">Spent Annually on Obesity-Related Healthcare</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">60%</div>
+      <div class="ob-stat-label">of Average American Calories Come From Ultra-Processed Food</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">50M</div>
+      <div class="ob-stat-label">Americans Eat Fast Food Every Single Day</div>
+    </div>
+  </div>
+
+  <!-- FAST FOOD TRUTH CARDS -->
+  <span class="section-label" style="margin-bottom:24px">What's Really in Your Food</span>
+  <h2 class="section-title" style="margin-bottom:32px">The Fast Food <span>Truth</span></h2>
+
+  <div class="alert-grid">
+    <div class="alert-card">
+      <h3>McDonald's Chicken McNuggets — 50+ Ingredients</h3>
+      <p>A Chicken McNugget sounds simple. It's not. The ingredient list includes <span class="highlight">dimethylpolysiloxane</span> (an antifoaming silicone agent also used in silly putty and caulk), <span class="highlight">TBHQ</span> (a petroleum-derived preservative), sodium phosphates, and autolyzed yeast extract. The "chicken" itself is a processed paste mechanically separated from the carcass, then shaped and fried. Actual chicken breast protein content: less than 45%.</p>
+    </div>
+    <div class="alert-card">
+      <h3>McDonald's Buns Are Loaded With Sugar & Additives</h3>
+      <p>McDonald's hamburger buns contain <span class="highlight">high fructose corn syrup</span>, azodicarbonamide (a flour bleaching agent also used to make yoga mats — banned in Europe and Australia), DATEM, and multiple forms of sugar. In 2020, an Irish court ruled that Subway's bread contained so much sugar it legally <span class="highlight">could not be classified as bread</span> under Irish tax law. These companies add sugar to everything because sugar is addictive.</p>
+    </div>
+    <div class="alert-card">
+      <h3>"Pink Slime" and Meat Fillers</h3>
+      <p>For years, McDonald's used <span class="highlight">lean finely textured beef (LFTB)</span> — nicknamed "pink slime" — in their burgers. This is beef scraps and connective tissue recovered from the carcass, processed at high heat, then treated with <span class="highlight">ammonium hydroxide gas</span> to kill bacteria. McDonald's dropped it after public backlash in 2012, but it's still legally allowed in school cafeteria beef in the U.S. Other chains still use it.</p>
+    </div>
+    <div class="alert-card">
+      <h3>Food Dyes Linked to Hyperactivity in Children</h3>
+      <p>Red 40, Yellow 5, Yellow 6, and Blue 1 are petroleum-derived synthetic dyes found in countless American fast food items, cereals, candies, and sports drinks. The European Union requires products containing these dyes to carry a warning label: <span class="highlight">"May have an adverse effect on activity and attention in children."</span> The FDA does not require this warning. These dyes are banned or restricted in several countries.</p>
+    </div>
+    <div class="alert-card">
+      <h3>Engineered Addiction — It's Not Weakness, It's Science</h3>
+      <p>Food scientists at major corporations are paid specifically to find the <span class="highlight">"bliss point"</span> — the precise combination of sugar, salt, and fat that makes a food maximally craving-inducing and nearly impossible to stop eating. Former FDA Commissioner David Kessler calls this "conditioned hypereating." These companies spend billions studying neurological reward pathways to ensure their products override your body's natural fullness signals.</p>
+    </div>
+    <div class="alert-card">
+      <h3>The Sodium Trap — Fast Food Is Salt-Loaded</h3>
+      <p>A single McDonald's Big Mac meal with a large Coke and fries delivers over <span class="highlight">1,500mg of sodium</span> — more than 65% of the recommended daily maximum in one sitting. Excessive sodium spikes blood pressure, causes water retention, and over time damages arterial walls and kidney function. The World Health Organization links high sodium intake directly to 1.89 million deaths per year globally.</p>
+    </div>
+  </div>
+
+  <!-- THE TRUTH LIST -->
+  <div class="truth-list">
+    <div class="truth-item">
+      <span class="truth-icon">🧪</span>
+      <div>
+        <h4>Ultra-Processed Food Is Engineered to Override Your Body</h4>
+        <p>Ultra-processed foods (UPFs) — defined as products with 5+ industrial ingredients you wouldn't find in a home kitchen — make up 60% of American daily caloric intake. A 2019 NIH study found that people given unlimited access to UPFs ate an average of 500 extra calories per day compared to those given whole foods, even when meals were matched for protein, fat, sugar, and fiber. The food itself drives overconsumption at a neurological level.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">🏭</span>
+      <div>
+        <h4>The USDA and Food Industry Have Conflicting Interests</h4>
+        <p>The U.S. Department of Agriculture simultaneously promotes American agriculture and sets dietary guidelines. This creates a direct conflict: the USDA sets national nutrition policy while also being tasked with promoting sales of meat, dairy, and processed crops. Food industry lobbying in Washington topped $175 million in 2022. The result is dietary guidelines that have historically protected industry profits as much as public health. MyPlate replaced MyPyramid — but corporate lobbying still shapes both.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">🧠</span>
+      <div>
+        <h4>Sugar Is as Addictive as Cocaine in Animal Studies</h4>
+        <p>Princeton University researchers found that rats given intermittent access to sugar showed all the hallmarks of addiction: bingeing, withdrawal, craving, and cross-sensitization with drugs of abuse. Brain scans of humans eating ultra-processed foods show dopamine responses similar to drug use. The average American consumes <span style="color:#FF6060;font-weight:600">17 teaspoons of added sugar per day</span> — more than twice the recommended maximum. Much of it is hidden in savory foods: bread, ketchup, pasta sauce, and dressings.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">👶</span>
+      <div>
+        <h4>Childhood Obesity Has Tripled Since 1970</h4>
+        <p>In 1970, roughly 5% of U.S. children were obese. Today that number is nearly 20% — and rising. Children as young as 8 are being diagnosed with Type 2 diabetes, fatty liver disease, and hypertension — conditions that were virtually unheard of in pediatric medicine a generation ago. Fast food companies spend over <span style="color:#FF6060;font-weight:600">$5 billion per year marketing to children</span>, specifically targeting them through cartoons, toys, apps, and social media before they're old enough to critically evaluate what they're consuming.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">✝️</span>
+      <div>
+        <h4>This Is a Spiritual Issue Too</h4>
+        <p>The body God gave you is not yours to destroy. 1 Corinthians 6:19–20 is unambiguous: your body is a temple of the Holy Spirit. Feeding it engineered garbage, fake ingredients, and addictive chemicals isn't just a health decision — it's a stewardship decision. We are called to present our bodies as living sacrifices, holy and pleasing to God (Romans 12:1). Knowing what you put in your body is part of living a conscious, intentional, God-honoring life. Choose real food. Choose your temple.</p>
       </div>
     </div>
   </div>
