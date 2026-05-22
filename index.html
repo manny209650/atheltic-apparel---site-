@@ -210,6 +210,10 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 #prevSvg{width:100%;height:100%}
 #logoOverlay{position:absolute;pointer-events:none;object-fit:contain;display:none}
 #textOverlay{position:absolute;pointer-events:none;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;color:rgba(0,0,0,.4);white-space:nowrap;transform:translate(-50%,-50%)}
+.side-toggle{display:flex;width:100%;border:1px solid var(--border-gold);overflow:hidden;margin-bottom:2px}
+.side-btn{flex:1;padding:9px;background:none;border:none;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .25s;font-weight:600}
+.side-btn.active{background:var(--gold-grad);color:var(--space)}
+.side-btn:not(.active):hover{background:rgba(224,32,32,.08);color:var(--text)}
 .prev-garment-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--gold)}
 .prev-color-name{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .builder-controls{display:flex;flex-direction:column;gap:24px}
@@ -637,7 +641,14 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   <div class="builder-layout">
     <!-- LIVE PREVIEW -->
     <div class="builder-preview reveal">
-      <p class="prev-lbl">Live Preview</p>
+      <div style="width:100%;display:flex;align-items:center;justify-content:space-between">
+        <p class="prev-lbl">Live Preview</p>
+        <p class="prev-lbl" id="sideLabel">Front View</p>
+      </div>
+      <div class="side-toggle">
+        <button class="side-btn active" onclick="selSide('front',this)">◼ Front</button>
+        <button class="side-btn" onclick="selSide('back',this)">Back ◼</button>
+      </div>
       <div class="prev-wrap">
         <svg id="prevSvg" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 10px 30px rgba(0,0,0,.85))">
           <defs>
@@ -1546,7 +1557,106 @@ function getGarmentPaths(type){
 }
 function updateGarmentSVG(title){
   const shape=document.getElementById('pvShape');
-  if(shape) shape.innerHTML=getGarmentPaths(getGarmentType(title));
+  const type=getGarmentType(title);
+  if(shape) shape.innerHTML=curSide==='back'?getGarmentPathsBack(type):getGarmentPaths(type);
+}
+function getGarmentPathsBack(type){
+  const g='url(#pvGrad)',dk='rgba(0,0,0,.15)',sm='rgba(0,0,0,.1)',hi='url(#pvHighlight)',ss='url(#pvSideShade)',bs='url(#pvBottomShade)';
+  switch(type){
+    case 'jersey': return `
+      <ellipse cx="130" cy="305" rx="65" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${g}"/>
+      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${g}" opacity=".85"/>
+      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${g}" opacity=".85"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${hi}"/>
+      <path d="M72 38 L22 72 L38 112 L60 75 Z" fill="${hi}" opacity=".7"/>
+      <path d="M188 38 L238 72 L222 112 L200 75 Z" fill="${hi}" opacity=".7"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${ss}"/>
+      <path d="M72 38 Q90 22 130 18 Q170 22 188 38 L200 75 L238 292 L22 292 L60 75 Z" fill="${bs}"/>
+      <line x1="130" y1="30" x2="130" y2="292" stroke="${sm}" stroke-width="1.5"/>
+      <text x="130" y="148" font-family="'Bebas Neue',sans-serif" font-size="26" fill="rgba(0,0,0,.18)" text-anchor="middle" letter-spacing="3">LAST NAME</text>
+      <text x="130" y="205" font-family="'Bebas Neue',sans-serif" font-size="52" fill="rgba(0,0,0,.18)" text-anchor="middle">00</text>
+      <text id="pvText" x="130" y="255" font-family="'Bebas Neue',sans-serif" font-size="14" fill="rgba(0,0,0,.32)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'hoodie': return `
+      <ellipse cx="130" cy="305" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${g}"/>
+      <path d="M82 62 Q100 4 130 1 Q160 4 178 62 Q155 24 130 22 Q105 24 82 62 Z" fill="${g}" opacity=".82"/>
+      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${g}" opacity=".85"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${hi}"/>
+      <path d="M82 62 Q100 4 130 1 Q160 4 178 62 Q155 24 130 22 Q105 24 82 62 Z" fill="${hi}" opacity=".6"/>
+      <path d="M62 62 L8 108 L28 158 L74 118 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 62 L252 108 L232 158 L186 118 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${ss}"/>
+      <path d="M62 62 L34 122 L22 295 L238 295 L226 122 L198 62 Z" fill="${bs}"/>
+      <line x1="130" y1="62" x2="130" y2="295" stroke="${sm}" stroke-width="1.5"/>
+      <line x1="130" y1="8" x2="130" y2="65" stroke="rgba(0,0,0,.22)" stroke-width="2.5"/>
+      <path d="M80 72 Q130 58 180 72 Q156 82 130 80 Q104 82 80 72 Z" fill="rgba(255,255,255,.1)"/>
+      <text id="pvText" x="130" y="200" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'quarter-zip':
+    case 'crewneck':
+    case 'jacket': return `
+      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M100 52 Q114 40 130 38 Q146 40 160 52" stroke="${dk}" stroke-width="2" fill="none"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
+      <line x1="130" y1="52" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
+      <rect x="22" y="278" width="216" height="14" rx="2" fill="${dk}"/>
+      <path d="M80 60 Q130 46 180 60 Q156 70 130 68 Q104 70 80 60 Z" fill="rgba(255,255,255,.1)"/>
+      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="18" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+    case 'shorts': return `
+      <ellipse cx="130" cy="228" rx="68" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
+      <rect x="48" y="72" width="164" height="24" rx="4" fill="${g}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${g}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${hi}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${ss}"/>
+      <path d="M48 94 L38 215 Q75 232 115 218 L130 135 L145 218 Q185 232 222 215 L212 94 Z" fill="${bs}"/>
+      <line x1="130" y1="94" x2="130" y2="135" stroke="${sm}" stroke-width="1.5"/>
+      <rect x="78" y="100" width="40" height="26" rx="2" fill="rgba(0,0,0,.12)"/>
+      <rect x="142" y="100" width="40" height="26" rx="2" fill="rgba(0,0,0,.12)"/>
+      <text id="pvText" x="130" y="185" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.32)" text-anchor="middle" letter-spacing="3">TL</text>`;
+    case 'pants': return `
+      <ellipse cx="130" cy="308" rx="65" ry="6" fill="rgba(0,0,0,.45)" filter="url(#pvBlur)"/>
+      <rect x="58" y="58" width="144" height="22" rx="4" fill="${g}" opacity=".9"/>
+      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${g}"/>
+      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${g}"/>
+      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${hi}"/>
+      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${hi}"/>
+      <path d="M58 78 L45 300 L122 300 L130 118 Z" fill="${ss}"/>
+      <path d="M202 78 L215 300 L138 300 L130 118 Z" fill="${ss}"/>
+      <rect x="62" y="82" width="52" height="28" rx="2" fill="rgba(0,0,0,.12)"/>
+      <rect x="146" y="82" width="52" height="28" rx="2" fill="rgba(0,0,0,.12)"/>
+      <line x1="130" y1="78" x2="130" y2="118" stroke="${sm}" stroke-width="1.5"/>
+      <text id="pvText" x="80" y="200" font-family="'Bebas Neue',sans-serif" font-size="13" fill="rgba(0,0,0,.35)" text-anchor="middle" letter-spacing="2">TL</text>`;
+    case 'bra': return `
+      <ellipse cx="130" cy="175" rx="55" ry="5" fill="rgba(0,0,0,.4)" filter="url(#pvBlur)"/>
+      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${g}"/>
+      <path d="M88 55 Q80 38 72 48 L72 120 Q82 126 130 124 Q178 126 188 120 L188 48 Q180 38 172 55" stroke="${g}" stroke-width="4" fill="none"/>
+      <path d="M112 28 Q122 16 130 14 Q138 16 148 28 L148 55 Q138 48 130 46 Q122 48 112 55 Z" fill="${g}"/>
+      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${hi}"/>
+      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${ss}"/>
+      <text id="pvText" x="130" y="148" font-family="'Bebas Neue',sans-serif" font-size="11" fill="rgba(0,0,0,.32)" text-anchor="middle" letter-spacing="3">TAGLINE</text>`;
+    default: return `
+      <ellipse cx="130" cy="302" rx="68" ry="7" fill="rgba(0,0,0,.5)" filter="url(#pvBlur)"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${g}"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${g}" opacity=".85"/>
+      <path d="M100 52 Q114 40 130 38 Q146 40 160 52" stroke="${dk}" stroke-width="2" fill="none"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${hi}"/>
+      <path d="M62 52 L8 98 L28 148 L74 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M198 52 L252 98 L232 148 L186 112 Z" fill="${hi}" opacity=".7"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${ss}"/>
+      <path d="M62 52 L34 118 L22 292 L238 292 L226 118 L198 52 Z" fill="${bs}"/>
+      <line x1="130" y1="52" x2="130" y2="288" stroke="${sm}" stroke-width="1.5"/>
+      <path d="M80 60 Q130 46 180 60 Q156 70 130 68 Q104 70 80 60 Z" fill="rgba(255,255,255,.1)"/>
+      <text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.38)" text-anchor="middle" letter-spacing="4">TAGLINE</text>`;
+  }
 }
 const COLOR_NAMES={
   'warm-tan':'Warm Tan','grey':'Grey','gray':'Grey','gray-1':'Grey','gray-2':'Grey',
@@ -1590,7 +1700,7 @@ function renderGarmentPicker(){
       <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
       <span class="g-opt-info">
         <span class="g-opt-name">${p.title}</span>
-        <span class="g-opt-price">$${p.price}</span>
+        <span class="g-opt-price">${p.price>0?'$'+p.price:'Custom'}</span>
       </span>
     </button>
   `).join('');
@@ -1616,6 +1726,11 @@ function selGarmentProduct(el,name,price){
   document.getElementById('ordJerseyName').style.display=isJersey?'block':'none';
 }
 let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
+let curSide='front';
+const sideState={
+  front:{hasLogo:false,logoSrc:null,placeIdx:4,text:'',font:"'Bebas Neue',sans-serif"},
+  back: {hasLogo:false,logoSrc:null,placeIdx:4,text:'',font:"'Bebas Neue',sans-serif"}
+};
 const pvPos=[
   {x:'78',y:'112'},{x:'130',y:'100'},{x:'182',y:'112'},
   {x:'82',y:'162'},{x:'130',y:'188'},{x:'178',y:'162'},
@@ -1627,6 +1742,30 @@ const lPos=[
   {left:'31%',top:'76%'},{left:'50%',top:'81%'},{left:'69%',top:'76%'}
 ];
 let curPlaceIdx=4;
+function selSide(side,btn){
+  const st=sideState[curSide];
+  st.hasLogo=hasLogo;st.placeIdx=curPlaceIdx;
+  st.text=document.getElementById('customTextIn').value;
+  const pvT=document.getElementById('pvText');
+  if(pvT)st.font=pvT.style.fontFamily||"'Bebas Neue',sans-serif";
+  curSide=side;
+  document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sideLabel').textContent=side==='front'?'Front View':'Back View';
+  const ns=sideState[side];
+  hasLogo=ns.hasLogo;curPlaceIdx=ns.placeIdx;
+  document.querySelectorAll('.p-btn').forEach((b,i)=>b.classList.toggle('active',i===curPlaceIdx));
+  const textIn=document.getElementById('customTextIn');
+  textIn.value=ns.text;
+  updateGarmentSVG(curGarment);
+  const pvT2=document.getElementById('pvText');
+  if(pvT2){pvT2.textContent=ns.text||'TAGLINE';pvT2.style.fontFamily=ns.font;
+    const pos=pvPos[curPlaceIdx];pvT2.setAttribute('x',pos.x);pvT2.setAttribute('y',pos.y);}
+  const logo=document.getElementById('logoOverlay');
+  if(ns.hasLogo&&ns.logoSrc){logo.src=ns.logoSrc;logo.style.display='block';
+    const lp=lPos[curPlaceIdx];logo.style.left=lp.left;logo.style.top=lp.top;}
+  else{logo.style.display='none';}
+}
 
 function selGarment(el,name){
   document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
@@ -1651,6 +1790,7 @@ function selColor(el,name,c1,c2){
 function selPlace(el,idx){
   document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');curPlaceIdx=idx;
+  sideState[curSide].placeIdx=idx;
   const p=pvPos[idx];
   document.getElementById('pvText').setAttribute('x',p.x);
   document.getElementById('pvText').setAttribute('y',p.y);
@@ -1659,12 +1799,15 @@ function selPlace(el,idx){
 }
 function updateText(val){
   hasText=val.trim().length>0;
+  sideState[curSide].text=val;
   document.getElementById('pvText').textContent=val.trim()||'TAGLINE';
 }
 function selFont(el,font){
   document.querySelectorAll('.f-opt').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('pvText').style.fontFamily=`'${font}',sans-serif`;
+  const ff=`'${font}',sans-serif`;
+  sideState[curSide].font=ff;
+  document.getElementById('pvText').style.fontFamily=ff;
 }
 function handleLogoUpload(input){
   const file=input.files[0];if(!file)return;
@@ -1676,6 +1819,8 @@ function handleLogoUpload(input){
     logo.src=e.target.result;logo.style.display='block';
     const lp=lPos[curPlaceIdx];logo.style.left=lp.left;logo.style.top=lp.top;
     hasLogo=true;
+    sideState[curSide].hasLogo=true;
+    sideState[curSide].logoSrc=e.target.result;
   };
   reader.readAsDataURL(file);
 }
