@@ -154,14 +154,18 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 /* ── VALUES ── */
 .values-sec{background:var(--space2);padding:100px 60px}
 .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.val-card{background:var(--card);border:1px solid var(--border-gold);padding:48px 36px;position:relative;overflow:hidden;transition:transform .3s,border-color .35s}
+.val-card{background:var(--card);border:1px solid var(--border-gold);padding:48px 36px;position:relative;overflow:hidden;transition:transform .3s,border-color .35s;display:flex;flex-direction:column}
 .val-card:hover{transform:translateY(-5px);border-color:rgba(224,32,32,.5)}
 .val-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .val-card:hover::after{transform:scaleX(1)}
 .val-icon{font-size:2.4rem;margin-bottom:18px;display:block}
 .val-word{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;letter-spacing:.06em;line-height:1;margin-bottom:16px;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.val-desc{font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:22px}
-.val-verse{font-family:'Cinzel',serif;font-size:.72rem;line-height:1.75;color:rgba(224,32,32,.55);border-left:2px solid rgba(224,32,32,.25);padding-left:14px}
+.val-desc{font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:18px}
+.val-topics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.val-topic{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45);padding:4px 10px}
+.val-cta{display:inline-flex;align-items:center;gap:8px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(195,149,60,.9);text-decoration:none;font-weight:700;margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);transition:gap .2s,color .2s}
+.val-cta:hover{gap:14px;color:#E8B84B}
+.val-verse{font-family:'Cinzel',serif;font-size:.72rem;line-height:1.75;color:rgba(224,32,32,.55);border-left:2px solid rgba(224,32,32,.25);padding-left:14px;margin-bottom:0}
 @media(max-width:900px){.values-grid{grid-template-columns:1fr};.values-sec{padding:70px 24px}}
 @media(max-width:768px){.values-sec{padding:70px 20px}}
 
@@ -621,19 +625,43 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
       <span class="val-icon">✝️</span>
       <a href="god.html" class="val-word" style="display:block;text-decoration:none;cursor:pointer">GOD</a>
       <p class="val-desc">Faith is your foundation. Every rep, every stride, every grind — do it for His glory. When you wear Tagline, you carry a reminder that your strength comes from something greater than yourself.</p>
+      <div class="val-topics">
+        <span class="val-topic">Daily Verse</span>
+        <span class="val-topic">Scripture</span>
+        <span class="val-topic">Faith & Purpose</span>
+      </div>
       <p class="val-verse">"Whether you eat or drink, or whatever you do, do all to the glory of God." — 1 Corinthians 10:31</p>
+      <a href="god.html" class="val-cta">Explore Faith Hub →</a>
     </div>
     <div class="val-card reveal" style="transition-delay:.1s">
       <span class="val-icon">⚡</span>
       <a href="health.html" class="val-word" style="display:block;text-decoration:none;cursor:pointer">HEALTH</a>
       <p class="val-desc">Your body is a temple. Train it like one. Push harder, recover smarter, and treat every workout as an act of stewardship over what God gave you. No excuses — just excellence.</p>
+      <div class="val-topics">
+        <span class="val-topic">Bulk Program</span>
+        <span class="val-topic">Cali Program</span>
+        <span class="val-topic">Nutrition Guide</span>
+        <span class="val-topic">Macro Tips</span>
+        <span class="val-topic">Daily Health Fact</span>
+        <span class="val-topic">Food of the Day</span>
+      </div>
       <p class="val-verse">"Do you not know that your body is a temple of the Holy Spirit within you?" — 1 Corinthians 6:19</p>
+      <a href="health.html" class="val-cta">Explore Health Hub →</a>
     </div>
     <div class="val-card reveal" style="transition-delay:.2s">
       <span class="val-icon">🚀</span>
       <a href="wealth.html" class="val-word" style="display:block;text-decoration:none;cursor:pointer">WEALTH</a>
       <p class="val-desc">Abundance is a blessing, not a sin. Chase financial freedom with integrity, purpose, and relentless faith. Build generational wealth. Give generously. Stack blessings, not just bags.</p>
+      <div class="val-topics">
+        <span class="val-topic">Investing Basics</span>
+        <span class="val-topic">Budgeting</span>
+        <span class="val-topic">Passive Income</span>
+        <span class="val-topic">Mindset</span>
+        <span class="val-topic">Daily Wealth Tip</span>
+        <span class="val-topic">Rule of 72</span>
+      </div>
       <p class="val-verse">"The blessing of the LORD makes rich, and he adds no sorrow with it." — Proverbs 10:22</p>
+      <a href="wealth.html" class="val-cta">Explore Wealth Hub →</a>
     </div>
   </div>
 </section>
