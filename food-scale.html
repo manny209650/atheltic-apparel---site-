@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Food Scale ⚖️ — Tagline Health</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --green:#00e676;--red:#ff1744;--gold:#ffd600;
+  --bg:#07081a;--card:#0f1030;--border:rgba(255,255,255,.08);
+}
+body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:100vh;overflow-x:hidden}
+
+/* ── BACK LINK ── */
+.back-bar{padding:18px 24px;background:rgba(0,0,0,.4);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.back-bar a{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.back-bar a:hover{color:#fff}
+.back-bar span{color:rgba(255,255,255,.2)}
+
+/* ── HEADER ── */
+.hero{text-align:center;padding:48px 24px 36px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -20%,rgba(0,230,118,.08) 0%,transparent 60%)}
+.hero-title{font-family:'Fredoka One',cursive;font-size:clamp(2.4rem,7vw,4rem);letter-spacing:.04em;line-height:1;margin-bottom:8px;background:linear-gradient(135deg,#00e676,#ffd600,#ff6d00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1rem;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.04em}
+.hero-emoji{font-size:2.8rem;display:block;margin-bottom:12px;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ── SEARCH ── */
+.search-wrap{max-width:540px;margin:0 auto 48px;padding:0 20px;position:relative}
+.search-box{display:flex;gap:0;border:2px solid rgba(255,255,255,.15);border-radius:50px;overflow:hidden;background:rgba(255,255,255,.05);transition:border-color .3s}
+.search-box:focus-within{border-color:var(--green)}
+.search-input{flex:1;background:none;border:none;outline:none;color:#fff;font-size:1.1rem;font-family:'Nunito',sans-serif;font-weight:700;padding:16px 24px;placeholder-color:rgba(255,255,255,.3)}
+.search-input::placeholder{color:rgba(255,255,255,.3)}
+.search-btn{background:linear-gradient(135deg,#00e676,#00bfa5);border:none;color:#000;font-family:'Fredoka One',cursive;font-size:1rem;padding:0 28px;cursor:pointer;border-radius:0 50px 50px 0;white-space:nowrap;transition:opacity .2s}
+.search-btn:hover{opacity:.85}
+.suggestions{position:absolute;top:calc(100% + 6px);left:20px;right:20px;background:#1a1b3e;border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;z-index:100;display:none}
+.sug-item{padding:12px 20px;cursor:pointer;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:12px;transition:background .15s}
+.sug-item:hover,.sug-item.active{background:rgba(255,255,255,.07)}
+.sug-emoji{font-size:1.3rem;width:28px;text-align:center}
+
+/* ── SCALE VISUAL ── */
+.scale-section{max-width:700px;margin:0 auto;padding:0 20px 40px;text-align:center}
+.scale-wrap{position:relative;height:280px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:24px}
+
+/* fulcrum */
+.fulcrum{position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:2}
+.fulcrum-tri{width:0;height:0;border-left:28px solid transparent;border-right:28px solid transparent;border-bottom:52px solid #2a2b50;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5))}
+.fulcrum-base{width:80px;height:10px;background:#2a2b50;border-radius:4px}
+
+/* beam */
+.beam-wrap{position:absolute;bottom:62px;left:0;right:0;display:flex;justify-content:center}
+.beam{width:480px;max-width:calc(100vw - 48px);height:10px;background:linear-gradient(90deg,#2a2b50,#3a3b70,#2a2b50);border-radius:5px;position:relative;transform-origin:center center;transition:transform .9s cubic-bezier(.34,1.56,.64,1);box-shadow:0 4px 16px rgba(0,0,0,.4)}
+
+/* plates */
+.plate{position:absolute;top:-10px;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform .9s cubic-bezier(.34,1.56,.64,1)}
+.plate-left{left:-4px;transform:translateX(-50%)}
+.plate-right{right:-4px;transform:translateX(50%)}
+.plate-string{width:2px;height:36px;background:rgba(255,255,255,.25);border-radius:1px}
+.plate-dish{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.2rem;border:3px solid;transition:background .4s,border-color .4s,transform .9s cubic-bezier(.34,1.56,.64,1);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.plate-left .plate-dish{background:rgba(0,230,118,.1);border-color:rgba(0,230,118,.3)}
+.plate-right .plate-dish{background:rgba(255,23,68,.1);border-color:rgba(255,23,68,.3)}
+.plate-label{font-family:'Fredoka One',cursive;font-size:.75rem;letter-spacing:.1em;opacity:.6;white-space:nowrap}
+.plate-left .plate-label{color:var(--green)}
+.plate-right .plate-label{color:var(--red)}
+.plate-score{font-family:'Fredoka One',cursive;font-size:1.6rem;min-height:32px;transition:color .4s}
+.plate-left .plate-score{color:var(--green)}
+.plate-right .plate-score{color:var(--red)}
+
+/* idle animation */
+.beam.idle{animation:idleRock 4s ease-in-out infinite}
+@keyframes idleRock{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+
+/* ── RESULT CARDS ── */
+.result-wrap{display:none;max-width:700px;margin:0 auto 32px;padding:0 20px}
+.result-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.result-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;transition:border-color .4s}
+.result-card.reward-card{border-top:3px solid var(--green)}
+.result-card.risk-card{border-top:3px solid var(--red)}
+.rc-header{font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.reward-card .rc-header{color:var(--green)}
+.risk-card .rc-header{color:var(--red)}
+.rc-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.rc-list li{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:8px;line-height:1.3}
+.rc-list li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.reward-card .rc-list li::before{background:var(--green)}
+.risk-card .rc-list li::before{background:var(--red)}
+
+/* ── VERDICT ── */
+.verdict-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;text-align:center}
+.verdict-emoji{font-size:3rem;display:block;margin-bottom:10px;animation:pop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.verdict-label{font-family:'Fredoka One',cursive;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.verdict-text{font-size:.95rem;font-weight:700;color:rgba(255,255,255,.7);line-height:1.5}
+
+/* ── STREAK ── */
+.streak-bar{text-align:center;padding:16px;font-family:'Fredoka One',cursive;font-size:1rem;color:rgba(255,255,255,.35);letter-spacing:.06em}
+.streak-bar span{color:var(--gold)}
+
+/* ── EMPTY STATE ── */
+.empty-state{max-width:460px;margin:0 auto;padding:40px 24px;text-align:center;opacity:.5}
+.empty-emoji{font-size:4rem;display:block;margin-bottom:16px}
+.empty-text{font-family:'Fredoka One',cursive;font-size:1.1rem;color:rgba(255,255,255,.5);line-height:1.6}
+
+/* ── RECENT ── */
+.recent-wrap{max-width:700px;margin:0 auto 60px;padding:0 20px}
+.recent-title{font-family:'Fredoka One',cursive;font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px}
+.recent-chips{display:flex;flex-wrap:wrap;gap:8px}
+.recent-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:7px 16px;font-size:.82rem;font-weight:800;cursor:pointer;transition:background .2s;display:flex;align-items:center;gap:6px}
+.recent-chip:hover{background:rgba(255,255,255,.12)}
+
+@media(max-width:520px){
+  .result-cards{grid-template-columns:1fr}
+  .beam{width:320px}
+  .plate-dish{width:58px;height:58px;font-size:1.7rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Back -->
+<div class="back-bar">
+  <a href="health.html">← Health Hub</a>
+  <span>/</span>
+  <a href="index.html">Home</a>
+</div>
+
+<!-- Header -->
+<div class="hero">
+  <span class="hero-emoji">⚖️</span>
+  <h1 class="hero-title">The Food Scale</h1>
+  <p class="hero-sub">Is your food a superhero or a villain? 🦸‍♂️🦹</p>
+</div>
+
+<!-- Search -->
+<div class="search-wrap">
+  <div class="search-box">
+    <input class="search-input" id="foodInput" type="text" placeholder="Type a food... 🍎🍔🥦" autocomplete="off">
+    <button class="search-btn" onclick="analyze()">Check It! 🔍</button>
+  </div>
+  <div class="suggestions" id="suggestions"></div>
+</div>
+
+<!-- Scale -->
+<div class="scale-section">
+  <div class="scale-wrap">
+    <!-- Beam -->
+    <div class="beam-wrap">
+      <div class="beam idle" id="beam">
+        <!-- Left plate: POWERS UP -->
+        <div class="plate plate-left" id="plateLeft">
+          <div class="plate-string"></div>
+          <div class="plate-dish" id="plateLeftDish">💪</div>
+          <div class="plate-label">POWERS UP</div>
+          <div class="plate-score" id="scoreLeft">—</div>
+        </div>
+        <!-- Right plate: SLOWS DOWN -->
+        <div class="plate plate-right" id="plateRight">
+          <div class="plate-string"></div>
+          <div class="plate-dish" id="plateRightDish">⚡</div>
+          <div class="plate-label">SLOWS DOWN</div>
+          <div class="plate-score" id="scoreRight">—</div>
+        </div>
+      </div>
+    </div>
+    <!-- Fulcrum -->
+    <div class="fulcrum">
+      <div class="fulcrum-tri"></div>
+      <div class="fulcrum-base"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Empty state -->
+<div class="empty-state" id="emptyState">
+  <span class="empty-emoji">🔍</span>
+  <p class="empty-text">Search any food above to see if it's a <strong>superhero</strong> or a <strong>villain</strong>!</p>
+</div>
+
+<!-- Results -->
+<div class="result-wrap" id="resultWrap">
+  <div class="result-cards">
+    <div class="result-card reward-card">
+      <p class="rc-header">💪 Powers You Up</p>
+      <ul class="rc-list" id="rewardList"></ul>
+    </div>
+    <div class="result-card risk-card">
+      <p class="rc-header">⚠️ Watch Out For</p>
+      <ul class="rc-list" id="riskList"></ul>
+    </div>
+  </div>
+  <div class="verdict-box" id="verdictBox">
+    <span class="verdict-emoji" id="verdictEmoji"></span>
+    <p class="verdict-label" id="verdictLabel"></p>
+    <p class="verdict-text" id="verdictText"></p>
+  </div>
+</div>
+
+<!-- Streak -->
+<div class="streak-bar" id="streakBar">Foods checked today: <span id="streakCount">0</span> 🔥</div>
+
+<!-- Recent checks -->
+<div class="recent-wrap" id="recentWrap" style="display:none">
+  <p class="recent-title">Recently checked</p>
+  <div class="recent-chips" id="recentChips"></div>
+</div>
+
+<script>
+const FOODS = {
+  // ── Fruits
+  'apple':       {e:'🍎',r:8,k:2,rw:['Fiber','Vitamin C','Antioxidants','Low calorie'],rk:['Natural sugar'],v:'Superfood Hero! Eat one every day!',hero:true},
+  'banana':      {e:'🍌',r:7,k:3,rw:['Potassium','Quick energy','Vitamin B6'],rk:['High sugar','High carbs'],v:'Great pre-workout fuel!',hero:true},
+  'strawberry':  {e:'🍓',r:9,k:1,rw:['Vitamin C','Antioxidants','Low calorie','Fiber'],rk:['Very little!'],v:'One of the best snacks out there!',hero:true},
+  'blueberry':   {e:'🫐',r:10,k:1,rw:['Brain fuel','Antioxidants','Vitamin C','Memory boost'],rk:['Nothing really!'],v:'BRAIN SUPERFOOD. Eat daily!',hero:true},
+  'orange':      {e:'🍊',r:8,k:1,rw:['Vitamin C','Fiber','Immune boost'],rk:['Natural sugar'],v:'Your immune system loves this!',hero:true},
+  'mango':       {e:'🥭',r:7,k:4,rw:['Vitamin A','Vitamin C','Fiber'],rk:['High sugar','High carbs'],v:'Delicious — go easy on portions!',hero:true},
+  'watermelon':  {e:'🍉',r:7,k:2,rw:['Hydration','Lycopene','Vitamin A'],rk:['High sugar'],v:'Super hydrating! Perfect in summer.',hero:true},
+  'grapes':      {e:'🍇',r:6,k:4,rw:['Antioxidants','Vitamin C'],rk:['High sugar','Easy to overeat'],v:'Good in small handfuls.',hero:true},
+  'avocado':     {e:'🥑',r:9,k:1,rw:['Healthy fats','Fiber','Potassium','Folate'],rk:['High calories'],v:'Healthy fat champion!',hero:true},
+  'pineapple':   {e:'🍍',r:7,k:3,rw:['Vitamin C','Bromelain','Anti-inflammatory'],rk:['High sugar'],v:'Great for digestion!',hero:true},
+  'cherry':      {e:'🍒',r:8,k:2,rw:['Antioxidants','Anti-inflammatory','Helps sleep!'],rk:['Small — easy to overeat'],v:'Great for sleep and recovery!',hero:true},
+  'kiwi':        {e:'🥝',r:9,k:1,rw:['Vitamin C','Vitamin K','Fiber','Low calorie'],rk:['Very little!'],v:'Tiny but MIGHTY superfood!',hero:true},
+  'peach':       {e:'🍑',r:7,k:2,rw:['Vitamin C','Fiber','Low calorie'],rk:['Natural sugar'],v:'Solid healthy snack!',hero:true},
+  'lemon':       {e:'🍋',r:8,k:1,rw:['Vitamin C','Detox','Alkalizing'],rk:['Acidic on teeth'],v:'Squeeze in your water every morning!',hero:true},
+
+  // ── Vegetables
+  'broccoli':    {e:'🥦',r:10,k:1,rw:['Vitamin C','Fiber','Protein','Anti-cancer','Calcium'],rk:['Nothing!'],v:'SUPERHERO VEGGIE. Eat it every day!',hero:true},
+  'spinach':     {e:'🥬',r:10,k:1,rw:['Iron','Vitamin K','Calcium','Protein'],rk:['Nothing!'],v:'Popeye was right. Spinach = STRENGTH!',hero:true},
+  'kale':        {e:'🥬',r:10,k:1,rw:['Vitamin K','Vitamin C','Iron','Antioxidants'],rk:['Nothing!'],v:'King of greens. Seriously powerful!',hero:true},
+  'carrot':      {e:'🥕',r:9,k:1,rw:['Vitamin A','Eye health','Fiber','Low calorie'],rk:['Slightly sweet'],v:'Great for your eyes and skin!',hero:true},
+  'tomato':      {e:'🍅',r:8,k:1,rw:['Lycopene','Vitamin C','Anti-cancer'],rk:['Slightly acidic'],v:'Eat them raw for max benefit!',hero:true},
+  'sweet potato':{e:'🍠',r:8,k:2,rw:['Vitamin A','Fiber','Potassium'],rk:['High carbs'],v:'Best carb for athletes!',hero:true},
+  'cucumber':    {e:'🥒',r:7,k:1,rw:['Hydration','Low calorie','Vitamin K'],rk:['Not many nutrients'],v:'Great hydrating snack!',hero:true},
+  'corn':        {e:'🌽',r:5,k:5,rw:['Fiber','Vitamin B','Energy'],rk:['High starch','Spikes blood sugar'],v:'Better than fries but go easy!'},
+  'celery':      {e:'🥬',r:6,k:1,rw:['Low calorie','Hydration','Fiber'],rk:['Few nutrients'],v:'Add peanut butter — great combo!',hero:true},
+  'garlic':      {e:'🧄',r:9,k:1,rw:['Immune boost','Anti-bacterial','Heart health'],rk:["Strong smell 😅"],v:"Nature's medicine. Use it daily!",hero:true},
+  'onion':       {e:'🧅',r:8,k:1,rw:['Antioxidants','Anti-inflammatory','Vitamin C'],rk:['Can cause bad breath'],v:'Underrated superfood!',hero:true},
+
+  // ── Proteins
+  'chicken':     {e:'🍗',r:9,k:2,rw:['High protein','Low fat','B vitamins','Muscle building'],rk:['Depends on how it\'s cooked'],v:'The ultimate lean protein!',hero:true},
+  'salmon':      {e:'🐟',r:10,k:1,rw:['Omega-3','Protein','Brain health','Heart health'],rk:['Pricey!'],v:'Best fish you can eat. 2x per week!',hero:true},
+  'tuna':        {e:'🐟',r:8,k:3,rw:['High protein','Omega-3','Low fat'],rk:['Mercury','Sodium in canned'],v:'Great lean protein — 2x/week max.',hero:true},
+  'eggs':        {e:'🥚',r:9,k:2,rw:['Complete protein','Vitamin D','Choline','B12'],rk:['Yolk has cholesterol'],v:"Nature's most perfect food!",hero:true},
+  'beef':        {e:'🥩',r:6,k:5,rw:['Iron','Zinc','B12','Protein'],rk:['Saturated fat','High calories'],v:'Eat lean cuts — not too often.'},
+  'turkey':      {e:'🦃',r:8,k:2,rw:['Lean protein','Selenium','B vitamins'],rk:['Deli turkey is high sodium'],v:'Great lean protein choice!',hero:true},
+  'shrimp':      {e:'🍤',r:7,k:3,rw:['Low calorie','Protein','Iodine'],rk:['Cholesterol','Depends on prep'],v:'Good protein — watch the butter sauce!',hero:true},
+  'beans':       {e:'🫘',r:9,k:1,rw:['Fiber','Plant protein','Iron','Folate'],rk:['Can cause gas 😅'],v:'Cheap superfood. Eat them more!',hero:true},
+  'lentils':     {e:'🫘',r:9,k:1,rw:['Protein','Fiber','Iron','Folate'],rk:['Can cause bloating'],v:'Incredible nutrition per dollar!',hero:true},
+
+  // ── Grains
+  'oatmeal':     {e:'🥣',r:9,k:1,rw:['Fiber','Slow carbs','Heart health','Keeps you full'],rk:['Avoid added sugar versions'],v:'Best breakfast for steady energy!',hero:true},
+  'brown rice':  {e:'🍚',r:7,k:2,rw:['Fiber','Magnesium','Whole grain'],rk:['Slightly high carbs'],v:'Way better than white rice!',hero:true},
+  'white rice':  {e:'🍚',r:4,k:5,rw:['Quick energy','Easy to digest'],rk:['Spikes blood sugar','Low fiber','Refined'],v:'OK once in a while — pick brown rice more.'},
+  'quinoa':      {e:'🌾',r:9,k:1,rw:['Complete protein','Fiber','All 9 amino acids'],rk:['More expensive'],v:'A rare plant food with complete protein!',hero:true},
+  'white bread': {e:'🍞',r:2,k:8,rw:['Quick energy'],rk:['Spikes blood sugar','No fiber','Empty calories'],v:'Villain in disguise. Switch to whole wheat!'},
+  'whole wheat bread':{e:'🍞',r:6,k:3,rw:['Fiber','B vitamins','Slower energy'],rk:['Still processed'],v:'Much better than white bread!',hero:true},
+  'pasta':       {e:'🍝',r:4,k:6,rw:['Energy','Some protein'],rk:['High carbs','Spikes blood sugar'],v:'Try whole wheat pasta — way better!'},
+
+  // ── Dairy
+  'milk':        {e:'🥛',r:7,k:3,rw:['Calcium','Vitamin D','Protein'],rk:['Saturated fat','Lactose'],v:'Great for growing bones!',hero:true},
+  'greek yogurt':{e:'🥛',r:9,k:1,rw:['Probiotics','Protein','Calcium','Gut health'],rk:['Watch sugary flavors'],v:'Plain greek yogurt = superfood!',hero:true},
+  'cheese':      {e:'🧀',r:5,k:5,rw:['Calcium','Protein','Vitamin B12'],rk:['Saturated fat','High sodium'],v:'Tasty but watch your portions!'},
+  'butter':      {e:'🧈',r:2,k:7,rw:['Fat-soluble vitamins'],rk:['Saturated fat','High calories'],v:'A tiny bit goes a long way!'},
+  'ice cream':   {e:'🍨',r:2,k:8,rw:['Calcium','Makes you happy!'],rk:['Sugar','Saturated fat','High calories'],v:'A happy villain! Treat — not daily.'},
+
+  // ── Junk Food
+  'pizza':       {e:'🍕',r:3,k:8,rw:['Calcium','Some protein'],rk:['High sodium','Saturated fat','Refined carbs'],v:'Sneaky villain! Enjoy rarely.'},
+  'burger':      {e:'🍔',r:3,k:9,rw:['Protein','Iron'],rk:['Saturated fat','High sodium','High calories'],v:'Classic villain. Treat yourself — not daily!'},
+  'hot dog':     {e:'🌭',r:1,k:9,rw:['Barely any'],rk:['Processed meat','Nitrates','High sodium'],v:'One of the worst processed meats. Avoid!'},
+  'french fries':{e:'🍟',r:2,k:9,rw:['Potassium (barely)'],rk:['Deep fried','High sodium','High calories','Trans fat'],v:'The sneakiest villain of them all!'},
+  'chips':       {e:'🥔',r:1,k:9,rw:['Nothing really'],rk:['Empty calories','High sodium','High fat','Addictive'],v:'Zero nutrition villain. Skip them!'},
+  'candy':       {e:'🍬',r:0,k:10,rw:['Quick energy (barely)'],rk:['Pure sugar','Cavities','Sugar crash','Zero nutrition'],v:'100% Sugar Villain! Rare treats only.'},
+  'soda':        {e:'🥤',r:0,k:10,rw:['Nothing'],rk:['Pure sugar','Destroys teeth','Harms bones','Addictive'],v:'LIQUID VILLAIN! Water always wins.'},
+  'cake':        {e:'🎂',r:1,k:9,rw:['Happy vibes! 🎉'],rk:['Sugar','Refined flour','Butter','Calories'],v:'One slice to celebrate — not the whole thing!'},
+  'cookies':     {e:'🍪',r:1,k:8,rw:['Mood boost!'],rk:['Sugar','Butter','Refined flour'],v:'Villainous but delicious. Everything in moderation!'},
+  'donut':       {e:'🍩',r:1,k:9,rw:['Quick energy'],rk:['Sugar','Deep fried','Trans fat','Empty calories'],v:'A delicious villain — not every day!'},
+  'chocolate':   {e:'🍫',r:5,k:5,rw:['Mood boost','Magnesium'],rk:['Sugar','Saturated fat'],v:'Dark chocolate (70%+) is actually healthy!'},
+  'dark chocolate':{e:'🍫',r:8,k:3,rw:['Antioxidants','Magnesium','Heart health','Mood boost'],rk:['Calories','Some sugar'],v:'The healthy treat! 1-2 squares daily.',hero:true},
+  'popcorn':     {e:'🍿',r:5,k:4,rw:['Fiber','Whole grain','Low calorie (plain)'],rk:['Movie butter = high fat & salt'],v:'Air-popped is great! Skip the butter.'},
+
+  // ── Nuts & Seeds
+  'almonds':     {e:'🌰',r:9,k:2,rw:['Healthy fats','Vitamin E','Protein','Magnesium'],rk:['High calories — small portions'],v:'Best nut snack! One handful a day.',hero:true},
+  'walnuts':     {e:'🌰',r:9,k:2,rw:['Omega-3','Brain health','Antioxidants'],rk:['High calories'],v:'Best nut for your BRAIN!',hero:true},
+  'peanut butter':{e:'🥜',r:7,k:4,rw:['Protein','Healthy fats','Magnesium'],rk:['High calories','Some brands add sugar'],v:'Natural PB with no added sugar is great!',hero:true},
+  'cashews':     {e:'🌰',r:7,k:3,rw:['Zinc','Magnesium','Healthy fats'],rk:['High calories'],v:'1 handful max — creamy and nutritious!',hero:true},
+  'chia seeds':  {e:'🌱',r:10,k:1,rw:['Omega-3','Fiber','Calcium','Complete protein'],rk:['Nothing really!'],v:'Tiny SUPERFOOD seeds! Add to anything.',hero:true},
+
+  // ── Drinks
+  'water':       {e:'💧',r:10,k:0,rw:['Hydration','Metabolism','Every body function!','Zero calories'],rk:['Nothing — it\'s water!'],v:'THE #1 SUPERFOOD. Drink 8 glasses daily!',hero:true},
+  'green tea':   {e:'🍵',r:9,k:1,rw:['Antioxidants','Metabolism boost','Brain health'],rk:['Caffeine (fine for adults)'],v:'One of the healthiest drinks on Earth!',hero:true},
+  'orange juice':{e:'🍊',r:5,k:5,rw:['Vitamin C','Folate'],rk:['High sugar','No fiber','Spikes blood sugar'],v:'Eat the orange — don\'t juice it!'},
+  'coffee':      {e:'☕',r:5,k:5,rw:['Antioxidants','Focus','Performance'],rk:['Caffeine addiction','Kids: avoid'],v:'Adults: 1-2 cups fine. Kids: skip it!'},
+  'energy drink':{e:'⚡',r:1,k:9,rw:['Short energy boost'],rk:['Dangerous caffeine','Heart risk','Addictive'],v:'VILLAIN DRINK. Especially bad for kids!'},
+
+  // ── Other
+  'olive oil':   {e:'🫒',r:9,k:2,rw:['Heart-healthy fats','Antioxidants','Anti-inflammatory'],rk:['High calories'],v:'Best cooking oil — use it daily!',hero:true},
+  'honey':       {e:'🍯',r:6,k:4,rw:['Antibacterial','Antioxidants','Soothing'],rk:['Still sugar'],v:'Better than table sugar — use a little!',hero:true},
+  'oats':        {e:'🥣',r:9,k:1,rw:['Fiber','Slow energy','Heart health'],rk:['Avoid sugary packets'],v:'Best breakfast for steady energy!',hero:true},
+};
+
+const KEYS = Object.keys(FOODS);
+let checked = 0;
+let recent = [];
+
+// ── SOUNDS ──
+const ctx = typeof AudioContext !== 'undefined' ? new AudioContext() : null;
+function playTone(freq, type='sine', dur=0.18, vol=0.18){
+  if(!ctx) return;
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.connect(g); g.connect(ctx.destination);
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(vol, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+dur);
+  o.start(); o.stop(ctx.currentTime+dur);
+}
+function playHappy(){
+  [523,659,784,1047].forEach((f,i)=>setTimeout(()=>playTone(f,'triangle',0.2,0.15),i*80));
+}
+function playVillain(){
+  [400,350,280,220].forEach((f,i)=>setTimeout(()=>playTone(f,'sawtooth',0.25,0.12),i*90));
+}
+function playNeutral(){
+  playTone(440,'sine',0.25,0.14);
+}
+
+// ── SEARCH ──
+const input = document.getElementById('foodInput');
+const sugBox = document.getElementById('suggestions');
+let sugIndex = -1;
+
+input.addEventListener('input', ()=>{
+  const q = input.value.trim().toLowerCase();
+  if(!q){ sugBox.style.display='none'; return; }
+  const matches = KEYS.filter(k=>k.startsWith(q) || k.includes(q)).slice(0,6);
+  if(!matches.length){ sugBox.style.display='none'; return; }
+  sugBox.innerHTML = matches.map(k=>`
+    <div class="sug-item" data-k="${k}">
+      <span class="sug-emoji">${FOODS[k].e}</span>
+      <span>${k.charAt(0).toUpperCase()+k.slice(1)}</span>
+    </div>`).join('');
+  sugBox.style.display='block';
+  sugIndex = -1;
+  sugBox.querySelectorAll('.sug-item').forEach(el=>{
+    el.addEventListener('click',()=>{ input.value=el.dataset.k; sugBox.style.display='none'; analyze(); });
+  });
+});
+
+input.addEventListener('keydown', e=>{
+  const items = sugBox.querySelectorAll('.sug-item');
+  if(e.key==='ArrowDown'){ sugIndex=Math.min(sugIndex+1,items.length-1); highlight(items); }
+  else if(e.key==='ArrowUp'){ sugIndex=Math.max(sugIndex-1,-1); highlight(items); }
+  else if(e.key==='Enter'){ e.preventDefault();
+    if(sugIndex>=0&&items[sugIndex]){ input.value=items[sugIndex].dataset.k; sugBox.style.display='none'; }
+    analyze(); }
+});
+function highlight(items){
+  items.forEach((el,i)=>el.classList.toggle('active',i===sugIndex));
+  if(sugIndex>=0) input.value=items[sugIndex].dataset.k;
+}
+document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) sugBox.style.display='none'; });
+
+// ── ANALYZE ──
+function analyze(){
+  const q = input.value.trim().toLowerCase();
+  const food = FOODS[q];
+  if(!food){ shake(); return; }
+
+  sugBox.style.display='none';
+  document.getElementById('emptyState').style.display='none';
+  document.getElementById('resultWrap').style.display='block';
+
+  // Score display
+  document.getElementById('scoreLeft').textContent = food.r+'/10';
+  document.getElementById('scoreRight').textContent = food.k+'/10';
+  document.getElementById('plateLeftDish').textContent = food.e;
+  document.getElementById('plateRightDish').textContent = food.e;
+
+  // Tilt beam: negative = reward wins (left down), positive = risk wins (right down)
+  const net = food.r - food.k;
+  const angle = -(net / 10) * 28;
+  const beam = document.getElementById('beam');
+  beam.classList.remove('idle');
+  beam.style.transform = `rotate(${angle}deg)`;
+
+  // Reward list
+  document.getElementById('rewardList').innerHTML = food.rw.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('riskList').innerHTML = food.rk.map(x=>`<li>${x}</li>`).join('');
+
+  // Verdict
+  let emoji, label;
+  if(food.r>=9){ emoji='🦸'; label='SUPERHERO FOOD!'; }
+  else if(food.r>=7){ emoji='⭐'; label='Pretty Great!'; }
+  else if(food.r>food.k){ emoji='👍'; label='More Good Than Bad'; }
+  else if(food.r===food.k){ emoji='⚖️'; label='It\'s Balanced'; }
+  else if(food.k>=9){ emoji='💀'; label='SUPER VILLAIN!'; }
+  else{ emoji='👿'; label='Sneaky Villain!'; }
+
+  const vEmoji = document.getElementById('verdictEmoji');
+  vEmoji.textContent = emoji;
+  vEmoji.style.animation='none'; vEmoji.offsetHeight; vEmoji.style.animation='';
+  document.getElementById('verdictLabel').textContent = label;
+  document.getElementById('verdictText').textContent = food.v;
+
+  // Color verdict box border
+  const vbox = document.getElementById('verdictBox');
+  vbox.style.borderTopColor = food.r>food.k ? 'var(--green)' : food.r===food.k ? '#ffd600' : 'var(--red)';
+  vbox.style.borderTopWidth = '3px';
+  vbox.style.borderTopStyle = 'solid';
+
+  // Sound
+  if(food.r>food.k) playHappy();
+  else if(food.r<food.k) playVillain();
+  else playNeutral();
+
+  // Streak
+  checked++;
+  document.getElementById('streakCount').textContent = checked;
+
+  // Recent
+  if(!recent.includes(q)) recent.unshift(q);
+  if(recent.length>8) recent.pop();
+  renderRecent();
+
+  input.value='';
+}
+
+function renderRecent(){
+  const wrap = document.getElementById('recentWrap');
+  const chips = document.getElementById('recentChips');
+  if(!recent.length){ wrap.style.display='none'; return; }
+  wrap.style.display='block';
+  chips.innerHTML = recent.map(k=>`
+    <div class="recent-chip" onclick="input.value='${k}';analyze()">
+      ${FOODS[k].e} ${k.charAt(0).toUpperCase()+k.slice(1)}
+    </div>`).join('');
+}
+
+function shake(){
+  input.style.animation='none';
+  input.style.borderColor='var(--red)';
+  setTimeout(()=>input.style.borderColor='',800);
+  playTone(200,'square',0.3,0.1);
+}
+</script>
+</body>
+</html>
