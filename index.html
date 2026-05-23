@@ -192,7 +192,36 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .prod-dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);flex-shrink:0}
 .prod-sizes{display:flex;gap:4px;padding:0 20px 14px;flex-wrap:wrap}
 .prod-size{font-size:.5rem;letter-spacing:.1em;color:var(--muted);border:1px solid rgba(255,255,255,.12);padding:2px 6px}
+.prod-quote-bar{padding:10px 20px 14px;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(224,32,32,.8)}
+/* ── TIP JAR ── */
+.tip-section{padding:60px 24px;border-top:1px solid rgba(255,255,255,.06);background:#07072A;text-align:center}
+.tip-inner{max-width:500px;margin:0 auto}
+.tip-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:#fff;margin-bottom:8px}
+.tip-sub{font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.tip-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.tip-btn{border:1px solid rgba(195,149,60,.4);background:rgba(195,149,60,.07);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;padding:14px 28px;cursor:pointer;transition:background .25s,border-color .25s;text-decoration:none;display:inline-block}
+.tip-btn:hover{background:rgba(195,149,60,.18);border-color:rgba(195,149,60,.8)}
+/* ── CUSTOM ORDER MODAL ── */
+.co-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.co-overlay.open{opacity:1;pointer-events:all}
+.co-modal{background:#0D0D25;border:1px solid rgba(195,149,60,.3);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;padding:36px 32px;position:relative}
+.co-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.4);font-size:1.4rem;cursor:pointer;line-height:1}
+.co-close:hover{color:#fff}
+.co-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em;color:#fff;margin-bottom:4px}
+.co-sub{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(195,149,60,.8);margin-bottom:24px}
+.co-field{margin-bottom:16px}
+.co-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.co-input,.co-select,.co-textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#fff;padding:11px 14px;font-size:.82rem;outline:none;font-family:inherit}
+.co-input:focus,.co-select:focus,.co-textarea:focus{border-color:rgba(195,149,60,.5)}
+.co-select option{background:#0D0D25}
+.co-textarea{resize:vertical;min-height:80px}
+.co-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.co-fee-note{background:rgba(224,32,32,.07);border:1px solid rgba(224,32,32,.2);padding:14px 16px;margin:20px 0;font-size:.74rem;color:rgba(255,255,255,.7);line-height:1.6}
+.co-fee-note strong{color:#fff}
+.co-submit{width:100%;background:linear-gradient(135deg,#C3953C,#E8B84B);color:#07072A;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.2em;padding:15px;border:none;cursor:pointer;margin-top:8px}
+.co-submit:hover{filter:brightness(1.1)}
 @media(max-width:1100px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.co-grid{grid-template-columns:1fr}.co-modal{padding:28px 20px}}
 @media(max-width:600px){.products-grid{grid-template-columns:1fr};.shop-sec{padding:70px 20px}}
 
 /* ── VERSE BANNER ── */
@@ -780,6 +809,100 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════ TIP JAR -->
+<section class="tip-section">
+  <div class="tip-inner">
+    <p class="tip-title">Support the Brand</p>
+    <p class="tip-sub">The verse, the health facts, the wealth tips — all free, every day.<br>If it's adding value to your life, send some love. Every bit fuels the mission.</p>
+    <div class="tip-btns">
+      <a class="tip-btn" href="STRIPE_TIP_5" target="_blank">☕ $5</a>
+      <a class="tip-btn" href="STRIPE_TIP_10" target="_blank">🙏 $10</a>
+      <a class="tip-btn" href="STRIPE_TIP_25" target="_blank">💛 $25</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CUSTOM ORDER MODAL -->
+<div class="co-overlay" id="co-overlay" onclick="if(event.target===this)closeCustomOrder()">
+  <div class="co-modal">
+    <button class="co-close" onclick="closeCustomOrder()">✕</button>
+    <p class="co-title">Lock Your Custom Order</p>
+    <p class="co-sub" id="co-product-name">Custom Order</p>
+    <form onsubmit="submitCustomOrder(event)">
+      <input type="hidden" name="co_product" id="co-product-hidden">
+      <div class="co-grid">
+        <div class="co-field">
+          <label class="co-label">Your Name</label>
+          <input class="co-input" name="co_name" required placeholder="First & Last">
+        </div>
+        <div class="co-field">
+          <label class="co-label">Phone</label>
+          <input class="co-input" name="co_phone" placeholder="Optional">
+        </div>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Email</label>
+        <input class="co-input" type="email" name="co_email" required placeholder="your@email.com">
+      </div>
+      <div class="co-grid">
+        <div class="co-field">
+          <label class="co-label">Quantity</label>
+          <input class="co-input" name="co_qty" required placeholder="e.g. 10 jerseys">
+        </div>
+        <div class="co-field">
+          <label class="co-label">Sizes Needed</label>
+          <input class="co-input" name="co_sizes" placeholder="e.g. 3S 4M 3L">
+        </div>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Colors</label>
+        <input class="co-input" name="co_colors" placeholder="e.g. Black body, red sleeves, white text">
+      </div>
+      <div class="co-grid">
+        <div class="co-field">
+          <label class="co-label">Decoration Type</label>
+          <select class="co-select" name="co_deco">
+            <option value="">Select...</option>
+            <option>Embroidery</option>
+            <option>Heat Press</option>
+            <option>Sublimation</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+        <div class="co-field">
+          <label class="co-label">Number of Logos</label>
+          <select class="co-select" name="co_logos">
+            <option value="">Select...</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4+</option>
+          </select>
+        </div>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Logo Size(s)</label>
+        <select class="co-select" name="co_logo_size">
+          <option value="">Select...</option>
+          <option>Small (pocket size)</option>
+          <option>Medium (chest size)</option>
+          <option>Large (full chest / back)</option>
+          <option>Across chest shoulder to shoulder</option>
+          <option>Mix of sizes</option>
+        </select>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Additional Notes</label>
+        <textarea class="co-textarea" name="co_notes" placeholder="Anything else — player names, numbers, specific placements, reference images, etc."></textarea>
+      </div>
+      <div class="co-fee-note">
+        <strong>$5 Order Lock Fee</strong> — This reserves your spot and confirms your request is real. After submitting, you'll be redirected to pay $5 via Stripe. Your custom quote will be sent to your email within 24 hours. The $5 goes toward your final order.
+      </div>
+      <button class="co-submit" type="submit">Lock My Order & Pay $5 →</button>
+    </form>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════ DAILY CONTENT -->
 <section class="dc-outer" style="background:#07072A">
   <div style="max-width:960px;margin:0 auto;padding:0 24px" data-daily="verse,health,wealth"></div>
@@ -1137,11 +1260,12 @@ function renderShop(filter='all'){
           <p class="prod-name">${p.title}</p>
           <p class="prod-cat">${p.desc}</p>
         </div>
-        <p class="prod-price">$${p.price}</p>
+        ${p.badge==='Custom' ? `<p class="prod-price" style="font-size:.9rem">$5 LOCK · QUOTE</p>` : `<p class="prod-price">$${p.price}</p>`}
       </div>
       <div class="prod-dots">
         ${p.colors.map(c=>`<span class="prod-dot" style="background:${gc(c)}" title="${c.replace(/-/g,' ')}"></span>`).join('')}
       </div>
+      ${p.badge==='Custom' ? `<p class="prod-quote-bar">Price varies · Embroidery · Heat Press · Sublimation</p>` : ''}
       ${p.sizes ? `<div class="prod-sizes">${p.sizes.map(s=>`<span class="prod-size">${s}</span>`).join('')}</div>` : ''}
     </div>
   `).join('');
@@ -1161,6 +1285,8 @@ function filterShop(cat, btn){
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
 }
 
+const STRIPE_TIP={'5':'STRIPE_TIP_5','10':'STRIPE_TIP_10','25':'STRIPE_TIP_25'};
+const STRIPE_CUSTOM_LOCK='STRIPE_CUSTOM_5';
 const STRIPE_LINKS={
   'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00',
   '3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01',
@@ -1178,8 +1304,52 @@ const STRIPE_LINKS={
   'boxe-tees':'https://buy.stripe.com/3cIaEXgk0eamh0j6cdasg0e',
 };
 function viewProduct(handle){
+  const p = PRODUCTS.find(x=>x.handle===handle);
+  if(p && p.badge==='Custom'){ openCustomOrder(p); return; }
   if(STRIPE_LINKS[handle]) window.open(STRIPE_LINKS[handle],'_blank');
   else window.open(`${STORE_URL}/products/${handle}`,'_blank');
+}
+
+function openCustomOrder(p){
+  const title = p ? p.title : 'Custom Order';
+  document.getElementById('co-product-name').textContent = title;
+  document.getElementById('co-product-hidden').value = title;
+  document.getElementById('co-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCustomOrder(){
+  document.getElementById('co-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function submitCustomOrder(e){
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    product: form.co_product.value,
+    name: form.co_name.value,
+    email: form.co_email.value,
+    phone: form.co_phone.value,
+    quantity: form.co_qty.value,
+    sizes: form.co_sizes.value,
+    colors: form.co_colors.value,
+    decoration: form.co_deco.value,
+    logos: form.co_logos.value,
+    logo_size: form.co_logo_size.value,
+    notes: form.co_notes.value,
+    _subject: 'New Custom Order Request — ' + form.co_product.value
+  };
+  fetch('https://formspree.io/f/mredlzrv',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify(data)
+  }).then(()=>{
+    if(STRIPE_CUSTOM_LOCK && STRIPE_CUSTOM_LOCK!=='STRIPE_CUSTOM_5'){
+      window.open(STRIPE_CUSTOM_LOCK,'_blank');
+    }
+    form.innerHTML='<p style="text-align:center;padding:40px 0;color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.8">Order locked! ✅<br><span style="color:rgba(195,149,60,.8);font-size:.75rem;letter-spacing:.1em">Complete the $5 payment in the new tab.<br>We\'ll send your custom quote within 24 hours.</span></p>';
+  }).catch(()=>{
+    alert('Something went wrong. Please try again.');
+  });
 }
 
 /* ── CURSOR ── */
