@@ -903,7 +903,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 </section>
 
 <!-- ═══════════════════════════════════════════ PRODUCT DETAIL MODAL -->
-<div class="pdp-overlay" id="pdpOverlay" onclick="if(event.target===this)closePDP()">
+<div class="pdp-overlay" id="pdpOverlay" style="display:none" onclick="if(event.target===this)closePDP()">
   <div class="pdp-modal" id="pdpModal">
     <button class="pdp-close" onclick="closePDP()">&#x2715;</button>
 
@@ -1068,11 +1068,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 </footer>
 
 <script>
-/* ─────────────────────────────────────────
-   SHOP PRODUCTS — sourced from Shopify CSV
-   Update STORE_URL to your Shopify domain
-───────────────────────────────────────── */
-const STORE_URL = 'https://taglineapparel.myshopify.com'; // ← update with your store URL
+/* ── SHOP PRODUCTS ── */
 
 const CM = {
   'warm-tan':'#C4A882','grey':'#888','gray':'#888','gray-1':'#777','gray-2':'#999','dark-gray':'#444',
@@ -1423,69 +1419,74 @@ function viewProduct(handle){
 function openPDP(p){
   pdpHandle = p.handle;
 
+  var ov = document.getElementById('pdpOverlay');
   document.getElementById('pdpImg').src = p.img;
   document.getElementById('pdpImg').alt = p.title;
   document.getElementById('pdpTitle').textContent = p.title;
   document.getElementById('pdpDesc').textContent = p.desc;
-
-  // Price
   document.getElementById('pdpPrice').textContent = p.price > 0 ? '$'+p.price : '';
 
-  // Eyebrow = first non-'all' category
-  const cat = (p.cats||[]).find(c=>c!=='all') || '';
+  var cat = (p.cats||[]).find(function(c){return c!=='all';}) || '';
   document.getElementById('pdpEyebrow').textContent = cat.replace(/-/g,' ');
 
-  // Badge
-  const badge = document.getElementById('pdpImgBadge');
-  if(p.badge){ badge.textContent=p.badge; badge.className='pdp-img-badge badge '+badgeClass(p.badge); badge.style.display=''; }
-  else badge.style.display='none';
+  var badge = document.getElementById('pdpImgBadge');
+  if(p.badge){ badge.textContent=p.badge; badge.className='pdp-img-badge badge '+badgeClass(p.badge); badge.style.display='block'; }
+  else { badge.style.display='none'; }
 
-  // Colors
-  const swatchWrap = document.getElementById('pdpSwatches');
+  var swatchWrap = document.getElementById('pdpSwatches');
   if(p.colors && p.colors.length){
-    swatchWrap.innerHTML = p.colors.map(c=>`<span class="pdp-swatch" style="background:${gc(c)}" data-c="${c}" title="${c.replace(/-/g,' ')}" onclick="pdpPickColor(this)"></span>`).join('');
-    document.getElementById('pdpColorsField').style.display='';
+    swatchWrap.innerHTML = p.colors.map(function(c){
+      return '<span class="pdp-swatch" style="background:'+gc(c)+'" data-c="'+c+'" title="'+c.replace(/-/g,' ')+'" onclick="pdpPickColor(this)"></span>';
+    }).join('');
+    document.getElementById('pdpColorsField').style.display='block';
     pdpPickColor(swatchWrap.firstChild);
   } else {
     document.getElementById('pdpColorsField').style.display='none';
   }
 
-  // Sizes
-  const sizeWrap = document.getElementById('pdpSizes');
+  var sizeWrap = document.getElementById('pdpSizes');
   if(p.sizes && p.sizes.length){
-    sizeWrap.innerHTML = p.sizes.map(s=>`<span class="pdp-sz" data-s="${s}" onclick="pdpPickSize(this)">${s}</span>`).join('');
-    document.getElementById('pdpSizesField').style.display='';
+    sizeWrap.innerHTML = p.sizes.map(function(s){
+      return '<span class="pdp-sz" data-s="'+s+'" onclick="pdpPickSize(this)">'+s+'</span>';
+    }).join('');
+    document.getElementById('pdpSizesField').style.display='block';
     pdpPickSize(sizeWrap.firstChild);
   } else {
     document.getElementById('pdpSizesField').style.display='none';
   }
 
-  document.getElementById('pdpOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  ov.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
 }
 
 function pdpPickColor(el){
-  document.querySelectorAll('.pdp-swatch').forEach(s=>s.classList.remove('sel'));
+  var all = document.querySelectorAll('.pdp-swatch');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('sel');
   el.classList.add('sel');
-  document.getElementById('pdpColorName').textContent = el.dataset.c.replace(/-/g,' ');
+  document.getElementById('pdpColorName').textContent = el.getAttribute('data-c').replace(/-/g,' ');
 }
 
 function pdpPickSize(el){
-  document.querySelectorAll('.pdp-sz').forEach(s=>s.classList.remove('sel'));
+  var all = document.querySelectorAll('.pdp-sz');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('sel');
   el.classList.add('sel');
-  document.getElementById('pdpSizeName').textContent = el.dataset.s;
+  document.getElementById('pdpSizeName').textContent = el.getAttribute('data-s');
 }
 
 function closePDP(){
-  document.getElementById('pdpOverlay').classList.remove('open');
-  document.body.style.overflow='';
-  pdpHandle=null;
+  document.getElementById('pdpOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.width = '';
+  pdpHandle = null;
 }
 
 function pdpBuyNow(){
   if(!pdpHandle) return;
   if(STRIPE_LINKS[pdpHandle]) window.open(STRIPE_LINKS[pdpHandle],'_blank');
-  else window.open(STORE_URL+'/products/'+pdpHandle,'_blank');
+  else alert('Stripe checkout coming soon for this product!');
 }
 
 function openCustomOrder(p){
