@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Truth About American Food — Tagline Apparel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --red:#E02020;--red-bright:#FF3333;--red-dark:#AA0000;
+  --red-grad:linear-gradient(135deg,#FF3333 0%,#E02020 50%,#AA0000 100%);
+  --space:#06060F;--space2:#0C0C1E;--space3:#111126;
+  --card:#0D0D25;--text:#DDE0F0;--muted:#8A8AAA;--white:#FFFFFF;
+  --border:rgba(224,32,32,0.18);
+}
+body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.7}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,15,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
+.nav-logo span{background:var(--red-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.back-btn{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--muted);text-decoration:none;border:1px solid rgba(255,255,255,.12);padding:9px 22px;transition:all .3s}
+.back-btn:hover{color:var(--white);border-color:var(--red)}
+
+.page-hero{min-height:52vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 40px 70px;background:radial-gradient(ellipse at 50% 0%,#1A0000 0%,#060610 55%,#020208 100%);position:relative;overflow:hidden}
+.hero-label{font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--red);margin-bottom:18px;display:block}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7.5rem);line-height:.9;letter-spacing:.06em;background:var(--red-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px}
+.hero-sub{font-family:'Cinzel',serif;font-size:clamp(.82rem,1.5vw,1rem);color:var(--muted);letter-spacing:.12em;max-width:580px;margin:0 auto}
+
+.content-sec{max-width:960px;margin:0 auto;padding:90px 40px}
+.section-label{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:12px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);letter-spacing:.06em;color:var(--white);margin-bottom:36px}
+.section-title span{background:var(--red-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* STAT ROW */
+.obesity-stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:60px}
+.ob-stat{background:rgba(180,10,10,.07);border:1px solid rgba(224,32,32,.25);padding:24px 20px;text-align:center}
+.ob-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:#FF5050;line-height:1}
+.ob-stat-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:6px;line-height:1.4}
+
+/* ALERT CARDS */
+.alert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:60px}
+.alert-card{background:rgba(180,10,10,.07);border:1px solid rgba(224,32,32,.3);padding:32px 28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+.alert-card:hover{transform:translateY(-4px);border-color:var(--red)}
+.alert-card::before{content:'⚠';position:absolute;top:16px;right:18px;font-size:1rem;opacity:.25}
+.alert-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;color:#FF6060;margin-bottom:10px}
+.alert-card p{font-size:.88rem;color:var(--muted);line-height:1.7}
+.alert-card .highlight{color:#FF6060;font-weight:600}
+
+/* TRUTH LIST */
+.truth-list{display:flex;flex-direction:column;gap:0;margin-bottom:60px}
+.truth-item{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid rgba(224,32,32,.1)}
+.truth-item:last-child{border-bottom:none}
+.truth-icon{font-size:1.6rem;flex-shrink:0;margin-top:2px}
+.truth-item h4{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.08em;color:#FF6060;margin-bottom:6px}
+.truth-item p{font-size:.88rem;color:var(--muted);line-height:1.7}
+
+.plan-nav-strip{background:var(--space2);border-top:1px solid rgba(255,255,255,.06);padding:48px 40px;text-align:center}
+.plan-nav-strip p{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.plan-nav-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.pnl{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.12);padding:11px 26px;color:var(--muted);transition:all .3s}
+.pnl:hover{border-color:var(--red);color:var(--white)}
+
+footer{text-align:center;padding:50px 40px;border-top:1px solid var(--border);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+footer a{color:var(--red);text-decoration:none}
+
+@media(max-width:640px){nav{padding:16px 24px}.content-sec{padding:70px 24px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Tag<span>line</span></a>
+  <a href="health.html" class="back-btn">← Health Hub</a>
+</nav>
+
+<section class="page-hero">
+  <div>
+    <span class="hero-label">Wake Up Call</span>
+    <div class="hero-title">America Is Sick.<br>It's Not an Accident.</div>
+    <p class="hero-sub">The wealthiest nation on Earth is also one of the sickest. This is the truth about why — and what's really in your food.</p>
+  </div>
+</section>
+
+<section class="content-sec">
+  <span class="section-label">The Numbers</span>
+  <h2 class="section-title">The Obesity <span>Crisis</span></h2>
+  <p style="font-size:.92rem;color:var(--muted);max-width:720px;line-height:1.8;margin-bottom:40px">This isn't about willpower. It isn't about laziness. It's about a food system that has been deliberately engineered to override your biology, keep you buying, and keep you addicted. Here's the data.</p>
+
+  <div class="obesity-stat-row">
+    <div class="ob-stat">
+      <div class="ob-stat-num">42%</div>
+      <div class="ob-stat-label">of U.S. Adults Are Clinically Obese — CDC 2023</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">73%</div>
+      <div class="ob-stat-label">of Americans Are Overweight or Obese</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">$173B</div>
+      <div class="ob-stat-label">Spent Annually on Obesity-Related Healthcare</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">60%</div>
+      <div class="ob-stat-label">of Average American Calories Come From Ultra-Processed Food</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">50M</div>
+      <div class="ob-stat-label">Americans Eat Fast Food Every Single Day</div>
+    </div>
+    <div class="ob-stat">
+      <div class="ob-stat-num">3×</div>
+      <div class="ob-stat-label">Childhood Obesity Has Tripled Since 1970</div>
+    </div>
+  </div>
+
+  <span class="section-label">What's Really in Your Food</span>
+  <h2 class="section-title">The Fast Food <span>Truth</span></h2>
+
+  <div class="alert-grid">
+    <div class="alert-card">
+      <h3>McDonald's Chicken McNuggets — 50+ Ingredients</h3>
+      <p>A Chicken McNugget sounds simple. It's not. The ingredient list includes <span class="highlight">dimethylpolysiloxane</span> (an antifoaming silicone agent also used in silly putty and caulk), <span class="highlight">TBHQ</span> (a petroleum-derived preservative), sodium phosphates, and autolyzed yeast extract. The "chicken" itself is a processed paste mechanically separated from the carcass, then shaped and fried. Actual chicken breast protein content: less than 45%.</p>
+    </div>
+    <div class="alert-card">
+      <h3>McDonald's Buns Are Loaded With Sugar & Additives</h3>
+      <p>McDonald's hamburger buns contain <span class="highlight">high fructose corn syrup</span>, azodicarbonamide (a flour bleaching agent also used to make yoga mats — banned in Europe and Australia), DATEM, and multiple forms of sugar. In 2020, an Irish court ruled that Subway's bread contained so much sugar it legally <span class="highlight">could not be classified as bread</span> under Irish tax law. These companies add sugar to everything because sugar is addictive.</p>
+    </div>
+    <div class="alert-card">
+      <h3>"Pink Slime" and Meat Fillers</h3>
+      <p>For years, McDonald's used <span class="highlight">lean finely textured beef (LFTB)</span> — nicknamed "pink slime" — in their burgers. This is beef scraps and connective tissue recovered from the carcass, processed at high heat, then treated with <span class="highlight">ammonium hydroxide gas</span> to kill bacteria. McDonald's dropped it after public backlash in 2012, but it's still legally allowed in school cafeteria beef in the U.S.</p>
+    </div>
+    <div class="alert-card">
+      <h3>Food Dyes Linked to Hyperactivity in Children</h3>
+      <p>Red 40, Yellow 5, Yellow 6, and Blue 1 are petroleum-derived synthetic dyes in countless American fast food items, cereals, and sports drinks. The EU requires these products to carry a warning: <span class="highlight">"May have an adverse effect on activity and attention in children."</span> The FDA does not require this warning. These dyes are banned or restricted in several countries.</p>
+    </div>
+    <div class="alert-card">
+      <h3>Engineered Addiction — It's Not Weakness, It's Science</h3>
+      <p>Food scientists are paid specifically to find the <span class="highlight">"bliss point"</span> — the precise combination of sugar, salt, and fat that makes a food maximally craving-inducing. Former FDA Commissioner David Kessler calls this "conditioned hypereating." These companies spend billions studying neurological reward pathways to ensure their products override your body's natural fullness signals.</p>
+    </div>
+    <div class="alert-card">
+      <h3>The Sodium Trap — Fast Food Is Salt-Loaded</h3>
+      <p>A single McDonald's Big Mac meal with a large Coke and fries delivers over <span class="highlight">1,500mg of sodium</span> — more than 65% of the recommended daily maximum in one sitting. Excessive sodium spikes blood pressure, causes water retention, and over time damages arterial walls and kidney function. The WHO links high sodium intake directly to 1.89 million deaths per year globally.</p>
+    </div>
+  </div>
+
+  <div class="truth-list">
+    <div class="truth-item">
+      <span class="truth-icon">🧪</span>
+      <div>
+        <h4>Ultra-Processed Food Is Engineered to Override Your Body</h4>
+        <p>Ultra-processed foods (UPFs) make up 60% of American daily caloric intake. A 2019 NIH study found that people given unlimited access to UPFs ate an average of 500 extra calories per day compared to those eating whole foods — even when meals were matched for protein, fat, sugar, and fiber. The food itself drives overconsumption at a neurological level. It is not a lack of discipline. It is a rigged game.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">🏭</span>
+      <div>
+        <h4>The USDA and Food Industry Have Conflicting Interests</h4>
+        <p>The USDA simultaneously promotes American agriculture and sets dietary guidelines — a direct conflict of interest. Food industry lobbying in Washington topped $175 million in 2022. The result is dietary guidelines that have historically protected industry profits as much as public health. MyPlate replaced MyPyramid — but corporate lobbying still shapes both. Follow the money.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">🧠</span>
+      <div>
+        <h4>Sugar Is as Addictive as Cocaine in Animal Studies</h4>
+        <p>Princeton University researchers found that rats given intermittent access to sugar showed all hallmarks of addiction: bingeing, withdrawal, craving, and cross-sensitization with drugs. Brain scans of humans eating ultra-processed foods show dopamine responses similar to drug use. The average American consumes <span style="color:#FF6060;font-weight:600">17 teaspoons of added sugar per day</span> — more than twice the recommended maximum. Most of it is hidden in savory foods: bread, ketchup, pasta sauce, dressings.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">👶</span>
+      <div>
+        <h4>Childhood Obesity Has Tripled Since 1970</h4>
+        <p>In 1970, roughly 5% of U.S. children were obese. Today it's nearly 20% and rising. Children as young as 8 are now being diagnosed with Type 2 diabetes, fatty liver disease, and hypertension. Fast food companies spend over <span style="color:#FF6060;font-weight:600">$5 billion per year marketing to children</span> — targeting them through cartoons, toys, apps, and social media before they're old enough to critically evaluate what they're consuming.</p>
+      </div>
+    </div>
+    <div class="truth-item">
+      <span class="truth-icon">✝️</span>
+      <div>
+        <h4>This Is a Spiritual Issue Too</h4>
+        <p>The body God gave you is not yours to destroy. 1 Corinthians 6:19–20 is unambiguous: your body is a temple of the Holy Spirit. Feeding it engineered garbage, fake ingredients, and addictive chemicals isn't just a health decision — it's a stewardship decision. We are called to present our bodies as living sacrifices, holy and pleasing to God (Romans 12:1). Knowing what you put in your body is part of living a conscious, intentional, God-honoring life. Choose real food. Choose your temple.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="plan-nav-strip">
+  <p>Continue your health journey</p>
+  <div class="plan-nav-links">
+    <a href="health.html" class="pnl">← Health Hub</a>
+    <a href="health-bulk.html" class="pnl">Bulk Up Plan →</a>
+    <a href="health-cali.html" class="pnl">Calisthenics Plan →</a>
+  </div>
+</div>
+
+<footer>
+  <p><a href="health.html">← Back to Health Hub</a></p>
+  <p style="margin-top:12px">GOD · HEALTH · WEALTH</p>
+</footer>
+
+</body>
+</html>

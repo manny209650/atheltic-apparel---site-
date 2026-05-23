@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Calisthenics & General Health Plan — Tagline Apparel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --red:#E02020;
+  --red-grad:linear-gradient(135deg,#FF3333 0%,#E02020 50%,#AA0000 100%);
+  --space:#06060F;--space2:#0C0C1E;--space3:#111126;
+  --card:#0D0D25;--text:#DDE0F0;--muted:#8A8AAA;--white:#FFFFFF;
+  --border:rgba(224,32,32,0.18);--teal:#00C9A7;
+}
+body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.7}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,15,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,201,167,.2)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--teal)}
+.back-btn{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--muted);text-decoration:none;border:1px solid rgba(255,255,255,.12);padding:9px 22px;transition:all .3s}
+.back-btn:hover{color:var(--teal);border-color:var(--teal)}
+
+.page-hero{min-height:52vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 40px 70px;background:radial-gradient(ellipse at 50% 0%,#00150F 0%,#060610 55%,#020208 100%);position:relative;overflow:hidden}
+.hero-label{font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;display:block}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7.5rem);line-height:.9;letter-spacing:.06em;color:var(--teal);margin-bottom:20px}
+.hero-sub{font-family:'Cinzel',serif;font-size:clamp(.82rem,1.5vw,1rem);color:var(--muted);letter-spacing:.12em;max-width:580px;margin:0 auto}
+
+.plan-sec{padding:90px 40px;max-width:960px;margin:0 auto}
+.plan-sub{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em;color:var(--white);margin-bottom:20px}
+
+.macro-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:48px}
+.macro-box{background:var(--card);border:1px solid rgba(0,201,167,.2);padding:20px 16px;text-align:center}
+.macro-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;color:var(--teal)}
+.macro-lbl{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+.meal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:56px}
+.meal-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--teal);padding:22px 20px}
+.meal-time{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.meal-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--white);margin-bottom:8px}
+.meal-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
+.meal-macros{font-size:.72rem;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);letter-spacing:.04em}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px}
+.info-block{background:var(--card);border:1px solid rgba(0,201,167,.2);padding:32px 28px}
+.info-block h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;color:var(--teal);margin-bottom:16px}
+.info-block ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.info-block li{font-size:.88rem;color:var(--muted);line-height:1.6;padding-left:16px;position:relative}
+.info-block li::before{content:'—';position:absolute;left:0;color:var(--teal)}
+
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:48px}
+.day-card{background:var(--card);border:1px solid rgba(255,255,255,.07);padding:14px 10px;text-align:center}
+.day-card.active{border-color:var(--teal);background:rgba(0,201,167,.06)}
+.day-card.rest{opacity:.5}
+.day-name{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.day-focus{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.06em;line-height:1.2;color:var(--teal)}
+.day-detail{font-size:.62rem;color:var(--muted);margin-top:5px;line-height:1.4}
+
+.ex-table{width:100%;border-collapse:collapse;margin-bottom:56px;font-size:.85rem}
+.ex-table th{font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08);color:var(--teal)}
+.ex-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--muted);vertical-align:top}
+.ex-table tr:hover td{background:rgba(255,255,255,.02)}
+.ex-name{color:var(--white);font-weight:600}
+
+.callout{background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.2);padding:24px 28px;margin-bottom:40px}
+.callout-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--teal);margin-bottom:8px}
+.callout p{font-size:.88rem;color:var(--muted);line-height:1.7}
+
+.plan-nav-strip{background:var(--space2);border-top:1px solid rgba(255,255,255,.06);padding:48px 40px;text-align:center}
+.plan-nav-strip p{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.plan-nav-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.pnl{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.12);padding:11px 26px;color:var(--muted);transition:all .3s}
+.pnl:hover{border-color:var(--teal);color:var(--teal)}
+
+footer{text-align:center;padding:50px 40px;border-top:1px solid rgba(0,201,167,.15);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+footer a{color:var(--teal);text-decoration:none}
+
+@media(max-width:640px){nav{padding:16px 24px}.plan-sec{padding:70px 24px}.two-col{grid-template-columns:1fr}.week-grid{grid-template-columns:repeat(4,1fr)}.ex-table{font-size:.75rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Tag<span>line</span></a>
+  <a href="health.html" class="back-btn">← Health Hub</a>
+</nav>
+
+<section class="page-hero">
+  <div>
+    <span class="hero-label">Plan 02 · Calisthenics & General Health</span>
+    <div class="hero-title">Move Well.<br>Live Long.</div>
+    <p class="hero-sub">A complete no-gym food and training plan for lean, functional, athletic health. No equipment needed — just your body, your discipline, and your God-given strength.</p>
+  </div>
+</section>
+
+<section class="plan-sec">
+
+  <p class="plan-sub">Daily Nutrition Targets</p>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:24px;line-height:1.7">Adjust calories to bodyweight × 15 for maintenance. Increase to × 16–17 if you're training hard and want to add a little muscle. These macros favor clean, whole foods over calorie-dense processed options.</p>
+  <div class="macro-row">
+    <div class="macro-box"><div class="macro-num">2,400</div><div class="macro-lbl">Calories / Day</div></div>
+    <div class="macro-box"><div class="macro-num">150g</div><div class="macro-lbl">Protein</div></div>
+    <div class="macro-box"><div class="macro-num">280g</div><div class="macro-lbl">Carbohydrates</div></div>
+    <div class="macro-box"><div class="macro-num">70g</div><div class="macro-lbl">Healthy Fats</div></div>
+    <div class="macro-box"><div class="macro-num">35g+</div><div class="macro-lbl">Fiber Daily</div></div>
+  </div>
+
+  <p class="plan-sub">Daily Meal Plan</p>
+  <div class="meal-grid">
+    <div class="meal-card">
+      <div class="meal-time">Breakfast · 7:00 AM</div>
+      <div class="meal-name">Overnight Oats + Fruit</div>
+      <div class="meal-desc">½ cup rolled oats + ¾ cup Greek yogurt + 1 tbsp chia seeds + mixed berries (blueberries, raspberries, strawberries) + drizzle of raw honey · Prep the night before. Grab and go.</div>
+      <div class="meal-macros">~28g protein · ~65g carbs · ~12g fat · ~480 cal</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Snack · 10:00 AM</div>
+      <div class="meal-name">Clean Energy Snack</div>
+      <div class="meal-desc">2 hard-boiled eggs · 1 apple · 20 raw almonds · Protein + healthy fat + fiber = stable energy for hours with no crash. This is what snacking is supposed to look like.</div>
+      <div class="meal-macros">~18g protein · ~30g carbs · ~18g fat · ~340 cal</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Lunch · 1:00 PM</div>
+      <div class="meal-name">Power Bowl</div>
+      <div class="meal-desc">Large bed of mixed greens + 6oz grilled chicken or canned tuna · cherry tomatoes · cucumber · ½ avocado · pumpkin seeds · olive oil + fresh lemon dressing · 1 slice whole grain bread or small bowl brown rice on the side</div>
+      <div class="meal-macros">~50g protein · ~45g carbs · ~25g fat · ~590 cal</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Pre-Workout · 4:00 PM</div>
+      <div class="meal-name">Natural Energy Boost</div>
+      <div class="meal-desc">1 banana + 2 tbsp almond butter · 1 cup coconut water · Optional: black coffee 20 minutes before training. Simple, effective. Your body will have exactly what it needs for a strong session.</div>
+      <div class="meal-macros">~8g protein · ~55g carbs · ~18g fat · ~390 cal</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Dinner · 7:00 PM</div>
+      <div class="meal-name">Whole Food Dinner</div>
+      <div class="meal-desc">6oz baked salmon or grilled tilapia · roasted vegetables (broccoli, bell peppers, zucchini, onion) tossed in olive oil + garlic · ¾ cup cooked quinoa · squeeze of lemon over everything</div>
+      <div class="meal-macros">~48g protein · ~50g carbs · ~22g fat · ~570 cal</div>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">Evening · 9:00 PM</div>
+      <div class="meal-name">Light Wind-Down</div>
+      <div class="meal-desc">1 kiwi (improves sleep quality) + 1 cup chamomile or ginger tea + 10 walnuts · Avoid heavy meals 2–3 hours before bed. Let your gut rest so your body can focus on recovery and repair overnight.</div>
+      <div class="meal-macros">~4g protein · ~18g carbs · ~9g fat · ~165 cal</div>
+    </div>
+  </div>
+
+  <p class="plan-sub">Foods to Eat and Avoid</p>
+  <div class="two-col">
+    <div class="info-block">
+      <h3>Eat These Every Week</h3>
+      <ul>
+        <li>Leafy greens (spinach, kale, arugula) — vitamins, minerals, fiber, and anti-inflammatory compounds</li>
+        <li>Fatty fish (salmon, sardines, mackerel) — omega-3s for brain, joints, and inflammation 2–3× per week</li>
+        <li>Legumes (lentils, black beans, chickpeas) — fiber + protein + slow carbs for sustained energy</li>
+        <li>Berries (blueberries, raspberries, blackberries) — highest antioxidant density of any fruit per calorie</li>
+        <li>Eggs — the most complete food on earth. Eat them whole. The yolk is where the nutrients live.</li>
+        <li>Sweet potatoes — Vitamin A, potassium, fiber, and complex carbs that don't spike blood sugar sharply</li>
+        <li>Fermented foods (yogurt, kimchi, sauerkraut) — gut health directly affects immunity and mood</li>
+        <li>Nuts and seeds (walnuts, flax, chia) — healthy fats, zinc, magnesium, anti-inflammatory</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h3>Avoid or Minimize</h3>
+      <ul>
+        <li>Seed oils (canola, soybean, vegetable oil) — highly processed and pro-inflammatory. Use olive oil or butter.</li>
+        <li>Sugary drinks (sodas, juices, sports drinks) — liquid calories with zero nutritional value</li>
+        <li>Ultra-processed snacks (chips, crackers, cookies) — engineered to be addictive, low in nutrients</li>
+        <li>White bread and refined carbs — stripped of fiber, spike blood sugar rapidly</li>
+        <li>Alcohol — disrupts sleep quality, suppresses fat burning for up to 24 hours</li>
+        <li>Fast food — calorie-dense, nutrient-poor, loaded with sodium and artificial ingredients</li>
+        <li>Artificial sweeteners — linked to gut microbiome disruption and increased sugar cravings</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="plan-sub">Weekly Workout Schedule</p>
+  <div class="week-grid">
+    <div class="day-card active"><div class="day-name">Mon</div><div class="day-focus">Push</div><div class="day-detail">Chest · tris · shoulders</div></div>
+    <div class="day-card active"><div class="day-name">Tue</div><div class="day-focus">Pull</div><div class="day-detail">Back · bis · rear</div></div>
+    <div class="day-card active"><div class="day-name">Wed</div><div class="day-focus">Legs + Core</div><div class="day-detail">Lower body power</div></div>
+    <div class="day-card rest"><div class="day-name">Thu</div><div class="day-focus" style="color:var(--muted)">Cardio</div><div class="day-detail">20 min HIIT or run</div></div>
+    <div class="day-card active"><div class="day-name">Fri</div><div class="day-focus">Full Body</div><div class="day-detail">Circuit training</div></div>
+    <div class="day-card rest"><div class="day-name">Sat</div><div class="day-focus" style="color:var(--muted)">Active Rest</div><div class="day-detail">Walk · swim · sport</div></div>
+    <div class="day-card rest"><div class="day-name">Sun</div><div class="day-focus" style="color:var(--muted)">Rest</div><div class="day-detail">Stretch + recover</div></div>
+  </div>
+
+  <p class="plan-sub">Calisthenics Exercises — With Progressions</p>
+  <table class="ex-table">
+    <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Day</th><th>Progression Path</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ex-name">Push-Up</span></td><td>4 × max reps</td><td>Monday</td><td>Knee push-up → Standard → Diamond → Archer → One-arm</td></tr>
+      <tr><td><span class="ex-name">Pike Push-Up</span></td><td>3 × 10–15</td><td>Monday</td><td>Pike → Decline pike → Handstand hold → Handstand push-up</td></tr>
+      <tr><td><span class="ex-name">Tricep Dips</span></td><td>3 × 12–15</td><td>Monday</td><td>Bench dip → Parallel bar dip → Weighted dip (backpack)</td></tr>
+      <tr><td><span class="ex-name">Pull-Up / Chin-Up</span></td><td>4 × max reps</td><td>Tuesday</td><td>Dead hang → Negatives → Band-assisted → Full → Weighted</td></tr>
+      <tr><td><span class="ex-name">Inverted Row</span></td><td>3 × 10–15</td><td>Tuesday</td><td>High bar (easier) → Lower bar → Feet elevated → Single arm</td></tr>
+      <tr><td><span class="ex-name">Bodyweight Squat</span></td><td>4 × 20–25</td><td>Wednesday</td><td>Squat → Jump squat → Bulgarian split squat → Pistol squat</td></tr>
+      <tr><td><span class="ex-name">Reverse Lunge</span></td><td>3 × 12 each leg</td><td>Wednesday</td><td>Stationary lunge → Walking lunge → Deficit lunge → Jump lunge</td></tr>
+      <tr><td><span class="ex-name">Glute Bridge</span></td><td>3 × 20</td><td>Wednesday</td><td>Flat → Single leg → Hip thrust elevated → Weighted hip thrust</td></tr>
+      <tr><td><span class="ex-name">Plank</span></td><td>3 × 45–90 sec</td><td>Wednesday</td><td>Forearm plank → Extended plank → Shoulder tap → Ab wheel rollout</td></tr>
+      <tr><td><span class="ex-name">Hollow Body Hold</span></td><td>3 × 30 sec</td><td>Wednesday</td><td>Tuck → Extended legs → Arms overhead → Flutter kicks added</td></tr>
+      <tr><td><span class="ex-name">Burpee</span></td><td>5 × 10</td><td>Friday</td><td>Beginner (no jump) → Standard → Burpee pull-up → Box jump burpee</td></tr>
+      <tr><td><span class="ex-name">Mountain Climber</span></td><td>4 × 30 sec</td><td>Friday</td><td>Slow and controlled → Fast pace → Cross-body → Elevated</td></tr>
+      <tr><td><span class="ex-name">Jump Squat</span></td><td>3 × 15</td><td>Friday</td><td>Squat → Jump squat → Tuck jump → 180° jump squat</td></tr>
+      <tr><td><span class="ex-name">L-Sit (on floor/bars)</span></td><td>3 × max hold</td><td>Wednesday</td><td>Tuck L-sit → Single leg → Full L-sit → L-sit on parallel bars</td></tr>
+      <tr><td><span class="ex-name">20-Min HIIT</span></td><td>4 rounds</td><td>Thursday</td><td>30 sec work / 15 sec rest: sprint, jump rope, high knees, burpees. Rotate each week.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p class="callout-title">The Calisthenics Mindset</p>
+    <p>Calisthenics isn't just exercise — it's mastery of your own body. The goal isn't to look a certain way. The goal is to move powerfully, age well, and maintain physical capability for life. A 60-year-old who can do 20 pull-ups, a clean pistol squat, and a 2-mile run is wealthier in health than most 25-year-olds in a gym. Invest in your movement. Your future self will thank you. Philippians 4:13 — you can do all things through Christ who strengthens you. That includes one more rep.</p>
+  </div>
+
+</section>
+
+<div class="plan-nav-strip">
+  <p>Explore other plans</p>
+  <div class="plan-nav-links">
+    <a href="health.html" class="pnl">← Health Hub</a>
+    <a href="health-bulk.html" class="pnl">Bulk Up Plan →</a>
+    <a href="health-truth.html" class="pnl">The Truth About Food →</a>
+  </div>
+</div>
+
+<footer>
+  <p><a href="health.html">← Back to Health Hub</a></p>
+  <p style="margin-top:12px">GOD · HEALTH · WEALTH</p>
+</footer>
+
+</body>
+</html>
