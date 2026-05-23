@@ -932,7 +932,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         <div class="pdp-sizes" id="pdpSizes"></div>
       </div>
 
-      <button class="pdp-buy" id="pdpBuyBtn" onclick="pdpBuyNow()">Buy Now &rarr;</button>
+      <button class="pdp-buy" id="pdpBuyBtn" onclick="pdpBuyNow()" style="pointer-events:none">Buy Now &rarr;</button>
     </div>
   </div>
 </div>
@@ -1457,8 +1457,9 @@ function openPDP(p){
 
   ov.style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  document.body.style.position = 'fixed';
-  document.body.style.width = '100%';
+  var btn = document.getElementById('pdpBuyBtn');
+  btn.style.pointerEvents = 'none';
+  setTimeout(function(){ btn.style.pointerEvents = ''; }, 600);
 }
 
 function pdpPickColor(el){
@@ -1478,8 +1479,6 @@ function pdpPickSize(el){
 function closePDP(){
   document.getElementById('pdpOverlay').style.display = 'none';
   document.body.style.overflow = '';
-  document.body.style.position = '';
-  document.body.style.width = '';
   pdpHandle = null;
 }
 
