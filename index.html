@@ -932,7 +932,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         <div class="pdp-sizes" id="pdpSizes"></div>
       </div>
 
-      <button class="pdp-buy" id="pdpBuyBtn" onclick="pdpBuyNow()" style="pointer-events:none">Buy Now &rarr;</button>
+      <button class="pdp-buy" id="pdpBuyBtn" onclick="pdpBuyNow()" style="pointer-events:none;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);cursor:not-allowed">🔒 Coming Soon</button>
     </div>
   </div>
 </div>
@@ -1457,9 +1457,6 @@ function openPDP(p){
 
   ov.style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  var btn = document.getElementById('pdpBuyBtn');
-  btn.style.pointerEvents = 'none';
-  setTimeout(function(){ btn.style.pointerEvents = ''; }, 600);
 }
 
 function pdpPickColor(el){
@@ -1483,9 +1480,7 @@ function closePDP(){
 }
 
 function pdpBuyNow(){
-  if(!pdpHandle) return;
-  if(STRIPE_LINKS[pdpHandle]) window.open(STRIPE_LINKS[pdpHandle],'_blank');
-  else alert('Stripe checkout coming soon for this product!');
+  /* Shop locked — purchasing disabled until all products are finalized */
 }
 
 function openCustomOrder(p){
