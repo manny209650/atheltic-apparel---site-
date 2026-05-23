@@ -71,13 +71,12 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   to{opacity:1;transform:translateY(0)}
 }
 
-/* ── SCENES: middle-left of the photo ── */
+/* ── SCENES: top-left of the photo (below logo bar) ── */
 .scene{
   position:absolute;
-  top:50%;
+  top:110px;
   left:0;
   width:68%;
-  transform:translateY(-50%);
   padding:0 0 0 28px;
   text-align:left;
   opacity:0;pointer-events:none;
@@ -86,10 +85,10 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 /* ── SCENE 1: 0.8s – 4s ── */
 .s1{animation:sceneIn 3.2s .8s both;animation-play-state:paused}
 @keyframes sceneIn{
-  0%{opacity:0;transform:translateY(calc(-50% + 18px))}
-  12%{opacity:1;transform:translateY(-50%)}
-  75%{opacity:1;transform:translateY(-50%)}
-  100%{opacity:0;transform:translateY(calc(-50% - 8px))}
+  0%{opacity:0;transform:translateY(18px)}
+  12%{opacity:1;transform:translateY(0)}
+  75%{opacity:1;transform:translateY(0)}
+  100%{opacity:0;transform:translateY(-8px)}
 }
 .s1-eyebrow{
   font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
@@ -185,10 +184,10 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 /* ── SCENE 4: 12.7s – 15s ── */
 .s4{animation:s4In 2.3s 12.7s both;animation-play-state:paused}
 @keyframes s4In{
-  0%{opacity:0;transform:translateY(calc(-50% + 22px))}
-  20%{opacity:1;transform:translateY(-50%)}
-  85%{opacity:1;transform:translateY(-50%)}
-  100%{opacity:0;transform:translateY(-50%)}
+  0%{opacity:0;transform:translateY(22px)}
+  20%{opacity:1;transform:translateY(0)}
+  85%{opacity:1;transform:translateY(0)}
+  100%{opacity:0;transform:translateY(0)}
 }
 .s4-qr{
   width:90px;height:90px;
