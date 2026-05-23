@@ -205,6 +205,39 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .tip-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .tip-btn{border:1px solid rgba(195,149,60,.4);background:rgba(195,149,60,.07);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;padding:14px 28px;cursor:pointer;transition:background .25s,border-color .25s;text-decoration:none;display:inline-block}
 .tip-btn:hover{background:rgba(195,149,60,.18);border-color:rgba(195,149,60,.8)}
+/* ── PRODUCT DETAIL MODAL (PDP) ── */
+.pdp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:8000;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
+.pdp-overlay.open{opacity:1;pointer-events:all}
+.pdp-modal{background:var(--card);border:1px solid var(--border-gold);width:100%;max-width:820px;max-height:92vh;overflow-y:auto;position:relative;display:grid;grid-template-columns:1fr 1fr;transform:translateY(20px);transition:transform .3s}
+.pdp-overlay.open .pdp-modal{transform:translateY(0)}
+.pdp-close{position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,.35);font-size:1.6rem;cursor:pointer;line-height:1;z-index:2;transition:color .2s}
+.pdp-close:hover{color:#fff}
+.pdp-img-col{position:relative;background:var(--space2);aspect-ratio:1;overflow:hidden}
+.pdp-img-col img{width:100%;height:100%;object-fit:cover;display:block}
+.pdp-img-badge{position:absolute;top:12px;left:12px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:5px 10px;font-weight:700}
+.pdp-info-col{padding:28px 28px 24px;display:flex;flex-direction:column;gap:0;overflow-y:auto}
+.pdp-eyebrow{font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.pdp-title{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.05em;color:var(--white);line-height:1;margin-bottom:6px}
+.pdp-price{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);margin-bottom:14px}
+.pdp-desc{font-size:.74rem;line-height:1.7;color:var(--muted);padding-bottom:16px;border-bottom:1px solid var(--border-soft);margin-bottom:16px}
+.pdp-field{margin-bottom:16px}
+.pdp-field-label{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px}
+.pdp-field-label span{color:var(--white);text-transform:none;letter-spacing:.05em}
+.pdp-swatches{display:flex;flex-wrap:wrap;gap:8px}
+.pdp-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,box-shadow .15s;flex-shrink:0}
+.pdp-swatch:hover{transform:scale(1.15)}
+.pdp-swatch.sel{border-color:#fff;box-shadow:0 0 0 2px var(--gold)}
+.pdp-sizes{display:flex;flex-wrap:wrap;gap:7px}
+.pdp-sz{font-size:.6rem;letter-spacing:.14em;border:1px solid rgba(255,255,255,.15);color:var(--muted);padding:6px 13px;cursor:pointer;transition:.2s;text-transform:uppercase}
+.pdp-sz:hover{border-color:var(--gold);color:#fff}
+.pdp-sz.sel{border-color:var(--gold);color:#fff;background:rgba(224,32,32,.12)}
+.pdp-buy{margin-top:auto;padding-top:18px;display:block;width:100%;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;background:var(--gold-grad);color:var(--space);border:none;padding:15px;cursor:pointer;transition:opacity .2s,transform .15s}
+.pdp-buy:hover{opacity:.85;transform:translateY(-1px)}
+@media(max-width:680px){
+  .pdp-modal{grid-template-columns:1fr;max-height:95vh}
+  .pdp-img-col{aspect-ratio:4/3}
+  .pdp-info-col{padding:20px}
+}
 /* ── CUSTOM ORDER MODAL ── */
 .co-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
 .co-overlay.open{opacity:1;pointer-events:all}
@@ -850,6 +883,41 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════ PRODUCT DETAIL MODAL -->
+<div class="pdp-overlay" id="pdpOverlay" onclick="if(event.target===this)closePDP()">
+  <div class="pdp-modal" id="pdpModal">
+    <button class="pdp-close" onclick="closePDP()">&#x2715;</button>
+
+    <!-- Left: image -->
+    <div class="pdp-img-col">
+      <img id="pdpImg" src="" alt="">
+      <div id="pdpImgBadge" class="pdp-img-badge" style="display:none"></div>
+    </div>
+
+    <!-- Right: info -->
+    <div class="pdp-info-col">
+      <p class="pdp-eyebrow" id="pdpEyebrow"></p>
+      <h2 class="pdp-title" id="pdpTitle"></h2>
+      <p class="pdp-price" id="pdpPrice"></p>
+      <p class="pdp-desc" id="pdpDesc"></p>
+
+      <!-- Colors -->
+      <div class="pdp-field" id="pdpColorsField">
+        <p class="pdp-field-label">Color &nbsp;<span id="pdpColorName"></span></p>
+        <div class="pdp-swatches" id="pdpSwatches"></div>
+      </div>
+
+      <!-- Sizes -->
+      <div class="pdp-field" id="pdpSizesField">
+        <p class="pdp-field-label">Size &nbsp;<span id="pdpSizeName"></span></p>
+        <div class="pdp-sizes" id="pdpSizes"></div>
+      </div>
+
+      <button class="pdp-buy" id="pdpBuyBtn">Buy Now &rarr;</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════ CUSTOM ORDER MODAL -->
 <div class="co-overlay" id="co-overlay" onclick="if(event.target===this)closeCustomOrder()">
   <div class="co-modal">
@@ -1323,12 +1391,82 @@ const STRIPE_LINKS={
   'womens-gym-shorts':'https://buy.stripe.com/14AfZh6Jqc2eeSb589asg0d',
   'boxe-tees':'https://buy.stripe.com/3cIaEXgk0eamh0j6cdasg0e',
 };
+let pdpHandle = null;
+
 function viewProduct(handle){
   const p = PRODUCTS.find(x=>x.handle===handle);
-  if(p && p.badge==='Custom'){ openCustomOrder(p); return; }
-  if(STRIPE_LINKS[handle]) window.open(STRIPE_LINKS[handle],'_blank');
-  else window.open(`${STORE_URL}/products/${handle}`,'_blank');
+  if(!p) return;
+  if(p.badge==='Custom'){ openCustomOrder(p); return; }
+  openPDP(p);
 }
+
+function openPDP(p){
+  pdpHandle = p.handle;
+
+  document.getElementById('pdpImg').src = p.img;
+  document.getElementById('pdpImg').alt = p.title;
+  document.getElementById('pdpTitle').textContent = p.title;
+  document.getElementById('pdpDesc').textContent = p.desc;
+
+  // Price
+  document.getElementById('pdpPrice').textContent = p.price > 0 ? '$'+p.price : '';
+
+  // Eyebrow = first non-'all' category
+  const cat = (p.cats||[]).find(c=>c!=='all') || '';
+  document.getElementById('pdpEyebrow').textContent = cat.replace(/-/g,' ');
+
+  // Badge
+  const badge = document.getElementById('pdpImgBadge');
+  if(p.badge){ badge.textContent=p.badge; badge.className='pdp-img-badge badge '+badgeClass(p.badge); badge.style.display=''; }
+  else badge.style.display='none';
+
+  // Colors
+  const swatchWrap = document.getElementById('pdpSwatches');
+  if(p.colors && p.colors.length){
+    swatchWrap.innerHTML = p.colors.map(c=>`<span class="pdp-swatch" style="background:${gc(c)}" data-c="${c}" title="${c.replace(/-/g,' ')}" onclick="pdpPickColor(this)"></span>`).join('');
+    document.getElementById('pdpColorsField').style.display='';
+    pdpPickColor(swatchWrap.firstChild);
+  } else {
+    document.getElementById('pdpColorsField').style.display='none';
+  }
+
+  // Sizes
+  const sizeWrap = document.getElementById('pdpSizes');
+  if(p.sizes && p.sizes.length){
+    sizeWrap.innerHTML = p.sizes.map(s=>`<span class="pdp-sz" data-s="${s}" onclick="pdpPickSize(this)">${s}</span>`).join('');
+    document.getElementById('pdpSizesField').style.display='';
+    pdpPickSize(sizeWrap.firstChild);
+  } else {
+    document.getElementById('pdpSizesField').style.display='none';
+  }
+
+  document.getElementById('pdpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function pdpPickColor(el){
+  document.querySelectorAll('.pdp-swatch').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('pdpColorName').textContent = el.dataset.c.replace(/-/g,' ');
+}
+
+function pdpPickSize(el){
+  document.querySelectorAll('.pdp-sz').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('pdpSizeName').textContent = el.dataset.s;
+}
+
+function closePDP(){
+  document.getElementById('pdpOverlay').classList.remove('open');
+  document.body.style.overflow='';
+  pdpHandle=null;
+}
+
+document.getElementById('pdpBuyBtn').addEventListener('click',()=>{
+  if(!pdpHandle) return;
+  if(STRIPE_LINKS[pdpHandle]) window.open(STRIPE_LINKS[pdpHandle],'_blank');
+  else window.open(`${STORE_URL}/products/${pdpHandle}`,'_blank');
+});
 
 function openCustomOrder(p){
   const title = p ? p.title : 'Custom Order';
