@@ -17,24 +17,14 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   overflow:hidden;
   background:#07072A;
   cursor:pointer;
-  display:flex;
-  flex-direction:column;
 }
 
-/* ── TOP: PHOTO (60% of frame = ~416px) ── */
-.ad-photo{
-  width:100%;
-  height:60%;
-  position:relative;
-  overflow:hidden;
-  flex-shrink:0;
-}
-.ad-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center top;
-  display:block;
+/* ── BACKGROUND IMAGE ── */
+.ad-bg{
+  position:absolute;inset:0;
+  background-image:url('https://i.ibb.co/Jjr8GXmW/IMG-4172.jpg');
+  background-size:100%;
+  background-position:top center;
   animation:kenBurns 15s linear forwards;
   animation-play-state:paused;
 }
@@ -42,29 +32,24 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   0%{transform:scale(1)}
   100%{transform:scale(1.05)}
 }
-/* gradient blends photo bottom into the dark text panel */
-.ad-photo-fade{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  height:70px;
-  background:linear-gradient(transparent,#07072A);
-  pointer-events:none;
+
+/* ── LEFT-SIDE GRADIENT so text is readable without covering right side ── */
+.ad-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to right,
+    rgba(0,0,0,.78) 0%,
+    rgba(0,0,0,.55) 45%,
+    rgba(0,0,0,.10) 75%,
+    transparent 100%
+  );
 }
 
-/* ── BOTTOM: TEXT PANEL (40% of frame = ~277px) ── */
-.ad-text{
-  flex:1;
-  position:relative;
-  background:#07072A;
-}
-
-/* ── LOGO BAR (floats over photo) ── */
+/* ── LOGO BAR ── */
 .ad-logo{
-  position:absolute;
-  top:14px;left:0;right:0;
-  padding:0 28px;
+  position:absolute;top:0;left:0;right:0;
+  padding:48px 28px 0;
   display:flex;align-items:center;justify-content:space-between;
-  z-index:20;
   animation:fadeDown .7s .3s both;
   animation-play-state:paused;
 }
@@ -72,37 +57,39 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   font-family:'Bebas Neue',sans-serif;
   font-size:1.6rem;letter-spacing:.35em;
   color:#fff;
-  text-shadow:0 0 20px rgba(0,0,0,1),0 2px 6px rgba(0,0,0,1);
+  text-shadow:0 0 16px rgba(0,0,0,1);
 }
 .ad-logo-tag{
   font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(255,255,255,.9);
-  border:1px solid rgba(255,255,255,.4);
+  color:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.3);
   padding:4px 10px;
-  background:rgba(0,0,0,.6);
+  background:rgba(0,0,0,.5);
 }
 @keyframes fadeDown{
   from{opacity:0;transform:translateY(-16px)}
   to{opacity:1;transform:translateY(0)}
 }
 
-/* ── SCENES (all inside .ad-text, never touch the photo) ── */
+/* ── SCENES: middle-left of the photo ── */
 .scene{
   position:absolute;
-  top:50%;left:0;right:0;
+  top:50%;
+  left:0;
+  width:68%;
   transform:translateY(-50%);
-  padding:0 28px;
-  text-align:center;
+  padding:0 0 0 28px;
+  text-align:left;
   opacity:0;pointer-events:none;
 }
 
 /* ── SCENE 1: 0.8s – 4s ── */
 .s1{animation:sceneIn 3.2s .8s both;animation-play-state:paused}
 @keyframes sceneIn{
-  0%{opacity:0;transform:translateY(18px)}
-  12%{opacity:1;transform:translateY(0)}
-  75%{opacity:1;transform:translateY(0)}
-  100%{opacity:0;transform:translateY(-8px)}
+  0%{opacity:0;transform:translateY(calc(-50% + 18px))}
+  12%{opacity:1;transform:translateY(-50%)}
+  75%{opacity:1;transform:translateY(-50%)}
+  100%{opacity:0;transform:translateY(calc(-50% - 8px))}
 }
 .s1-eyebrow{
   font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
@@ -110,8 +97,8 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 }
 .s1-headline{
   font-family:'Bebas Neue',sans-serif;
-  font-size:3.2rem;letter-spacing:.06em;line-height:1;
-  color:#fff;margin-bottom:8px;
+  font-size:3.4rem;letter-spacing:.06em;line-height:1;
+  color:#fff;
 }
 .s1-headline span{
   background:linear-gradient(135deg,#C3953C,#E8B84B);
@@ -122,13 +109,13 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .s2{animation:sceneIn 4.3s 4.2s both;animation-play-state:paused}
 .s2-label{
   font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;
-  color:rgba(255,255,255,.35);margin-bottom:14px;
+  color:rgba(255,255,255,.35);margin-bottom:12px;
 }
-.pillars{display:flex;flex-direction:column;gap:4px}
+.pillars{display:flex;flex-direction:column;gap:2px}
 .pillar{
   font-family:'Bebas Neue',sans-serif;
   font-size:2.8rem;letter-spacing:.1em;
-  color:#fff;opacity:0;
+  opacity:0;
   animation-play-state:paused;
 }
 .pillar.god{
@@ -156,19 +143,21 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .s3{animation:sceneIn 3.8s 8.7s both;animation-play-state:paused}
 .s3-title{
   font-family:'Bebas Neue',sans-serif;
-  font-size:1.8rem;letter-spacing:.12em;color:#fff;
-  margin-bottom:6px;
+  font-size:2rem;letter-spacing:.12em;color:#fff;
+  margin-bottom:4px;
 }
 .s3-sub{
-  font-size:.62rem;letter-spacing:.1em;
-  color:rgba(255,255,255,.4);margin-bottom:16px;
+  font-size:.6rem;letter-spacing:.1em;
+  color:rgba(255,255,255,.4);margin-bottom:14px;
 }
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chips{display:flex;flex-direction:column;gap:6px}
 .chip{
+  display:inline-block;
   font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
-  border:1px solid rgba(255,255,255,.18);
-  color:rgba(255,255,255,.7);
-  padding:6px 12px;
+  border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.75);
+  padding:5px 10px;
+  width:fit-content;
   opacity:0;
   animation-play-state:paused;
 }
@@ -176,13 +165,13 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .chip:nth-child(2){animation:chipIn .4s 9.5s both;animation-play-state:paused}
 .chip:nth-child(3){animation:chipIn .4s 9.8s both;animation-play-state:paused}
 @keyframes chipIn{
-  from{opacity:0;transform:scale(.85)}
-  to{opacity:1;transform:scale(1)}
+  from{opacity:0;transform:translateX(-12px)}
+  to{opacity:1;transform:translateX(0)}
 }
 .s3-free{
-  margin-top:14px;
+  margin-top:12px;
   font-family:'Cinzel',serif;
-  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(195,149,60,.8);
   opacity:0;
   animation:fadeUp .5s 10.5s both;
@@ -196,30 +185,30 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 /* ── SCENE 4: 12.7s – 15s ── */
 .s4{animation:s4In 2.3s 12.7s both;animation-play-state:paused}
 @keyframes s4In{
-  0%{opacity:0;transform:translateY(22px)}
-  20%{opacity:1;transform:translateY(0)}
-  85%{opacity:1}
-  100%{opacity:0}
+  0%{opacity:0;transform:translateY(calc(-50% + 22px))}
+  20%{opacity:1;transform:translateY(-50%)}
+  85%{opacity:1;transform:translateY(-50%)}
+  100%{opacity:0;transform:translateY(-50%)}
 }
 .s4-qr{
-  width:88px;height:88px;
+  width:90px;height:90px;
   border:2px solid rgba(195,149,60,.5);
   padding:5px;background:#fff;
-  margin-bottom:10px;
+  margin-bottom:10px;display:block;
   opacity:0;
   animation:fadeUp .5s 13.1s both;
   animation-play-state:paused;
 }
 .s4-cta-label{
   font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;
-  color:rgba(255,255,255,.35);margin-bottom:8px;
+  color:rgba(255,255,255,.35);margin-bottom:6px;
 }
 .s4-url{
   font-family:'Bebas Neue',sans-serif;
   font-size:2.2rem;letter-spacing:.12em;
   background:linear-gradient(135deg,#C3953C,#E8B84B);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:6px;
+  margin-bottom:4px;
 }
 .s4-tagline{
   font-family:'Cinzel',serif;
@@ -227,18 +216,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   color:rgba(255,255,255,.5);
 }
 
-/* ── RED ACCENT LINE (bottom of whole ad) ── */
-.ad-accent{
-  position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,transparent,rgba(224,32,32,.8),transparent);
-  animation:accentIn .8s .5s both;
-  animation-play-state:paused;
-}
-@keyframes accentIn{
-  from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}
-}
-
-/* ── FADE TO BLACK ── */
+/* ── FADE OUT at 15s ── */
 .ad-fadeout{
   position:absolute;inset:0;background:#000;
   opacity:0;pointer-events:none;
@@ -247,6 +225,17 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 }
 @keyframes fadeOut{
   from{opacity:0}to{opacity:1}
+}
+
+/* ── RED ACCENT LINE ── */
+.ad-accent{
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,rgba(224,32,32,.8),transparent);
+  animation:accentIn .8s .5s both;
+  animation-play-state:paused;
+}
+@keyframes accentIn{
+  from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}
 }
 
 /* ── PLAY BUTTON ── */
@@ -263,57 +252,52 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 
 <div class="ad" id="ad" onclick="playAd()">
 
-  <!-- TOP SECTION: Photo only — text never goes here -->
-  <div class="ad-photo" id="adPhoto">
-    <img id="adImg" src="https://i.ibb.co/Jjr8GXmW/IMG-4172.jpg" alt="">
-    <div class="ad-photo-fade"></div>
-  </div>
+  <!-- Background image -->
+  <div class="ad-bg" id="adBg"></div>
 
-  <!-- BOTTOM SECTION: Text only — photo never goes here -->
-  <div class="ad-text" id="adText">
+  <!-- Left-side gradient for text readability -->
+  <div class="ad-grad"></div>
 
-    <!-- Scene 1 -->
-    <div class="scene s1">
-      <p class="s1-eyebrow">Tagline Apparel</p>
-      <h1 class="s1-headline">More Than<br><span>Clothes.</span></h1>
-    </div>
-
-    <!-- Scene 2 -->
-    <div class="scene s2">
-      <p class="s2-label">We stand for</p>
-      <div class="pillars">
-        <span class="pillar god">✝ GOD</span>
-        <span class="pillar health">⚡ HEALTH</span>
-        <span class="pillar wealth">🚀 WEALTH</span>
-      </div>
-    </div>
-
-    <!-- Scene 3 -->
-    <div class="scene s3">
-      <h2 class="s3-title">Free. Daily.</h2>
-      <p class="s3-sub">Knowledge delivered to you</p>
-      <div class="chips">
-        <span class="chip">✝ Daily Verse</span>
-        <span class="chip">🥗 Nutrition</span>
-        <span class="chip">💰 Wealth Tips</span>
-      </div>
-      <p class="s3-free">No paywall. Ever.</p>
-    </div>
-
-    <!-- Scene 4 -->
-    <div class="scene s4">
-      <img class="s4-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tagline.space&margin=0" alt="Scan to visit tagline.space">
-      <p class="s4-cta-label">Scan or visit</p>
-      <p class="s4-url">tagline.space</p>
-      <p class="s4-tagline">God · Health · Wealth</p>
-    </div>
-
-  </div>
-
-  <!-- Logo overlaid on top of photo -->
+  <!-- Logo bar -->
   <div class="ad-logo" id="adLogo">
     <span class="ad-logo-text">TAGLINE</span>
     <span class="ad-logo-tag">Apparel</span>
+  </div>
+
+  <!-- Scene 1 -->
+  <div class="scene s1">
+    <p class="s1-eyebrow">Tagline Apparel</p>
+    <h1 class="s1-headline">More Than<br><span>Clothes.</span></h1>
+  </div>
+
+  <!-- Scene 2 -->
+  <div class="scene s2">
+    <p class="s2-label">We stand for</p>
+    <div class="pillars">
+      <span class="pillar god">✝ GOD</span>
+      <span class="pillar health">⚡ HEALTH</span>
+      <span class="pillar wealth">🚀 WEALTH</span>
+    </div>
+  </div>
+
+  <!-- Scene 3 -->
+  <div class="scene s3">
+    <h2 class="s3-title">Free. Daily.</h2>
+    <p class="s3-sub">Knowledge delivered to you</p>
+    <div class="chips">
+      <span class="chip">✝ Daily Verse</span>
+      <span class="chip">🥗 Nutrition</span>
+      <span class="chip">💰 Wealth Tips</span>
+    </div>
+    <p class="s3-free">No paywall. Ever.</p>
+  </div>
+
+  <!-- Scene 4 -->
+  <div class="scene s4">
+    <img class="s4-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tagline.space&margin=0" alt="Scan to visit tagline.space">
+    <p class="s4-cta-label">Scan or visit</p>
+    <p class="s4-url">tagline.space</p>
+    <p class="s4-tagline">God · Health · Wealth</p>
   </div>
 
   <!-- Accent line -->
@@ -336,15 +320,12 @@ function playAd(){
   playing = true;
 
   const ad = document.getElementById('ad');
-
-  // Reset all animations
   ad.querySelectorAll('*').forEach(el=>{
     el.style.animation = 'none';
-    el.offsetHeight; // force reflow
+    el.offsetHeight;
     el.style.animation = '';
   });
 
-  // Start all animations
   setTimeout(()=>{
     ad.querySelectorAll('*').forEach(el=>{
       el.style.animationPlayState = 'running';
