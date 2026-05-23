@@ -282,7 +282,7 @@ function dcSubscribe(e, form){
   e.preventDefault();
   const email = form.querySelector('input[type=email]').value;
   // Submit to Formspree — replace FORMSPREE_ID with your form ID from formspree.io
-  fetch('https://formspree.io/f/FORMSPREE_ID', {
+  fetch('https://formspree.io/f/mredlzrv', {
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body: JSON.stringify({email, source: window.location.pathname})
