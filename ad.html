@@ -38,11 +38,19 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   position:absolute;inset:0;
   background:linear-gradient(
     to bottom,
-    rgba(0,0,0,.1) 0%,
-    rgba(0,0,0,0) 38%,
-    rgba(7,7,42,.8) 58%,
-    rgba(7,7,42,1) 100%
+    rgba(0,0,0,.15) 0%,
+    rgba(0,0,0,0) 30%,
+    transparent 55%,
+    #07072A 68%,
+    #07072A 100%
   );
+}
+/* solid dark panel bottom 38% */
+.ad-panel{
+  position:absolute;bottom:0;left:0;right:0;
+  height:38%;
+  background:#07072A;
+  border-top:1px solid rgba(195,149,60,.2);
 }
 .ad-noise{
   position:absolute;inset:0;
@@ -83,8 +91,10 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 
 /* SCENE BASE */
 .scene{
-  position:absolute;bottom:22%;left:0;right:0;
-  padding:0 32px;
+  position:absolute;bottom:0;left:0;right:0;
+  height:38%;
+  padding:20px 32px;
+  display:flex;flex-direction:column;justify-content:center;
   opacity:0;pointer-events:none;
 }
 
@@ -276,6 +286,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   <!-- Gradient overlay -->
   <div class="ad-grad"></div>
   <div class="ad-noise"></div>
+  <div class="ad-panel"></div>
 
   <!-- Logo bar -->
   <div class="ad-logo" id="adLogo">
