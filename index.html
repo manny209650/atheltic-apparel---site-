@@ -1286,7 +1286,7 @@ function filterShop(cat, btn){
 }
 
 const STRIPE_TIP={'5':'https://buy.stripe.com/8x2fZhgk04zM7pJ8klasg0f','10':'https://buy.stripe.com/4gMbJ1d7O9U6dO7445asg0g','25':'STRIPE_TIP_25'};
-const STRIPE_CUSTOM_LOCK='STRIPE_CUSTOM_5';
+const STRIPE_CUSTOM_LOCK='https://buy.stripe.com/7sY28r5Fm1nA9xR301asg0h';
 const STRIPE_LINKS={
   'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00',
   '3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01',
@@ -1343,7 +1343,7 @@ function submitCustomOrder(e){
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body: JSON.stringify(data)
   }).then(()=>{
-    if(STRIPE_CUSTOM_LOCK && STRIPE_CUSTOM_LOCK!=='STRIPE_CUSTOM_5'){
+    if(STRIPE_CUSTOM_LOCK && STRIPE_CUSTOM_LOCK!=='https://buy.stripe.com/7sY28r5Fm1nA9xR301asg0h'){
       window.open(STRIPE_CUSTOM_LOCK,'_blank');
     }
     form.innerHTML='<p style="text-align:center;padding:40px 0;color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.8">Order locked! ✅<br><span style="color:rgba(195,149,60,.8);font-size:.75rem;letter-spacing:.1em">Complete the $5 payment in the new tab.<br>We\'ll send your custom quote within 24 hours.</span></p>';
