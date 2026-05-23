@@ -336,6 +336,10 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 .footer-social{display:flex;gap:10px}
 .soc{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.95rem;color:var(--muted);transition:border-color .3s,color .3s}
 .soc:hover{border-color:var(--gold);color:var(--gold)}
+.feat-card{background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left}
+.feat-card-icon{font-size:1.6rem;margin-bottom:12px}
+.feat-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px}
+.feat-card-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
 @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px};footer{padding:60px 24px 32px}}
 @media(max-width:480px){.footer-top{grid-template-columns:1fr}}
 @media(max-width:480px){.moon-wrap{width:110px;height:110px;right:-15px;bottom:16%}}
@@ -644,20 +648,20 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     <a href="#contact" class="btn-ghost" style="font-size:.75rem;padding:20px 52px">Ask a Question</a>
   </div>
   <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:860px;margin:0 auto;transition-delay:.2s">
-    <div style="background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left">
-      <div style="font-size:1.6rem;margin-bottom:12px">👕</div>
-      <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px">Jerseys &amp; Sets</p>
-      <p style="font-size:.82rem;color:var(--muted);line-height:1.65">Custom basketball jerseys, jersey + shorts sets — full sublimation or embroidery. Reversible option available.</p>
+    <div class="feat-card">
+      <div class="feat-card-icon">👕</div>
+      <p class="feat-card-title">Jerseys &amp; Sets</p>
+      <p class="feat-card-desc">Custom basketball jerseys, jersey + shorts sets — full sublimation or embroidery. Reversible option available.</p>
     </div>
-    <div style="background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left">
-      <div style="font-size:1.6rem;margin-bottom:12px">🎨</div>
-      <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px">Full Custom Build</p>
-      <p style="font-size:.82rem;color:var(--muted);line-height:1.65">Hoodies, tees, crewnecks and more — add your logos front &amp; back, choose colors, pick placement and decoration style.</p>
+    <div class="feat-card">
+      <div class="feat-card-icon">🎨</div>
+      <p class="feat-card-title">Full Custom Build</p>
+      <p class="feat-card-desc">Hoodies, tees, crewnecks and more — add your logos front &amp; back, choose colors, pick placement and decoration style.</p>
     </div>
-    <div style="background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left">
-      <div style="font-size:1.6rem;margin-bottom:12px">💬</div>
-      <p style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px">$5 Design Deposit</p>
-      <p style="font-size:.82rem;color:var(--muted);line-height:1.65">Submit your design request and pay $5 to lock your spot. Applied as credit toward your order. Quote in 24 hrs.</p>
+    <div class="feat-card">
+      <div class="feat-card-icon">💬</div>
+      <p class="feat-card-title">$5 Design Deposit</p>
+      <p class="feat-card-desc">Submit your design request and pay $5 to lock your spot. Applied as credit toward your order. Quote in 24 hrs.</p>
     </div>
   </div>
 </section>
@@ -807,7 +811,6 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         <li><a href="#about">Our Story</a></li>
         <li><a href="#values">Our Values</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
@@ -815,8 +818,6 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     <span>© 2026 Tagline Apparel. All rights reserved. · GOD. HEALTH. WEALTH.</span>
     <div class="footer-social">
       <a class="soc" href="https://instagram.com/tagline._" target="_blank" aria-label="Instagram">◈</a>
-      <a class="soc" href="#" aria-label="TikTok">▷</a>
-      <a class="soc" href="#" aria-label="Twitter/X">✕</a>
     </div>
   </div>
 </footer>

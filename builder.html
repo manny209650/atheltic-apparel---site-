@@ -188,6 +188,8 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
 .footer-social{display:flex;gap:10px}
 .soc{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.95rem;color:var(--muted);transition:border-color .3s,color .3s}
 .soc:hover{border-color:var(--gold);color:var(--gold)}
+.add-logo-btn{margin-top:8px;background:none;border:1px dashed rgba(224,32,32,.35);color:var(--muted);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;cursor:pointer;width:100%;transition:border-color .3s}
+.add-logo-btn:hover{border-color:var(--gold)}
 @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px};footer{padding:60px 24px 32px}}
 @media(max-width:480px){.footer-top{grid-template-columns:1fr}}
 
@@ -355,7 +357,7 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
           <img id="uploadPreviewImg" alt="Uploaded logo preview">
         </div>
         <div id="extraLogos" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
-        <button type="button" onclick="addLogoSlot()" style="margin-top:8px;background:none;border:1px dashed rgba(224,32,32,.35);color:var(--muted);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;cursor:pointer;width:100%;transition:border-color .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(224,32,32,.35)'">+ Add Another Logo</button>
+        <button type="button" class="add-logo-btn" onclick="addLogoSlot()">+ Add Another Logo</button>
       </div>
       <div class="ctrl-block">
         <div class="ctrl-head"><div class="ctrl-num">4</div><p class="ctrl-title">Logo / Text Placement</p></div>
@@ -502,7 +504,6 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
         <li><a href="index.html#about">Our Story</a></li>
         <li><a href="index.html#values">Our Values</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="#">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
@@ -510,8 +511,6 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
     <span>© 2026 Tagline Apparel. All rights reserved. · GOD. HEALTH. WEALTH.</span>
     <div class="footer-social">
       <a class="soc" href="https://instagram.com/tagline._" target="_blank" aria-label="Instagram">◈</a>
-      <a class="soc" href="#" aria-label="TikTok">▷</a>
-      <a class="soc" href="#" aria-label="Twitter/X">✕</a>
     </div>
   </div>
 </footer>
