@@ -23,14 +23,14 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .ad-bg{
   position:absolute;inset:0;
   background-image:url('https://i.ibb.co/Jjr8GXmW/IMG-4172.jpg');
-  background-size:150%;
-  background-position:center top;
+  background-size:100%;
+  background-position:top center;
   animation:kenBurns 15s linear forwards;
   animation-play-state:paused;
 }
 @keyframes kenBurns{
-  0%{transform:scale(1) translate(0,0)}
-  100%{transform:scale(1.12) translate(-3%,-2%)}
+  0%{transform:scale(1)}
+  100%{transform:scale(1.05)}
 }
 
 /* ── OVERLAYS ── */
@@ -38,10 +38,10 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   position:absolute;inset:0;
   background:linear-gradient(
     to bottom,
-    rgba(0,0,0,.15) 0%,
-    rgba(0,0,0,.05) 40%,
-    rgba(7,7,42,.75) 65%,
-    rgba(7,7,42,.98) 100%
+    rgba(0,0,0,.1) 0%,
+    rgba(0,0,0,0) 45%,
+    rgba(7,7,42,.85) 72%,
+    rgba(7,7,42,1) 100%
   );
 }
 .ad-noise{
