@@ -109,8 +109,6 @@ const PRODUCTS=[
   {handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,badge:'Custom',cats:['all','mens','custom'],img:'https://i.ibb.co/W4cCRYnY/6754.png',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey'],sizes:['S','M','L','XL']},
 ];
 
-const STRIPE_LINKS={'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00','3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01','mens-gym-shirt':'https://buy.stripe.com/28E5kDaZG1nAbFZastasg02','untitled-nov4_20-32':'https://buy.stripe.com/fZucN5ebS1nA6lFastasg04','3-d-embroidery-hoodie':'https://buy.stripe.com/cNi7sLebS8Q26lF0RTasg05','3-d-embroidery-t-shirt':'https://buy.stripe.com/bJe3cvd7O3vI4dxcABasg06','womens-sport-bra':'https://buy.stripe.com/7sYcN5ffW7LYh0jcABasg07','mens-compression-pants':'https://buy.stripe.com/28EeVdc3K6HUdO77ghasg08','mens-single-leg-compression-pants':'https://buy.stripe.com/eVq00jffW2rE11lfMNasg09','tl-rocket':'https://buy.stripe.com/5kQ3cv2tafeqh0j1VXasg0a','mensrunner-vest':'https://buy.stripe.com/7sYaEXd7O1nA5hBbwxasg0b','womens-2-1-shorts':'https://buy.stripe.com/5kQ00j0l25DQcK3bwxasg0c','womens-gym-shorts':'https://buy.stripe.com/14AfZh6Jqc2eeSb589asg0d','boxe-tees':'https://buy.stripe.com/3cIaEXgk0eamh0j6cdasg0e','boxy-tanks':'https://buy.stripe.com/5kQeVd3xe6HU6lFfMNasg0j'};
-
 function badgeClass(b){return b==='New'?'badge-new':b==='Best Seller'||b==='Bestseller'?'badge-hot':'badge-ltd';}
 
 var handle = new URLSearchParams(window.location.search).get('h');

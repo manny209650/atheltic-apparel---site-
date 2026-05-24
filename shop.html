@@ -12,6 +12,13 @@
   var params=new URLSearchParams(window.location.search);
   if(params.get('key')!==SECRET){
     window.location.replace('/');
+    return;
+  }
+  /* Force reload if browser served a cached old version */
+  var PAGE_VER='v5';
+  if(sessionStorage.getItem('tlShopVer')!==PAGE_VER){
+    sessionStorage.setItem('tlShopVer',PAGE_VER);
+    window.location.reload(true);
   }
 })();
 </script>
