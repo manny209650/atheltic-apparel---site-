@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){
+  var SECRET='TAGLINE2026';
+  var params=new URLSearchParams(window.location.search);
+  if(params.get('key')!==SECRET){
+    window.location.replace('/');
+  }
+})();
+</script>
+<title>TAGLINE — To the Moon!</title>
+<meta name="description" content="Christian athletic clothing brand. GOD. HEALTH. WEALTH. Built for believers. Designed for champions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #E02020;
+  --gold-bright: #FF3333;
+  --gold-dark: #AA0000;
+  --blue: #1B3DD8;
+  --blue-bright: #4361EE;
+  --white: #FFFFFF;
+  --space: #06060F;
+  --space2: #0C0C1E;
+  --space3: #111126;
+  --muted: #8A8AAA;
+  --text: #DDE0F0;
+  --card: #0D0D25;
+  --border-gold: rgba(224,32,32,0.18);
+  --border-soft: rgba(255,255,255,0.07);
+  --gold-grad: linear-gradient(135deg,#FF3333 0%,#E02020 50%,#AA0000 100%);
+  --blue-grad: linear-gradient(135deg,#4361EE 0%,#1B3DD8 100%);
+  --hero-bg: radial-gradient(ellipse at 50% 0%,#0B1640 0%,#060610 50%,#020208 100%);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* ── UTILITY ── */
+.gold-text{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section{padding:100px 60px}
+.section-label{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,5rem);line-height:.95;letter-spacing:.04em;color:var(--white);margin-bottom:56px}
+.section-title .g{color:var(--gold)}
+.btn-primary{display:inline-block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;background:var(--gold-grad);color:var(--space);padding:16px 40px;text-decoration:none;transition:opacity .3s,transform .2s}
+.btn-primary:hover{opacity:.85;transform:translateY(-2px)}
+.btn-ghost{display:inline-block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;border:1.5px solid rgba(255,255,255,.2);color:var(--white);padding:15px 40px;text-decoration:none;transition:border-color .3s,color .3s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── CURSOR (pointer devices only) ── */
+@media(pointer:fine){
+  body{cursor:none}
+  .cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s}
+  .cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(224,32,32,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+  a,button,[onclick]{cursor:none!important}
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,backdrop-filter .3s}
+nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-gold)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.12em;text-decoration:none;color:var(--white)}
+.nav-logo .g{color:var(--gold)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-grad);color:var(--space);padding:10px 24px;text-decoration:none;font-weight:700;transition:opacity .3s,transform .2s}
+.nav-cta:hover{opacity:.85;transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-burger span{display:block;width:24px;height:2px;background:var(--white);transition:.3s}
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(6,6,15,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:.1em;color:var(--white);text-decoration:none;transition:color .3s}
+.mob-menu a:hover{color:var(--gold)}
+.mob-close{position:absolute;top:24px;right:28px;background:none;border:none;font-size:1.8rem;color:var(--muted);cursor:pointer}
+@media(max-width:900px){
+  nav{padding:20px 24px}
+  .nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}
+}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--hero-bg);position:relative;overflow:hidden;display:flex;align-items:center}
+.stars-wrap{position:absolute;inset:0;pointer-events:none}
+.s{position:absolute;border-radius:50%;background:var(--sc,#fff);animation:twinkle var(--d,5s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+@keyframes twinkle{0%,100%{opacity:var(--o1,.08)}50%{opacity:var(--o2,.55)}}
+.hero-glow-a{position:absolute;bottom:-120px;left:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(224,32,32,.05) 0%,transparent 70%);pointer-events:none}
+.hero-glow-b{position:absolute;top:-60px;right:-60px;width:560px;height:560px;background:radial-gradient(circle,rgba(67,97,238,.05) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+.moon-wrap{position:absolute;right:6%;top:8%;width:260px;height:260px;pointer-events:none;opacity:.82;animation:moonpulse 8s ease-in-out infinite}
+.rocket-wrap{position:absolute;pointer-events:none;z-index:4;animation:rocketFly 12s ease-in-out infinite}
+@keyframes rocketFly{
+  0%{left:-8%;bottom:-8%;opacity:0;transform:rotate(45deg)}
+  5%{opacity:1}
+  52%{left:80%;bottom:62%;opacity:1;transform:rotate(45deg)}
+  58%{left:80%;bottom:62%;opacity:1;transform:rotate(10deg)}
+  74%{left:80%;bottom:62%;opacity:1;transform:rotate(10deg)}
+  84%{left:80%;bottom:62%;opacity:0;transform:rotate(10deg)}
+  100%{left:-8%;bottom:-8%;opacity:0;transform:rotate(45deg)}
+}
+.rocket-trail{animation:trailFlicker .12s ease-in-out infinite alternate;transform-origin:top center}
+@keyframes trailFlicker{0%{opacity:.8;transform:scaleX(.9) scaleY(.95)}100%{opacity:1;transform:scaleX(1.1) scaleY(1.05)}}
+@keyframes moonpulse{0%,100%{filter:drop-shadow(0 0 12px rgba(210,195,155,.2))}50%{filter:drop-shadow(0 0 22px rgba(210,195,155,.32))}}
+.hero-content{position:relative;z-index:5;padding:150px 60px 100px;max-width:960px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(224,32,32,.1);border:1px solid rgba(224,32,32,.35);padding:6px 18px;border-radius:100px;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .7s ease .2s forwards}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero-h1{font-family:'Bebas Neue',sans-serif;line-height:.88;letter-spacing:.02em;margin-bottom:22px;opacity:0;animation:fadeUp .9s ease .4s forwards}
+.hero-h1 .l1{display:block;font-size:clamp(4rem,10vw,10rem);color:var(--white)}
+.hero-h1 .l2{display:block;font-size:clamp(5.5rem,15vw,14rem);background:linear-gradient(135deg,#FFD97A 0%,#C8921A 45%,#A87010 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 28px rgba(200,146,26,.25))}
+.hero-h1 .l3{display:block;font-size:clamp(4rem,10vw,10rem);color:var(--white)}
+.hero-motto{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,2.5vw,1.8rem);letter-spacing:.5em;color:var(--blue-bright);margin-bottom:16px;opacity:0;animation:fadeUp .9s ease .6s forwards}
+.hero-motto .dot{color:var(--gold);letter-spacing:.1em}
+.hero-verse{font-family:'Cinzel',serif;font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.7;margin-bottom:44px;opacity:0;animation:fadeUp .9s ease .75s forwards}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp .9s ease .9s forwards}
+.hero-scroll{position:absolute;bottom:40px;left:60px;display:flex;align-items:center;gap:12px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeIn 1s ease 1.3s forwards}
+.scroll-line{width:36px;height:1px;background:var(--gold)}
+/* UFO — mobile only */
+.ufo-wrap{display:none;position:absolute;pointer-events:none;z-index:4;animation:ufoRoam 16s ease-in-out infinite}
+@media(max-width:768px){
+  .hero-content{padding:120px 24px 80px}
+  .hero-scroll{left:24px}
+  .moon-wrap{width:130px;height:130px;right:-20px;top:auto;bottom:18%}
+  .rocket-wrap{display:none}
+  .hero-badge{font-size:.55rem;letter-spacing:.18em;padding:5px 14px}
+  .ufo-wrap{display:block}
+}
+.ufo-svg{animation:ufoBob 2.2s ease-in-out infinite}
+.ufo-beam{animation:beamPulse 2.2s ease-in-out infinite}
+@keyframes ufoRoam{
+  0%{left:105%;bottom:70%;opacity:0}
+  5%{opacity:1}
+  20%{left:65%;bottom:62%}
+  40%{left:30%;bottom:72%}
+  60%{left:55%;bottom:55%}
+  80%{left:15%;bottom:65%}
+  92%{left:-15%;bottom:60%;opacity:1}
+  97%{opacity:0}
+  100%{left:-15%;bottom:70%;opacity:0}
+}
+@keyframes ufoBob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+@keyframes beamPulse{
+  0%,100%{opacity:.18}
+  50%{opacity:.35}
+}
+
+/* ── MARQUEE ── */
+.marquee{background:var(--space3);border-top:1px solid rgba(224,32,32,.2);border-bottom:1px solid rgba(224,32,32,.2);padding:13px 0;overflow:hidden}
+.marquee-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap}
+.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.3em;color:var(--muted);flex-shrink:0;padding:0 28px}
+.marquee-item .star{color:var(--gold)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── VALUES ── */
+.values-sec{background:var(--space2);padding:100px 60px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.val-card{background:var(--card);border:1px solid var(--border-gold);padding:48px 36px;position:relative;overflow:hidden;transition:transform .3s,border-color .35s;display:flex;flex-direction:column}
+.val-card:hover{transform:translateY(-5px);border-color:rgba(224,32,32,.5)}
+.val-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.val-card:hover::after{transform:scaleX(1)}
+.val-icon{font-size:2.4rem;margin-bottom:18px;display:block}
+.val-word{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;letter-spacing:.06em;line-height:1;margin-bottom:16px;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.val-desc{font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:18px}
+.val-topics{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.val-topic{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45);padding:4px 10px}
+.val-cta{display:inline-flex;align-items:center;gap:8px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(195,149,60,.9);text-decoration:none;font-weight:700;margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);transition:gap .2s,color .2s}
+.val-cta:hover{gap:14px;color:#E8B84B}
+.val-verse{font-family:'Cinzel',serif;font-size:.72rem;line-height:1.75;color:rgba(224,32,32,.55);border-left:2px solid rgba(224,32,32,.25);padding-left:14px;margin-bottom:0}
+@media(max-width:900px){.values-grid{grid-template-columns:1fr};.values-sec{padding:70px 24px}}
+@media(max-width:768px){.values-sec{padding:70px 20px}}
+
+/* ── SHOP ── */
+.shop-sec{background:var(--space);padding:100px 60px}
+.shop-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+.shop-count{font-size:.68rem;letter-spacing:.15em;color:var(--muted)}
+.shop-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+.f-tab{padding:8px 20px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--muted);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s;white-space:nowrap}
+.f-tab:hover,.f-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(224,32,32,.07)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.prod-card{background:var(--card);border:1px solid var(--border-soft);overflow:hidden;position:relative;transition:border-color .3s,transform .3s;cursor:pointer}
+.prod-card:hover{border-color:rgba(224,32,32,.4);transform:translateY(-4px)}
+.prod-img{height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--space3)}
+.prod-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+.prod-card:hover .prod-img img{transform:scale(1.05)}
+.badge{position:absolute;top:14px;left:14px;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;padding:4px 12px;z-index:2}
+.badge-new{background:var(--gold-grad);color:var(--space)}
+.badge-hot{background:linear-gradient(135deg,#EF4444,#B91C1C);color:#fff}
+.badge-ltd{background:linear-gradient(135deg,#7C3AED,#4C1D95);color:#fff}
+.prod-hover-btn{position:absolute;bottom:14px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--gold-grad);color:var(--space);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;padding:9px 22px;border:none;cursor:pointer;opacity:0;transition:opacity .3s,transform .3s;white-space:nowrap;z-index:3}
+.prod-card:hover .prod-hover-btn{opacity:1;transform:translateX(-50%) translateY(0)}
+.prod-info{padding:16px 20px 10px;display:flex;justify-content:space-between;align-items:flex-start}
+.prod-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.06em;color:var(--white);margin-bottom:3px}
+.prod-cat{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);line-height:1.5}
+.prod-price{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.prod-dots{display:flex;gap:5px;padding:0 20px 10px;flex-wrap:wrap}
+.prod-dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);flex-shrink:0}
+.prod-sizes{display:flex;gap:4px;padding:0 20px 14px;flex-wrap:wrap}
+.prod-size{font-size:.5rem;letter-spacing:.1em;color:var(--muted);border:1px solid rgba(255,255,255,.12);padding:2px 6px}
+.prod-quote-bar{padding:10px 20px 14px;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(224,32,32,.8)}
+/* ── TIP JAR ── */
+.tip-section{padding:60px 24px;border-top:1px solid rgba(255,255,255,.06);background:#07072A;text-align:center}
+.tip-inner{max-width:500px;margin:0 auto}
+.tip-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;color:#fff;margin-bottom:8px}
+.tip-sub{font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.tip-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.tip-btn{border:1px solid rgba(195,149,60,.4);background:rgba(195,149,60,.07);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;padding:14px 28px;cursor:pointer;transition:background .25s,border-color .25s;text-decoration:none;display:inline-block}
+.tip-btn:hover{background:rgba(195,149,60,.18);border-color:rgba(195,149,60,.8)}
+/* ── PRODUCT DETAIL MODAL (PDP) ── */
+.pdp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:10000;display:none;align-items:center;justify-content:center;padding:16px;-webkit-overflow-scrolling:touch}
+.pdp-overlay.open{display:flex}
+.pdp-modal{background:var(--card);border:1px solid var(--border-gold);width:100%;max-width:820px;max-height:92vh;overflow-y:auto;position:relative;display:grid;grid-template-columns:1fr 1fr;-webkit-overflow-scrolling:touch}
+.pdp-close{position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,.35);font-size:1.6rem;cursor:pointer;line-height:1;z-index:2;transition:color .2s}
+.pdp-close:hover{color:#fff}
+.pdp-img-col{position:relative;background:var(--space2);aspect-ratio:1;overflow:hidden}
+.pdp-img-col img{width:100%;height:100%;object-fit:cover;display:block}
+.pdp-img-badge{position:absolute;top:12px;left:12px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:5px 10px;font-weight:700}
+.pdp-info-col{padding:28px 28px 24px;display:flex;flex-direction:column;gap:0;overflow-y:auto}
+.pdp-eyebrow{font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.pdp-title{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.05em;color:var(--white);line-height:1;margin-bottom:6px}
+.pdp-price{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);margin-bottom:14px}
+.pdp-desc{font-size:.74rem;line-height:1.7;color:var(--muted);padding-bottom:16px;border-bottom:1px solid var(--border-soft);margin-bottom:16px}
+.pdp-field{margin-bottom:16px}
+.pdp-field-label{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px}
+.pdp-field-label span{color:var(--white);text-transform:none;letter-spacing:.05em}
+.pdp-swatches{display:flex;flex-wrap:wrap;gap:8px}
+.pdp-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,box-shadow .15s;flex-shrink:0}
+.pdp-swatch:hover{transform:scale(1.15)}
+.pdp-swatch.sel{border-color:#fff;box-shadow:0 0 0 2px var(--gold)}
+.pdp-sizes{display:flex;flex-wrap:wrap;gap:7px}
+.pdp-sz{font-size:.6rem;letter-spacing:.14em;border:1px solid rgba(255,255,255,.15);color:var(--muted);padding:6px 13px;cursor:pointer;transition:.2s;text-transform:uppercase}
+.pdp-sz:hover{border-color:var(--gold);color:#fff}
+.pdp-sz.sel{border-color:var(--gold);color:#fff;background:rgba(224,32,32,.12)}
+.pdp-buy{margin-top:auto;padding-top:18px;display:block;width:100%;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;background:var(--gold-grad);color:var(--space);border:none;padding:15px;cursor:pointer;transition:opacity .2s,transform .15s}
+.pdp-buy:hover{opacity:.85;transform:translateY(-1px)}
+@media(max-width:680px){
+  .pdp-modal{grid-template-columns:1fr;max-height:95vh}
+  .pdp-img-col{aspect-ratio:4/3}
+  .pdp-info-col{padding:20px}
+}
+/* ── CUSTOM ORDER MODAL ── */
+.co-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.co-overlay.open{opacity:1;pointer-events:all}
+.co-modal{background:#0D0D25;border:1px solid rgba(195,149,60,.3);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;padding:36px 32px;position:relative}
+.co-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.4);font-size:1.4rem;cursor:pointer;line-height:1}
+.co-close:hover{color:#fff}
+.co-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.1em;color:#fff;margin-bottom:4px}
+.co-sub{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(195,149,60,.8);margin-bottom:24px}
+.co-field{margin-bottom:16px}
+.co-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.co-input,.co-select,.co-textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#fff;padding:11px 14px;font-size:.82rem;outline:none;font-family:inherit}
+.co-input:focus,.co-select:focus,.co-textarea:focus{border-color:rgba(195,149,60,.5)}
+.co-select option{background:#0D0D25}
+.co-textarea{resize:vertical;min-height:80px}
+.co-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.co-fee-note{background:rgba(224,32,32,.07);border:1px solid rgba(224,32,32,.2);padding:14px 16px;margin:20px 0;font-size:.74rem;color:rgba(255,255,255,.7);line-height:1.6}
+.co-fee-note strong{color:#fff}
+.co-submit{width:100%;background:linear-gradient(135deg,#C3953C,#E8B84B);color:#07072A;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.2em;padding:15px;border:none;cursor:pointer;margin-top:8px}
+.co-submit:hover{filter:brightness(1.1)}
+@media(max-width:1100px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.co-grid{grid-template-columns:1fr}.co-modal{padding:28px 20px}}
+@media(max-width:600px){.products-grid{grid-template-columns:1fr};.shop-sec{padding:70px 20px}}
+
+/* ── VERSE BANNER ── */
+.verse-banner{padding:80px 60px;background:linear-gradient(135deg,#07072A 0%,#0D1B4D 50%,#07072A 100%);text-align:center;border-top:1px solid rgba(224,32,32,.15);border-bottom:1px solid rgba(224,32,32,.15);position:relative;overflow:hidden}
+.verse-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(67,97,238,.12) 0%,transparent 70%)}
+.verse-banner blockquote{position:relative;z-index:2;font-family:'Cinzel',serif;font-size:clamp(1.2rem,2.8vw,2rem);font-weight:600;color:var(--white);line-height:1.55;max-width:820px;margin:0 auto 12px}
+.verse-banner cite{position:relative;z-index:2;font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold);letter-spacing:.25em;text-transform:uppercase;display:block;font-style:normal}
+@media(max-width:768px){.verse-banner{padding:60px 24px}}
+
+/* ── CUSTOM BUILDER ── */
+.builder-sec{background:var(--space2);padding:100px 60px}
+.builder-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px}
+.builder-preview{position:sticky;top:96px;background:var(--card);border:1px solid var(--border-gold);padding:44px 32px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.prev-lbl{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.prev-wrap{width:100%;max-width:260px;position:relative;aspect-ratio:3/4;background:radial-gradient(ellipse at 48% 32%,rgba(44,44,75,.85) 0%,rgba(7,7,15,.98) 100%);border:1px solid rgba(255,255,255,.07);overflow:hidden}
+.prev-wrap::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;z-index:0}
+#prevSvg{width:100%;height:100%}
+#logoOverlay{position:absolute;pointer-events:none;object-fit:contain;display:none}
+#textOverlay{position:absolute;pointer-events:none;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;color:rgba(0,0,0,.4);white-space:nowrap;transform:translate(-50%,-50%)}
+.side-toggle{display:flex;width:100%;border:1px solid var(--border-gold);overflow:hidden;margin-bottom:2px}
+.side-btn{flex:1;padding:9px;background:none;border:none;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .25s;font-weight:600}
+.side-btn.active{background:var(--gold-grad);color:var(--space)}
+.side-btn:not(.active):hover{background:rgba(224,32,32,.08);color:var(--text)}
+.prev-garment-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--gold)}
+.prev-color-name{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.builder-controls{display:flex;flex-direction:column;gap:24px}
+.ctrl-block{background:var(--card);border:1px solid var(--border-soft);padding:26px 22px}
+.ctrl-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(224,32,32,.1)}
+.ctrl-num{font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:var(--gold-grad);color:var(--space);width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ctrl-title{font-size:.66rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.garment-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:320px;overflow-y:auto;padding-right:4px}
+.garment-opts::-webkit-scrollbar{width:4px}
+.garment-opts::-webkit-scrollbar-track{background:transparent}
+.garment-opts::-webkit-scrollbar-thumb{background:rgba(224,32,32,.3);border-radius:2px}
+.g-opt{border:1px solid rgba(255,255,255,.08);padding:0;text-align:left;cursor:pointer;background:var(--card);transition:border-color .3s,background .3s;width:100%;display:flex;align-items:center;gap:10px;overflow:hidden}
+.g-opt:hover,.g-opt.active{border-color:var(--gold);background:rgba(224,32,32,.06)}
+.g-opt-thumb{width:52px;height:52px;object-fit:cover;flex-shrink:0;display:block}
+.g-opt-info{padding:6px 8px 6px 0;flex:1;min-width:0}
+.g-opt-name{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .3s;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-opt-price{font-size:.65rem;color:var(--gold);font-weight:600;display:block;margin-top:2px}
+.g-opt.active .g-opt-name{color:var(--gold)}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
+.sw:hover{transform:scale(1.2)}
+.sw.active{border-color:var(--gold)}
+.sw.active::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(255,255,255,.85)}
+.upload-zone{border:2px dashed rgba(224,32,32,.3);background:rgba(224,32,32,.03);padding:28px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s;position:relative}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--gold);background:rgba(224,32,32,.07)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:2rem;margin-bottom:8px;opacity:.5}
+.upload-txt{font-size:.78rem;color:var(--muted);line-height:1.65}
+.upload-txt strong{color:var(--gold)}
+#uploadPreviewImg{width:72px;height:72px;object-fit:contain;border:1px solid rgba(224,32,32,.2);margin:10px auto 0;display:none}
+.place-wrap{display:flex;gap:24px;align-items:flex-start}
+.place-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:150px;flex-shrink:0}
+.p-btn{aspect-ratio:1;border:1px solid rgba(255,255,255,.08);background:transparent;cursor:pointer;transition:background .2s,border-color .2s;font-size:.7rem;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.p-btn:hover,.p-btn.active{background:rgba(224,32,32,.12);border-color:var(--gold);color:var(--gold)}
+.place-hint{font-size:.75rem;color:var(--muted);line-height:1.7}
+.text-inputs{display:flex;flex-direction:column;gap:10px}
+.c-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;padding:12px 16px;outline:none;width:100%;transition:border-color .3s}
+.c-input:focus{border-color:var(--gold)}
+.c-input::placeholder{color:var(--muted)}
+.font-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.f-opt{padding:6px 16px;border:1px solid rgba(255,255,255,.1);font-size:.7rem;cursor:pointer;color:var(--muted);background:transparent;transition:border-color .3s,color .3s}
+.f-opt:hover,.f-opt.active{border-color:var(--gold);color:var(--gold)}
+.order-sum{background:var(--card);border:1px solid var(--border-gold);padding:26px 22px}
+.price-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);padding:10px 0;border-bottom:1px solid rgba(224,32,32,.08)}
+.price-row strong{color:var(--text)}
+.deposit-box{background:rgba(224,32,32,.05);border:1px solid rgba(224,32,32,.18);padding:18px 16px;margin:14px 0 18px}
+.deposit-box-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.deposit-box-body{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:14px}
+.deposit-fee{font-family:'Bebas Neue',sans-serif;font-size:2rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+.deposit-fee-sub{font-size:.7rem;color:var(--muted);line-height:1.5}
+.btn-order{width:100%;padding:18px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:opacity .3s,transform .2s}
+.btn-order:hover{opacity:.85;transform:translateY(-2px)}
+.btn-deposit{display:block;text-align:center;padding:15px;background:var(--gold-grad);color:var(--space);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;text-decoration:none;margin-top:14px;transition:opacity .3s}
+.btn-deposit:hover{opacity:.85}
+.deposit-fine{font-size:.7rem;color:var(--muted);margin-top:10px;line-height:1.55;text-align:center}
+.order-note{text-align:center;font-size:.6rem;color:var(--muted);letter-spacing:.08em;margin-top:8px}
+.order-success{display:none;text-align:center;padding:20px;border:1px solid rgba(224,32,32,.3);background:rgba(224,32,32,.05)}
+.order-success .check{font-size:2.2rem;display:block;margin-bottom:10px}
+.order-success p{font-size:.85rem;color:var(--text);line-height:1.6}
+@media(max-width:900px){.builder-layout{grid-template-columns:1fr;gap:32px};.builder-preview{position:static};.builder-sec{padding:70px 24px}}
+@media(max-width:768px){.builder-sec{padding:70px 20px}}
+
+/* ── ABOUT ── */
+.about-sec{background:var(--space);padding:100px 60px}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-card{background:var(--card);border:1px solid var(--border-gold);padding:60px 40px;text-align:center;position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(224,32,32,.07) 0%,transparent 60%)}
+.about-moon{font-size:5rem;display:block;position:relative;z-index:2;margin-bottom:18px;filter:drop-shadow(0 0 12px rgba(210,185,120,.25));animation:moonpulse 8s ease-in-out infinite}
+.about-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4vw,3.8rem);letter-spacing:.2em;line-height:1.2;position:relative;z-index:2}
+.about-big .g{color:var(--gold)}
+.about-big .dot{color:var(--gold)}
+.about-card-verse{font-family:'Cinzel',serif;font-size:.74rem;color:rgba(224,32,32,.5);margin-top:26px;line-height:1.75;position:relative;z-index:2}
+.about-content .section-title{font-size:clamp(2.5rem,4vw,4rem);margin-bottom:24px}
+.about-p{font-size:.95rem;line-height:1.85;color:var(--muted);margin-bottom:18px}
+.about-pillars{display:flex;flex-direction:column;gap:14px;margin:28px 0 32px}
+.pillar{display:flex;align-items:flex-start;gap:12px;font-size:.88rem;color:var(--text);line-height:1.6}
+.pillar-dot{width:8px;height:8px;border-radius:50%;background:var(--gold-grad);flex-shrink:0;margin-top:6px}
+@media(max-width:900px){.about-layout{grid-template-columns:1fr;gap:40px};.about-sec{padding:70px 24px}}
+@media(max-width:768px){.about-sec{padding:70px 20px}}
+
+/* ── CONTACT ── */
+.contact-sec{background:var(--space2);padding:100px 60px}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-info .section-title{font-size:clamp(2.5rem,4vw,4rem);margin-bottom:20px}
+.contact-desc{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:36px}
+.c-item{display:flex;gap:14px;margin-bottom:18px;align-items:center}
+.c-icon{width:44px;height:44px;flex-shrink:0;background:rgba(224,32,32,.08);border:1px solid rgba(224,32,32,.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.c-item-txt{font-size:.85rem;color:var(--muted)}
+.c-item-txt strong{display:block;font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-g{display:flex;flex-direction:column;gap:6px}
+.form-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.f-in,.f-sel,.f-ta{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;padding:12px 16px;outline:none;width:100%;transition:border-color .3s;appearance:none}
+.f-in:focus,.f-sel:focus,.f-ta:focus{border-color:var(--gold)}
+.f-in::placeholder,.f-ta::placeholder{color:var(--muted)}
+.f-ta{min-height:120px;resize:vertical}
+.f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8AAA' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.f-sel option{background:var(--space3)}
+.btn-send{padding:16px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:opacity .3s,transform .2s}
+.btn-send:hover{opacity:.85;transform:translateY(-2px)}
+.form-success{display:none;text-align:center;padding:24px;border:1px solid rgba(224,32,32,.3);background:rgba(224,32,32,.05);margin-top:8px}
+.form-success span{font-size:1.8rem;display:block;margin-bottom:10px}
+.form-success p{font-size:.85rem;color:var(--text);line-height:1.6}
+@media(max-width:900px){.contact-layout{grid-template-columns:1fr;gap:40px};.contact-sec{padding:70px 24px}}
+@media(max-width:600px){.form-row{grid-template-columns:1fr};.contact-sec{padding:70px 20px}}
+
+/* ── FOOTER ── */
+footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba(224,32,32,.1)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.footer-logo-link{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.12em;text-decoration:none;color:var(--white);display:block;margin-bottom:8px}
+.footer-logo-link .g{color:var(--gold)}
+.footer-tagline{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.35em;color:var(--gold);margin-bottom:14px}
+.footer-desc{font-size:.8rem;color:var(--muted);line-height:1.85;max-width:270px}
+.footer-col-h{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .3s}
+.footer-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid rgba(255,255,255,.06);font-size:.65rem;color:var(--muted);letter-spacing:.08em;flex-wrap:wrap;gap:10px}
+.footer-social{display:flex;gap:10px}
+.soc{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.95rem;color:var(--muted);transition:border-color .3s,color .3s}
+.soc:hover{border-color:var(--gold);color:var(--gold)}
+.feat-card{background:var(--card);border:1px solid var(--border-gold);padding:32px 24px;text-align:left}
+.feat-card-icon{font-size:1.6rem;margin-bottom:12px}
+.feat-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.08em;color:var(--gold);margin-bottom:8px}
+.feat-card-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px};footer{padding:60px 24px 32px}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr}}
+@media(max-width:480px){.moon-wrap{width:110px;height:110px;right:-15px;bottom:16%}}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.float{animation:float 5s ease-in-out infinite}
+/* ── DISCOUNTS ── */
+.discounts-sec{padding:100px 60px;background:var(--space2)}
+.discounts-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto}
+.discount-card{background:var(--card);border:1px solid var(--border);padding:48px 40px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:20px}
+.discount-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad)}
+.discount-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(224,32,32,.1);border:1px solid rgba(224,32,32,.3);padding:5px 14px;border-radius:100px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);width:fit-content}
+.discount-pct{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:.9;letter-spacing:.04em;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.discount-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;color:var(--white);margin-top:-8px}
+.discount-desc{font-size:.88rem;color:var(--muted);line-height:1.7}
+.idme-btn{display:inline-flex;align-items:center;gap:10px;background:#1B4B8B;color:#fff;border:none;padding:14px 24px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .3s;font-family:'Inter',sans-serif;margin-top:auto}
+.idme-btn:hover{opacity:.85}
+.idme-btn svg{flex-shrink:0}
+.idme-note{font-size:.7rem;color:var(--muted);margin-top:8px;line-height:1.6}
+.subscribe-form{display:flex;flex-direction:column;gap:12px;margin-top:auto}
+.subscribe-form input[type=email]{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:13px 16px;font-size:.85rem;font-family:'Inter',sans-serif;width:100%;outline:none;transition:border-color .3s}
+.subscribe-form input[type=email]:focus{border-color:var(--red)}
+.subscribe-form input[type=email]::placeholder{color:var(--muted)}
+.subscribe-form button{background:var(--gold-grad);color:var(--space);padding:14px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .3s}
+.subscribe-form button:hover{opacity:.85}
+.subscribe-success{display:none;text-align:center;padding:20px;border:1px solid rgba(224,32,32,.3);background:rgba(224,32,32,.06);font-size:.85rem;color:var(--text);line-height:1.7}
+.subscribe-success strong{color:var(--red);display:block;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;margin-bottom:6px}
+@media(max-width:768px){
+  .discounts-sec{padding:80px 24px}
+  .discounts-grid{grid-template-columns:1fr}
+  .discount-pct{font-size:4rem}
+  .discount-card{padding:36px 28px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+  <a href="#home" onclick="event.preventDefault();mobGoTo('home')">Home</a>
+  <a href="#shop" onclick="event.preventDefault();mobGoTo('shop')">Shop</a>
+  <a href="builder.html">Create Merch</a>
+  <a href="food-scale.html" style="color:#00e676">⚖️ Food Scale</a>
+  <a href="health.html">Health Hub</a>
+  <a href="#about" onclick="event.preventDefault();mobGoTo('about')">About</a>
+  <a href="#contact" onclick="event.preventDefault();mobGoTo('contact')">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">TAG<span class="g">LINE</span></a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="builder.html">Create Merch</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="builder.html" class="nav-cta">Create Merch</a>
+  <button class="nav-burger" id="burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HERO -->
+<section class="hero" id="home">
+  <div class="stars-wrap" id="starsWrap"></div>
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <!-- UFO — mobile only -->
+  <div class="ufo-wrap">
+    <svg class="ufo-svg" width="80" height="54" viewBox="0 0 80 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ufoBeamG" cx="50%" cy="0%" r="100%">
+          <stop offset="0%" stop-color="#88DDFF" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#88DDFF" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="ufoBodyG" cx="40%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#D0D8E8"/>
+          <stop offset="60%" stop-color="#8898B8"/>
+          <stop offset="100%" stop-color="#445070"/>
+        </radialGradient>
+        <radialGradient id="ufoDomeG" cx="35%" cy="25%" r="75%">
+          <stop offset="0%" stop-color="#C8F0FF" stop-opacity="0.95"/>
+          <stop offset="50%" stop-color="#60B8E8" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#2060A0" stop-opacity="0.9"/>
+        </radialGradient>
+      </defs>
+      <!-- Beam -->
+      <polygon class="ufo-beam" points="30,36 50,36 62,54 18,54" fill="url(#ufoBeamG)"/>
+      <!-- Shadow under body -->
+      <ellipse cx="40" cy="37" rx="29" ry="5" fill="rgba(0,0,0,0.25)"/>
+      <!-- Body -->
+      <ellipse cx="40" cy="33" rx="29" ry="9" fill="url(#ufoBodyG)"/>
+      <!-- Body rim highlight -->
+      <ellipse cx="40" cy="29" rx="22" ry="4" fill="rgba(255,255,255,0.12)"/>
+      <!-- Dome -->
+      <ellipse cx="40" cy="28" rx="15" ry="13" fill="url(#ufoDomeG)"/>
+      <!-- Dome shine -->
+      <ellipse cx="35" cy="20" rx="6" ry="4" fill="rgba(255,255,255,0.3)" transform="rotate(-15,35,20)"/>
+      <!-- Lights -->
+      <circle cx="16" cy="34" r="2.5" fill="#FF3333" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="0.8s" repeatCount="indefinite"/></circle>
+      <circle cx="27" cy="38" r="2.5" fill="#FFB700" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.1s" repeatCount="indefinite"/></circle>
+      <circle cx="40" cy="39" r="2.5" fill="#44FF88" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="0.7s" repeatCount="indefinite"/></circle>
+      <circle cx="53" cy="38" r="2.5" fill="#4488FF" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="0.9s" repeatCount="indefinite"/></circle>
+      <circle cx="64" cy="34" r="2.5" fill="#FF3333" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.2s" repeatCount="indefinite"/></circle>
+    </svg>
+  </div>
+
+  <div class="rocket-wrap">
+    <svg width="44" height="104" viewBox="0 0 60 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="rBody" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+          <stop offset="0%" stop-color="#F8F8F8"/>
+          <stop offset="100%" stop-color="#C8C8C8"/>
+        </linearGradient>
+        <linearGradient id="rFlameA" x1="30" y1="72" x2="30" y2="138" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FF2200" stop-opacity="1"/>
+          <stop offset="45%" stop-color="#FF6600" stop-opacity=".9"/>
+          <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="rFlameB" x1="30" y1="72" x2="30" y2="122" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FF6600"/>
+          <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="rFlameC" x1="30" y1="72" x2="30" y2="108" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFEE44"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Outer flame -->
+      <path d="M17 74 Q8 92 12 112 Q18 130 30 138 Q42 130 48 112 Q52 92 43 74 Z" fill="url(#rFlameA)" class="rocket-trail"/>
+      <!-- Mid flame -->
+      <path d="M20 74 Q13 88 16 104 Q22 120 30 126 Q38 120 44 104 Q47 88 40 74 Z" fill="url(#rFlameB)" class="rocket-trail"/>
+      <!-- Inner core -->
+      <path d="M23 74 Q18 85 20 97 Q25 110 30 114 Q35 110 40 97 Q42 85 37 74 Z" fill="url(#rFlameC)" class="rocket-trail"/>
+      <!-- Left fin (blue) -->
+      <path d="M16 52 L4 70 Q4 76 9 74 L16 68 Z" fill="#4361EE"/>
+      <!-- Right fin (blue) -->
+      <path d="M44 52 L56 70 Q56 76 51 74 L44 68 Z" fill="#4361EE"/>
+      <!-- Body -->
+      <path d="M16 30 Q18 12 30 2 Q42 12 44 30 L44 68 Q40 74 30 76 Q20 74 16 68 Z" fill="url(#rBody)"/>
+      <!-- Nose cone (red) -->
+      <path d="M30 2 Q42 12 44 28 Q37 18 30 16 Q23 18 16 28 Q18 12 30 2 Z" fill="#FF3B3B"/>
+      <!-- Window -->
+      <circle cx="30" cy="42" r="10" fill="#1B3DD8" opacity=".95"/>
+      <circle cx="30" cy="42" r="7" fill="#4361EE" opacity=".8"/>
+      <circle cx="27" cy="39" r="3" fill="rgba(255,255,255,.65)"/>
+      <!-- Nozzle -->
+      <rect x="23" y="68" width="14" height="8" rx="3" fill="#888"/>
+    </svg>
+  </div>
+  <div class="moon-wrap">
+    <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="crescentMask">
+          <circle cx="130" cy="130" r="100" fill="white"/>
+          <circle cx="166" cy="110" r="84" fill="black"/>
+        </mask>
+        <radialGradient id="moonG" cx="32%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#EEE8D8"/>
+          <stop offset="40%" stop-color="#C4B89A"/>
+          <stop offset="75%" stop-color="#9A8E78"/>
+          <stop offset="100%" stop-color="#6A6050"/>
+        </radialGradient>
+        <radialGradient id="cr1" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="rgba(40,35,28,.65)"/>
+          <stop offset="55%" stop-color="rgba(40,35,28,.2)"/>
+          <stop offset="100%" stop-color="rgba(180,165,140,.25)"/>
+        </radialGradient>
+        <radialGradient id="cr2" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="rgba(35,30,24,.55)"/>
+          <stop offset="55%" stop-color="rgba(35,30,24,.15)"/>
+          <stop offset="100%" stop-color="rgba(170,155,130,.2)"/>
+        </radialGradient>
+        <radialGradient id="cr3" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="rgba(45,38,30,.5)"/>
+          <stop offset="100%" stop-color="rgba(45,38,30,.05)"/>
+        </radialGradient>
+      </defs>
+      <!-- Moon base -->
+      <circle cx="130" cy="130" r="100" fill="url(#moonG)" mask="url(#crescentMask)"/>
+      <!-- Maria (dark regions) -->
+      <ellipse cx="98" cy="118" rx="22" ry="16" fill="rgba(55,48,38,.28)" mask="url(#crescentMask)"/>
+      <ellipse cx="118" cy="158" rx="16" ry="10" fill="rgba(55,48,38,.2)" mask="url(#crescentMask)"/>
+      <!-- Craters -->
+      <circle cx="85" cy="95" r="13" fill="url(#cr1)" mask="url(#crescentMask)"/>
+      <circle cx="112" cy="168" r="9" fill="url(#cr2)" mask="url(#crescentMask)"/>
+      <circle cx="70" cy="155" r="6" fill="url(#cr3)" mask="url(#crescentMask)"/>
+      <circle cx="105" cy="108" r="5" fill="url(#cr3)" mask="url(#crescentMask)"/>
+      <circle cx="92" cy="138" r="4" fill="url(#cr2)" mask="url(#crescentMask)"/>
+      <!-- Subtle limb brightening -->
+      <circle cx="130" cy="130" r="100" fill="none" stroke="rgba(220,210,190,.12)" stroke-width="3" mask="url(#crescentMask)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Coming Soon
+    </div>
+    <h1 class="hero-h1">
+      <span class="l1">TO THE</span>
+      <span class="l2">MOON!</span>
+    </h1>
+    <p class="hero-motto">GOD<span class="dot"> · </span>HEALTH<span class="dot"> · </span>WEALTH</p>
+    <p class="hero-verse">"I can do all things through Christ who strengthens me." — Philippians 4:13</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn-primary">Shop the Collection</a>
+      <a href="#builder" class="btn-ghost" >Create Merch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ QUICK LINKS -->
+<div style="background:#0a0a1e;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;scrollbar-width:none">
+  <a href="food-scale.html" style="flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px;text-decoration:none;border-right:1px solid rgba(255,255,255,.06)">
+    <span style="font-size:1.5rem">⚖️</span>
+    <span style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#00e676;font-family:sans-serif;white-space:nowrap">Food Scale</span>
+  </a>
+  <a href="health.html" style="flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px;text-decoration:none;border-right:1px solid rgba(255,255,255,.06)">
+    <span style="font-size:1.5rem">💪</span>
+    <span style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#ff4444;font-family:sans-serif;white-space:nowrap">Health Hub</span>
+  </a>
+  <a href="wealth.html" style="flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px;text-decoration:none;border-right:1px solid rgba(255,255,255,.06)">
+    <span style="font-size:1.5rem">🚀</span>
+    <span style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#E8B84B;font-family:sans-serif;white-space:nowrap">Wealth Hub</span>
+  </a>
+  <a href="god.html" style="flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px;text-decoration:none">
+    <span style="font-size:1.5rem">✝️</span>
+    <span style="font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:rgba(255,255,255,.5);font-family:sans-serif;white-space:nowrap">Faith Hub</span>
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════ MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="star">✦</span> TO THE MOON</span>
+    <span class="marquee-item"><span class="star">✦</span> GOD. HEALTH. WEALTH.</span>
+    <span class="marquee-item"><span class="star">✦</span> FAITH OVER FEAR</span>
+    <span class="marquee-item"><span class="star">✦</span> BUILT FOR GREATNESS</span>
+    <span class="marquee-item"><span class="star">✦</span> PHILIPPIANS 4:13</span>
+    <span class="marquee-item"><span class="star">✦</span> KINGDOM ATHLETES</span>
+    <span class="marquee-item"><span class="star">✦</span> BLESSED &amp; PRESSED</span>
+    <span class="marquee-item"><span class="star">✦</span> TO THE MOON</span>
+    <span class="marquee-item"><span class="star">✦</span> GOD. HEALTH. WEALTH.</span>
+    <span class="marquee-item"><span class="star">✦</span> FAITH OVER FEAR</span>
+    <span class="marquee-item"><span class="star">✦</span> BUILT FOR GREATNESS</span>
+    <span class="marquee-item"><span class="star">✦</span> PHILIPPIANS 4:13</span>
+    <span class="marquee-item"><span class="star">✦</span> KINGDOM ATHLETES</span>
+    <span class="marquee-item"><span class="star">✦</span> BLESSED &amp; PRESSED</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ VALUES -->
+<section class="values-sec" id="values">
+  <span class="section-label reveal">Our Foundation</span>
+  <h2 class="section-title reveal">Three Pillars<span class="g">.</span></h2>
+  <div class="values-grid">
+    <div class="val-card reveal">
+      <span class="val-icon">✝️</span>
+      <a href="god.html" class="val-word" style="display:block;text-decoration:none;cursor:pointer">GOD</a>
+      <p class="val-desc">Faith is your foundation. Every rep, every stride, every grind — do it for His glory. When you wear Tagline, you carry a reminder that your strength comes from something greater than yourself.</p>
+      <div class="val-topics">
+        <span class="val-topic">Daily Verse</span>
+        <span class="val-topic">Scripture</span>
+        <span class="val-topic">Faith & Purpose</span>
+      </div>
+      <p class="val-verse">"Whether you eat or drink, or whatever you do, do all to the glory of God." — 1 Corinthians 10:31</p>
+      <a href="god.html" class="val-cta">Explore Faith Hub →</a>
+    </div>
+    <div class="val-card reveal" style="transition-delay:.1s">
+      <span class="val-icon">⚡</span>
+      <a href="health.html" class="val-word" style="display:block;text-decoration:none;cursor:pointer">HEALTH</a>
+      <p class="val-desc">Your body is a temple. Train it like one. Push harder, recover smarter, and treat every workout as an act of stewardship over what God gave you. No excuses — just excellence.</p>
+      <div class="val-topics">
+        <span class="val-topic">Bulk Program</span>
+        <span class="val-topic">Cali Program</span>
+        <span class="val-topic">Nutrition Guide</span>
+        <span class="val-topic">Macro Tips</span>
+        <span class="val-topic">Daily Health Fact</span>
+        <span class="val-topic">Food of the Day</span>
+      </div>
+      <p class="val-verse">"Do you not know that your body is a temple of the Holy Spirit within you?" — 1 Corinthians 6:19</p>
+      <a href="health.html" class="val-cta">Explore Health Hub →</a>
+      <a href="food-scale.html" class="val-cta" style="margin-top:10px;background:rgba(0,230,118,.08);border-color:rgba(0,230,118,.35);color:#00e676">⚖️ Try The Food Scale →</a>
+    </div>
+    <div class="val-card reveal" style="transition-delay:.2s">
+      <span class="val-icon">🚀</span>
+      <a href="wealth.html" class="val-word" style="display:block;text-decoration:none;cursor:pointer">WEALTH</a>
+      <p class="val-desc">Abundance is a blessing, not a sin. Chase financial freedom with integrity, purpose, and relentless faith. Build generational wealth. Give generously. Stack blessings, not just bags.</p>
+      <div class="val-topics">
+        <span class="val-topic">Investing Basics</span>
+        <span class="val-topic">Budgeting</span>
+        <span class="val-topic">Passive Income</span>
+        <span class="val-topic">Mindset</span>
+        <span class="val-topic">Daily Wealth Tip</span>
+        <span class="val-topic">Rule of 72</span>
+      </div>
+      <p class="val-verse">"The blessing of the LORD makes rich, and he adds no sorrow with it." — Proverbs 10:22</p>
+      <a href="wealth.html" class="val-cta">Explore Wealth Hub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SHOP -->
+<section class="shop-sec" id="shop">
+  <div class="shop-header reveal">
+    <div>
+      <span class="section-label">The Collection</span>
+      <h2 class="section-title" style="margin-bottom:0">Shop <span class="g">Tagline</span></h2>
+    </div>
+    <span class="shop-count" id="shopCount"></span>
+  </div>
+
+  <!-- Category Filters -->
+  <div class="shop-filters reveal" style="transition-delay:.05s">
+    <button class="f-tab active" onclick="filterShop('all',this)">All</button>
+    <button class="f-tab" onclick="filterShop('mens',this)">Men's</button>
+    <button class="f-tab" onclick="filterShop('womens',this)">Women's</button>
+    <button class="f-tab" onclick="filterShop('hoodies',this)">Hoodies</button>
+    <button class="f-tab" onclick="filterShop('tops',this)">Tops</button>
+    <button class="f-tab" onclick="filterShop('bottoms',this)">Bottoms</button>
+    <button class="f-tab" onclick="filterShop('jackets',this)">Jackets</button>
+  </div>
+
+  <!-- Dynamic product grid populated by JS -->
+  <div id="shopGrid" class="products-grid"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════ VERSE BANNER -->
+<div class="verse-banner reveal">
+  <blockquote>"And whatever you do, work at it with all your heart, as working for the Lord, not for human masters."</blockquote>
+  <cite>— Colossians 3:23</cite>
+</div>
+
+<!-- ═══════════════════════════════════════════ CUSTOM BUILDER CTA -->
+<section style="background:var(--space2);padding:100px 60px;text-align:center" id="builder">
+  <span class="section-label reveal" style="display:block">Create Merch</span>
+  <h2 class="section-title reveal" style="text-align:center">Custom <span class="g">Kingdom Gear</span></h2>
+  <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.85;max-width:620px;margin:0 auto 48px;transition-delay:.1s">Upload your logos, pick colors, set placement — front and back. We'll send a full quote within 24 hours. A $5 design deposit locks your spot in our queue and counts as credit toward your order.</p>
+  <div class="reveal" style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-bottom:64px;transition-delay:.15s">
+    <a href="builder.html" class="btn-primary" style="font-size:.75rem;padding:20px 52px">Design Your Gear →</a>
+    <a href="#contact" class="btn-ghost" style="font-size:.75rem;padding:20px 52px">Ask a Question</a>
+  </div>
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:860px;margin:0 auto;transition-delay:.2s">
+    <div class="feat-card">
+      <div class="feat-card-icon">👕</div>
+      <p class="feat-card-title">Jerseys &amp; Sets</p>
+      <p class="feat-card-desc">Custom basketball jerseys, jersey + shorts sets — full sublimation or embroidery. Reversible option available.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-icon">🎨</div>
+      <p class="feat-card-title">Full Custom Build</p>
+      <p class="feat-card-desc">Hoodies, tees, crewnecks and more — add your logos front &amp; back, choose colors, pick placement and decoration style.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-icon">💬</div>
+      <p class="feat-card-title">$5 Design Deposit</p>
+      <p class="feat-card-desc">Submit your design request and pay $5 to lock your spot. Applied as credit toward your order. Quote in 24 hrs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ DISCOUNTS -->
+<section class="discounts-sec" id="discounts">
+  <span class="section-label reveal" style="text-align:center;display:block">Exclusive Offers</span>
+  <h2 class="section-title reveal" style="text-align:center;margin-bottom:48px">You Earned It<span class="g">.</span></h2>
+  <div class="discounts-grid">
+
+    <!-- MILITARY -->
+    <div class="discount-card reveal">
+      <span class="discount-badge">🎖️ Military Discount</span>
+      <div>
+        <div class="discount-pct">15%</div>
+        <div class="discount-title">OFF — Active Duty, Veterans & Military Families</div>
+      </div>
+      <p class="discount-desc">We honor your service. Verify your military status through ID.me — a secure, trusted platform used by the VA, TSA, and hundreds of top retailers. Takes under 2 minutes.</p>
+      <div>
+        <a href="https://groups.id.me/" target="_blank" rel="noopener" class="idme-btn">
+          <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#fff"/><text x="20" y="26" font-size="14" font-weight="bold" fill="#1B4B8B" text-anchor="middle" font-family="Arial">ID</text></svg>
+          Verify with ID.me
+        </a>
+        <p class="idme-note">After verifying, email your confirmation to <strong style="color:var(--text)">tagline@tagline.space</strong> and we'll send your 15% discount code within 24 hours.</p>
+      </div>
+    </div>
+
+    <!-- SUBSCRIBER -->
+    <div class="discount-card reveal" style="transition-delay:.1s">
+      <span class="discount-badge">✉️ Subscriber Discount</span>
+      <div>
+        <div class="discount-pct">10%</div>
+        <div class="discount-title">OFF — Subscribe & Save on Every Order</div>
+      </div>
+      <p class="discount-desc">Join the Tagline family. Drop your email below and we'll send your 10% discount code instantly — plus early access to new drops, restocks, and members-only deals.</p>
+      <div id="subscribeWrap">
+        <!-- Replace the form action URL with your Mailchimp list URL -->
+        <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+          <input type="email" placeholder="your@email.com" required/>
+          <button type="submit">Get My 10% Off</button>
+        </form>
+        <div class="subscribe-success" id="subSuccess">
+          <strong>You're In!</strong>
+          Check your inbox — your <span style="color:var(--red)">10% off code</span> is on its way. Welcome to the family.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ABOUT -->
+<section class="about-sec" id="about">
+  <div class="about-layout">
+    <div class="about-card reveal">
+      <span class="about-moon">🌙</span>
+      <div class="about-big">
+        <span class="g">GOD</span><span class="dot">.</span><br>
+        HEALTH<span class="dot">.</span><br>
+        <span class="g">WEALTH</span><span class="dot">.</span>
+      </div>
+      <p class="about-card-verse">"For I know the plans I have for you, declares the LORD, plans to prosper you and not to harm you, plans to give you hope and a future."<br><br>— Jeremiah 29:11</p>
+    </div>
+    <div class="about-content reveal" style="transition-delay:.12s">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">Built for <span class="g">Believers</span></h2>
+      <p class="about-p">Tagline was born at the intersection of faith, fitness, and financial freedom. We believe God created you for greatness — in the gym, in the marketplace, and in every area of life. "To the Moon!" isn't just a phrase. It's a declaration that with God, there are no limits to how high you can go.</p>
+      <p class="about-p">We're not your typical athletic brand. We're a movement. Every hoodie, every tee, every pair of shorts you put on is a reminder of who you are and Whose you are. You grind with purpose. You train with intention. You build wealth as an act of worship.</p>
+      <div class="about-pillars">
+        <div class="pillar"><div class="pillar-dot"></div><span><strong>Faith-forward design</strong> — Every piece carries a message worth wearing.</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span><strong>Premium quality</strong> — Performance fabrics built to move with you through every workout.</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span><strong>Custom everything</strong> — Your vision, your brand, your kingdom-building gear.</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span><strong>Community-driven</strong> — Athletes, entrepreneurs, and believers living out GOD. HEALTH. WEALTH.</span></div>
+      </div>
+      <a href="#shop" class="btn-primary">Shop the Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="contact-layout">
+    <div class="contact-info reveal">
+      <span class="section-label">Get in Touch</span>
+      <h2 class="section-title">Let's <span class="g">Connect</span></h2>
+      <p class="contact-desc">Got questions about a custom order? Want to talk wholesale? Just want to say what's up? We'd love to hear from you. Every message is read — no bots, just people who care.</p>
+      <div class="c-item"><div class="c-icon">✉️</div><div class="c-item-txt"><strong>Email Us</strong>taglineapparelllc@gmail.com</div></div>
+      <div class="c-item"><div class="c-icon">📱</div><div class="c-item-txt"><strong>Follow Along</strong>@tagline._ on Instagram</div></div>
+      <div class="c-item"><div class="c-icon">🕐</div><div class="c-item-txt"><strong>Response Time</strong>Within 24 hours, Mon–Fri</div></div>
+      <div class="c-item"><div class="c-icon">📦</div><div class="c-item-txt"><strong>Custom Orders</strong>3–5 week production from order date</div></div>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div class="form-g"><label class="form-lbl">First Name</label><input class="f-in" type="text" required placeholder="First"></div>
+          <div class="form-g"><label class="form-lbl">Last Name</label><input class="f-in" type="text" required placeholder="Last"></div>
+        </div>
+        <div class="form-g"><label class="form-lbl">Email</label><input class="f-in" type="email" required placeholder="you@example.com"></div>
+        <div class="form-g">
+          <label class="form-lbl">Subject</label>
+          <select class="f-sel">
+            <option value="">— Choose a topic —</option>
+            <option>Custom Order</option><option>Wholesale / Bulk</option><option>Order Status</option><option>Press / Media</option><option>General Question</option>
+          </select>
+        </div>
+        <div class="form-g"><label class="form-lbl">Message</label><textarea class="f-ta" required placeholder="Tell us what's on your heart…"></textarea></div>
+        <button class="btn-send" type="submit">Send Message →</button>
+        <div class="form-success" id="contactSuccess">
+          <span>✦</span>
+          <p><strong>Message sent!</strong><br>We'll get back to you within 24 hours. Stay blessed.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ TIP JAR -->
+<section class="tip-section">
+  <div class="tip-inner">
+    <p class="tip-title">Support the Brand</p>
+    <p class="tip-sub">The verse, the health facts, the wealth tips — all free, every day.<br>If it's adding value to your life, send some love. Every bit fuels the mission.</p>
+    <div class="tip-btns">
+      <a class="tip-btn" href="https://buy.stripe.com/8x2fZhgk04zM7pJ8klasg0f" target="_blank">☕ $5</a>
+      <a class="tip-btn" href="https://buy.stripe.com/4gMbJ1d7O9U6dO7445asg0g" target="_blank">🙏 $10</a>
+      <a class="tip-btn" href="https://buy.stripe.com/4gMbJ11p6c2e5hBdEFasg0i" target="_blank">💛 $25</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PRODUCT DETAIL MODAL -->
+<div class="pdp-overlay" id="pdpOverlay" style="display:none" onclick="if(event.target===this)closePDP()">
+  <div class="pdp-modal" id="pdpModal">
+    <button class="pdp-close" onclick="closePDP()">&#x2715;</button>
+
+    <!-- Left: image -->
+    <div class="pdp-img-col">
+      <img id="pdpImg" src="" alt="">
+      <div id="pdpImgBadge" class="pdp-img-badge" style="display:none"></div>
+    </div>
+
+    <!-- Right: info -->
+    <div class="pdp-info-col">
+      <p class="pdp-eyebrow" id="pdpEyebrow"></p>
+      <h2 class="pdp-title" id="pdpTitle"></h2>
+      <p class="pdp-price" id="pdpPrice"></p>
+      <p class="pdp-desc" id="pdpDesc"></p>
+
+      <!-- Colors -->
+      <div class="pdp-field" id="pdpColorsField">
+        <p class="pdp-field-label">Color &nbsp;<span id="pdpColorName"></span></p>
+        <div class="pdp-swatches" id="pdpSwatches"></div>
+      </div>
+
+      <!-- Sizes -->
+      <div class="pdp-field" id="pdpSizesField">
+        <p class="pdp-field-label">Size &nbsp;<span id="pdpSizeName"></span></p>
+        <div class="pdp-sizes" id="pdpSizes"></div>
+      </div>
+
+      <button class="pdp-buy" id="pdpBuyBtn" onclick="pdpBuyNow()" style="pointer-events:none;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);cursor:not-allowed">🔒 Coming Soon</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ CUSTOM ORDER MODAL -->
+<div class="co-overlay" id="co-overlay" onclick="if(event.target===this)closeCustomOrder()">
+  <div class="co-modal">
+    <button class="co-close" onclick="closeCustomOrder()">✕</button>
+    <p class="co-title">Lock Your Custom Order</p>
+    <p class="co-sub" id="co-product-name">Custom Order</p>
+    <form onsubmit="submitCustomOrder(event)">
+      <input type="hidden" name="co_product" id="co-product-hidden">
+      <div class="co-grid">
+        <div class="co-field">
+          <label class="co-label">Your Name</label>
+          <input class="co-input" name="co_name" required placeholder="First & Last">
+        </div>
+        <div class="co-field">
+          <label class="co-label">Phone</label>
+          <input class="co-input" name="co_phone" placeholder="Optional">
+        </div>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Email</label>
+        <input class="co-input" type="email" name="co_email" required placeholder="your@email.com">
+      </div>
+      <div class="co-grid">
+        <div class="co-field">
+          <label class="co-label">Quantity</label>
+          <input class="co-input" name="co_qty" required placeholder="e.g. 10 jerseys">
+        </div>
+        <div class="co-field">
+          <label class="co-label">Sizes Needed</label>
+          <input class="co-input" name="co_sizes" placeholder="e.g. 3S 4M 3L">
+        </div>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Colors</label>
+        <input class="co-input" name="co_colors" placeholder="e.g. Black body, red sleeves, white text">
+      </div>
+      <div class="co-grid">
+        <div class="co-field">
+          <label class="co-label">Decoration Type</label>
+          <select class="co-select" name="co_deco">
+            <option value="">Select...</option>
+            <option>Embroidery</option>
+            <option>Heat Press</option>
+            <option>Sublimation</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+        <div class="co-field">
+          <label class="co-label">Number of Logos</label>
+          <select class="co-select" name="co_logos">
+            <option value="">Select...</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4+</option>
+          </select>
+        </div>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Logo Size(s)</label>
+        <select class="co-select" name="co_logo_size">
+          <option value="">Select...</option>
+          <option>Small (pocket size)</option>
+          <option>Medium (chest size)</option>
+          <option>Large (full chest / back)</option>
+          <option>Across chest shoulder to shoulder</option>
+          <option>Mix of sizes</option>
+        </select>
+      </div>
+      <div class="co-field">
+        <label class="co-label">Additional Notes</label>
+        <textarea class="co-textarea" name="co_notes" placeholder="Anything else — player names, numbers, specific placements, reference images, etc."></textarea>
+      </div>
+      <div class="co-fee-note">
+        <strong>$5 Order Lock Fee</strong> — This reserves your spot and confirms your request is real. After submitting, you'll be redirected to pay $5 via Stripe. Your custom quote will be sent to your email within 24 hours. The $5 goes toward your final order.
+      </div>
+      <button class="co-submit" type="submit">Lock My Order & Pay $5 →</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ DAILY CONTENT -->
+<section class="dc-outer" style="background:#07072A">
+  <div style="max-width:960px;margin:0 auto;padding:0 24px" data-daily="verse,health,wealth"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#home" class="footer-logo-link">TAG<span class="g">LINE</span></a>
+      <p class="footer-tagline">To the Moon!</p>
+      <p class="footer-desc">Christian athletic clothing for believers who chase greatness. GOD. HEALTH. WEALTH. — every piece, a declaration.</p>
+    </div>
+    <div>
+      <span class="footer-col-h">Shop</span>
+      <ul class="footer-links">
+        <li><a href="#shop">New Arrivals</a></li>
+        <li><a href="#shop" onclick="filterShop('hoodies',null)">Hoodies</a></li>
+        <li><a href="#shop" onclick="filterShop('tops',null)">Tops</a></li>
+        <li><a href="#shop" onclick="filterShop('bottoms',null)">Bottoms</a></li>
+        <li><a href="#shop" onclick="filterShop('jackets',null)">Jackets</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-h">Services</span>
+      <ul class="footer-links">
+        <li><a href="builder.html">Create Merch</a></li>
+        <li><a href="#contact">Wholesale</a></li>
+        <li><a href="#contact">Size Guide</a></li>
+        <li><a href="#contact">Track Order</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-h">Company</span>
+      <ul class="footer-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#values">Our Values</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Tagline Apparel. All rights reserved. · GOD. HEALTH. WEALTH.</span>
+    <div class="footer-social">
+      <a class="soc" href="https://instagram.com/tagline._" target="_blank" aria-label="Instagram">◈</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── SHOP PRODUCTS ── */
+
+const CM = {
+  'warm-tan':'#C4A882','grey':'#888','gray':'#888','gray-1':'#777','gray-2':'#999','dark-gray':'#444',
+  'white':'#F5F5F5','white-1':'#F5F5F5','navy-blue':'#1E3A8A','black':'#1A1A1A',
+  'black-1':'#1A1A1A','milk-white':'#F5F2E8','off-brown':'#8B6F52','khaki':'#8B7355',
+  'wine-red':'#7B1A1A','pink-1':'#F4A7B9','purple-1':'#7C3AED','purple':'#7C3AED',
+  'orange':'#E87010','light-grey':'#D0D0D0','brown-2':'#8B5E3C','brown-1':'#8B5E3C',
+  'brown':'#8B5E3C','dark-fog':'#555','hard-blue':'#1E4D8C','emerald-green':'#2D9B5A',
+  'blue-1':'#4A6FA5','green-1':'#2D7A4A','green':'#2D7A4A','yellow':'#FFD700',
+  'burgundy':'#722F37','red':'#CC0000','light-blue':'#ADD8E6','sand':'#C4A882',
+  'clear':'#E8E8E8','rose-gold':'#C8936A','frost-blue':'#6BB4C8','frost-blue-1':'#6BB4C8',
+  'silver':'#C0C0C0','green-gray':'#4A7A6A','baby-blue':'#ADD8E6','beige-1':'#D4C5A0',
+  'chinese-red':'#CC2020','nio-grey':'#7A7A7A','cream':'#F5F0DC'
+};
+const gc = k => CM[k] || '#888';
+
+const PRODUCTS = [
+  {
+    handle:'untitled-jan17_23-53',title:'TL "Rocket" Hoodie',
+    desc:'Heavyweight fleece · 430g',price:55,badge:'Best Seller',
+    cats:['all','mens','hoodies'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_b5276775-498d-4315-8251-37c7234be6b4.jpg?v=1768722983',
+    colors:['black'],
+    sizes:['S','M','L','XL','2XL']
+  },
+  {
+    handle:'3-d-embroidery-hoodie',title:'3-D Embroidery Hoodie',
+    desc:'100% Cotton · Lightweight · 3-D embroidered',price:45,badge:'',
+    cats:['all','hoodies','mens','womens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_4981aa0e-9864-43bd-9e9e-c30e28e472b3.jpg?v=1775531157',
+    colors:['white','black','pink-1'],
+    sizes:['S','M','L','XL','2XL']
+  },
+  {
+    handle:'tl-hoodies',title:'"TL" Winter Hoodie',
+    desc:"Men's warm fleece hoodie",price:45,badge:'',
+    cats:['all','mens','hoodies'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',
+    colors:['blue-1','gray','light-grey'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'untitled-nov4_20-32',title:"Women's Hoodie",
+    desc:'Loose casual fitness sports hoodie',price:35,badge:'',
+    cats:['all','womens','hoodies'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/A610FF16-6BA4-4255-90B0-F42AB7246271.jpg?v=1762317317',
+    colors:['sand','clear','rose-gold','black'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'3-d-embroidery-t-shirt',title:'3-D Embroidery T-Shirt',
+    desc:'100% cotton · Heavyweight oversized',price:30,badge:'',
+    cats:['all','tops','mens','womens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_caac77bf-a368-4c9f-8dba-f96b475ed42c.jpg?v=1775534730',
+    colors:['black','white-1'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'boxe-tees',title:"Box'e Tee's",
+    desc:"100% Cotton · Box-fit",price:25,badge:'',
+    cats:['all','tops','mens','womens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_935aa918-1d27-4cb2-96fb-e191e14f38f3.jpg?v=1775552279',
+    colors:['orange','cream','brown','white','light-grey'],
+    sizes:['S','M','L','XL','2XL']
+  },
+  {
+    handle:'boxy-tanks',title:'BOXY Tanks',
+    desc:'100% cotton · Box-Fit',price:30,badge:'New',
+    cats:['all','tops','womens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/CD67E94D-AF63-4D2F-AD7D-CEC2A442674B.jpg?v=1778476132',
+    colors:['white','black','dark-gray'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'mens-gym-shirt',title:"Men's Gym Shirt",
+    desc:'True to size · 95% polyamide 5% elastane',price:30,badge:'',
+    cats:['all','tops','mens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_65a0576e-dbba-443f-a04a-5d91f6d91d20.jpg?v=1775552279',
+    colors:['navy-blue','black','milk-white','off-brown','grey'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'tl-rocket',title:'TL "Rocket" Shirt',
+    desc:'Quick dry breathable · 80% polyester 20% spandex',price:30,badge:'',
+    cats:['all','tops','mens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_95ca150e-60c6-4308-90f2-6310c8096b6a.jpg?v=1768722286',
+    colors:['warm-tan'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'shirt',title:'"Everyday" Shirt',
+    desc:'Quick dry yoga wear · Scallop curved hem',price:25,badge:'',
+    cats:['all','tops','womens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8c64d9c2-9284-4019-b2f5-cb4ef82f3df6.png?v=1768914448',
+    colors:['warm-tan','green-1','white','pink-1','purple','frost-blue-1'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'men-s',title:'Quick-Dry Shirt',
+    desc:"Men's quick dry breathable sports tee",price:20,badge:'',
+    cats:['all','tops','mens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/7E62E8C7-9832-4D8F-B46A-AE8249EDD544.jpg?v=1761546662',
+    colors:['clear','baby-blue'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'men-s-zip-up-shirt',title:'"TTM" Quarter-Zip',
+    desc:"Men's quarter-zip shirt",price:35,badge:'',
+    cats:['all','tops','mens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B2796E1A-0A02-4370-BC1A-87BDFE471E5A.png?v=1762482462',
+    colors:['dark-fog','green','frost-blue','warm-tan','white'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'men-s-quarter-zip-up-long-sleeve',title:'Quarter-Zip Long Sleeve',
+    desc:'Quick-dry breathable active wear',price:35,badge:'',
+    cats:['all','tops','mens'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0025.jpg?v=1761716083',
+    colors:['gray','black-1','gray-2'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'womens-sport-bra',title:"Women's Sport Bra",
+    desc:'95% polyamide 5% elastane · Medium support',price:30,badge:'',noCustom:true,
+    cats:['all','womens','tops'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_70148a65-ac5c-4e67-b9c8-10d2ad789c1c.jpg?v=1775552279',
+    colors:['black','khaki','wine-red','pink-1','purple-1'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'women-s-sports-bra',title:'Irregular Bra',
+    desc:"Women's irregular strap yoga vest",price:25,badge:'',noCustom:true,
+    cats:['all','womens','tops'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B723BBA2-B00A-4C9A-8283-226AFEB8C698.jpg?v=1761548691',
+    colors:['white','black'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'womens-gym-shorts',title:"Women's Gym Shorts",
+    desc:'90% polyamide 10% elastane · High waist',price:20,badge:'',noCustom:true,
+    cats:['all','womens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_1210f229-9c09-47f0-9203-2aa876bb70fb.jpg?v=1775552279',
+    colors:['wine-red','pink-1','warm-tan','gray','hard-blue','khaki','purple-1'],
+    sizes:['XS','S','M','L','XL']
+  },
+  {
+    handle:'womens-2-1-shorts',title:"Women's 2-1 Shorts",
+    desc:'Running shorts · 90% polyester 10% spandex',price:30,badge:'',noCustom:true,
+    cats:['all','womens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_26e60b6f-49f2-4a3a-b34d-2140bfdf784e.jpg?v=1775536820',
+    colors:['black','pink-1','emerald-green'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'mens-basketball-shorts',title:"Men's Basketball Shorts",
+    desc:'100% polyester · Breathable design',price:25,badge:'',
+    cats:['all','mens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_59c8766e-4591-468f-8075-8b4287f30a9f.jpg?v=1775535578',
+    colors:['yellow','burgundy','red','light-blue','purple','white','black'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'men-s-2-for-1-compression-shorts',title:'2-in-1 Compression Shorts',
+    desc:'Nylon · Running training basketball shorts',price:40,badge:'',
+    cats:['all','mens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0022.jpg?v=1761716083',
+    colors:['black','grey'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'women-s-butter-soft-leggings',title:'"Butter-Soft" Leggings',
+    desc:'Double-brushed · 80% nylon 20% elastane · High waist',price:30,badge:'',noCustom:true,
+    cats:['all','womens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/AEEB6281-985A-423A-AAA8-097D87601F6D.jpg?v=1762231785',
+    colors:['sand','brown-1','warm-tan'],
+    sizes:['S','M','L']
+  },
+  {
+    handle:'mens-pants',title:"Men's Running Pants",
+    desc:'Ankle zipper · Lightweight breathable track pants',price:30,badge:'',
+    cats:['all','mens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_570552c0-1a69-472d-9320-398747b35f08.jpg?v=1775536043',
+    colors:['navy-blue','warm-tan','light-grey'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'tl-winter-sweatpants',title:'"TL" Winter Sweatpants',
+    desc:"Men's warm fleece sweatpants",price:45,badge:'',
+    cats:['all','mens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',
+    colors:['blue-1','light-grey','gray'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'cargo-sweatpants',title:'Cargo Sweatpants',
+    desc:"Women's baggy street wear · Multi-pocket",price:55,badge:'Trending',
+    cats:['all','womens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_7c4f5b99-50af-43eb-ac4e-81ff780a2b4b.jpg?v=1768725457',
+    colors:['black-1','navy-blue'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'men-s-sport-pants',title:'Sport Pants',
+    desc:'Breathable quick dry jogging pants · Back pocket',price:35,badge:'',
+    cats:['all','mens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/ECE25F92-576E-4A30-B8F5-CCD44DB470B0.jpg?v=1761627349',
+    colors:['dark-fog','black','green-gray'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'sport-pants',title:'Outdoor Sport Pants',
+    desc:"Men's side zipper pocket sport pants",price:55,badge:'',
+    cats:['all','mens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/BD848E54-21F0-4255-B1F1-7D0A533C1E35.jpg?v=1761554034',
+    colors:['gray-1','black','dark-fog'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'light-slim-fit-flex-pants',title:'Slim-Fit "Scrubs"',
+    desc:'Quick-dry breathable fitness trousers',price:35,badge:'',noCustom:true,
+    cats:['all','mens','bottoms'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/8C4F7825-DEEA-4CEF-955E-C5432C6FB34B.jpg?v=1761544634',
+    colors:['beige-1','silver','gray','warm-tan'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'mensrunner-vest',title:"Men's Runner Vest",
+    desc:'100% polyester · Windproof · Waterproof',price:45,badge:'',
+    cats:['all','mens','jackets'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_0a5e02aa-8e81-4e92-963d-cee6741b086c.jpg?v=1775536851',
+    colors:['green-1','black','orange'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'men-s-light-jacket',title:'Oversized Light Sweater',
+    desc:'High quality hooded zip track jacket',price:65,badge:'',
+    cats:['all','mens','jackets'],
+    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/F329367F-4612-4CBE-A66D-A7BD3BC84DC1.jpg?v=1761553089',
+    colors:['light-blue','silver','gray','frost-blue-1'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'3-d-embroidery-crewneck',title:'3-D Embroidery Crewneck',
+    desc:'100% Cotton · 3-D embroidered · God. Health. Wealth.',price:40,badge:'New',
+    cats:['all','mens','tops'],
+    img:'https://i.ibb.co/Vcdg0dcD/IMG-3641.png',
+    colors:['chinese-red','navy-blue','nio-grey'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'mens-compression-pants',title:"Men's Compression Pants",
+    desc:'Compression · Without logo',price:20,badge:'New',
+    cats:['all','mens','bottoms'],
+    img:'https://i.ibb.co/sJtWx4HY/IMG-4501.jpg',
+    colors:['white','black'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'mens-single-leg-compression-pants',title:"Men's Single Leg Compression Pants",
+    desc:'Single leg compression · Without logo',price:25,badge:'New',
+    cats:['all','mens','bottoms'],
+    img:'https://i.ibb.co/b5hGKF5j/IMG-4504.jpg',
+    colors:['white','black','grey'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',
+    desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,badge:'Custom',
+    cats:['all','mens','custom'],
+    img:'https://i.ibb.co/W4cCRYnY/6754.png',noCustom:false,
+    colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey'],
+    sizes:['S','M','L','XL']
+  }
+];
+
+function badgeClass(b){ return b==='New'?'badge-new': b==='Best Seller'||b==='Bestseller'?'badge-hot': 'badge-ltd'; }
+
+function renderShop(filter='all'){
+  const grid = document.getElementById('shopGrid');
+  const list = filter==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.cats.includes(filter));
+  document.getElementById('shopCount').textContent = list.length+' items';
+
+  grid.innerHTML = list.map(p=>`
+    <div class="prod-card" onclick="viewProduct('${p.handle}')">
+      <div class="prod-img">
+        ${p.badge ? `<div class="badge ${badgeClass(p.badge)}">${p.badge}</div>` : ''}
+        <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)';this.style.display='block'">
+        <button class="prod-hover-btn" onclick="event.stopPropagation();viewProduct('${p.handle}')">View Product →</button>
+      </div>
+      <div class="prod-info">
+        <div>
+          <p class="prod-name">${p.title}</p>
+          <p class="prod-cat">${p.desc}</p>
+        </div>
+        ${p.badge==='Custom' ? `<p class="prod-price" style="font-size:.9rem">$5 LOCK · QUOTE</p>` : `<p class="prod-price">$${p.price}</p>`}
+      </div>
+      <div class="prod-dots">
+        ${p.colors.map(c=>`<span class="prod-dot" style="background:${gc(c)}" title="${c.replace(/-/g,' ')}"></span>`).join('')}
+      </div>
+      ${p.badge==='Custom' ? `<p class="prod-quote-bar">Price varies · Embroidery · Heat Press · Sublimation</p>` : ''}
+      ${p.sizes ? `<div class="prod-sizes">${p.sizes.map(s=>`<span class="prod-size">${s}</span>`).join('')}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+let curFilter = 'all';
+function filterShop(cat, btn){
+  curFilter = cat;
+  document.querySelectorAll('.f-tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('.f-tab').forEach(b=>{
+      if(b.textContent.toLowerCase().includes(cat.replace('mens',"men's").replace('womens',"women's"))) b.classList.add('active');
+    });
+  }
+  renderShop(cat);
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
+
+const STRIPE_TIP={'5':'https://buy.stripe.com/8x2fZhgk04zM7pJ8klasg0f','10':'https://buy.stripe.com/4gMbJ1d7O9U6dO7445asg0g','25':'https://buy.stripe.com/4gMbJ11p6c2e5hBdEFasg0i'};
+const STRIPE_CUSTOM_LOCK='https://buy.stripe.com/7sY28r5Fm1nA9xR301asg0h';
+const STRIPE_LINKS={
+  'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00',
+  '3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01',
+  'mens-gym-shirt':'https://buy.stripe.com/28E5kDaZG1nAbFZastasg02',
+  'untitled-nov4_20-32':'https://buy.stripe.com/fZucN5ebS1nA6lFastasg04',
+  '3-d-embroidery-hoodie':'https://buy.stripe.com/cNi7sLebS8Q26lF0RTasg05',
+  '3-d-embroidery-t-shirt':'https://buy.stripe.com/bJe3cvd7O3vI4dxcABasg06',
+  'womens-sport-bra':'https://buy.stripe.com/7sYcN5ffW7LYh0jcABasg07',
+  'mens-compression-pants':'https://buy.stripe.com/28EeVdc3K6HUdO77ghasg08',
+  'mens-single-leg-compression-pants':'https://buy.stripe.com/eVq00jffW2rE11lfMNasg09',
+  'tl-rocket':'https://buy.stripe.com/5kQ3cv2tafeqh0j1VXasg0a',
+  'mensrunner-vest':'https://buy.stripe.com/7sYaEXd7O1nA5hBbwxasg0b',
+  'womens-2-1-shorts':'https://buy.stripe.com/5kQ00j0l25DQcK3bwxasg0c',
+  'womens-gym-shorts':'https://buy.stripe.com/14AfZh6Jqc2eeSb589asg0d',
+  'boxe-tees':'https://buy.stripe.com/3cIaEXgk0eamh0j6cdasg0e',
+  'boxy-tanks':'https://buy.stripe.com/5kQeVd3xe6HU6lFfMNasg0j',
+};
+let pdpHandle = null;
+
+function viewProduct(handle){
+  const p = PRODUCTS.find(x=>x.handle===handle);
+  if(!p) return;
+  if(p.badge==='Custom'){ openCustomOrder(p); return; }
+  openPDP(p);
+}
+
+function openPDP(p){
+  pdpHandle = p.handle;
+
+  var ov = document.getElementById('pdpOverlay');
+  document.getElementById('pdpImg').src = p.img;
+  document.getElementById('pdpImg').alt = p.title;
+  document.getElementById('pdpTitle').textContent = p.title;
+  document.getElementById('pdpDesc').textContent = p.desc;
+  document.getElementById('pdpPrice').textContent = p.price > 0 ? '$'+p.price : '';
+
+  var cat = (p.cats||[]).find(function(c){return c!=='all';}) || '';
+  document.getElementById('pdpEyebrow').textContent = cat.replace(/-/g,' ');
+
+  var badge = document.getElementById('pdpImgBadge');
+  if(p.badge){ badge.textContent=p.badge; badge.className='pdp-img-badge badge '+badgeClass(p.badge); badge.style.display='block'; }
+  else { badge.style.display='none'; }
+
+  var swatchWrap = document.getElementById('pdpSwatches');
+  if(p.colors && p.colors.length){
+    swatchWrap.innerHTML = p.colors.map(function(c){
+      return '<span class="pdp-swatch" style="background:'+gc(c)+'" data-c="'+c+'" title="'+c.replace(/-/g,' ')+'" onclick="pdpPickColor(this)"></span>';
+    }).join('');
+    document.getElementById('pdpColorsField').style.display='block';
+    pdpPickColor(swatchWrap.firstChild);
+  } else {
+    document.getElementById('pdpColorsField').style.display='none';
+  }
+
+  var sizeWrap = document.getElementById('pdpSizes');
+  if(p.sizes && p.sizes.length){
+    sizeWrap.innerHTML = p.sizes.map(function(s){
+      return '<span class="pdp-sz" data-s="'+s+'" onclick="pdpPickSize(this)">'+s+'</span>';
+    }).join('');
+    document.getElementById('pdpSizesField').style.display='block';
+    pdpPickSize(sizeWrap.firstChild);
+  } else {
+    document.getElementById('pdpSizesField').style.display='none';
+  }
+
+  ov.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function pdpPickColor(el){
+  var all = document.querySelectorAll('.pdp-swatch');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('sel');
+  el.classList.add('sel');
+  document.getElementById('pdpColorName').textContent = el.getAttribute('data-c').replace(/-/g,' ');
+}
+
+function pdpPickSize(el){
+  var all = document.querySelectorAll('.pdp-sz');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('sel');
+  el.classList.add('sel');
+  document.getElementById('pdpSizeName').textContent = el.getAttribute('data-s');
+}
+
+function closePDP(){
+  document.getElementById('pdpOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+  pdpHandle = null;
+}
+
+function pdpBuyNow(){
+  /* Shop locked — purchasing disabled until all products are finalized */
+}
+
+function openCustomOrder(p){
+  const title = p ? p.title : 'Custom Order';
+  document.getElementById('co-product-name').textContent = title;
+  document.getElementById('co-product-hidden').value = title;
+  document.getElementById('co-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCustomOrder(){
+  document.getElementById('co-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function submitCustomOrder(e){
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    product: form.co_product.value,
+    name: form.co_name.value,
+    email: form.co_email.value,
+    phone: form.co_phone.value,
+    quantity: form.co_qty.value,
+    sizes: form.co_sizes.value,
+    colors: form.co_colors.value,
+    decoration: form.co_deco.value,
+    logos: form.co_logos.value,
+    logo_size: form.co_logo_size.value,
+    notes: form.co_notes.value,
+    _subject: 'New Custom Order Request — ' + form.co_product.value
+  };
+  fetch('https://formspree.io/f/mredlzrv',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify(data)
+  }).then(()=>{
+    if(STRIPE_CUSTOM_LOCK && STRIPE_CUSTOM_LOCK!=='https://buy.stripe.com/7sY28r5Fm1nA9xR301asg0h'){
+      window.open(STRIPE_CUSTOM_LOCK,'_blank');
+    }
+    form.innerHTML='<p style="text-align:center;padding:40px 0;color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.8">Order locked! ✅<br><span style="color:rgba(195,149,60,.8);font-size:.75rem;letter-spacing:.1em">Complete the $5 payment in the new tab.<br>We\'ll send your custom quote within 24 hours.</span></p>';
+  }).catch(()=>{
+    alert('Something went wrong. Please try again.');
+  });
+}
+
+/* ── CURSOR ── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+if(cur && ring){
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function tick(){
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+    rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,[onclick]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='48px';ring.style.height='48px';});
+    el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='32px';ring.style.height='32px';});
+  });
+}
+
+/* ── STARS ── */
+(function(){
+  const wrap=document.getElementById('starsWrap');
+  if(!wrap)return;
+  const starColors=['#ffffff','#ffffff','#ffffff','#E8EEFF','#E8EEFF','#FFF8E8','#D8E8FF'];
+  for(let i=0;i<200;i++){
+    const s=document.createElement('div');
+    s.className='s';
+    const sz=Math.random()<.06?Math.random()*1.8+1.8:Math.random()*1.2+0.3;
+    const bright=sz>1.8;
+    const col=starColors[Math.floor(Math.random()*starColors.length)];
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--sc:${col};--d:${(Math.random()*6+4).toFixed(1)}s;--dl:${(Math.random()*8).toFixed(1)}s;--o1:${bright ? .06 : .04};--o2:${bright ? .7 : .45}`;
+    wrap.appendChild(s);
+  }
+})();
+
+/* ── NAV SCROLL ── */
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+
+/* ── MOBILE MENU ── */
+document.getElementById('burger').addEventListener('click',()=>document.getElementById('mobMenu').classList.add('open'));
+document.getElementById('mobClose').addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open'));
+function closeMob(){document.getElementById('mobMenu').classList.remove('open');}
+function mobGoTo(id){closeMob();setTimeout(function(){var el=document.getElementById(id);if(el){window.scrollTo({top:el.offsetTop-80,behavior:'smooth'});}},350);}
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+
+
+function handleSubscribe(e){
+  e.preventDefault();
+  const email=e.target.querySelector('input[type=email]').value.trim();
+  if(!email)return;
+  // TODO: replace the fetch URL below with your Mailchimp JSONP endpoint
+  // For now, show success message. Wire to Mailchimp once you have your list URL.
+  e.target.style.display='none';
+  document.getElementById('subSuccess').style.display='block';
+  // Uncomment and update once Mailchimp is set up:
+  // fetch('https://YOUR-MAILCHIMP-JSONP-URL&EMAIL='+encodeURIComponent(email)+'&c=?')
+}
+
+/* ── CONTACT FORM ── */
+function submitContact(e){
+  e.preventDefault();
+  document.getElementById('contactSuccess').style.display='block';
+  e.target.reset();
+  document.getElementById('contactSuccess').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ── INITIAL RENDER ── */
+renderShop();
+</script>
+<script src="daily.js"></script>
+</body>
+</html>
