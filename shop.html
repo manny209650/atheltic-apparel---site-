@@ -1365,11 +1365,11 @@ function renderShop(filter='all'){
   document.getElementById('shopCount').textContent = list.length+' items';
 
   grid.innerHTML = list.map(p=>`
-    <div class="prod-card" onclick="viewProduct('${p.handle}')">
+    <div class="prod-card" onclick="window.location.href='product.html?h=${p.handle}'">
       <div class="prod-img">
         ${p.badge ? `<div class="badge ${badgeClass(p.badge)}">${p.badge}</div>` : ''}
         <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)';this.style.display='block'">
-        <button class="prod-hover-btn" onclick="event.stopPropagation();viewProduct('${p.handle}')">View Product →</button>
+        <button class="prod-hover-btn" onclick="event.stopPropagation();window.location.href='product.html?h=${p.handle}'">View Product →</button>
       </div>
       <div class="prod-info">
         <div>

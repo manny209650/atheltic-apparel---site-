@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAGLINE — Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#E02020;--space:#06060F;--card:#0D0D25;--muted:#8A8AAA;--text:#DDE0F0;--border:rgba(255,255,255,.07)}
+body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+
+/* ── NAV ── */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border);background:rgba(6,6,15,.95)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.1em;color:#fff;text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.back-btn{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back-btn:hover{color:#fff}
+
+/* ── LAYOUT ── */
+.page{max-width:860px;margin:0 auto;padding:32px 20px 60px}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+@media(max-width:600px){.product-grid{grid-template-columns:1fr}}
+
+/* ── IMAGE ── */
+.img-col{position:relative}
+.product-img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--card);display:block}
+.product-badge{position:absolute;top:14px;left:14px;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;padding:5px 12px;font-weight:700}
+.badge-new{background:#1B3DD8;color:#fff}
+.badge-hot{background:var(--gold);color:#fff}
+.badge-ltd{background:rgba(255,255,255,.15);color:#fff}
+
+/* ── INFO ── */
+.info-col{display:flex;flex-direction:column;gap:0;padding:4px 0}
+.product-cat{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.product-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.05em;color:#fff;line-height:1;margin-bottom:8px}
+.product-price{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);margin-bottom:14px}
+.product-desc{font-size:.82rem;line-height:1.7;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:20px}
+
+/* ── FIELD ── */
+.field{margin-bottom:20px}
+.field-label{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.field-label strong{color:#fff;font-size:.72rem;letter-spacing:.06em;text-transform:none}
+
+/* ── COLOR SWATCHES ── */
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.swatch{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent}
+.swatch:active{transform:scale(1.2)}
+.swatch.sel{border-color:#fff;box-shadow:0 0 0 2px var(--gold)}
+
+/* ── SIZE CHIPS ── */
+.sizes{display:flex;flex-wrap:wrap;gap:8px}
+.sz{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,.15);color:var(--muted);padding:10px 18px;cursor:pointer;transition:.2s;-webkit-tap-highlight-color:transparent;user-select:none}
+.sz:active{background:rgba(224,32,32,.15)}
+.sz.sel{border-color:var(--gold);color:#fff;background:rgba(224,32,32,.12)}
+
+/* ── BUY BUTTON ── */
+.buy-btn{display:block;width:100%;margin-top:auto;padding-top:24px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);padding:16px;text-align:center;cursor:not-allowed;margin-top:28px}
+.buy-btn.active{background:linear-gradient(135deg,#FF3333,#E02020);color:#fff;cursor:pointer;border:none}
+.buy-btn.active:active{opacity:.85}
+
+.coming-note{font-size:.65rem;letter-spacing:.12em;color:rgba(255,255,255,.25);text-align:center;margin-top:10px}
+
+/* ── NOT FOUND ── */
+.not-found{text-align:center;padding:80px 24px;color:var(--muted)}
+.not-found h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="javascript:history.back()" class="back-btn">← Back</a>
+  <a href="/" class="nav-logo">TAG<span>LINE</span></a>
+  <span style="width:60px"></span>
+</div>
+
+<div class="page" id="page">
+  <div class="not-found" id="notFound" style="display:none">
+    <h2>Product Not Found</h2>
+    <p>This product doesn't exist or may have been removed.</p>
+  </div>
+</div>
+
+<script>
+const CM={'warm-tan':'#C4A882','grey':'#888','gray':'#888','gray-1':'#777','gray-2':'#999','dark-gray':'#444','black':'#1A1A1A','white':'#F5F5F5','white-1':'#F5F5F5','navy-blue':'#1E3A8A','red':'#DC2626','chinese-red':'#AA381E','burgundy':'#800020','wine-red':'#722F37','light-blue':'#93C5FD','hard-blue':'#1D4ED8','blue-1':'#2563EB','frost-blue-1':'#BFDBFE','kelly-green':'#22C55E','green-1':'#16A34A','green-gray':'#4B5563','teal':'#0D9488','yellow':'#EAB308','orange':'#F97316','purple':'#9333EA','purple-1':'#7C3AED','pink-1':'#EC4899','beige-1':'#D4B896','silver':'#C0C0C0','sand':'#C2B280','brown-1':'#8B6340','warm-tan':'#C4A882','cream':'#F5F0DC','rose-gold':'#B76E79','light-grey':'#D1D5DB','black-1':'#111','khaki':'#BDB76B','dark-fog':'#6B7280','clear':'#E8E8E8','nio-grey':'#6B7280','frost':'#E8F4FD','gold':'#C3953C'};
+const gc=k=>CM[k]||'#888';
+
+const PRODUCTS=[
+  {handle:'3-d-embroidery-hoodie',title:'3-D Embroidery Hoodie',desc:'100% Cotton · Lightweight · 3-D embroidered',price:45,badge:'',cats:['all','hoodies','mens','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_4981aa0e-9864-43bd-9e9e-c30e28e472b3.jpg?v=1775531157',colors:['black','white','grey'],sizes:['S','M','L','XL','2XL']},
+  {handle:'tl-winter-sweatpants',title:'"TL" Winter Sweatpants',desc:"Men's warm fleece sweatpants",price:45,badge:'',cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',colors:['blue-1','light-grey','gray'],sizes:['S','M','L','XL']},
+  {handle:'untitled-nov4_20-32',title:"Women's Hoodie",desc:'Premium hoodie · Relaxed fit',price:45,badge:'',cats:['all','hoodies','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/A610FF16-6BA4-4255-90B0-F42AB7246271.jpg?v=1762317317',colors:['sand','clear','rose-gold','black'],sizes:['S','M','L','XL','2XL']},
+  {handle:'3-d-embroidery-t-shirt',title:'3-D Embroidery T-Shirt',desc:'100% Cotton · Heavyweight oversized',price:30,badge:'',cats:['all','tops','mens','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_caac77bf-a368-4c9f-8dba-f96b475ed42c.jpg?v=1775534730',colors:['black','white','grey'],sizes:['S','M','L','XL']},
+  {handle:'boxy-tanks',title:'BOXY Tanks',desc:'100% Cotton · Box-Fit',price:30,badge:'New',cats:['all','tops','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/CD67E94D-AF63-4D2F-AD7D-CEC2A442674B.jpg?v=1778476132',colors:['white','black','dark-gray'],sizes:['S','M','L','XL']},
+  {handle:'mens-gym-shirt',title:"Men's Gym Shirt",desc:'True to size · 95% polyamide 5% elastane',price:30,badge:'',cats:['all','tops','mens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_65a0576e-dbba-443f-a04a-5d91f6d91d20.jpg?v=1775552279',colors:['black','white','navy-blue','red'],sizes:['S','M','L','XL']},
+  {handle:'womens-sport-bra',title:"Women's Sport Bra",desc:'High support · Moisture-wicking',price:25,badge:'',cats:['all','womens','tops'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_95ca150e-60c6-4308-90f2-6310c8096b6a.jpg?v=1768722286',colors:['black','white','pink-1','navy-blue'],sizes:['S','M','L','XL']},
+  {handle:'womens-gym-shorts',title:"Women's Gym Shorts",desc:'4-way stretch · Quick-dry',price:25,badge:'',cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/7E62E8C7-9832-4D8F-B46A-AE8249EDD544.jpg?v=1761546662',colors:['black','navy-blue','burgundy'],sizes:['XS','S','M','L','XL']},
+  {handle:'womens-2-1-shorts',title:"Women's 2-in-1 Shorts",desc:'Built-in compression liner',price:30,badge:'',cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B2796E1A-0A02-4370-BC1A-87BDFE471E5A.png?v=1762482462',colors:['black','navy-blue'],sizes:['S','M','L','XL']},
+  {handle:'men-s-2-for-1-compression-shorts',title:'2-in-1 Compression Shorts',desc:'Nylon · Running training basketball shorts',price:40,badge:'',cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0022.jpg?v=1761716083',colors:['black','grey'],sizes:['S','M','L','XL']},
+  {handle:'mens-basketball-shorts',title:"Men's Basketball Shorts",desc:'100% Polyester · Breathable design',price:25,badge:'',cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_59c8766e-4591-468f-8075-8b4287f30a9f.jpg?v=1775535578',colors:['yellow','burgundy','red','light-blue','purple','white','black'],sizes:['S','M','L','XL']},
+  {handle:'womens-2-1-shorts',title:"Women's 2-in-1 Shorts",desc:'Built-in compression liner',price:30,badge:'',cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B2796E1A-0A02-4370-BC1A-87BDFE471E5A.png?v=1762482462',colors:['black','navy-blue'],sizes:['S','M','L','XL']},
+  {handle:'mens-compression-pants',title:"Men's Compression Pants",desc:'Compression · Without logo',price:20,badge:'New',cats:['all','mens','bottoms'],img:'https://i.ibb.co/sJtWx4HY/IMG-4501.jpg',colors:['white','black'],sizes:['S','M','L','XL']},
+  {handle:'mens-single-leg-compression-pants',title:"Men's Single Leg Compression Pants",desc:'Single leg compression · Without logo',price:25,badge:'New',cats:['all','mens','bottoms'],img:'https://i.ibb.co/b5hGKF5j/IMG-4504.jpg',colors:['white','black','grey'],sizes:['S','M','L','XL']},
+  {handle:'mensrunner-vest',title:"Men's Runner Vest",desc:'100% Polyester · Windproof · Waterproof',price:45,badge:'',cats:['all','mens','jackets'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_0a5e02aa-8e81-4e92-963d-cee6741b086c.jpg?v=1775536851',colors:['green-1','black','orange'],sizes:['S','M','L','XL']},
+  {handle:'tl-rocket',title:'TL "Rocket" Shirt',desc:'Breathable · Athletic fit',price:30,badge:'',cats:['all','tops','mens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_935aa918-1d27-4cb2-96fb-e191e14f38f3.jpg?v=1775552279',colors:['black','white','navy-blue'],sizes:['S','M','L','XL']},
+  {handle:'3-d-embroidery-crewneck',title:'3-D Embroidery Crewneck',desc:'100% Cotton · 3-D embroidered · God. Health. Wealth.',price:40,badge:'New',cats:['all','tops','mens'],img:'https://i.ibb.co/Vcdg0dcD/IMG-3641.png',colors:['chinese-red','navy-blue','nio-grey'],sizes:['S','M','L','XL']},
+  {handle:'women-s-butter-soft-leggings',title:'"Butter-Soft" Leggings',desc:'Double-brushed · 80% Nylon 20% Elastane · High waist',price:30,badge:'',cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/AEEB6281-985A-423A-AAA8-097D87601F6D.jpg?v=1762231785',colors:['sand','brown-1','warm-tan'],sizes:['S','M','L']},
+  {handle:'boxe-tees',title:'Box\'e Tees',desc:'100% Cotton · Oversized boxy fit',price:30,badge:'',cats:['all','tops','mens','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_1210f229-9c09-47f0-9203-2aa876bb70fb.jpg?v=1775552279',colors:['orange','cream','brown-1','white','light-grey'],sizes:['S','M','L','XL','2XL']},
+  {handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,badge:'Custom',cats:['all','mens','custom'],img:'https://i.ibb.co/W4cCRYnY/6754.png',colors:['white','black','navy-blue','red','hard-blue','kelly-green','yellow','purple','grey'],sizes:['S','M','L','XL']},
+];
+
+const STRIPE_LINKS={'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00','3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01','mens-gym-shirt':'https://buy.stripe.com/28E5kDaZG1nAbFZastasg02','untitled-nov4_20-32':'https://buy.stripe.com/fZucN5ebS1nA6lFastasg04','3-d-embroidery-hoodie':'https://buy.stripe.com/cNi7sLebS8Q26lF0RTasg05','3-d-embroidery-t-shirt':'https://buy.stripe.com/bJe3cvd7O3vI4dxcABasg06','womens-sport-bra':'https://buy.stripe.com/7sYcN5ffW7LYh0jcABasg07','mens-compression-pants':'https://buy.stripe.com/28EeVdc3K6HUdO77ghasg08','mens-single-leg-compression-pants':'https://buy.stripe.com/eVq00jffW2rE11lfMNasg09','tl-rocket':'https://buy.stripe.com/5kQ3cv2tafeqh0j1VXasg0a','mensrunner-vest':'https://buy.stripe.com/7sYaEXd7O1nA5hBbwxasg0b','womens-2-1-shorts':'https://buy.stripe.com/5kQ00j0l25DQcK3bwxasg0c','womens-gym-shorts':'https://buy.stripe.com/14AfZh6Jqc2eeSb589asg0d','boxe-tees':'https://buy.stripe.com/3cIaEXgk0eamh0j6cdasg0e','boxy-tanks':'https://buy.stripe.com/5kQeVd3xe6HU6lFfMNasg0j'};
+
+function badgeClass(b){return b==='New'?'badge-new':b==='Best Seller'||b==='Bestseller'?'badge-hot':'badge-ltd';}
+
+var handle = new URLSearchParams(window.location.search).get('h');
+var p = PRODUCTS.find(function(x){return x.handle===handle;});
+
+if(!p){
+  document.getElementById('notFound').style.display='block';
+} else {
+  document.title = 'TAGLINE — '+p.title;
+  var cat = (p.cats||[]).find(function(c){return c!=='all';}) || '';
+  var page = document.getElementById('page');
+  page.innerHTML =
+    '<div class="product-grid">'
+      +'<div class="img-col">'
+        +'<img class="product-img" src="'+p.img+'" alt="'+p.title+'">'
+        +(p.badge?'<div class="product-badge '+badgeClass(p.badge)+'">'+p.badge+'</div>':'')
+      +'</div>'
+      +'<div class="info-col">'
+        +'<p class="product-cat">'+cat.replace(/-/g,' ')+'</p>'
+        +'<h1 class="product-name">'+p.title+'</h1>'
+        +(p.price>0?'<p class="product-price">$'+p.price+'</p>':p.badge==='Custom'?'<p class="product-price" style="font-size:1rem">$5 Lock · Custom Quote</p>':'')
+        +'<p class="product-desc">'+p.desc+'</p>'
+        +(p.colors&&p.colors.length?
+          '<div class="field"><div class="field-label">Color &nbsp;<strong id="colorName">'+p.colors[0].replace(/-/g,' ')+'</strong></div>'
+          +'<div class="swatches">'
+          +p.colors.map(function(c,i){return '<div class="swatch'+(i===0?' sel':'')+'" style="background:'+gc(c)+'" data-c="'+c+'" onclick="pickColor(this)" title="'+c.replace(/-/g,' ')+'"></div>';}).join('')
+          +'</div></div>':'')
+        +(p.sizes&&p.sizes.length?
+          '<div class="field"><div class="field-label">Size &nbsp;<strong id="sizeName">'+p.sizes[0]+'</strong></div>'
+          +'<div class="sizes">'
+          +p.sizes.map(function(s,i){return '<div class="sz'+(i===0?' sel':'')+'" data-s="'+s+'" onclick="pickSize(this)">'+s+'</div>';}).join('')
+          +'</div></div>':'')
+        +'<div class="buy-btn" id="buyBtn">🔒 Coming Soon</div>'
+        +'<p class="coming-note">Shop opens soon — check back shortly</p>'
+      +'</div>'
+    +'</div>';
+}
+
+function pickColor(el){
+  document.querySelectorAll('.swatch').forEach(function(s){s.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('colorName').textContent = el.getAttribute('data-c').replace(/-/g,' ');
+}
+function pickSize(el){
+  document.querySelectorAll('.sz').forEach(function(s){s.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('sizeName').textContent = el.getAttribute('data-s');
+}
+</script>
+</body>
+</html>
