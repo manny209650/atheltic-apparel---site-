@@ -100,27 +100,36 @@ spawnShoot();
 setTimeout(spawnShoot, 700);
 setTimeout(spawnShoot, 1600);
 
-/* ── ROCKET — orbits elliptically around center, points in direction of travel ── */
+/* ── ROCKET — blasts across the screen, pauses, repeats ── */
 var rk=document.getElementById('rocket');
-var rAngle=0;
-function animRocket(){
-  var cx=window.innerWidth/2;
-  var cy=window.innerHeight/2;
-  var rx=Math.min(window.innerWidth*0.4,300);
-  var ry=Math.min(window.innerHeight*0.32,210);
-  var x=cx+rx*Math.cos(rAngle);
-  var y=cy+ry*Math.sin(rAngle);
-  /* velocity direction → rocket nose points in direction of travel */
-  var vx=-rx*Math.sin(rAngle);
-  var vy=ry*Math.cos(rAngle);
-  var rot=Math.atan2(vx,-vy)*180/Math.PI;
-  rk.style.left=x+'px';
-  rk.style.top=y+'px';
-  rk.style.transform='translate(-50%,-50%) rotate('+rot+'deg)';
-  rAngle+=0.014;
-  requestAnimationFrame(animRocket);
+function launchRocket(){
+  var fromLeft=Math.random()>0.5;
+  var startX=fromLeft?-60:window.innerWidth+60;
+  var endX=fromLeft?window.innerWidth+60:-60;
+  var startY=window.innerHeight*(0.55+Math.random()*0.3);
+  var endY=window.innerHeight*(0.05+Math.random()*0.25);
+  var angle=Math.atan2(endY-startY,endX-startX)*180/Math.PI+90;
+  rk.style.opacity='1';
+  rk.style.transform='translate(-50%,-50%) rotate('+angle+'deg)';
+  var duration=1800+Math.random()*600;
+  var start=null;
+  function step(ts){
+    if(!start)start=ts;
+    var p=Math.min((ts-start)/duration,1);
+    var ease=1-Math.pow(1-p,2);
+    var x=startX+(endX-startX)*ease;
+    var y=startY+(endY-startY)*ease;
+    rk.style.left=x+'px';
+    rk.style.top=y+'px';
+    if(p<1){requestAnimationFrame(step);}
+    else{
+      rk.style.opacity='0';
+      setTimeout(launchRocket, 2500+Math.random()*2000);
+    }
+  }
+  requestAnimationFrame(step);
 }
-animRocket();
+launchRocket();
 
 /* ── UFO — drifts slowly left→right at top, bobs gently, wraps ── */
 var ufo=document.getElementById('ufo');
