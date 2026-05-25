@@ -23,9 +23,10 @@ body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;displ
 /* ── SHOOTING STARS ── */
 .sstar{position:fixed;height:2px;background:linear-gradient(90deg,#fff,rgba(255,255,255,.5),transparent);border-radius:2px;pointer-events:none;transform-origin:left center;opacity:0}
 
-/* ── ROCKET ── */
+/* ── ROCKET — mobile only ── */
 #rocket{font-size:clamp(2.4rem,8vw,3rem);display:block;margin-bottom:18px;position:relative;z-index:10;animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(min-width:481px){#rocket{display:none}}
 
 /* ── DECO ── */
 #ufo{position:fixed;pointer-events:none;z-index:1;font-size:clamp(1.4rem,4vw,1.9rem)}
@@ -136,9 +137,9 @@ function spawnShoot(){
     el.style.transform='rotate(-30deg) translate('+(p*dx)+'px,'+(p*dy*0.4)+'px)';
     p<1?requestAnimationFrame(step):el.remove();
   })(0);
-  setTimeout(spawnShoot,Math.random()*2000+1000);
+  setTimeout(spawnShoot,Math.random()*4000+5000);
 }
-spawnShoot();setTimeout(spawnShoot,600);setTimeout(spawnShoot,1400);
+spawnShoot();
 
 /* ── UFO ── */
 var ufo=document.getElementById('ufo'),uX=-80,uT=0;
