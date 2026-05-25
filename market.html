@@ -31,6 +31,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:fl
 .nav-links{display:flex;gap:20px;align-items:center}
 .back-btn{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--muted);text-decoration:none;border:1px solid rgba(255,255,255,.12);padding:9px 22px;transition:all .3s}
 .back-btn:hover{color:var(--white);border-color:var(--red)}
+.tl-lang-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Inter',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;cursor:pointer;border-radius:50px;display:flex;align-items:center;gap:6px;transition:background .2s;white-space:nowrap}
+.tl-lang-btn:hover{background:rgba(255,255,255,.14)}.tl-flag{font-size:.8rem}
 
 /* TICKER TAPE */
 .ticker-wrap{margin-top:80px;border-bottom:1px solid var(--border)}
@@ -99,7 +101,8 @@ footer a{color:var(--red);text-decoration:none}
 <nav>
   <a href="index.html" class="nav-logo">TAG<span>LINE</span></a>
   <div class="nav-links">
-    <a href="wealth.html" class="back-btn">← Wealth Hub</a>
+    <button class="tl-lang-btn" data-target="es" aria-label="Cambiar a Español"><span class="tl-flag">🇲🇽</span> Español</button>
+    <a href="wealth.html" class="back-btn" data-i18n="m-back">← Wealth Hub</a>
   </div>
 </nav>
 
@@ -136,18 +139,18 @@ footer a{color:var(--red);text-decoration:none}
 
 <!-- HERO -->
 <div class="page-hero">
-  <span class="hero-label">Tagline Wealth Hub — Live Markets</span>
-  <div class="hero-title">MARKET WATCH</div>
-  <p class="hero-sub">"The plans of the diligent lead to profit." — Proverbs 21:5 &nbsp;·&nbsp; Live prices. Real knowledge. Build generational wealth.</p>
-  <span class="disclaimer">⚠️ Not financial advice — for educational purposes only. Always do your own research.</span>
+  <span class="hero-label" data-i18n="m-hero-label">Tagline Wealth Hub — Live Markets</span>
+  <div class="hero-title" data-i18n="m-hero-title">MARKET WATCH</div>
+  <p class="hero-sub" data-i18n="m-hero-sub">"The plans of the diligent lead to profit." — Proverbs 21:5 &nbsp;·&nbsp; Live prices. Real knowledge. Build generational wealth.</p>
+  <span class="disclaimer" data-i18n="m-disclaimer">⚠️ Not financial advice — for educational purposes only. Always do your own research.</span>
 </div>
 
 <div class="market-section">
 
   <!-- ── INDEXES ── -->
-  <span class="section-label">The Foundation</span>
-  <h2 class="section-title">Top 3 <span>Market Indexes</span></h2>
-  <p class="section-sub">Indexes measure the overall health of the market. If you understand these three numbers, you understand the economy. Every serious investor watches these daily.</p>
+  <span class="section-label" data-i18n="m-idx-label">The Foundation</span>
+  <h2 class="section-title" data-i18n="m-idx-title">Top 3 <span>Market Indexes</span></h2>
+  <p class="section-sub" data-i18n="m-idx-sub">Indexes measure the overall health of the market. If you understand these three numbers, you understand the economy. Every serious investor watches these daily.</p>
 
   <div class="widget-box">
     <div class="tradingview-widget-container">
@@ -221,9 +224,9 @@ footer a{color:var(--red);text-decoration:none}
   <hr class="divider">
 
   <!-- ── ETFs ── -->
-  <span class="section-label">Diversified Power</span>
-  <h2 class="section-title">Top 5 <span>ETFs</span> to Watch</h2>
-  <p class="section-sub">ETFs let you own hundreds of companies in one purchase. One click, instant diversification. These five are among the most powerful wealth-building vehicles available to everyday investors.</p>
+  <span class="section-label" data-i18n="m-etf-label">Diversified Power</span>
+  <h2 class="section-title" data-i18n="m-etf-title">Top 5 <span>ETFs</span> to Watch</h2>
+  <p class="section-sub" data-i18n="m-etf-sub">ETFs let you own hundreds of companies in one purchase. One click, instant diversification. These five are among the most powerful wealth-building vehicles available to everyday investors.</p>
 
   <div class="widget-box">
     <div class="tradingview-widget-container">
@@ -318,9 +321,9 @@ footer a{color:var(--red);text-decoration:none}
   <hr class="divider">
 
   <!-- ── STOCKS ── -->
-  <span class="section-label">Individual Leaders</span>
-  <h2 class="section-title">Top 5 <span>Stocks</span> to Watch</h2>
-  <p class="section-sub">These are some of the most powerful companies on Earth — companies that shape the global economy. Understanding them helps you understand where the world is going and where money is flowing.</p>
+  <span class="section-label" data-i18n="m-stocks-label">Individual Leaders</span>
+  <h2 class="section-title" data-i18n="m-stocks-title">Top 5 <span>Stocks</span> to Watch</h2>
+  <p class="section-sub" data-i18n="m-stocks-sub">These are some of the most powerful companies on Earth — companies that shape the global economy. Understanding them helps you understand where the world is going and where money is flowing.</p>
 
   <div class="widget-box">
     <div class="tradingview-widget-container">
@@ -424,10 +427,11 @@ footer a{color:var(--red);text-decoration:none}
 </div>
 
 <footer>
-  <p><a href="wealth.html">← Back to Wealth Hub</a> &nbsp;·&nbsp; <a href="index.html">Home</a></p>
-  <p style="margin-top:12px">GOD · HEALTH · WEALTH</p>
-  <p style="margin-top:10px;font-size:.6rem;color:rgba(255,255,255,.2)">Market data powered by TradingView · Not financial advice · Always do your own research</p>
+  <p><a href="wealth.html" data-i18n="m-footer-wealth">← Back to Wealth Hub</a> &nbsp;·&nbsp; <a href="index.html" data-i18n="m-footer-home">Home</a></p>
+  <p style="margin-top:12px" data-i18n="m-footer-tag">GOD · HEALTH · WEALTH</p>
+  <p style="margin-top:10px;font-size:.6rem;color:rgba(255,255,255,.2)" data-i18n="m-footer-credit">Market data powered by TradingView · Not financial advice · Always do your own research</p>
 </footer>
+<script src="lang.js"></script>
 
 </body>
 </html>

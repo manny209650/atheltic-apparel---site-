@@ -77,9 +77,16 @@ body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;displ
 @media(prefers-reduced-motion:reduce){
   .star,#rocket,#moon,#planet{animation:none}
 }
+
+/* ── LANG BUTTON ── */
+.tl-lang-btn{position:fixed;top:16px;right:16px;z-index:200;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-family:-apple-system,'Helvetica Neue',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-radius:50px;display:flex;align-items:center;gap:6px;transition:background .2s,border-color .2s;white-space:nowrap;backdrop-filter:blur(8px)}
+.tl-lang-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)}
+.tl-flag{font-size:.85rem}
 </style>
 </head>
 <body>
+
+<button class="tl-lang-btn" data-target="es" aria-label="Cambiar a Español"><span class="tl-flag">🇲🇽</span> Español</button>
 
 <div id="ufo">🛸</div>
 <div id="moon">🌙</div>
@@ -88,25 +95,25 @@ body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;displ
 <div class="content">
   <div id="rocket">🚀</div>
   <div class="logo">TAGLINE</div>
-  <div class="tagline">God · Health · Wealth</div>
-  <div class="headline">Something Big Is Coming</div>
-  <p class="sub">Faith-forward athletic apparel built for believers who chase greatness.</p>
+  <div class="tagline" data-i18n="idx-sub">God · Health · Wealth</div>
+  <div class="headline" data-i18n="idx-headline">Something Big Is Coming</div>
+  <p class="sub" data-i18n="idx-body">Faith-forward athletic apparel built for believers who chase greatness.</p>
 
   <div class="hubs">
     <a href="god.html" class="hub hub-faith">
       <span class="hub-icon">✝️</span>
-      <span class="hub-name">Faith Hub</span>
-      <span class="hub-sub">God · Spirit<br>Purpose</span>
+      <span class="hub-name" data-i18n="idx-faith-name">Faith Hub</span>
+      <span class="hub-sub" data-i18n="idx-faith-sub">God · Spirit<br>Purpose</span>
     </a>
     <a href="health.html" class="hub hub-health">
       <span class="hub-icon">💪</span>
-      <span class="hub-name">Health Hub</span>
-      <span class="hub-sub">Body · Mind<br>Nutrition</span>
+      <span class="hub-name" data-i18n="idx-health-name">Health Hub</span>
+      <span class="hub-sub" data-i18n="idx-health-sub">Body · Mind<br>Nutrition</span>
     </a>
     <a href="wealth.html" class="hub hub-wealth">
       <span class="hub-icon">💰</span>
-      <span class="hub-name">Wealth Hub</span>
-      <span class="hub-sub">Money · Build<br>Grow</span>
+      <span class="hub-name" data-i18n="idx-wealth-name">Wealth Hub</span>
+      <span class="hub-sub" data-i18n="idx-wealth-sub">Money · Build<br>Grow</span>
     </a>
   </div>
 </div>
@@ -141,6 +148,21 @@ function spawnShoot(){
 }
 spawnShoot();
 
+/* ── LANG ── */
+document.querySelector('.tl-lang-btn').addEventListener('click',function(){
+  var t=this.dataset.target;
+  localStorage.setItem('tl-lang',t);
+  location.reload();
+});
+(function(){
+  var l=localStorage.getItem('tl-lang')||'en';
+  if(l==='es'){
+    var btn=document.querySelector('.tl-lang-btn');
+    btn.innerHTML='<span class="tl-flag">🇺🇸</span> English';
+    btn.dataset.target='en';
+  }
+})();
+
 /* ── UFO ── */
 var ufo=document.getElementById('ufo'),uX=-80,uT=0;
 (function animUFO(){
@@ -150,5 +172,6 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
   uT+=0.016;requestAnimationFrame(animUFO);
 })();
 </script>
+<script src="lang.js"></script>
 </body>
 </html>

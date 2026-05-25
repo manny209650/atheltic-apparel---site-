@@ -125,29 +125,33 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
   .beam{width:320px}
   .plate-dish{width:58px;height:58px;font-size:1.7rem}
 }
+.tl-lang-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;cursor:pointer;border-radius:50px;display:inline-flex;align-items:center;gap:5px;transition:background .2s}
+.tl-lang-btn:hover{background:rgba(255,255,255,.14)}.tl-flag{font-size:.8rem}
 </style>
 </head>
 <body>
 
 <!-- Back -->
 <div class="back-bar">
-  <a href="health.html">← Health Hub</a>
+  <a href="health.html" data-i18n="fs-back">← Health Hub</a>
   <span>/</span>
-  <a href="index.html">Home</a>
+  <a href="index.html" data-i18n="fs-home">Home</a>
+  <span>/</span>
+  <button class="tl-lang-btn" data-target="es"><span class="tl-flag">🇲🇽</span> Español</button>
 </div>
 
 <!-- Header -->
 <div class="hero">
   <span class="hero-emoji">⚖️</span>
-  <h1 class="hero-title">The Food Scale</h1>
-  <p class="hero-sub">Is your food a superhero or a villain? 🦸‍♂️🦹</p>
+  <h1 class="hero-title" data-i18n="fs-title">The Food Scale</h1>
+  <p class="hero-sub" data-i18n="fs-sub">Is your food a superhero or a villain? 🦸‍♂️🦹</p>
 </div>
 
 <!-- Search -->
 <div class="search-wrap">
   <div class="search-box">
     <input class="search-input" id="foodInput" type="text" placeholder="Type a food... 🍎🍔🥦" autocomplete="off">
-    <button class="search-btn" onclick="analyze()">Check It! 🔍</button>
+    <button class="search-btn" onclick="analyze()" data-i18n="fs-btn">Check It! 🔍</button>
   </div>
   <div class="suggestions" id="suggestions"></div>
 </div>
@@ -162,14 +166,14 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
         <div class="plate plate-left" id="plateLeft">
           <div class="plate-string"></div>
           <div class="plate-dish" id="plateLeftDish">💪</div>
-          <div class="plate-label">POWERS UP</div>
+          <div class="plate-label" data-i18n="fs-powers-up">POWERS UP</div>
           <div class="plate-score" id="scoreLeft">—</div>
         </div>
         <!-- Right plate: SLOWS DOWN -->
         <div class="plate plate-right" id="plateRight">
           <div class="plate-string"></div>
           <div class="plate-dish" id="plateRightDish">⚡</div>
-          <div class="plate-label">SLOWS DOWN</div>
+          <div class="plate-label" data-i18n="fs-slows-down">SLOWS DOWN</div>
           <div class="plate-score" id="scoreRight">—</div>
         </div>
       </div>
@@ -192,11 +196,11 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
 <div class="result-wrap" id="resultWrap">
   <div class="result-cards">
     <div class="result-card reward-card">
-      <p class="rc-header">💪 Powers You Up</p>
+      <p class="rc-header" data-i18n="fs-rewards-hdr">💪 Powers You Up</p>
       <ul class="rc-list" id="rewardList"></ul>
     </div>
     <div class="result-card risk-card">
-      <p class="rc-header">⚠️ Watch Out For</p>
+      <p class="rc-header" data-i18n="fs-risks-hdr">⚠️ Watch Out For</p>
       <ul class="rc-list" id="riskList"></ul>
     </div>
   </div>
@@ -206,17 +210,17 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
     <p class="verdict-text" id="verdictText"></p>
   </div>
   <div class="swap-box" id="swapBox" style="display:none">
-    <p class="swap-header">🔄 Smarter Swaps — Same Craving, Better Fuel</p>
+    <p class="swap-header" data-i18n="fs-swap-hdr">🔄 Smarter Swaps — Same Craving, Better Fuel</p>
     <div class="swap-list" id="swapList"></div>
   </div>
 </div>
 
 <!-- Streak -->
-<div class="streak-bar" id="streakBar">Foods checked today: <span id="streakCount">0</span> 🔥</div>
+<div class="streak-bar" id="streakBar"><span data-i18n="fs-streak-txt">Foods checked today:</span> <span id="streakCount">0</span> 🔥</div>
 
 <!-- Recent checks -->
 <div class="recent-wrap" id="recentWrap" style="display:none">
-  <p class="recent-title">Recently checked</p>
+  <p class="recent-title" data-i18n="fs-recent-lbl">Recently checked</p>
   <div class="recent-chips" id="recentChips"></div>
 </div>
 
@@ -430,7 +434,9 @@ let sugIndex = -1;
 input.addEventListener('input', ()=>{
   const q = input.value.trim().toLowerCase();
   if(!q){ sugBox.style.display='none'; return; }
-  const matches = KEYS.filter(k=>k.startsWith(q) || k.includes(q)).slice(0,6);
+  // Include Spanish alias matches
+  const esMatches = Object.keys(ES_ALIAS).filter(k=>k.startsWith(q)||k.includes(q)).map(k=>ES_ALIAS[k]);
+  const matches = [...new Set([...KEYS.filter(k=>k.startsWith(q)||k.includes(q)),...esMatches])].slice(0,6);
   if(!matches.length){ sugBox.style.display='none'; return; }
   sugBox.innerHTML = matches.map(k=>`
     <div class="sug-item" data-k="${k}">
@@ -460,7 +466,8 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) sug
 
 // ── ANALYZE ──
 function analyze(){
-  const q = input.value.trim().toLowerCase();
+  const raw = input.value.trim().toLowerCase();
+  const q = resolveQuery(raw);
   const food = FOODS[q];
   if(!food){ shake(); return; }
 
@@ -545,6 +552,15 @@ function renderRecent(){
     </div>`).join('');
 }
 
+// Spanish food aliases
+const ES_ALIAS = {
+  'manzana':'apple','plátano':'banana','plátanos':'banana','platano':'banana','fresa':'strawberry','fresas':'strawberry','arándano':'blueberry','arándanos':'blueberry','naranja':'orange','mango':'mango','sandía':'watermelon','uvas':'grapes','aguacate':'avocado','piña':'pineapple','cereza':'cherry','kiwi':'kiwi','durazno':'peach','limón':'lemon','brócoli':'broccoli','espinaca':'spinach','espinacas':'spinach','col rizada':'kale','zanahoria':'carrot','tomate':'tomato','camote':'sweet potato','pepino':'cucumber','maíz':'corn','apio':'celery','ajo':'garlic','cebolla':'onion','pimiento':'bell pepper','pimientos':'bell peppers','champiñones':'mushrooms','espárragos':'asparagus','calabacín':'zucchini','edamame':'edamame','pollo':'chicken','salmón':'salmon','atún':'tuna','huevos':'eggs','huevo':'eggs','carne':'beef','pavo':'turkey','camarones':'shrimp','frijoles':'beans','lentejas':'lentils','avena':'oatmeal','arroz integral':'brown rice','arroz blanco':'white rice','quinoa':'quinoa','pan blanco':'white bread','pan integral':'whole wheat bread','pasta':'pasta','leche':'milk','yogur griego':'greek yogurt','queso':'cheese','mantequilla':'butter','helado':'ice cream','pizza':'pizza','hamburguesa':'burger','perro caliente':'hot dog','papas fritas':'french fries','papas':'chips','dulces':'candy','refresco':'soda','pastel':'cake','galletas':'cookies','dona':'donut','chocolate':'chocolate','chocolate oscuro':'dark chocolate','palomitas':'popcorn','panqueques':'pancakes','panqueque':'pancake','panqueques de proteína':'protein pancakes','miel':'honey','jarabe':'syrup','almendras':'almonds','nueces':'walnuts','mantequilla de maní':'peanut butter','mantequilla de almendra':'almond butter','mantequilla de anacardo':'cashew butter','semillas de chía':'chia seeds','agua':'water','té verde':'green tea','jugo de naranja':'orange juice','café':'coffee','bebida energética':'energy drink','aceite de oliva':'olive oil','avena cocida':'oats','ensalada':'salad','ensalada griega':'greek salad','ensalada mediterránea':'mediterranean salad','ensalada de quinoa':'quinoa salad','ensalada de pollo':'chicken salad','ensalada de atún':'tuna salad','ensalada de frutas':'fruit salad','ensalada César':'caesar salad','ensalada de espinaca':'spinach salad','ensalada de col rizada':'kale salad','claras de huevo':'egg whites','clara de huevo':'egg white','mantequilla kerrygold':'kerrygold','ghee':'ghee','mantequilla de hierba':'grass fed butter','pasta de garbanzos':'chickpea pasta','pasta de proteína':'protein pasta','pizza de corteza delgada':'thin crust pizza','pizza vegetariana':'veggie pizza','pollo frito':'fried chicken','papas dulces fritas':'sweet potato fries','arroz de coliflor':'cauliflower rice','batido':'smoothie','batido de proteína':'protein shake','granola':'granola','barra de proteína':'protein bar'
+};
+
+function resolveQuery(q){
+  return ES_ALIAS[q] || q;
+}
+
 function shake(){
   input.style.animation='none';
   input.style.borderColor='var(--red)';
@@ -552,5 +568,6 @@ function shake(){
   playTone(200,'square',0.3,0.1);
 }
 </script>
+<script src="lang.js"></script>
 </body>
 </html>
