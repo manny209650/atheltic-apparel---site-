@@ -2,15 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<meta name="theme-color" content="#06060F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TAGLINE">
 <title>TAGLINE — Coming Soon</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;overflow:hidden}
-body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 24px;font-family:'Helvetica Neue',sans-serif;color:#fff;position:relative}
+body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px env(safe-area-inset-bottom,16px);font-family:-apple-system,'Helvetica Neue',sans-serif;color:#fff;position:relative}
 
 /* ── STARS ── */
 .star{position:fixed;border-radius:50%;pointer-events:none;animation:twinkle var(--d,3s) ease-in-out var(--del,0s) infinite alternate}
@@ -19,47 +23,58 @@ body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;alig
 /* ── SHOOTING STARS ── */
 .sstar{position:fixed;height:2px;background:linear-gradient(90deg,#fff,rgba(255,255,255,.5),transparent);border-radius:2px;pointer-events:none;transform-origin:left center;opacity:0}
 
-/* ── ROCKET — floats above logo ── */
-#rocket{font-size:3rem;display:block;margin-bottom:22px;position:relative;z-index:10;animation:float 3s ease-in-out infinite}
+/* ── ROCKET ── */
+#rocket{font-size:clamp(2.4rem,8vw,3rem);display:block;margin-bottom:18px;position:relative;z-index:10;animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* ── DECO ── */
-#moon{position:fixed;top:10%;left:8%;font-size:2rem;pointer-events:none;z-index:1;animation:bob 8s ease-in-out infinite}
-#planet{position:fixed;bottom:10%;right:6%;font-size:1.6rem;pointer-events:none;z-index:1;animation:bob 10s ease-in-out 2s infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+#ufo{position:fixed;pointer-events:none;z-index:1;font-size:clamp(1.4rem,4vw,1.9rem)}
+#moon{position:fixed;top:8%;left:6%;font-size:clamp(1.5rem,4vw,2rem);pointer-events:none;z-index:1;animation:bob 8s ease-in-out infinite}
+#planet{position:fixed;bottom:8%;right:5%;font-size:clamp(1.2rem,3.5vw,1.6rem);pointer-events:none;z-index:1;animation:bob 10s ease-in-out 2s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* ── CONTENT ── */
-.content{position:relative;z-index:10}
-.logo{font-size:clamp(2.6rem,9vw,4.8rem);font-weight:900;letter-spacing:.1em;margin-bottom:6px}
-.tagline{font-size:.65rem;letter-spacing:.38em;text-transform:uppercase;color:#E02020;margin-bottom:10px}
-.headline{font-size:clamp(1.2rem,4vw,1.9rem);font-weight:800;margin-bottom:10px}
-.sub{font-size:.85rem;color:rgba(255,255,255,.38);max-width:320px;line-height:1.8;margin:0 auto 36px}
+.content{position:relative;z-index:10;width:100%;max-width:500px}
+.logo{font-size:clamp(2.4rem,11vw,4.8rem);font-weight:900;letter-spacing:.1em;margin-bottom:6px}
+.tagline{font-size:clamp(.58rem,.65rem,1rem);letter-spacing:.32em;text-transform:uppercase;color:#E02020;margin-bottom:10px}
+.headline{font-size:clamp(1.1rem,4.5vw,1.9rem);font-weight:800;margin-bottom:10px}
+.sub{font-size:clamp(.8rem,.9rem,1rem);color:rgba(255,255,255,.38);max-width:300px;line-height:1.8;margin:0 auto 28px}
 
 /* ── HUB CARDS ── */
-.hubs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto}
-.hub{display:flex;flex-direction:column;align-items:center;gap:7px;padding:18px 12px 16px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:transform .22s,border-color .22s,background .22s,box-shadow .22s;-webkit-tap-highlight-color:transparent}
-.hub:active{transform:scale(.96)}
-.hub-icon{font-size:1.9rem;line-height:1}
-.hub-name{font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:#fff}
-.hub-sub{font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);line-height:1.5}
+.hubs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:460px;margin:0 auto}
+.hub{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;min-height:100px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;touch-action:manipulation}
+.hub:active{transform:scale(.94);opacity:.85}
+.hub-icon{font-size:clamp(1.5rem,5vw,1.9rem);line-height:1}
+.hub-name{font-size:clamp(.6rem,.65rem,1rem);letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#fff}
+.hub-sub{font-size:clamp(.5rem,.55rem,.9rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);line-height:1.5}
 
-/* Faith — purple */
 .hub-faith{border-color:rgba(160,90,255,.22);background:rgba(120,50,220,.07)}
-.hub-faith:hover,.hub-faith:focus{border-color:rgba(160,90,255,.55);background:rgba(120,50,220,.18);box-shadow:0 6px 22px rgba(120,50,220,.25);transform:translateY(-4px)}
-
-/* Health — green */
+.hub-faith:hover{border-color:rgba(160,90,255,.55);background:rgba(120,50,220,.18);box-shadow:0 6px 22px rgba(120,50,220,.25);transform:translateY(-3px)}
 .hub-health{border-color:rgba(0,210,100,.22);background:rgba(0,180,80,.07)}
-.hub-health:hover,.hub-health:focus{border-color:rgba(0,220,100,.55);background:rgba(0,180,80,.18);box-shadow:0 6px 22px rgba(0,180,80,.25);transform:translateY(-4px)}
-
-/* Wealth — gold */
+.hub-health:hover{border-color:rgba(0,220,100,.55);background:rgba(0,180,80,.18);box-shadow:0 6px 22px rgba(0,180,80,.25);transform:translateY(-3px)}
 .hub-wealth{border-color:rgba(220,170,0,.22);background:rgba(200,150,0,.07)}
-.hub-wealth:hover,.hub-wealth:focus{border-color:rgba(220,170,0,.55);background:rgba(200,150,0,.18);box-shadow:0 6px 22px rgba(200,150,0,.25);transform:translateY(-4px)}
+.hub-wealth:hover{border-color:rgba(220,170,0,.55);background:rgba(200,150,0,.18);box-shadow:0 6px 22px rgba(200,150,0,.25);transform:translateY(-3px)}
 
-@media(max-width:400px){
-  .hubs{grid-template-columns:1fr;max-width:260px}
-  .hub{flex-direction:row;gap:14px;padding:14px 18px;text-align:left}
-  .hub-icon{font-size:1.6rem}
+/* ── MOBILE ── */
+@media(max-width:480px){
+  body{padding:24px 16px 20px}
+  .hubs{gap:8px}
+  .hub{padding:14px 8px;min-height:90px;gap:6px}
   .hub-sub{display:none}
+}
+
+/* ── SHORT SCREENS (landscape phones) ── */
+@media(max-height:560px){
+  #rocket{font-size:2rem;margin-bottom:10px}
+  .tagline{margin-bottom:6px}
+  .headline{margin-bottom:6px}
+  .sub{margin-bottom:18px;font-size:.75rem}
+  #moon,#planet{display:none}
+}
+
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  .star,#rocket,#moon,#planet{animation:none}
 }
 </style>
 </head>
@@ -125,7 +140,7 @@ function spawnShoot(){
 }
 spawnShoot();setTimeout(spawnShoot,600);setTimeout(spawnShoot,1400);
 
-/* ── UFO — drifts left → right, bobs ── */
+/* ── UFO ── */
 var ufo=document.getElementById('ufo'),uX=-80,uT=0;
 (function animUFO(){
   uX+=0.5;if(uX>window.innerWidth+80)uX=-80;
