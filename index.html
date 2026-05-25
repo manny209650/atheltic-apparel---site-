@@ -19,20 +19,21 @@ body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;alig
 /* ── SHOOTING STARS ── */
 .sstar{position:fixed;height:2px;background:linear-gradient(90deg,#fff,rgba(255,255,255,.5),transparent);border-radius:2px;pointer-events:none;transform-origin:left center;opacity:0}
 
-/* ── ROCKET — straight shot bottom-left → top-right (to the moon) ── */
-#rocket{position:fixed;bottom:-70px;left:-70px;font-size:2.2rem;pointer-events:none;z-index:1;transform:rotate(45deg);animation:blast 5.5s ease-in 0.5s infinite}
-@keyframes blast{
-  0%  {transform:translate(0,0) rotate(45deg);opacity:0}
-  6%  {opacity:1}
-  88% {opacity:1}
-  100%{transform:translate(115vw,-115vh) rotate(45deg);opacity:0}
+/* ── ROCKET — shoots up and lands back, centered above logo ── */
+#rocket{font-size:3rem;display:block;margin-bottom:18px;position:relative;z-index:10;animation:launch 3.5s ease-in-out infinite;transform-origin:center bottom}
+@keyframes launch{
+  0%  {transform:translateY(0) rotate(0deg)}
+  35% {transform:translateY(-55px) rotate(-12deg)}
+  50% {transform:translateY(-70px) rotate(-8deg)}
+  65% {transform:translateY(-55px) rotate(-4deg)}
+  100%{transform:translateY(0) rotate(0deg)}
 }
 
 /* ── UFO ── */
 #ufo{position:fixed;pointer-events:none;z-index:1;font-size:1.9rem;top:12%}
 
 /* ── DECO ── */
-#moon{position:fixed;top:8%;right:9%;font-size:2rem;pointer-events:none;z-index:1;animation:bob 8s ease-in-out infinite}
+#moon{position:fixed;top:10%;left:8%;font-size:2rem;pointer-events:none;z-index:1;animation:bob 8s ease-in-out infinite}
 #planet{position:fixed;bottom:10%;right:6%;font-size:1.6rem;pointer-events:none;z-index:1;animation:bob 10s ease-in-out 2s infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
@@ -73,12 +74,12 @@ body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;alig
 </head>
 <body>
 
-<div id="rocket">🚀</div>
 <div id="ufo">🛸</div>
 <div id="moon">🌙</div>
 <div id="planet">🪐</div>
 
 <div class="content">
+  <div id="rocket">🚀</div>
   <div class="logo">TAGLINE</div>
   <div class="tagline">God · Health · Wealth</div>
   <div class="headline">Something Big Is Coming</div>
