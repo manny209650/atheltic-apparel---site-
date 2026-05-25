@@ -3,7 +3,7 @@ const TL = {
   es: {
     // ── INDEX
     'idx-sub':          'Dios · Salud · Riqueza',
-    'idx-headline':     'Algo Grande Está por Venir',
+    'idx-headline':     '¡Mercancía Próximamente!',
     'idx-body':         'Ropa deportiva impulsada por la fe, creada para creyentes que persiguen la grandeza.',
     'idx-faith-name':   'Hub de Fe',
     'idx-faith-sub':    'Dios · Espíritu\nPropósito',
