@@ -19,23 +19,15 @@ body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;alig
 /* ── SHOOTING STARS ── */
 .sstar{position:fixed;height:2px;background:linear-gradient(90deg,#fff,rgba(255,255,255,.5),transparent);border-radius:2px;pointer-events:none;transform-origin:left center;opacity:0}
 
-/* ── ROCKET — shoots up and lands back, centered above logo ── */
-#rocket{font-size:3rem;display:block;margin-bottom:18px;position:relative;z-index:10;animation:launch 3.5s ease-in-out infinite;transform-origin:center bottom}
-@keyframes launch{
-  0%  {transform:translateY(0) rotate(0deg)}
-  35% {transform:translateY(-55px) rotate(-12deg)}
-  50% {transform:translateY(-70px) rotate(-8deg)}
-  65% {transform:translateY(-55px) rotate(-4deg)}
-  100%{transform:translateY(0) rotate(0deg)}
-}
+/* ── MOON — big, top-right ── */
+#moon{position:fixed;top:6%;right:6%;font-size:3.5rem;pointer-events:none;z-index:1;animation:bob 7s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-/* ── UFO ── */
-#ufo{position:fixed;pointer-events:none;z-index:1;font-size:1.9rem;top:12%}
+/* ── ROCKET — shoots from bottom-left toward moon, lands, pauses, repeats ── */
+#rocket{position:fixed;pointer-events:none;z-index:2;font-size:2rem;opacity:0}
 
-/* ── DECO ── */
-#moon{position:fixed;top:10%;left:8%;font-size:2rem;pointer-events:none;z-index:1;animation:bob 8s ease-in-out infinite}
+/* ── PLANET ── */
 #planet{position:fixed;bottom:10%;right:6%;font-size:1.6rem;pointer-events:none;z-index:1;animation:bob 10s ease-in-out 2s infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
 /* ── CONTENT ── */
 .content{position:relative;z-index:10}
@@ -74,12 +66,12 @@ body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;alig
 </head>
 <body>
 
+<div id="rocket">🚀</div>
 <div id="ufo">🛸</div>
 <div id="moon">🌙</div>
 <div id="planet">🪐</div>
 
 <div class="content">
-  <div id="rocket">🚀</div>
   <div class="logo">TAGLINE</div>
   <div class="tagline">God · Health · Wealth</div>
   <div class="headline">Something Big Is Coming</div>
@@ -133,6 +125,38 @@ function spawnShoot(){
   setTimeout(spawnShoot,Math.random()*2000+1000);
 }
 spawnShoot();setTimeout(spawnShoot,600);setTimeout(spawnShoot,1400);
+
+/* ── ROCKET — launches from bottom-left, flies to moon (top-right), lands, pauses, repeats ── */
+var rk=document.getElementById('rocket');
+function launchRocket(){
+  var moonEl=document.getElementById('moon');
+  var mr=moonEl.getBoundingClientRect();
+  var endX=mr.left+mr.width/2;
+  var endY=mr.top+mr.height/2;
+  var startX=-60, startY=window.innerHeight+60;
+  var dx=endX-startX, dy=endY-startY;
+  var angle=Math.atan2(dx,-dy)*180/Math.PI;
+  rk.style.left=startX+'px';
+  rk.style.top=startY+'px';
+  rk.style.transform='translate(-50%,-50%) rotate('+angle+'deg)';
+  rk.style.opacity='0';
+  var flightDur=2000, start=null;
+  function fly(ts){
+    if(!start)start=ts;
+    var p=Math.min((ts-start)/flightDur,1);
+    var ease=p<1?1-Math.pow(1-p,3):1;
+    rk.style.left=(startX+dx*ease)+'px';
+    rk.style.top=(startY+dy*ease)+'px';
+    rk.style.opacity=p<0.08?(p/0.08).toString():p>0.85?((1-p)/0.15).toString():'1';
+    if(p<1){requestAnimationFrame(fly);}
+    else{
+      rk.style.opacity='0';
+      setTimeout(launchRocket, 3000+Math.random()*1500);
+    }
+  }
+  requestAnimationFrame(fly);
+}
+setTimeout(launchRocket, 800);
 
 /* ── UFO — drifts left → right, bobs ── */
 var ufo=document.getElementById('ufo'),uX=-80,uT=0;
