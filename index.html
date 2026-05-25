@@ -148,20 +148,6 @@ function spawnShoot(){
 }
 spawnShoot();
 
-/* ── LANG ── */
-document.querySelector('.tl-lang-btn').addEventListener('click',function(){
-  var t=this.dataset.target;
-  localStorage.setItem('tl-lang',t);
-  location.reload();
-});
-(function(){
-  var l=localStorage.getItem('tl-lang')||'en';
-  if(l==='es'){
-    var btn=document.querySelector('.tl-lang-btn');
-    btn.innerHTML='<span class="tl-flag">🇺🇸</span> English';
-    btn.dataset.target='en';
-  }
-})();
 
 /* ── UFO ── */
 var ufo=document.getElementById('ufo'),uX=-80,uT=0;
@@ -172,6 +158,9 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
   uT+=0.016;requestAnimationFrame(animUFO);
 })();
 </script>
+<style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
+<div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 <script src="lang.js"></script>
 </body>
 </html>

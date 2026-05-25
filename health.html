@@ -117,7 +117,10 @@ footer a{color:var(--red);text-decoration:none}
 
 <nav>
   <a href="index.html" class="nav-logo">TAG<span>LINE</span></a>
-  <a href="index.html" class="back-btn">← Back to Site</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <button class="tl-lang-btn" data-target="es" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;cursor:pointer;border-radius:50px;display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="font-size:.82rem">🇲🇽</span> Español</button>
+    <a href="index.html" class="back-btn">← Back to Site</a>
+  </div>
 </nav>
 
 <section class="page-hero">
@@ -361,5 +364,9 @@ footer a{color:var(--red);text-decoration:none}
   <p style="margin-top:12px">GOD · HEALTH · WEALTH</p>
 </footer>
 <script src="daily.js"></script>
+<style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
+<div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+<script src="lang.js"></script>
 </body>
 </html>
