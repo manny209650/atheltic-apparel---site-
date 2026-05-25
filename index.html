@@ -10,141 +10,137 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;height:100%;overflow:hidden}
-body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;font-family:'Helvetica Neue',sans-serif;color:#fff;position:relative}
+body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 24px;font-family:'Helvetica Neue',sans-serif;color:#fff;position:relative}
 
 /* ── STARS ── */
-.star{position:fixed;border-radius:50%;pointer-events:none;animation:twinkle var(--d,3s) ease-in-out var(--delay,0s) infinite alternate}
-@keyframes twinkle{0%{opacity:var(--bright,.8)}100%{opacity:.04}}
+.star{position:fixed;border-radius:50%;pointer-events:none;animation:twinkle var(--d,3s) ease-in-out var(--del,0s) infinite alternate}
+@keyframes twinkle{0%{opacity:var(--b,.7)}100%{opacity:.03}}
 
 /* ── SHOOTING STARS ── */
-.shoot{position:fixed;height:2px;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.6) 40%,transparent 100%);border-radius:2px;pointer-events:none;transform-origin:left center;transform:rotate(-32deg);opacity:0}
+.sstar{position:fixed;height:2px;background:linear-gradient(90deg,#fff,rgba(255,255,255,.5),transparent);border-radius:2px;pointer-events:none;transform-origin:left center;opacity:0}
 
-/* ── ORBITING ELEMENTS ── */
-#rocket,#ufo{position:fixed;pointer-events:none;z-index:1;will-change:transform;font-size:1.8rem}
+/* ── ROCKET — straight shot bottom-left → top-right (to the moon) ── */
+#rocket{position:fixed;bottom:-70px;left:-70px;font-size:2.2rem;pointer-events:none;z-index:1;transform:rotate(45deg);animation:blast 5.5s ease-in 0.5s infinite}
+@keyframes blast{
+  0%  {transform:translate(0,0) rotate(45deg);opacity:0}
+  6%  {opacity:1}
+  88% {opacity:1}
+  100%{transform:translate(115vw,-115vh) rotate(45deg);opacity:0}
+}
 
-/* ── DECORATIVE SPACE BITS ── */
-.deco{position:fixed;pointer-events:none;z-index:1;font-size:1.4rem}
-#planet{bottom:12%;right:8%;animation:bob 7s ease-in-out infinite}
-#moon{top:10%;left:8%;animation:bob 9s ease-in-out 1s infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+/* ── UFO ── */
+#ufo{position:fixed;pointer-events:none;z-index:1;font-size:1.9rem;top:12%}
+
+/* ── DECO ── */
+#moon{position:fixed;top:8%;right:9%;font-size:2rem;pointer-events:none;z-index:1;animation:bob 8s ease-in-out infinite}
+#planet{position:fixed;bottom:10%;right:6%;font-size:1.6rem;pointer-events:none;z-index:1;animation:bob 10s ease-in-out 2s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
 /* ── CONTENT ── */
 .content{position:relative;z-index:10}
-.logo{font-size:clamp(2.4rem,9vw,4.5rem);font-weight:900;letter-spacing:.1em;margin-bottom:8px}
-.tagline{font-size:.7rem;letter-spacing:.38em;text-transform:uppercase;color:#E02020;margin-bottom:40px}
-.headline{font-size:clamp(1.4rem,5vw,2.2rem);font-weight:800;margin-bottom:14px}
-.sub{font-size:.92rem;color:rgba(255,255,255,.42);max-width:340px;line-height:1.8;margin-bottom:48px}
-.links{display:flex;flex-direction:column;gap:14px;align-items:center}
-.link-btn{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;border:1px solid rgba(255,255,255,.12);padding:13px 30px;transition:border-color .2s,color .2s}
-.link-btn:hover{border-color:rgba(255,255,255,.35);color:#fff}
+.logo{font-size:clamp(2.6rem,9vw,4.8rem);font-weight:900;letter-spacing:.1em;margin-bottom:6px}
+.tagline{font-size:.65rem;letter-spacing:.38em;text-transform:uppercase;color:#E02020;margin-bottom:10px}
+.headline{font-size:clamp(1.2rem,4vw,1.9rem);font-weight:800;margin-bottom:10px}
+.sub{font-size:.85rem;color:rgba(255,255,255,.38);max-width:320px;line-height:1.8;margin:0 auto 36px}
+
+/* ── HUB CARDS ── */
+.hubs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto}
+.hub{display:flex;flex-direction:column;align-items:center;gap:7px;padding:18px 12px 16px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:transform .22s,border-color .22s,background .22s,box-shadow .22s;-webkit-tap-highlight-color:transparent}
+.hub:active{transform:scale(.96)}
+.hub-icon{font-size:1.9rem;line-height:1}
+.hub-name{font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:#fff}
+.hub-sub{font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);line-height:1.5}
+
+/* Faith — purple */
+.hub-faith{border-color:rgba(160,90,255,.22);background:rgba(120,50,220,.07)}
+.hub-faith:hover,.hub-faith:focus{border-color:rgba(160,90,255,.55);background:rgba(120,50,220,.18);box-shadow:0 6px 22px rgba(120,50,220,.25);transform:translateY(-4px)}
+
+/* Health — green */
+.hub-health{border-color:rgba(0,210,100,.22);background:rgba(0,180,80,.07)}
+.hub-health:hover,.hub-health:focus{border-color:rgba(0,220,100,.55);background:rgba(0,180,80,.18);box-shadow:0 6px 22px rgba(0,180,80,.25);transform:translateY(-4px)}
+
+/* Wealth — gold */
+.hub-wealth{border-color:rgba(220,170,0,.22);background:rgba(200,150,0,.07)}
+.hub-wealth:hover,.hub-wealth:focus{border-color:rgba(220,170,0,.55);background:rgba(200,150,0,.18);box-shadow:0 6px 22px rgba(200,150,0,.25);transform:translateY(-4px)}
+
+@media(max-width:400px){
+  .hubs{grid-template-columns:1fr;max-width:260px}
+  .hub{flex-direction:row;gap:14px;padding:14px 18px;text-align:left}
+  .hub-icon{font-size:1.6rem}
+  .hub-sub{display:none}
+}
 </style>
 </head>
 <body>
 
-<!-- Orbiting elements -->
 <div id="rocket">🚀</div>
 <div id="ufo">🛸</div>
+<div id="moon">🌙</div>
+<div id="planet">🪐</div>
 
-<!-- Static space decorations -->
-<div class="deco" id="planet">🪐</div>
-<div class="deco" id="moon">🌙</div>
-
-<!-- Main content -->
 <div class="content">
   <div class="logo">TAGLINE</div>
   <div class="tagline">God · Health · Wealth</div>
   <div class="headline">Something Big Is Coming</div>
-  <p class="sub">Faith-forward athletic apparel built for believers who chase greatness. Dropping soon.</p>
-  <div class="links">
-    <a href="god.html" class="link-btn">✝️ Faith Hub</a>
-    <a href="health.html" class="link-btn">💪 Health Hub</a>
-    <a href="wealth.html" class="link-btn">💰 Wealth Hub</a>
+  <p class="sub">Faith-forward athletic apparel built for believers who chase greatness.</p>
+
+  <div class="hubs">
+    <a href="god.html" class="hub hub-faith">
+      <span class="hub-icon">✝️</span>
+      <span class="hub-name">Faith Hub</span>
+      <span class="hub-sub">God · Spirit<br>Purpose</span>
+    </a>
+    <a href="health.html" class="hub hub-health">
+      <span class="hub-icon">💪</span>
+      <span class="hub-name">Health Hub</span>
+      <span class="hub-sub">Body · Mind<br>Nutrition</span>
+    </a>
+    <a href="wealth.html" class="hub hub-wealth">
+      <span class="hub-icon">💰</span>
+      <span class="hub-name">Wealth Hub</span>
+      <span class="hub-sub">Money · Build<br>Grow</span>
+    </a>
   </div>
 </div>
 
 <script>
 /* ── STARS ── */
-for(var i=0;i<110;i++){
-  var s=document.createElement('div');
-  s.className='star';
-  var sz=Math.random()*2.2+0.4;
-  s.style.cssText='width:'+sz+'px;height:'+sz+'px;background:#fff;top:'+Math.random()*100+'vh;left:'+Math.random()*100+'vw;--bright:'+(Math.random()*0.65+0.15)+';--d:'+(Math.random()*3+1.5)+'s;--delay:'+(Math.random()*4)+'s';
+for(var i=0;i<100;i++){
+  var s=document.createElement('div');s.className='star';
+  var sz=Math.random()*2+0.4;
+  s.style.cssText='width:'+sz+'px;height:'+sz+'px;background:#fff;top:'+Math.random()*100+'vh;left:'+Math.random()*100+'vw;--b:'+(Math.random()*0.6+0.15)+';--d:'+(Math.random()*3+1.5)+'s;--del:'+(Math.random()*4)+'s';
   document.body.appendChild(s);
 }
 
 /* ── SHOOTING STARS ── */
 function spawnShoot(){
-  var el=document.createElement('div');
-  el.className='shoot';
-  var w=Math.random()*120+70;
-  var startTop=Math.random()*55;
-  el.style.cssText='width:'+w+'px;top:'+startTop+'vh;left:-'+w+'px';
+  var el=document.createElement('div');el.className='sstar';
+  var w=Math.random()*110+60;
+  el.style.cssText='width:'+w+'px;top:'+Math.random()*55+'vh;left:-'+w+'px';
   document.body.appendChild(el);
-  var duration=Math.random()*600+500;
-  var distX=window.innerWidth+w+100;
-  var distY=window.innerHeight*0.35;
-  var start=null;
+  var dur=Math.random()*500+450,start=null;
+  var dx=window.innerWidth+w+80,dy=window.innerHeight*0.28;
   el.style.opacity='1';
-  function step(ts){
+  (function step(ts){
     if(!start)start=ts;
-    var p=Math.min((ts-start)/duration,1);
-    var ease=p<0.1?p/0.1:p>0.85?(1-p)/0.15:1;
-    el.style.opacity=ease.toString();
-    el.style.transform='rotate(-32deg) translate('+(p*distX)+'px,'+(p*distY*0.4)+'px)';
-    if(p<1){requestAnimationFrame(step);}else{el.remove();}
-  }
-  requestAnimationFrame(step);
-  setTimeout(spawnShoot, Math.random()*2200+1200);
+    var p=Math.min((ts-start)/dur,1);
+    var fade=p<0.1?p/0.1:p>0.8?(1-p)/0.2:1;
+    el.style.opacity=fade;
+    el.style.transform='rotate(-30deg) translate('+(p*dx)+'px,'+(p*dy*0.4)+'px)';
+    p<1?requestAnimationFrame(step):el.remove();
+  })(0);
+  setTimeout(spawnShoot,Math.random()*2000+1000);
 }
-spawnShoot();
-setTimeout(spawnShoot, 700);
-setTimeout(spawnShoot, 1600);
+spawnShoot();setTimeout(spawnShoot,600);setTimeout(spawnShoot,1400);
 
-/* ── ROCKET — blasts across the screen, pauses, repeats ── */
-var rk=document.getElementById('rocket');
-function launchRocket(){
-  var fromLeft=Math.random()>0.5;
-  var startX=fromLeft?-60:window.innerWidth+60;
-  var endX=fromLeft?window.innerWidth+60:-60;
-  var startY=window.innerHeight*(0.55+Math.random()*0.3);
-  var endY=window.innerHeight*(0.05+Math.random()*0.25);
-  var angle=Math.atan2(endY-startY,endX-startX)*180/Math.PI+90;
-  rk.style.opacity='1';
-  rk.style.transform='translate(-50%,-50%) rotate('+angle+'deg)';
-  var duration=1800+Math.random()*600;
-  var start=null;
-  function step(ts){
-    if(!start)start=ts;
-    var p=Math.min((ts-start)/duration,1);
-    var ease=1-Math.pow(1-p,2);
-    var x=startX+(endX-startX)*ease;
-    var y=startY+(endY-startY)*ease;
-    rk.style.left=x+'px';
-    rk.style.top=y+'px';
-    if(p<1){requestAnimationFrame(step);}
-    else{
-      rk.style.opacity='0';
-      setTimeout(launchRocket, 2500+Math.random()*2000);
-    }
-  }
-  requestAnimationFrame(step);
-}
-launchRocket();
-
-/* ── UFO — drifts slowly left→right at top, bobs gently, wraps ── */
-var ufo=document.getElementById('ufo');
-var uX=-80;
-var uT=0;
-function animUFO(){
-  uX+=0.55;
-  if(uX>window.innerWidth+80)uX=-80;
-  var y=window.innerHeight*0.1+Math.sin(uT*0.6)*18;
+/* ── UFO — drifts left → right, bobs ── */
+var ufo=document.getElementById('ufo'),uX=-80,uT=0;
+(function animUFO(){
+  uX+=0.5;if(uX>window.innerWidth+80)uX=-80;
   ufo.style.left=uX+'px';
-  ufo.style.top=y+'px';
-  uT+=0.018;
-  requestAnimationFrame(animUFO);
-}
-animUFO();
+  ufo.style.top=(window.innerHeight*0.1+Math.sin(uT*0.55)*16)+'px';
+  uT+=0.016;requestAnimationFrame(animUFO);
+})();
 </script>
 </body>
 </html>
