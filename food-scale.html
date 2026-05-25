@@ -267,8 +267,13 @@ const FOODS = {
   'ice cream':   {e:'🍨',r:2,k:8,rw:['Calcium','Makes you happy!'],rk:['Sugar','Saturated fat','High calories'],v:'A happy villain! Treat — not daily.'},
 
   // ── Junk Food
-  'pizza':       {e:'🍕',r:3,k:8,rw:['Calcium','Some protein'],rk:['High sodium','Saturated fat','Refined carbs'],v:'Sneaky villain! Enjoy rarely.'},
-  'burger':      {e:'🍔',r:3,k:9,rw:['Protein','Iron'],rk:['Saturated fat','High sodium','High calories'],v:'Classic villain. Treat yourself — not daily!'},
+  'pizza':       {e:'🍕',r:3,k:8,rw:['Calcium','Some protein'],rk:['High sodium','Saturated fat','Refined carbs'],v:'Go thin crust + load up with veggies — totally different food!'},
+  'thin crust pizza':{e:'🍕',r:5,k:5,rw:['Fewer carbs than thick crust','Calcium','Can add great toppings'],rk:['Still processed crust','Sodium'],v:'Better base! Now ditch the meat and pile on the veggies.'},
+  'veggie pizza':{e:'🍕',r:6,k:4,rw:['Fiber from veggies','Vitamins','Calcium','Less saturated fat'],rk:['Refined crust','Sodium'],v:'Way better than meat pizza! Go thin crust for the full upgrade.',hero:true},
+  'thin crust veggie pizza':{e:'🍕',r:8,k:2,rw:['Veggies = vitamins & fiber','Less refined carbs','Lower calories','Calcium','Antioxidants'],rk:['Sodium','Watch portion size'],v:'The SMART pizza choice. All the fun, none of the guilt! 🍕✅',hero:true},
+  'burger':      {e:'🍔',r:3,k:9,rw:['Protein','Iron'],rk:['Saturated fat','High sodium','High calories'],v:'Swap to a turkey or veggie burger — game changer!'},
+  'turkey burger':{e:'🍔',r:7,k:3,rw:['Lean protein','Less saturated fat','B vitamins','Filling'],rk:['Watch the bun','Condiments add up'],v:'Smart burger swap! Go lettuce wrap for the full upgrade.',hero:true},
+  'veggie burger':{e:'🍔',r:7,k:3,rw:['Plant protein','Fiber','Lower saturated fat'],rk:['Check sodium','Some are ultra-processed'],v:'Great swap — pick whole food patties, not the mystery ones!',hero:true},
   'hot dog':     {e:'🌭',r:1,k:9,rw:['Barely any'],rk:['Processed meat','Nitrates','High sodium'],v:'One of the worst processed meats. Avoid!'},
   'french fries':{e:'🍟',r:2,k:9,rw:['Potassium (barely)'],rk:['Deep fried','High sodium','High calories','Trans fat'],v:'The sneakiest villain of them all!'},
   'chips':       {e:'🥔',r:1,k:9,rw:['Nothing really'],rk:['Empty calories','High sodium','High fat','Addictive'],v:'Zero nutrition villain. Skip them!'},
@@ -280,6 +285,17 @@ const FOODS = {
   'chocolate':   {e:'🍫',r:5,k:5,rw:['Mood boost','Magnesium'],rk:['Sugar','Saturated fat'],v:'Dark chocolate (70%+) is actually healthy!'},
   'dark chocolate':{e:'🍫',r:8,k:3,rw:['Antioxidants','Magnesium','Heart health','Mood boost'],rk:['Calories','Some sugar'],v:'The healthy treat! 1-2 squares daily.',hero:true},
   'popcorn':     {e:'🍿',r:5,k:4,rw:['Fiber','Whole grain','Low calorie (plain)'],rk:['Movie butter = high fat & salt'],v:'Air-popped is great! Skip the butter.'},
+  'pancakes':    {e:'🥞',r:3,k:7,rw:['Quick energy'],rk:['Refined flour','Spikes blood sugar','Sugary syrup'],v:'Stack protein pancakes with fresh fruit and a drizzle of honey instead!'},
+  'protein pancakes':{e:'🥞',r:9,k:1,rw:['High protein','Keeps you full','Muscle building','Slow energy release','Fiber'],rk:['Nothing much!'],v:'Stack em high! Top with fresh berries and honey instead of syrup. Breakfast of champions! 🏆',hero:true},
+  'syrup':       {e:'🍁',r:1,k:9,rw:['Taste'],rk:['Pure sugar','Blood sugar spike','Empty calories','No nutrients'],v:'Swap for raw honey — sweeter, antibacterial, and actually GOOD for you!'},
+  'maple syrup': {e:'🍁',r:4,k:5,rw:['Some antioxidants','Manganese','Natural source'],rk:['Still high sugar','Spikes blood sugar'],v:'Better than syrup but honey beats it. Use a small drizzle.'},
+  'fried chicken':{e:'🍗',r:3,k:8,rw:['Protein (under the breading)'],rk:['Deep fried','High fat','High sodium','Trans fat'],v:'Bake it instead — same chicken, completely different nutrition!'},
+  'sweet potato fries':{e:'🍠',r:7,k:3,rw:['Vitamin A','Fiber','Potassium','Antioxidants'],rk:['Baked not fried ideally','Portion control'],v:'Way better than regular fries! Bake them for max benefit.',hero:true},
+  'cauliflower rice':{e:'🥦',r:9,k:1,rw:['Low carb','High fiber','Vitamins C & K','Blood sugar friendly','Low calorie'],rk:['Not as filling alone — add protein'],v:'The smart rice swap! Athletes cutting weight love this.',hero:true},
+  'smoothie':    {e:'🥤',r:8,k:2,rw:['Vitamins','Fast nutrition','Customizable','Hydrating'],rk:['Can spike sugar without protein','Watch portions'],v:'Add protein + spinach + fruit + honey = SUPER smoothie! 🚀',hero:true},
+  'protein shake':{e:'💪',r:8,k:2,rw:['High protein','Muscle recovery','Fast absorbing','Convenient'],rk:['Check ingredients','Some have sugar'],v:'Post-workout essential! Blend with banana and honey for extra gains.',hero:true},
+  'granola':     {e:'🌾',r:5,k:5,rw:['Fiber','Oats','Healthy fats'],rk:['Often high sugar','High calorie','Easy to overeat'],v:'Read the label! Low-sugar granola + Greek yogurt + berries = elite breakfast.'},
+  'protein bar': {e:'💪',r:7,k:3,rw:['Protein','Convenient','Keeps you full','On the go'],rk:['Some have added sugar','Artificial ingredients'],v:'Look for 20g+ protein and under 10g sugar. Great backup fuel!',hero:true},
 
   // ── Nuts & Seeds
   'almonds':     {e:'🌰',r:9,k:2,rw:['Healthy fats','Vitamin E','Protein','Magnesium'],rk:['High calories — small portions'],v:'Best nut snack! One handful a day.',hero:true},
@@ -297,7 +313,7 @@ const FOODS = {
 
   // ── Other
   'olive oil':   {e:'🫒',r:9,k:2,rw:['Heart-healthy fats','Antioxidants','Anti-inflammatory'],rk:['High calories'],v:'Best cooking oil — use it daily!',hero:true},
-  'honey':       {e:'🍯',r:6,k:4,rw:['Antibacterial','Antioxidants','Soothing'],rk:['Still sugar'],v:'Better than table sugar — use a little!',hero:true},
+  'honey':       {e:'🍯',r:9,k:1,rw:['Antibacterial','Antioxidants','Soothes throat','Prebiotic for gut','Lower glycemic than syrup','Natural energy boost','Anti-inflammatory'],rk:['Still a sugar — use in moderation'],v:"Nature's liquid gold! Drizzle on protein pancakes, Greek yogurt, fruit & smoothies. Replaces syrup, sugar & processed sweeteners. Your body will thank you! 🍯✨",hero:true},
   'oats':        {e:'🥣',r:9,k:1,rw:['Fiber','Slow energy','Heart health'],rk:['Avoid sugary packets'],v:'Best breakfast for steady energy!',hero:true},
 };
 
