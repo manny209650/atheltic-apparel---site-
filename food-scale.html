@@ -274,7 +274,11 @@ const FOODS = {
   'milk':        {e:'🥛',r:7,k:3,rw:['Calcium','Vitamin D','Protein'],rk:['Saturated fat','Lactose'],v:'Great for growing bones!',hero:true},
   'greek yogurt':{e:'🥛',r:9,k:1,rw:['Probiotics','Protein','Calcium','Gut health'],rk:['Watch sugary flavors'],v:'Plain greek yogurt = superfood!',hero:true},
   'cheese':      {e:'🧀',r:5,k:5,rw:['Calcium','Protein','Vitamin B12'],rk:['Saturated fat','High sodium'],v:'Tasty but watch your portions!'},
-  'butter':      {e:'🧈',r:2,k:7,rw:['Fat-soluble vitamins'],rk:['Saturated fat','High calories'],v:'A tiny bit goes a long way!'},
+  'butter':      {e:'🧈',r:2,k:7,rw:['Fat-soluble vitamins'],rk:['Saturated fat','High calories','Low quality fats'],v:'Not all butter is equal! Upgrade to Kerrygold grass-fed butter — completely different nutrition.'},
+  'kerrygold':   {e:'🧈',r:7,k:2,rw:['Omega-3 fatty acids','CLA for fat loss','Vitamin K2 for heart & bones','Vitamin A & D','Grass-fed = better fat profile','Anti-inflammatory'],rk:['Still calorie dense','Use in moderation'],v:'This is the GOOD butter! Grass-fed cows = way more nutrients. CLA actually helps burn fat. A quality fat your body loves. 🧈✅',hero:true},
+  'kerrygold butter':{e:'🧈',r:7,k:2,rw:['Omega-3 fatty acids','CLA for fat loss','Vitamin K2','Vitamin A & D','Grass-fed quality fats'],rk:['Still calorie dense — use wisely'],v:'Smart choice! Grass-fed butter is a completely different food than regular butter. Keep using it! 💪',hero:true},
+  'grass fed butter':{e:'🧈',r:7,k:2,rw:['Omega-3s','CLA (fat-burning fatty acid)','Vitamin K2','Vitamin A & D','Better fat quality'],rk:['High calories','Use in moderation'],v:'Quality fat that your body actually uses well. Way better than conventional butter!',hero:true},
+  'ghee':        {e:'🧈',r:8,k:1,rw:['Lactose-free','High smoke point for cooking','Vitamin A, D, E, K','Butyrate for gut health','Pure healthy fat','Anti-inflammatory'],rk:['Very high calories — small amounts'],v:'Liquid gold for cooking! No lactose, no casein, great for your gut. The cleanest butter upgrade. 🌟',hero:true},
   'ice cream':   {e:'🍨',r:2,k:8,rw:['Calcium','Makes you happy!'],rk:['Sugar','Saturated fat','High calories'],v:'A happy villain! Treat — not daily.'},
 
   // ── Junk Food
@@ -328,7 +332,9 @@ const FOODS = {
   // ── Nuts & Seeds
   'almonds':     {e:'🌰',r:9,k:2,rw:['Healthy fats','Vitamin E','Protein','Magnesium'],rk:['High calories — small portions'],v:'Best nut snack! One handful a day.',hero:true},
   'walnuts':     {e:'🌰',r:9,k:2,rw:['Omega-3','Brain health','Antioxidants'],rk:['High calories'],v:'Best nut for your BRAIN!',hero:true},
-  'peanut butter':{e:'🥜',r:7,k:4,rw:['Protein','Healthy fats','Magnesium'],rk:['High calories','Some brands add sugar'],v:'Natural PB with no added sugar is great!',hero:true},
+  'almond butter':{e:'🌰',r:10,k:0,rw:['Vitamin E (skin & immunity)','Healthy monounsaturated fats','Magnesium','Calcium','Protein','Fiber','Heart health','Lower sugar than PB'],rk:['High calories — 2 tbsp is plenty'],v:'ELITE nut butter! Beats peanut butter on almost every nutrient. Spread on apple slices or blend in your smoothie. 🏆',hero:true},
+  'peanut butter':{e:'🥜',r:7,k:4,rw:['Protein','Healthy fats','Magnesium'],rk:['High calories','Some brands add sugar'],v:'Go natural with no added sugar — or upgrade to almond butter for even more nutrients!',hero:true},
+  'cashew butter':{e:'🌰',r:8,k:2,rw:['Magnesium','Zinc','Healthy fats','Iron','Creamy texture','Lower fat than almond butter'],rk:['High calories','Less protein than almond butter'],v:'Creamy and delicious! Great on toast, in smoothies, or with fruit. Solid upgrade from PB.',hero:true},
   'cashews':     {e:'🌰',r:7,k:3,rw:['Zinc','Magnesium','Healthy fats'],rk:['High calories'],v:'1 handful max — creamy and nutritious!',hero:true},
   'chia seeds':  {e:'🌱',r:10,k:1,rw:['Omega-3','Fiber','Calcium','Complete protein'],rk:['Nothing really!'],v:'Tiny SUPERFOOD seeds! Add to anything.',hero:true},
 
