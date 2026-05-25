@@ -97,6 +97,13 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
 .verdict-label{font-family:'Fredoka One',cursive;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 .verdict-text{font-size:.95rem;font-weight:700;color:rgba(255,255,255,.7);line-height:1.5}
 
+/* ── SMART SWAPS ── */
+.swap-box{background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.2);border-top:3px solid #ffb400;border-radius:20px;padding:22px 24px;margin-top:16px;text-align:left}
+.swap-header{font-family:'Fredoka One',cursive;font-size:1rem;color:#ffb400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.swap-list{display:flex;flex-direction:column;gap:10px}
+.swap-item{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.8);display:flex;align-items:flex-start;gap:10px;line-height:1.45;background:rgba(255,255,255,.03);border:1px solid rgba(255,180,0,.1);border-radius:12px;padding:10px 14px}
+.swap-arrow{color:#ffb400;font-size:.9rem;flex-shrink:0;margin-top:1px}
+
 /* ── STREAK ── */
 .streak-bar{text-align:center;padding:16px;font-family:'Fredoka One',cursive;font-size:1rem;color:rgba(255,255,255,.35);letter-spacing:.06em}
 .streak-bar span{color:var(--gold)}
@@ -197,6 +204,10 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
     <span class="verdict-emoji" id="verdictEmoji"></span>
     <p class="verdict-label" id="verdictLabel"></p>
     <p class="verdict-text" id="verdictText"></p>
+  </div>
+  <div class="swap-box" id="swapBox" style="display:none">
+    <p class="swap-header">🔄 Smarter Swaps — Same Craving, Better Fuel</p>
+    <div class="swap-list" id="swapList"></div>
   </div>
 </div>
 
@@ -351,6 +362,40 @@ const FOODS = {
   'oats':        {e:'🥣',r:9,k:1,rw:['Fiber','Slow energy','Heart health'],rk:['Avoid sugary packets'],v:'Best breakfast for steady energy!',hero:true},
 };
 
+const SWAPS = {
+  'pasta':             ["🌱 Banza Chickpea Pasta — 25g protein, same taste, low glycemic","💪 Barilla Protein+ — 2x the protein of regular pasta","🫘 Tolerant Lentil Pasta — iron-packed and high fiber"],
+  'white bread':       ["💪 Dave's Killer Bread — whole grain, 5g protein per slice","🌾 Ezekiel 4:9 Sprouted Bread — no refined flour, complete protein","🥖 Silver Hills Sprouted Bread — fiber-rich, low glycemic"],
+  'white rice':        ["🥦 Green Giant Cauliflower Rice — low carb, high fiber","🌾 Seeds of Change Organic Brown Rice — whole grain, precooked","🍛 RightRice — made from veggies, 10g protein per serving"],
+  'butter':            ["🧈 Kerrygold Grass-Fed Butter — Omega-3s, CLA, Vitamin K2","🌟 Vital Farms Pasture-Raised Butter — ethical and nutrient-rich","✨ Fourth & Heart Ghee — lactose-free, gut-healthy, great for cooking"],
+  'ice cream':         ["🍦 Halo Top — 280 calories for the whole pint, high protein","🍨 Rebel Creamery — keto-friendly, low sugar, great taste","🍧 Enlightened — bean-based, high protein, low calorie"],
+  'pizza':             ["🍕 Amy's Thin Crust Veggie Pizza — organic veggies, clean ingredients","🥦 Caulipower Veggie Pizza — cauliflower crust, way less carbs","💪 Real Good Pizza — high protein, grain-free crust"],
+  'burger':            ["🥩 Primal Kitchen Grass-Fed Burger — clean, no antibiotics","🌱 Dr. Praeger's Veggie Burger — whole food ingredients, plant-based","🍔 Applegate Naturals Beef — no nitrates, grass-fed, cleaner"],
+  'hot dog':           ["🌭 Applegate Naturals Beef Hot Dogs — no nitrates, grass-fed","🐔 Applegate Chicken Sausage — way cleaner, lower sodium","🌱 Tofurky Sausage — plant-based, no processed meat"],
+  'french fries':      ["🍠 Alexia Sweet Potato Fries — baked, Vitamin A rich","🥦 Green Giant Veggie Fries — made from real vegetables","🌿 Cascadian Farm Straight-Cut — organic, cleaner potato fries"],
+  'chips':             ["💪 Quest Protein Chips — 18g protein, 140 calories","🐣 Hippeas Organic Chickpea Puffs — high fiber, plant protein","🌽 Siete Grain-Free Chips — cassava-based, cleaner ingredients","🍿 PopCorners Flex Protein Chips — 10g protein per bag"],
+  'candy':             ["🍬 SmartSweets — candy taste, 3g sugar, fiber-packed","🍫 Lily's Chocolate — stevia-sweetened, zero sugar spike","🥜 RXBAR — real ingredients, 12g protein, dates as sweetener"],
+  'soda':              ["🌿 Olipop — prebiotic soda, 9g fiber, 45 calories","🌱 Zevia — stevia-sweetened, zero sugar, zero calories","🫧 Spindrift Sparkling Water — real fruit juice, no sweeteners","💧 Waterloo Sparkling Water — zero sugar, natural flavors"],
+  'cake':              ["🥚 Kodiak Cakes Mug Cake — high protein, whole grain, microwave ready","💪 Built Bar — tastes like dessert, 17g protein, low sugar","🍫 Lily's Chocolate — bake with it instead for zero sugar spike"],
+  'cookies':           ["💪 Lenny & Larry's Complete Cookie — 16g protein, whole wheat","🥜 Quest Cookies — 15g protein, 5g net carbs","🌾 Siete Grain-Free Cookies — cleaner ingredients, no gluten"],
+  'donut':             ["💪 Enlightened Glazed Donuts — high protein, low sugar","🥚 Protein Donut Co. — 11g protein per donut","🍩 Quest Donuts — 12g protein, 4g net carbs"],
+  'pancakes':          ["🐻 Kodiak Cakes Power Cakes — 14g protein per serving, whole grain","🌾 Bob's Red Mill Protein Pancake Mix — plant-based, high fiber","💪 Premier Protein Pancake Mix — 30g protein per serving"],
+  'pancake':           ["🐻 Kodiak Cakes Power Cakes — 14g protein per serving, whole grain","🌾 Bob's Red Mill Protein Pancake Mix — plant-based, high fiber","💪 Premier Protein Pancake Mix — 30g protein per serving"],
+  'syrup':             ["🍯 Raw Manuka Honey — antibacterial, antioxidants, prebiotic","🍁 Lakanto Maple Syrup — monk fruit sweetened, zero sugar","🌿 ChocZero Maple Syrup — no sugar alcohols, keto-friendly"],
+  'maple syrup':       ["🍯 Raw Honey — more nutrients, antibacterial, lower glycemic","🍁 Lakanto Maple Syrup — monk fruit, zero sugar","🌿 ChocZero Maple — no sugar alcohols, great taste"],
+  'fried chicken':     ["🍗 Applegate Naturals Chicken Tenders — no antibiotics, cleaner","🥚 Bell & Evans Air-Chilled Chicken — bake yourself for way less fat","💪 Just Bare Chicken Strips — lightly breaded, high protein"],
+  'energy drink':      ["⚡ Celsius — green tea based, no artificial colors, cleaner energy","🌿 REIZE — low calorie, B vitamins, smart caffeine blend","💧 Hiball Energy — organic caffeine, no sugar, sparkling water base"],
+  'pasta salad':       ["🌱 Banza Chickpea Pasta Salad — same dish, 3x the protein","🥗 Quinoa Salad — complete protein, all 9 amino acids","🫘 Lentil Pasta Salad — iron-rich, high fiber, low glycemic"],
+  'caesar salad':      ["🥗 Bolthouse Farms Yogurt Caesar Dressing — same taste, 70% less fat","🥑 Primal Kitchen Caesar — avocado oil based, no seed oils","🌿 Skip croutons + add grilled chicken for a 10/10 meal instantly"],
+  'cobb salad':        ["🥗 Primal Kitchen Ranch — avocado oil, no seed oils","🥑 Swap bacon for avocado slices — healthy fats without nitrates","🍗 Add extra grilled chicken and halve the blue cheese"],
+  'egg salad':         ["🥛 Swap mayo for Siggi's Greek Yogurt — same creaminess, 2x protein","🥑 Use mashed avocado instead of mayo — healthy fats","🫘 Add chickpeas for extra plant protein and fiber"],
+  'corn':              ["🥦 Cauliflower — same versatility, way more nutrients","🫘 Edamame — plant protein powerhouse, all amino acids","🥕 Carrots — naturally sweet, Vitamin A, low glycemic"],
+  'cheese':            ["🧀 Organic Valley Cheese — no hormones, antibiotic-free","🥛 Tillamook — minimal ingredients, real aged cheese, cleaner","💪 Organic Valley String Cheese — portion-controlled, clean protein"],
+  'granola':           ["🌾 KIND Healthy Grains Granola — low sugar, whole grain","🥣 Bob's Red Mill Old Country Granola — minimal ingredients","🌱 Purely Elizabeth — low sugar, coconut oil, ancient grains"],
+  'peanut butter':     ["🌰 Justin's Almond Butter — more Vitamin E, magnesium, calcium","🥜 Crazy Richard's Natural PB — one ingredient: peanuts only","🌿 Wild Friends Almond Butter — no added sugar, clean label"],
+  'orange juice':      ["🍊 Eat the whole orange — fiber intact, slower sugar release","🫧 Spindrift Orange — real fruit, way less sugar","💧 Vitamin C from bell peppers instead — zero sugar, same vitamin"],
+  'coffee':            ["🍵 Rishi Organic Matcha — calm focus, L-theanine, no crash","🌿 Four Sigmatic Mushroom Coffee — adaptogenic, lower caffeine","☕ Bulletproof Coffee — grass-fed butter + MCT oil = sustained energy"],
+};
+
 const KEYS = Object.keys(FOODS);
 let checked = 0;
 let recent = [];
@@ -460,6 +505,17 @@ function analyze(){
   vbox.style.borderTopColor = food.r>food.k ? 'var(--green)' : food.r===food.k ? '#ffd600' : 'var(--red)';
   vbox.style.borderTopWidth = '3px';
   vbox.style.borderTopStyle = 'solid';
+
+  // Smart Swaps
+  const swapBox = document.getElementById('swapBox');
+  const swapList = document.getElementById('swapList');
+  const swaps = SWAPS[q];
+  if(swaps && food.r <= food.k){
+    swapList.innerHTML = swaps.map(s=>`<div class="swap-item"><span class="swap-arrow">→</span><span>${s}</span></div>`).join('');
+    swapBox.style.display = 'block';
+  } else {
+    swapBox.style.display = 'none';
+  }
 
   // Sound
   if(food.r>food.k) playHappy();
