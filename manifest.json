@@ -1,0 +1,54 @@
+{
+  "name": "TAGLINE — God · Health · Wealth",
+  "short_name": "TAGLINE",
+  "description": "Faith, fitness, and financial freedom. Your daily guide to God, Health, and Wealth from Tagline Apparel.",
+  "start_url": "/index.html?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#06060F",
+  "theme_color": "#E02020",
+  "categories": ["health", "lifestyle", "fitness", "finance"],
+  "icons": [
+    { "src": "icons/icon-72.png",            "sizes": "72x72",   "type": "image/png" },
+    { "src": "icons/icon-96.png",            "sizes": "96x96",   "type": "image/png" },
+    { "src": "icons/icon-128.png",           "sizes": "128x128", "type": "image/png" },
+    { "src": "icons/icon-144.png",           "sizes": "144x144", "type": "image/png" },
+    { "src": "icons/icon-152.png",           "sizes": "152x152", "type": "image/png" },
+    { "src": "icons/icon-192.png",           "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-384.png",           "sizes": "384x384", "type": "image/png" },
+    { "src": "icons/icon-512.png",           "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-192.png",  "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Food Scale",
+      "short_name": "Food Scale",
+      "description": "Rate any food hero or villain",
+      "url": "/food-scale.html?source=shortcut",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Health Hub",
+      "short_name": "Health",
+      "description": "Nutrition science and training plans",
+      "url": "/health.html?source=shortcut",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Wealth Hub",
+      "short_name": "Wealth",
+      "description": "Investing, ETFs, and financial freedom",
+      "url": "/wealth.html?source=shortcut",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Live Market",
+      "short_name": "Markets",
+      "description": "Live stock prices and portfolio strategy",
+      "url": "/market.html?source=shortcut",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ]
+}

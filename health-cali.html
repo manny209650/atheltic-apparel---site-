@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#E02020"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="TAGLINE"/>
+<link rel="apple-touch-icon" href="icons/icon-192.png"/>
 <title>Calisthenics & General Health Plan — Tagline Apparel</title>
 <meta name="description" content="Build functional strength with bodyweight training — a full calisthenics plan with clean eating guide, weekly schedule, and progressive exercise paths."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -241,5 +248,6 @@ footer a{color:var(--teal);text-decoration:none}
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 <script src="lang.js"></script>
 <script src="tipjar.js"></script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}</script>
 </body>
 </html>
