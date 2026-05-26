@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#E02020"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="TAGLINE"/>
+<link rel="apple-touch-icon" href="icons/icon-192.png"/>
 <title>Bulk Up Plan — Tagline Apparel</title>
 <meta name="description" content="A complete muscle-building plan — 3,200-calorie daily diet, full macro breakdown, 7-meal schedule, and 5-day gym split with 15 exercises."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -83,7 +90,7 @@ footer a{color:var(--gold);text-decoration:none}
 
 <nav>
   <a href="index.html" class="nav-logo">TAG<span>LINE</span></a>
-  <a href="health.html" class="back-btn">← Health Hub</a>
+  <div style="display:flex;align-items:center;gap:14px"><button class="tl-lang-btn" data-target="es" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;cursor:pointer;border-radius:50px;display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="font-size:.82rem">🇲🇽</span> Español</button><a href="health.html" class="back-btn">← Health Hub</a></div>
 </nav>
 
 <section class="page-hero">
@@ -210,5 +217,11 @@ footer a{color:var(--gold);text-decoration:none}
   <p style="margin-top:12px">GOD · HEALTH · WEALTH</p>
 </footer>
 <script src="daily.js"></script>
+<style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
+<div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+<script src="lang.js"></script>
+<script src="tipjar.js"></script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}</script>
 </body>
 </html>

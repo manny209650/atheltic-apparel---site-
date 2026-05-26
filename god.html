@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#E02020"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="TAGLINE"/>
+<link rel="apple-touch-icon" href="icons/icon-192.png"/>
 <title>GOD — Tagline Apparel</title>
 <meta name="description" content="Faith is the foundation. Tagline Apparel exists to glorify God — explore the scripture, the mission, and the values behind the brand."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -78,6 +85,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:fl
 /* FOOTER */
 footer{text-align:center;padding:60px 40px;border-top:1px solid var(--border);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 footer a{color:var(--red);text-decoration:none}
+.tl-lang-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-family:'Inter',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;cursor:pointer;border-radius:50px;display:flex;align-items:center;gap:6px;transition:background .2s;white-space:nowrap}
+.tl-lang-btn:hover{background:rgba(255,255,255,.15)}.tl-flag{font-size:.8rem}
 
 @media(max-width:640px){
   nav{padding:16px 24px}
@@ -90,7 +99,10 @@ footer a{color:var(--red);text-decoration:none}
 
 <nav>
   <a href="index.html" class="nav-logo">TAG<span>LINE</span></a>
-  <a href="index.html" class="back-btn">← Back to Site</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <button class="tl-lang-btn" data-target="es"><span class="tl-flag">🇲🇽</span> Español</button>
+    <a href="index.html" class="back-btn">← Back to Site</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -205,7 +217,7 @@ footer a{color:var(--red);text-decoration:none}
   <div class="testimony-body">
     <p class="lead">Mannuel's story didn't begin with advantages. His first three months of life were spent in an incubator — doctors told his family he might not survive. He did. And that early fight became the defining pattern of everything that followed.</p>
 
-    <p>Raised as his young mother's third child, he grew up in a home shaped by instability. His biological father was largely absent, later serving an eight-year prison sentence on drug-related charges. That reality hit hard — but it also planted something in Mannuel: a deep, unmovable determination to choose a different path.</p>
+    <p>Raised as his young mother's third child, he grew up in a home shaped by instability. His biological father was absent — not by choice in the way some might assume, but because he was caught with drugs and deported. Gone. That was the reality. No anger, no blame — just an empty chair and a boy who had to figure out what it meant to become a man without one. That wound ran deep, but it also planted something in Mannuel: a hard, unmovable determination to choose a different path.</p>
 
     <p>At four years old, a stepfather entered the picture. The family had its moments — food on the table, a roof overhead — but volatility was always nearby. Drug involvement cast a shadow over the household, and life moved in unpredictable cycles. "There were highs and lows," Mannuel recalls. "Some days we shopped at Payless; other days we were at the mall."</p>
 
@@ -253,5 +265,11 @@ footer a{color:var(--red);text-decoration:none}
   <p style="margin-top:12px">GOD · HEALTH · WEALTH</p>
 </footer>
 <script src="daily.js"></script>
+<style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
+<div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+<script src="lang.js"></script>
+<script src="tipjar.js"></script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}</script>
 </body>
 </html>

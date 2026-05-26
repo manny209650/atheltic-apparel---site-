@@ -2,35 +2,167 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<meta name="theme-color" content="#06060F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TAGLINE">
 <title>TAGLINE — Coming Soon</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#06060F;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;font-family:'Helvetica Neue',sans-serif;color:#fff}
-.logo{font-size:clamp(2.4rem,9vw,4.5rem);font-weight:900;letter-spacing:.1em;margin-bottom:8px}
-.tagline{font-size:.7rem;letter-spacing:.38em;text-transform:uppercase;color:#E02020;margin-bottom:40px}
-.headline{font-size:clamp(1.4rem,5vw,2.2rem);font-weight:800;margin-bottom:14px}
-.sub{font-size:.92rem;color:rgba(255,255,255,.42);max-width:340px;line-height:1.8;margin-bottom:48px}
-.links{display:flex;flex-direction:column;gap:14px;align-items:center}
-.link-btn{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;border:1px solid rgba(255,255,255,.12);padding:13px 30px;transition:border-color .2s,color .2s}
-.link-btn:hover{border-color:rgba(255,255,255,.35);color:#fff}
-.link-plain{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);text-decoration:none}
-.rocket{font-size:3rem;margin-bottom:22px;display:block;animation:float 3s ease-in-out infinite}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px env(safe-area-inset-bottom,16px);font-family:-apple-system,'Helvetica Neue',sans-serif;color:#fff;position:relative}
+
+/* ── STARS ── */
+.star{position:fixed;border-radius:50%;pointer-events:none;animation:twinkle var(--d,3s) ease-in-out var(--del,0s) infinite alternate}
+@keyframes twinkle{0%{opacity:var(--b,.7)}100%{opacity:.03}}
+
+/* ── SHOOTING STARS ── */
+.sstar{position:fixed;height:2px;background:linear-gradient(90deg,#fff,rgba(255,255,255,.5),transparent);border-radius:2px;pointer-events:none;transform-origin:left center;opacity:0}
+
+/* ── ROCKET — mobile only ── */
+#rocket{font-size:clamp(2.4rem,8vw,3rem);display:block;margin-bottom:18px;position:relative;z-index:10;animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(min-width:481px){#rocket{display:none}}
+
+/* ── DECO ── */
+#ufo{position:fixed;pointer-events:none;z-index:1;font-size:clamp(1.4rem,4vw,1.9rem)}
+#moon{position:fixed;top:8%;left:6%;font-size:clamp(1.5rem,4vw,2rem);pointer-events:none;z-index:1;animation:bob 8s ease-in-out infinite}
+#planet{position:fixed;bottom:8%;right:5%;font-size:clamp(1.2rem,3.5vw,1.6rem);pointer-events:none;z-index:1;animation:bob 10s ease-in-out 2s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ── CONTENT ── */
+.content{position:relative;z-index:10;width:100%;max-width:500px}
+.logo{font-size:clamp(2.4rem,11vw,4.8rem);font-weight:900;letter-spacing:.1em;margin-bottom:6px}
+.tagline{font-size:clamp(.58rem,.65rem,1rem);letter-spacing:.32em;text-transform:uppercase;color:#E02020;margin-bottom:10px}
+.headline{font-size:clamp(1.1rem,4.5vw,1.9rem);font-weight:800;margin-bottom:10px}
+.sub{font-size:clamp(.8rem,.9rem,1rem);color:rgba(255,255,255,.38);max-width:300px;line-height:1.8;margin:0 auto 28px}
+
+/* ── HUB CARDS ── */
+.hubs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:460px;margin:0 auto}
+.hub{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;min-height:100px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;touch-action:manipulation}
+.hub:active{transform:scale(.94);opacity:.85}
+.hub-icon{font-size:clamp(1.5rem,5vw,1.9rem);line-height:1}
+.hub-name{font-size:clamp(.6rem,.65rem,1rem);letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#fff}
+.hub-sub{font-size:clamp(.5rem,.55rem,.9rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);line-height:1.5}
+
+.hub-faith{border-color:rgba(160,90,255,.22);background:rgba(120,50,220,.07)}
+.hub-faith:hover{border-color:rgba(160,90,255,.55);background:rgba(120,50,220,.18);box-shadow:0 6px 22px rgba(120,50,220,.25);transform:translateY(-3px)}
+.hub-health{border-color:rgba(0,210,100,.22);background:rgba(0,180,80,.07)}
+.hub-health:hover{border-color:rgba(0,220,100,.55);background:rgba(0,180,80,.18);box-shadow:0 6px 22px rgba(0,180,80,.25);transform:translateY(-3px)}
+.hub-wealth{border-color:rgba(220,170,0,.22);background:rgba(200,150,0,.07)}
+.hub-wealth:hover{border-color:rgba(220,170,0,.55);background:rgba(200,150,0,.18);box-shadow:0 6px 22px rgba(200,150,0,.25);transform:translateY(-3px)}
+
+/* ── MOBILE ── */
+@media(max-width:480px){
+  body{padding:24px 16px 20px}
+  .hubs{gap:8px}
+  .hub{padding:14px 8px;min-height:90px;gap:6px}
+  .hub-sub{display:none}
+}
+
+/* ── SHORT SCREENS (landscape phones) ── */
+@media(max-height:560px){
+  #rocket{font-size:2rem;margin-bottom:10px}
+  .tagline{margin-bottom:6px}
+  .headline{margin-bottom:6px}
+  .sub{margin-bottom:18px;font-size:.75rem}
+  #moon,#planet{display:none}
+}
+
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  .star,#rocket,#moon,#planet{animation:none}
+}
+
+/* ── LANG BUTTON ── */
+.tl-lang-btn{position:fixed;top:16px;right:16px;z-index:200;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-family:-apple-system,'Helvetica Neue',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-radius:50px;display:flex;align-items:center;gap:6px;transition:background .2s,border-color .2s;white-space:nowrap;backdrop-filter:blur(8px)}
+.tl-lang-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)}
+.tl-flag{font-size:.85rem}
 </style>
 </head>
 <body>
-<span class="rocket">🚀</span>
-<div class="logo">TAGLINE</div>
-<div class="tagline">God · Health · Wealth</div>
-<div class="headline">Something Big Is Coming</div>
-<p class="sub">Faith-forward athletic apparel built for believers who chase greatness. Dropping soon.</p>
-<div class="links">
-  <a href="health.html" class="link-btn">💪 Health Hub</a>
-  <a href="god.html" class="link-plain">✝️ Faith Hub</a>
+
+<button class="tl-lang-btn" data-target="es" aria-label="Cambiar a Español"><span class="tl-flag">🇲🇽</span> Español</button>
+
+<div id="ufo">🛸</div>
+<div id="moon">🌙</div>
+<div id="planet">🪐</div>
+
+<div class="content">
+  <div id="rocket">🚀</div>
+  <div class="logo">TAGLINE</div>
+  <div class="tagline" data-i18n="idx-sub">God · Health · Wealth</div>
+  <div class="headline" data-i18n="idx-headline">Merch Coming Soon!</div>
+  <p class="sub" data-i18n="idx-body">Faith-forward athletic apparel built for believers who chase greatness.</p>
+
+  <div class="hubs">
+    <a href="god.html" class="hub hub-faith">
+      <span class="hub-icon">✝️</span>
+      <span class="hub-name" data-i18n="idx-faith-name">Faith Hub</span>
+      <span class="hub-sub" data-i18n="idx-faith-sub">God · Spirit<br>Purpose</span>
+    </a>
+    <a href="health.html" class="hub hub-health">
+      <span class="hub-icon">💪</span>
+      <span class="hub-name" data-i18n="idx-health-name">Health Hub</span>
+      <span class="hub-sub" data-i18n="idx-health-sub">Body · Mind<br>Nutrition</span>
+    </a>
+    <a href="wealth.html" class="hub hub-wealth">
+      <span class="hub-icon">💰</span>
+      <span class="hub-name" data-i18n="idx-wealth-name">Wealth Hub</span>
+      <span class="hub-sub" data-i18n="idx-wealth-sub">Money · Build<br>Grow</span>
+    </a>
+  </div>
 </div>
+
+<script>
+/* ── STARS ── */
+for(var i=0;i<100;i++){
+  var s=document.createElement('div');s.className='star';
+  var sz=Math.random()*2+0.4;
+  s.style.cssText='width:'+sz+'px;height:'+sz+'px;background:#fff;top:'+Math.random()*100+'vh;left:'+Math.random()*100+'vw;--b:'+(Math.random()*0.6+0.15)+';--d:'+(Math.random()*3+1.5)+'s;--del:'+(Math.random()*4)+'s';
+  document.body.appendChild(s);
+}
+
+/* ── SHOOTING STARS ── */
+function spawnShoot(){
+  var el=document.createElement('div');el.className='sstar';
+  var w=Math.random()*110+60;
+  el.style.cssText='width:'+w+'px;top:'+Math.random()*55+'vh;left:-'+w+'px';
+  document.body.appendChild(el);
+  var dur=Math.random()*500+450,start=null;
+  var dx=window.innerWidth+w+80,dy=window.innerHeight*0.28;
+  el.style.opacity='1';
+  (function step(ts){
+    if(!start)start=ts;
+    var p=Math.min((ts-start)/dur,1);
+    var fade=p<0.1?p/0.1:p>0.8?(1-p)/0.2:1;
+    el.style.opacity=fade;
+    el.style.transform='rotate(-30deg) translate('+(p*dx)+'px,'+(p*dy*0.4)+'px)';
+    p<1?requestAnimationFrame(step):el.remove();
+  })(0);
+  setTimeout(spawnShoot,Math.random()*4000+5000);
+}
+spawnShoot();
+
+
+/* ── UFO ── */
+var ufo=document.getElementById('ufo'),uX=-80,uT=0;
+(function animUFO(){
+  uX+=0.5;if(uX>window.innerWidth+80)uX=-80;
+  ufo.style.left=uX+'px';
+  ufo.style.top=(window.innerHeight*0.1+Math.sin(uT*0.55)*16)+'px';
+  uT+=0.016;requestAnimationFrame(animUFO);
+})();
+</script>
+<style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
+<div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+<script src="lang.js"></script>
+<script src="tipjar.js"></script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}</script>
 </body>
 </html>

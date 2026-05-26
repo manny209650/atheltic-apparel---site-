@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Food Scale ⚖️ — Tagline Health</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -94,6 +97,13 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
 .verdict-label{font-family:'Fredoka One',cursive;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 .verdict-text{font-size:.95rem;font-weight:700;color:rgba(255,255,255,.7);line-height:1.5}
 
+/* ── SMART SWAPS ── */
+.swap-box{background:rgba(255,180,0,.05);border:1px solid rgba(255,180,0,.2);border-top:3px solid #ffb400;border-radius:20px;padding:22px 24px;margin-top:16px;text-align:left}
+.swap-header{font-family:'Fredoka One',cursive;font-size:1rem;color:#ffb400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.swap-list{display:flex;flex-direction:column;gap:10px}
+.swap-item{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.8);display:flex;align-items:flex-start;gap:10px;line-height:1.45;background:rgba(255,255,255,.03);border:1px solid rgba(255,180,0,.1);border-radius:12px;padding:10px 14px}
+.swap-arrow{color:#ffb400;font-size:.9rem;flex-shrink:0;margin-top:1px}
+
 /* ── STREAK ── */
 .streak-bar{text-align:center;padding:16px;font-family:'Fredoka One',cursive;font-size:1rem;color:rgba(255,255,255,.35);letter-spacing:.06em}
 .streak-bar span{color:var(--gold)}
@@ -115,31 +125,86 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
   .beam{width:320px}
   .plate-dish{width:58px;height:58px;font-size:1.7rem}
 }
+.tl-lang-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;cursor:pointer;border-radius:50px;display:inline-flex;align-items:center;gap:5px;transition:background .2s}
+.tl-lang-btn:hover{background:rgba(255,255,255,.14)}.tl-flag{font-size:.8rem}
+
+/* ── PHOTO SCAN ── */
+.mode-tabs{display:flex;gap:8px;justify-content:center;margin:0 auto 20px;max-width:540px;padding:0 20px}
+.mode-tab{flex:1;padding:12px;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;border-radius:50px;transition:all .25s}
+.mode-tab.active{border-color:var(--green);background:rgba(0,230,118,.1);color:#fff}
+.scan-area{max-width:540px;margin:0 auto 32px;padding:0 20px}
+.scan-drop{border:2px dashed rgba(0,230,118,.35);border-radius:16px;padding:48px 24px;text-align:center;cursor:pointer;transition:border-color .25s,background .25s;background:rgba(0,230,118,.03)}
+.scan-drop:hover{border-color:var(--green);background:rgba(0,230,118,.07)}
+.scan-drop-icon{font-size:3rem;margin-bottom:12px}
+.scan-drop-title{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:6px}
+.scan-drop-sub{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.5}
+.scan-preview-wrap{position:relative;border-radius:16px;overflow:hidden;margin-bottom:16px}
+.scan-preview-wrap img{width:100%;max-height:300px;object-fit:cover;display:block;border-radius:16px}
+.scan-clear{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.7);border:none;color:#fff;font-size:.8rem;padding:6px 12px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800}
+.scan-btn{width:100%;padding:16px;background:linear-gradient(135deg,#00e676,#00bfa5);border:none;color:#000;font-family:'Fredoka One',cursive;font-size:1.1rem;border-radius:50px;cursor:pointer;transition:opacity .2s;margin-bottom:8px}
+.scan-btn:hover{opacity:.88}
+.scan-btn:disabled{opacity:.4;cursor:not-allowed}
+.scan-loading{text-align:center;padding:32px 0}
+.scan-spinner{width:48px;height:48px;border:4px solid rgba(0,230,118,.2);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scan-loading p{font-family:'Fredoka One',cursive;font-size:1.1rem;color:rgba(255,255,255,.6)}
+.scan-error{background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.3);border-radius:12px;padding:16px;text-align:center;color:#ff6b6b;font-family:'Nunito',sans-serif;font-size:.9rem;margin-top:12px}
+.scan-setup{background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.2);border-radius:12px;padding:20px;text-align:center;margin-top:8px}
+.scan-setup p{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6}
+.scan-setup strong{color:var(--green)}
 </style>
 </head>
 <body>
 
 <!-- Back -->
 <div class="back-bar">
-  <a href="health.html">← Health Hub</a>
+  <a href="health.html" data-i18n="fs-back">← Health Hub</a>
   <span>/</span>
-  <a href="index.html">Home</a>
+  <a href="index.html" data-i18n="fs-home">Home</a>
+  <span>/</span>
+  <button class="tl-lang-btn" data-target="es"><span class="tl-flag">🇲🇽</span> Español</button>
 </div>
 
 <!-- Header -->
 <div class="hero">
   <span class="hero-emoji">⚖️</span>
-  <h1 class="hero-title">The Food Scale</h1>
-  <p class="hero-sub">Is your food a superhero or a villain? 🦸‍♂️🦹</p>
+  <h1 class="hero-title" data-i18n="fs-title">The Food Scale</h1>
+  <p class="hero-sub" data-i18n="fs-sub">Is your food a superhero or a villain? 🦸‍♂️🦹</p>
+</div>
+
+<!-- Mode Toggle -->
+<div class="mode-tabs">
+  <button class="mode-tab active" id="tabType" onclick="switchMode('type')">🔍 Type Food</button>
+  <button class="mode-tab" id="tabScan" onclick="switchMode('scan')">📸 Scan Photo</button>
 </div>
 
 <!-- Search -->
-<div class="search-wrap">
+<div class="search-wrap" id="typeArea">
   <div class="search-box">
     <input class="search-input" id="foodInput" type="text" placeholder="Type a food... 🍎🍔🥦" autocomplete="off">
-    <button class="search-btn" onclick="analyze()">Check It! 🔍</button>
+    <button class="search-btn" onclick="analyze()" data-i18n="fs-btn">Check It! 🔍</button>
   </div>
   <div class="suggestions" id="suggestions"></div>
+</div>
+
+<!-- Photo Scan -->
+<div class="scan-area" id="scanArea" style="display:none">
+  <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this.files[0])">
+  <div class="scan-drop" id="scanDrop" onclick="document.getElementById('photoInput').click()">
+    <div class="scan-drop-icon">📸</div>
+    <div class="scan-drop-title">Take a Photo or Upload</div>
+    <div class="scan-drop-sub">Tap to open camera · or drag &amp; drop an image here</div>
+  </div>
+  <div class="scan-preview-wrap" id="scanPreviewWrap" style="display:none">
+    <img id="scanPreview" src="" alt="Food photo">
+    <button class="scan-clear" onclick="clearPhoto()">✕ Clear</button>
+  </div>
+  <button class="scan-btn" id="scanBtn" onclick="runPhotoAnalysis()" style="display:none">🔬 Analyze This Food</button>
+  <div class="scan-loading" id="scanLoading" style="display:none">
+    <div class="scan-spinner"></div>
+    <p>Reading your food...</p>
+  </div>
+  <div id="scanMsg"></div>
 </div>
 
 <!-- Scale -->
@@ -152,14 +217,14 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
         <div class="plate plate-left" id="plateLeft">
           <div class="plate-string"></div>
           <div class="plate-dish" id="plateLeftDish">💪</div>
-          <div class="plate-label">POWERS UP</div>
+          <div class="plate-label" data-i18n="fs-powers-up">POWERS UP</div>
           <div class="plate-score" id="scoreLeft">—</div>
         </div>
         <!-- Right plate: SLOWS DOWN -->
         <div class="plate plate-right" id="plateRight">
           <div class="plate-string"></div>
           <div class="plate-dish" id="plateRightDish">⚡</div>
-          <div class="plate-label">SLOWS DOWN</div>
+          <div class="plate-label" data-i18n="fs-slows-down">SLOWS DOWN</div>
           <div class="plate-score" id="scoreRight">—</div>
         </div>
       </div>
@@ -182,11 +247,11 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
 <div class="result-wrap" id="resultWrap">
   <div class="result-cards">
     <div class="result-card reward-card">
-      <p class="rc-header">💪 Powers You Up</p>
+      <p class="rc-header" data-i18n="fs-rewards-hdr">💪 Powers You Up</p>
       <ul class="rc-list" id="rewardList"></ul>
     </div>
     <div class="result-card risk-card">
-      <p class="rc-header">⚠️ Watch Out For</p>
+      <p class="rc-header" data-i18n="fs-risks-hdr">⚠️ Watch Out For</p>
       <ul class="rc-list" id="riskList"></ul>
     </div>
   </div>
@@ -195,14 +260,18 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
     <p class="verdict-label" id="verdictLabel"></p>
     <p class="verdict-text" id="verdictText"></p>
   </div>
+  <div class="swap-box" id="swapBox" style="display:none">
+    <p class="swap-header" data-i18n="fs-swap-hdr">🔄 Smarter Swaps — Same Craving, Better Fuel</p>
+    <div class="swap-list" id="swapList"></div>
+  </div>
 </div>
 
 <!-- Streak -->
-<div class="streak-bar" id="streakBar">Foods checked today: <span id="streakCount">0</span> 🔥</div>
+<div class="streak-bar" id="streakBar"><span data-i18n="fs-streak-txt">Foods checked today:</span> <span id="streakCount">0</span> 🔥</div>
 
 <!-- Recent checks -->
 <div class="recent-wrap" id="recentWrap" style="display:none">
-  <p class="recent-title">Recently checked</p>
+  <p class="recent-title" data-i18n="fs-recent-lbl">Recently checked</p>
   <div class="recent-chips" id="recentChips"></div>
 </div>
 
@@ -234,10 +303,18 @@ const FOODS = {
   'cucumber':    {e:'🥒',r:7,k:1,rw:['Hydration','Low calorie','Vitamin K'],rk:['Not many nutrients'],v:'Great hydrating snack!',hero:true},
   'corn':        {e:'🌽',r:5,k:5,rw:['Fiber','Vitamin B','Energy'],rk:['High starch','Spikes blood sugar'],v:'Better than fries but go easy!'},
   'celery':      {e:'🥬',r:6,k:1,rw:['Low calorie','Hydration','Fiber'],rk:['Few nutrients'],v:'Add peanut butter — great combo!',hero:true},
+  'bell pepper': {e:'🫑',r:10,k:0,rw:['Vitamin C (more than oranges!)','Vitamin A','Antioxidants','Zero fat','Low calorie','Fiber'],rk:['Nothing!'],v:'One of the best veggies PERIOD. Eat them raw, roasted, in eggs — any way! 🫑',hero:true},
+  'bell peppers':{e:'🫑',r:10,k:0,rw:['Vitamin C','Vitamin A','Antioxidants','Low calorie','Fiber'],rk:['Nothing!'],v:'One of the best veggies PERIOD. Slice them raw or toss in your eggs every morning!',hero:true},
+  'mushrooms':   {e:'🍄',r:9,k:1,rw:['Vitamin D','Immune boost','B vitamins','Low calorie','Anti-cancer','Fiber'],rk:['Very little!'],v:'Underrated superfood! Sauté in olive oil and add to everything.',hero:true},
+  'asparagus':   {e:'🥦',r:9,k:1,rw:['Folate','Vitamin K','Prebiotic','Anti-inflammatory','Low calorie'],rk:['Nothing!'],v:'Elite athlete veggie. Roast with olive oil and sea salt — incredible.',hero:true},
+  'zucchini':    {e:'🥒',r:8,k:1,rw:['Low carb','Hydration','Vitamin C','Fiber','Low calorie'],rk:['Very mild nutrients alone'],v:'Great pasta swap! Spiralize it for zucchini noodles with zero guilt.',hero:true},
+  'edamame':     {e:'🫘',r:9,k:1,rw:['Complete plant protein','Fiber','Folate','Iron','All 9 amino acids'],rk:['Nothing much!'],v:'Best plant protein snack! 17g protein per cup. Athlete fuel! 💪',hero:true},
   'garlic':      {e:'🧄',r:9,k:1,rw:['Immune boost','Anti-bacterial','Heart health'],rk:["Strong smell 😅"],v:"Nature's medicine. Use it daily!",hero:true},
   'onion':       {e:'🧅',r:8,k:1,rw:['Antioxidants','Anti-inflammatory','Vitamin C'],rk:['Can cause bad breath'],v:'Underrated superfood!',hero:true},
 
   // ── Proteins
+  'egg whites':  {e:'🥚',r:10,k:0,rw:['Pure protein','Zero fat','Zero cholesterol','Zero carbs','Muscle building','Low calorie'],rk:['Nothing — they\'re nearly perfect!'],v:'THE leanest protein on the planet. 4 egg whites = 14g protein for almost no calories! 🏆',hero:true},
+  'egg white':   {e:'🥚',r:10,k:0,rw:['Pure protein','Zero fat','Zero cholesterol','Muscle building'],rk:['Nothing!'],v:'THE leanest protein on the planet. Stack with veggies for the perfect meal!',hero:true},
   'chicken':     {e:'🍗',r:9,k:2,rw:['High protein','Low fat','B vitamins','Muscle building'],rk:['Depends on how it\'s cooked'],v:'The ultimate lean protein!',hero:true},
   'salmon':      {e:'🐟',r:10,k:1,rw:['Omega-3','Protein','Brain health','Heart health'],rk:['Pricey!'],v:'Best fish you can eat. 2x per week!',hero:true},
   'tuna':        {e:'🐟',r:8,k:3,rw:['High protein','Omega-3','Low fat'],rk:['Mercury','Sodium in canned'],v:'Great lean protein — 2x/week max.',hero:true},
@@ -255,20 +332,49 @@ const FOODS = {
   'quinoa':      {e:'🌾',r:9,k:1,rw:['Complete protein','Fiber','All 9 amino acids'],rk:['More expensive'],v:'A rare plant food with complete protein!',hero:true},
   'white bread': {e:'🍞',r:2,k:8,rw:['Quick energy'],rk:['Spikes blood sugar','No fiber','Empty calories'],v:'Villain in disguise. Switch to whole wheat!'},
   'whole wheat bread':{e:'🍞',r:6,k:3,rw:['Fiber','B vitamins','Slower energy'],rk:['Still processed'],v:'Much better than white bread!',hero:true},
-  'pasta':       {e:'🍝',r:4,k:6,rw:['Energy','Some protein'],rk:['High carbs','Spikes blood sugar'],v:'Try whole wheat pasta — way better!'},
+  'pasta':       {e:'🍝',r:4,k:6,rw:['Energy','Some protein'],rk:['High carbs','Spikes blood sugar'],v:'Upgrade to chickpea pasta — same taste, triple the protein!'},
+  'chickpea pasta':{e:'🍝',r:9,k:2,rw:['High protein (14g/serving)','Fiber','Plant-based','Low glycemic','Gluten-free option'],rk:['Slightly more expensive'],v:'GAME CHANGER! Same pasta taste with way more protein. Athlete approved! 💪',hero:true},
+  'protein pasta':{e:'🍝',r:9,k:2,rw:['High protein','Fiber','Keeps you full','Muscle support'],rk:['Read the label — brands vary'],v:'Smart swap! Chickpea or lentil protein pasta destroys regular pasta nutritionally.',hero:true},
+  'pasta sauce':  {e:'🍅',r:3,k:7,rw:['Some lycopene from tomatoes','Vitamin C'],rk:['10–14g added sugar per serving','Corn syrup','High sodium','Preservatives','Low quality oils'],v:'Most store sauces are hidden sugar traps. Prego and Ragu pack 10g+ of sugar per serving — that\'s 3 teaspoons on your pasta! Swap to Rao\'s or Sonoma Gourmet immediately.'},
+  'prego':        {e:'🍅',r:2,k:8,rw:['Some tomato lycopene'],rk:['10g+ added sugar','Corn syrup','High sodium','Artificial flavors','Soybean oil'],v:'Prego packs 10g of added sugar per serving — almost 3 teaspoons of sugar sitting on top of your pasta. Your body deserves better than that! Swap to Rao\'s and never look back.'},
+  'ragu':         {e:'🍅',r:2,k:8,rw:['Some tomato base'],rk:['Added sugar','Soybean oil','High sodium','Preservatives','Corn syrup'],v:'Same trap as Prego — loaded with hidden sugar and low quality oils. The label looks harmless but the ingredients tell a different story. Time to upgrade!'},
+  'marinara':     {e:'🍅',r:5,k:5,rw:['Lycopene antioxidants','Vitamins A & C','Garlic & herbs'],rk:['Read the label — brand is everything','Many have added sugar','Sodium varies widely'],v:'Marinara CAN be a hero or a villain — the brand makes all the difference. Under 4g sugar + olive oil = winner. Prego/Ragu style = sugar trap. Pick Rao\'s or Sonoma Gourmet and you\'re golden.'},
+  'marinara sauce':{e:'🍅',r:5,k:5,rw:['Lycopene antioxidants','Vitamins A & C','Garlic & herbs'],rk:['Brand determines everything','Many have added sugar','Check sodium'],v:'The label is everything with marinara. Rao\'s and Sonoma Gourmet = zero added sugar, olive oil, real ingredients. Prego/Ragu = sugar and soybean oil. Same category, completely different results.'},
+  'raos':         {e:'🍅',r:9,k:1,rw:['Zero added sugar','Extra virgin olive oil','Clean simple ingredients','Lycopene antioxidants','Keto & diabetic friendly','No corn syrup or preservatives'],rk:['Higher price point — worth it'],v:'The GOAT of pasta sauces. Zero added sugar, real olive oil, real garlic, real basil — this is how sauce should always be made. Find it at Costco for the best deal. Worth every penny! 🍅💚',hero:true},
+  'rao\'s':       {e:'🍅',r:9,k:1,rw:['Zero added sugar','Extra virgin olive oil','Clean simple ingredients','Lycopene antioxidants','Keto & diabetic friendly','No corn syrup or preservatives'],rk:['Higher price point — worth it'],v:'The GOAT of pasta sauces. Zero added sugar, real olive oil, real garlic, real basil — this is how sauce should always be made. Find it at Costco for the best deal. Worth every penny! 🍅💚',hero:true},
+  'sonoma gourmet':{e:'🍅',r:8,k:2,rw:['No added sugar','Olive oil base','Real vegetables','Lycopene','Clean label','Affordable hero'],rk:['Watch sodium on some varieties'],v:'Clean, honest, and delicious. Sonoma Gourmet keeps it real — no hidden sugar, no junk oils, just real ingredients. Pair it with chickpea pasta for the ultimate clean comfort meal! 🍅✅',hero:true},
+  'victoria marinara':{e:'🍅',r:8,k:2,rw:['No added sugar','Simple clean ingredients','Olive oil','Lycopene','Non-GMO'],rk:['Sodium on the higher side'],v:'Victoria is the underrated hero of pasta sauces — clean ingredients, no added sugar, and it tastes incredible. A real find at most grocery stores! 🍅',hero:true},
+  'homemade tomato sauce':{e:'🍅',r:10,k:0,rw:['Zero preservatives','No added sugar','Full control of ingredients','Maximum lycopene','Olive oil healthy fats','Fresh garlic & herbs','Cheapest option'],rk:['Takes more time to prepare — totally worth it'],v:'THE gold standard of pasta sauce. Crushed tomatoes + extra virgin olive oil + garlic + fresh basil + pinch of salt. That\'s it. Nothing fake, nothing hidden, all real. Your body will thank you every single time. 🍅🌿',hero:true},
+  'tortilla':     {e:'🫓',r:3,k:7,rw:['Some energy','Convenient','Versatile'],rk:['Refined white flour','Spikes blood sugar','Low fiber','Low protein','Bleached flour'],v:'Standard flour tortillas are basically white bread in disguise — refined carbs with almost nothing useful. Upgrade to low-carb, spinach, or almond flour tortillas and keep all the flavor!'},
+  'flour tortilla':{e:'🫓',r:3,k:7,rw:['Some energy','Versatile'],rk:['Refined white flour','Blood sugar spike','Low fiber','Low protein'],v:'Flour tortillas are a blank slate nutritionally — mostly refined carbs. Easy upgrade: Mission Carb Balance or spinach tortillas keep the same convenience with way better numbers.'},
+  'corn tortilla':{e:'🌽',r:6,k:4,rw:['Whole grain','Non-GMO options','Lower calories','Gluten-free','More fiber than flour','Lower glycemic index'],rk:['Still a carb source','Smaller size may lead to eating more'],v:'Corn tortillas are actually the smarter traditional choice — whole grain, lower calories, more fiber than flour. Go non-GMO or organic and you\'ve got a solid base! 🌽',hero:true},
+  'low carb tortilla':{e:'🫓',r:8,k:2,rw:['High fiber 8–12g','Only 3–5g net carbs','High protein versions','Low glycemic','Keeps you full','Blood sugar stable'],rk:['Check ingredients — some use additives'],v:'The smart swap that changes the taco game! Mission Carb Balance has 8g fiber and only 3g net carbs per tortilla. Same wrap, completely different metabolic response. 💪',hero:true},
+  'spinach tortilla':{e:'🥬',r:7,k:3,rw:['Added iron from spinach','More fiber than standard','Lower calories','Antioxidants','Better micronutrients','Eye-catching green color'],rk:['Check sugar content on label','Not all brands are equal'],v:'A real upgrade from standard flour — spinach tortillas add iron, more fiber, and antioxidants. Mission Spinach Herb or La Banderita Spinach are great picks. Great for wraps, burritos, and quesadillas! 🥬',hero:true},
+  'almond flour tortilla':{e:'🥜',r:9,k:1,rw:['Grain-free','High healthy fats','Low net carbs','High protein','Vitamin E','Magnesium','Keto & paleo friendly','No blood sugar spike'],rk:['Higher calories from healthy fats','More expensive','Less flexible when cold'],v:'The premium tortilla upgrade. Siete Almond Flour Tortillas are grain-free, keto-friendly, and made with real ingredients. Healthy fats, low carbs, and they taste incredible. Worth every penny! 🥜✅',hero:true},
+  'cassava tortilla':{e:'🫓',r:7,k:3,rw:['Grain-free','Paleo friendly','Gluten-free','Whole food ingredient','Easier to digest for some'],rk:['Higher carbs than almond flour','Watch portion size'],v:'Siete Cassava Tortillas are the grain-free option closest to a traditional flour tortilla in texture. Great for anyone avoiding grains or gluten without going full low-carb! ✅',hero:true},
 
   // ── Dairy
   'milk':        {e:'🥛',r:7,k:3,rw:['Calcium','Vitamin D','Protein'],rk:['Saturated fat','Lactose'],v:'Great for growing bones!',hero:true},
   'greek yogurt':{e:'🥛',r:9,k:1,rw:['Probiotics','Protein','Calcium','Gut health'],rk:['Watch sugary flavors'],v:'Plain greek yogurt = superfood!',hero:true},
   'cheese':      {e:'🧀',r:5,k:5,rw:['Calcium','Protein','Vitamin B12'],rk:['Saturated fat','High sodium'],v:'Tasty but watch your portions!'},
-  'butter':      {e:'🧈',r:2,k:7,rw:['Fat-soluble vitamins'],rk:['Saturated fat','High calories'],v:'A tiny bit goes a long way!'},
+  'butter':      {e:'🧈',r:2,k:7,rw:['Fat-soluble vitamins'],rk:['Saturated fat','High calories','Low quality fats'],v:'Not all butter is equal! Upgrade to Kerrygold grass-fed butter — completely different nutrition.'},
+  'kerrygold':   {e:'🧈',r:7,k:2,rw:['Omega-3 fatty acids','CLA for fat loss','Vitamin K2 for heart & bones','Vitamin A & D','Grass-fed = better fat profile','Anti-inflammatory'],rk:['Still calorie dense','Use in moderation'],v:'This is the GOOD butter! Grass-fed cows = way more nutrients. CLA actually helps burn fat. A quality fat your body loves. 🧈✅',hero:true},
+  'kerrygold butter':{e:'🧈',r:7,k:2,rw:['Omega-3 fatty acids','CLA for fat loss','Vitamin K2','Vitamin A & D','Grass-fed quality fats'],rk:['Still calorie dense — use wisely'],v:'Smart choice! Grass-fed butter is a completely different food than regular butter. Keep using it! 💪',hero:true},
+  'grass fed butter':{e:'🧈',r:7,k:2,rw:['Omega-3s','CLA (fat-burning fatty acid)','Vitamin K2','Vitamin A & D','Better fat quality'],rk:['High calories','Use in moderation'],v:'Quality fat that your body actually uses well. Way better than conventional butter!',hero:true},
+  'ghee':        {e:'🧈',r:8,k:1,rw:['Lactose-free','High smoke point for cooking','Vitamin A, D, E, K','Butyrate for gut health','Pure healthy fat','Anti-inflammatory'],rk:['Very high calories — small amounts'],v:'Liquid gold for cooking! No lactose, no casein, great for your gut. The cleanest butter upgrade. 🌟',hero:true},
   'ice cream':   {e:'🍨',r:2,k:8,rw:['Calcium','Makes you happy!'],rk:['Sugar','Saturated fat','High calories'],v:'A happy villain! Treat — not daily.'},
 
   // ── Junk Food
-  'pizza':       {e:'🍕',r:3,k:8,rw:['Calcium','Some protein'],rk:['High sodium','Saturated fat','Refined carbs'],v:'Sneaky villain! Enjoy rarely.'},
-  'burger':      {e:'🍔',r:3,k:9,rw:['Protein','Iron'],rk:['Saturated fat','High sodium','High calories'],v:'Classic villain. Treat yourself — not daily!'},
+  'pizza':       {e:'🍕',r:3,k:8,rw:['Calcium','Some protein'],rk:['High sodium','Saturated fat','Refined carbs'],v:'Go thin crust + load up with veggies — totally different food!'},
+  'thin crust pizza':{e:'🍕',r:5,k:5,rw:['Fewer carbs than thick crust','Calcium','Can add great toppings'],rk:['Still processed crust','Sodium'],v:'Better base! Now ditch the meat and pile on the veggies.'},
+  'veggie pizza':{e:'🍕',r:6,k:4,rw:['Fiber from veggies','Vitamins','Calcium','Less saturated fat'],rk:['Refined crust','Sodium'],v:'Way better than meat pizza! Go thin crust for the full upgrade.',hero:true},
+  'thin crust veggie pizza':{e:'🍕',r:8,k:2,rw:['Veggies = vitamins & fiber','Less refined carbs','Lower calories','Calcium','Antioxidants'],rk:['Sodium','Watch portion size'],v:'The SMART pizza choice. All the fun, none of the guilt! 🍕✅',hero:true},
+  'burger':      {e:'🍔',r:3,k:9,rw:['Protein','Iron'],rk:['Saturated fat','High sodium','High calories'],v:'Try a protein burger — lettuce wrap, lean patty, loaded with veggies. Same satisfaction, totally different results!'},
+  'turkey burger':{e:'🍔',r:7,k:3,rw:['Lean protein','Less saturated fat','B vitamins','Filling'],rk:['Watch the bun','Condiments add up'],v:'Smart burger swap! Go lettuce wrap for the full upgrade.',hero:true},
+  'veggie burger':{e:'🍔',r:7,k:3,rw:['Plant protein','Fiber','Lower saturated fat'],rk:['Check sodium','Some are ultra-processed'],v:'Great swap — pick whole food patties, not the mystery ones!',hero:true},
+  'protein burger':{e:'🍔',r:9,k:1,rw:['High protein 30–40g','Zero refined carbs (lettuce wrap)','Healthy fats from avocado','Loaded with micronutrients','Keeps you full for hours','Supports muscle building'],rk:['Watch sodium in condiments','Use clean sauces like mustard or guac'],v:'THE burger upgrade. Lettuce wrap bun, grass-fed or turkey patty, avocado, tomato, onion — this is how you eat a burger and still win the day! 💪🥬',hero:true},
   'hot dog':     {e:'🌭',r:1,k:9,rw:['Barely any'],rk:['Processed meat','Nitrates','High sodium'],v:'One of the worst processed meats. Avoid!'},
-  'french fries':{e:'🍟',r:2,k:9,rw:['Potassium (barely)'],rk:['Deep fried','High sodium','High calories','Trans fat'],v:'The sneakiest villain of them all!'},
+  'french fries':{e:'🍟',r:2,k:9,rw:['Potassium (trace amounts)','Some energy'],rk:['Deep fried in industrial oils','800–1200mg sodium per serving','Trans fat risk','Acrylamide (carcinogen from high-heat frying)','Addictive — engineered to make you eat more','Zero fiber','Blood sugar crash after'],v:'One of the most engineered villain foods ever created. Deep fried in seed oils that oxidize at high heat, packed with sodium, and stripped of everything the potato originally had. The craving is real — but so is the damage. Swap to baked sweet potato fries and WIN! 🍟❌'},
   'chips':       {e:'🥔',r:1,k:9,rw:['Nothing really'],rk:['Empty calories','High sodium','High fat','Addictive'],v:'Zero nutrition villain. Skip them!'},
   'candy':       {e:'🍬',r:0,k:10,rw:['Quick energy (barely)'],rk:['Pure sugar','Cavities','Sugar crash','Zero nutrition'],v:'100% Sugar Villain! Rare treats only.'},
   'soda':        {e:'🥤',r:0,k:10,rw:['Nothing'],rk:['Pure sugar','Destroys teeth','Harms bones','Addictive'],v:'LIQUID VILLAIN! Water always wins.'},
@@ -278,11 +384,41 @@ const FOODS = {
   'chocolate':   {e:'🍫',r:5,k:5,rw:['Mood boost','Magnesium'],rk:['Sugar','Saturated fat'],v:'Dark chocolate (70%+) is actually healthy!'},
   'dark chocolate':{e:'🍫',r:8,k:3,rw:['Antioxidants','Magnesium','Heart health','Mood boost'],rk:['Calories','Some sugar'],v:'The healthy treat! 1-2 squares daily.',hero:true},
   'popcorn':     {e:'🍿',r:5,k:4,rw:['Fiber','Whole grain','Low calorie (plain)'],rk:['Movie butter = high fat & salt'],v:'Air-popped is great! Skip the butter.'},
+  'pancake':     {e:'🥞',r:3,k:7,rw:['Quick energy'],rk:['Refined flour','Spikes blood sugar','Sugary syrup'],v:'Stack protein pancakes with fresh fruit and a drizzle of honey instead!'},
+  'pancakes':    {e:'🥞',r:3,k:7,rw:['Quick energy'],rk:['Refined flour','Spikes blood sugar','Sugary syrup'],v:'Stack protein pancakes with fresh fruit and a drizzle of honey instead!'},
+  'protein pancakes':{e:'🥞',r:9,k:1,rw:['High protein','Keeps you full','Muscle building','Slow energy release','Fiber'],rk:['Nothing much!'],v:'Stack em high! Top with fresh berries and honey instead of syrup. Breakfast of champions! 🏆',hero:true},
+  'syrup':       {e:'🍁',r:1,k:9,rw:['Taste'],rk:['Pure sugar','Blood sugar spike','Empty calories','No nutrients'],v:'Swap for raw honey — sweeter, antibacterial, and actually GOOD for you!'},
+  'maple syrup': {e:'🍁',r:4,k:5,rw:['Some antioxidants','Manganese','Natural source'],rk:['Still high sugar','Spikes blood sugar'],v:'Better than syrup but honey beats it. Use a small drizzle.'},
+  'fried chicken':{e:'🍗',r:3,k:8,rw:['Protein (under the breading)'],rk:['Deep fried','High fat','High sodium','Trans fat'],v:'Bake it instead — same chicken, completely different nutrition!'},
+  'sweet potato fries':{e:'🍠',r:8,k:2,rw:['Vitamin A — one serving = 400% daily value','Fiber 4g per serving','Potassium for muscle recovery','Beta-carotene antioxidants','Lower glycemic than regular fries','Anti-inflammatory','Vitamin C & B6'],rk:['Bake don\'t fry for max benefit','Watch sodium if seasoned heavily','Portion size matters'],v:'The ultimate fries upgrade. Same satisfying crunch and flavor — but now you\'re fueling your body with Vitamin A, fiber, and antioxidants instead of oxidized oils and empty carbs. Season with olive oil, paprika, and garlic, bake at 425°F, and you\'ve got a side dish that actually works FOR you. 🍠🔥',hero:true},
+  'cauliflower rice':{e:'🥦',r:9,k:1,rw:['Low carb','High fiber','Vitamins C & K','Blood sugar friendly','Low calorie'],rk:['Not as filling alone — add protein'],v:'The smart rice swap! Athletes cutting weight love this.',hero:true},
+  'smoothie':    {e:'🥤',r:8,k:2,rw:['Vitamins','Fast nutrition','Customizable','Hydrating'],rk:['Can spike sugar without protein','Watch portions'],v:'Add protein + spinach + fruit + honey = SUPER smoothie! 🚀',hero:true},
+  'protein shake':{e:'💪',r:8,k:2,rw:['High protein','Muscle recovery','Fast absorbing','Convenient'],rk:['Check ingredients','Some have sugar'],v:'Post-workout essential! Blend with banana and honey for extra gains.',hero:true},
+  'granola':     {e:'🌾',r:5,k:5,rw:['Fiber','Oats','Healthy fats'],rk:['Often high sugar','High calorie','Easy to overeat'],v:'Read the label! Low-sugar granola + Greek yogurt + berries = elite breakfast.'},
+  'protein bar': {e:'💪',r:7,k:3,rw:['Protein','Convenient','Keeps you full','On the go'],rk:['Some have added sugar','Artificial ingredients'],v:'Look for 20g+ protein and under 10g sugar. Great backup fuel!',hero:true},
+
+  // ── Salads
+  'salad':            {e:'🥗',r:8,k:1,rw:['Fiber','Vitamins','Hydration','Low calorie'],rk:['Watch the dressing — it can undo everything!'],v:'Base is great! Load with lean protein + olive oil dressing for a perfect meal.',hero:true},
+  'garden salad':     {e:'🥗',r:8,k:1,rw:['Vitamins','Fiber','Low calorie','Antioxidants'],rk:['Add protein or it won\'t keep you full'],v:'Great start! Add chicken, eggs, or chickpeas to make it a complete meal.',hero:true},
+  'spinach salad':    {e:'🥗',r:10,k:0,rw:['Iron','Vitamin K','Protein','Calcium','Folate','Antioxidants'],rk:['Nothing — it\'s basically perfect!'],v:'SUPERHERO SALAD. Spinach base beats lettuce every single time. Add berries and almonds! 🏆',hero:true},
+  'kale salad':       {e:'🥗',r:10,k:0,rw:['Vitamin K','Vitamin C','Iron','Calcium','Fiber','Anti-cancer'],rk:['Massage the kale or it\'s tough'],v:'The king of salads. Massaged with lemon and olive oil — incredible and unstoppable! 💪',hero:true},
+  'greek salad':      {e:'🥗',r:9,k:1,rw:['Healthy fats from olive oil','Antioxidants','Fiber','Vitamin C','Calcium from feta','Anti-inflammatory'],rk:['Feta adds sodium'],v:'Mediterranean eating at its finest. One of the healthiest salads on Earth! 🇬🇷',hero:true},
+  'mediterranean salad':{e:'🥗',r:10,k:0,rw:['Olive oil healthy fats','Antioxidants','Fiber','Heart health','Longevity foods'],rk:['Nothing!'],v:'The salad that makes people live to 100! Olive oil + veggies + lemon = perfection. 🫒',hero:true},
+  'quinoa salad':     {e:'🥗',r:10,k:0,rw:['Complete protein','All 9 amino acids','Fiber','Iron','Magnesium','Slow energy'],rk:['Nothing — it\'s elite!'],v:'ATHLETE\'S DREAM SALAD. Quinoa + veggies + lemon = muscle fuel that keeps you going all day! 🏆',hero:true},
+  'chicken salad':    {e:'🥗',r:8,k:2,rw:['High protein','Keeps you full','Lean muscle fuel','B vitamins'],rk:['Heavy mayo version = high fat','Watch the dressing'],v:'Go light on mayo — use Greek yogurt instead for double the protein boost!',hero:true},
+  'tuna salad':       {e:'🥗',r:8,k:2,rw:['High protein','Omega-3','Low fat','Filling'],rk:['Canned = high sodium','Mercury — 2x/week max'],v:'Protein powerhouse! Mix with avocado instead of mayo for healthy fats.',hero:true},
+  'egg salad':        {e:'🥗',r:6,k:4,rw:['Protein','Vitamin D','Choline'],rk:['Mayo heavy = high fat & calories','Cholesterol'],v:'Swap mayo for Greek yogurt — same creaminess, way more protein!'},
+  'fruit salad':      {e:'🥗',r:9,k:1,rw:['Vitamins','Antioxidants','Hydration','Natural sweetness','Fiber'],rk:['Natural sugar — watch portions'],v:'Nature\'s candy bowl! Berries + kiwi + mango + honey drizzle = PERFECT snack. 🍓',hero:true},
+  'pasta salad':      {e:'🥗',r:4,k:6,rw:['Some veggies','Energy'],rk:['Refined pasta','High calorie dressing','Blood sugar spike'],v:'Swap regular pasta for chickpea pasta — total game changer on nutrition!'},
+  'cobb salad':       {e:'🥗',r:6,k:4,rw:['Protein','Healthy fats from avocado','Fiber'],rk:['Bacon','Blue cheese','Creamy dressing = high fat & sodium'],v:'Ask for dressing on the side and skip the bacon — still a solid meal!'},
+  'caesar salad':     {e:'🥗',r:4,k:6,rw:['Some protein','Calcium'],rk:['Creamy dressing = high fat','Croutons = refined carbs','High sodium'],v:'Skip the croutons and use light dressing — saves 200+ calories instantly!'},
 
   // ── Nuts & Seeds
   'almonds':     {e:'🌰',r:9,k:2,rw:['Healthy fats','Vitamin E','Protein','Magnesium'],rk:['High calories — small portions'],v:'Best nut snack! One handful a day.',hero:true},
   'walnuts':     {e:'🌰',r:9,k:2,rw:['Omega-3','Brain health','Antioxidants'],rk:['High calories'],v:'Best nut for your BRAIN!',hero:true},
-  'peanut butter':{e:'🥜',r:7,k:4,rw:['Protein','Healthy fats','Magnesium'],rk:['High calories','Some brands add sugar'],v:'Natural PB with no added sugar is great!',hero:true},
+  'almond butter':{e:'🌰',r:10,k:0,rw:['Vitamin E (skin & immunity)','Healthy monounsaturated fats','Magnesium','Calcium','Protein','Fiber','Heart health','Lower sugar than PB'],rk:['High calories — 2 tbsp is plenty'],v:'ELITE nut butter! Beats peanut butter on almost every nutrient. Spread on apple slices or blend in your smoothie. 🏆',hero:true},
+  'peanut butter':{e:'🥜',r:7,k:4,rw:['Protein','Healthy fats','Magnesium'],rk:['High calories','Some brands add sugar'],v:'Go natural with no added sugar — or upgrade to almond butter for even more nutrients!',hero:true},
+  'cashew butter':{e:'🌰',r:8,k:2,rw:['Magnesium','Zinc','Healthy fats','Iron','Creamy texture','Lower fat than almond butter'],rk:['High calories','Less protein than almond butter'],v:'Creamy and delicious! Great on toast, in smoothies, or with fruit. Solid upgrade from PB.',hero:true},
   'cashews':     {e:'🌰',r:7,k:3,rw:['Zinc','Magnesium','Healthy fats'],rk:['High calories'],v:'1 handful max — creamy and nutritious!',hero:true},
   'chia seeds':  {e:'🌱',r:10,k:1,rw:['Omega-3','Fiber','Calcium','Complete protein'],rk:['Nothing really!'],v:'Tiny SUPERFOOD seeds! Add to anything.',hero:true},
 
@@ -295,8 +431,49 @@ const FOODS = {
 
   // ── Other
   'olive oil':   {e:'🫒',r:9,k:2,rw:['Heart-healthy fats','Antioxidants','Anti-inflammatory'],rk:['High calories'],v:'Best cooking oil — use it daily!',hero:true},
-  'honey':       {e:'🍯',r:6,k:4,rw:['Antibacterial','Antioxidants','Soothing'],rk:['Still sugar'],v:'Better than table sugar — use a little!',hero:true},
+  'honey':       {e:'🍯',r:9,k:1,rw:['Antibacterial','Antioxidants','Soothes throat','Prebiotic for gut','Lower glycemic than syrup','Natural energy boost','Anti-inflammatory'],rk:['Still a sugar — use in moderation'],v:"Nature's liquid gold! Drizzle on protein pancakes, Greek yogurt, fruit & smoothies. Replaces syrup, sugar & processed sweeteners. Your body will thank you! 🍯✨",hero:true},
   'oats':        {e:'🥣',r:9,k:1,rw:['Fiber','Slow energy','Heart health'],rk:['Avoid sugary packets'],v:'Best breakfast for steady energy!',hero:true},
+};
+
+const SWAPS = {
+  'pasta':             ["🌱 Banza Chickpea Pasta — 25g protein, same taste, low glycemic","💪 Barilla Protein+ — 2x the protein of regular pasta","🫘 Tolerant Lentil Pasta — iron-packed and high fiber"],
+  'pasta sauce':       ["🍅 Rao's Homemade Marinara — zero added sugar, olive oil, the gold standard","🌿 Sonoma Gourmet Marinara — no added sugar, real vegetables, affordable","💚 Victoria Marinara — simple ingredients, olive oil, non-GMO","🏠 Homemade — crushed tomatoes + olive oil + garlic + basil = perfection"],
+  'prego':             ["🍅 Rao's Homemade Marinara — same convenience, zero added sugar","🌿 Sonoma Gourmet — clean label, no corn syrup, way better ingredients","💚 Victoria Marinara — simple, honest, no sugar added","🏠 Homemade Tomato Sauce — the healthiest & cheapest option of all"],
+  'ragu':              ["🍅 Rao's Homemade Marinara — upgrade your pasta immediately","🌿 Sonoma Gourmet — no added sugar, no junk oils","💚 Victoria Marinara — clean and affordable at most stores","🏠 Homemade Tomato Sauce — you control every ingredient"],
+  'marinara':          ["🍅 Rao's Homemade — zero added sugar, the GOAT of pasta sauces","🌿 Sonoma Gourmet — clean ingredients, real vegetables","💚 Victoria Marinara — no added sugar, olive oil base"],
+  'marinara sauce':    ["🍅 Rao's Homemade — zero added sugar, the GOAT of pasta sauces","🌿 Sonoma Gourmet — clean ingredients, real vegetables","💚 Victoria Marinara — no added sugar, olive oil base"],
+  'tortilla':          ["🫓 Mission Carb Balance — 3g net carbs, 8g fiber, same taste","🥬 Mission Spinach Herb Tortilla — more iron, fiber, antioxidants","🥜 Siete Almond Flour Tortilla — grain-free, keto-friendly, real ingredients","🌽 Corn Tortilla (non-GMO) — whole grain, lower calories, more traditional"],
+  'flour tortilla':    ["🫓 Mission Carb Balance — 3g net carbs, 8g fiber, same taste","🥬 Spinach Tortilla — more nutrients, better fiber profile","🥜 Siete Almond Flour — grain-free, healthy fats, low carb"],
+  'white bread':       ["💪 Dave's Killer Bread — whole grain, 5g protein per slice","🌾 Ezekiel 4:9 Sprouted Bread — no refined flour, complete protein","🥖 Silver Hills Sprouted Bread — fiber-rich, low glycemic"],
+  'white rice':        ["🥦 Green Giant Cauliflower Rice — low carb, high fiber","🌾 Seeds of Change Organic Brown Rice — whole grain, precooked","🍛 RightRice — made from veggies, 10g protein per serving"],
+  'butter':            ["🧈 Kerrygold Grass-Fed Butter — Omega-3s, CLA, Vitamin K2","🌟 Vital Farms Pasture-Raised Butter — ethical and nutrient-rich","✨ Fourth & Heart Ghee — lactose-free, gut-healthy, great for cooking"],
+  'ice cream':         ["🍦 Halo Top — 280 calories for the whole pint, high protein","🍨 Rebel Creamery — keto-friendly, low sugar, great taste","🍧 Enlightened — bean-based, high protein, low calorie"],
+  'pizza':             ["🍕 Amy's Thin Crust Veggie Pizza — organic veggies, clean ingredients","🥦 Caulipower Veggie Pizza — cauliflower crust, way less carbs","💪 Real Good Pizza — high protein, grain-free crust"],
+  'burger':            ["💪 Protein Burger — lettuce wrap bun, turkey or grass-fed patty, avocado, tomato, onion. Same craving, totally different results","🥩 Primal Kitchen Grass-Fed Burger — clean, no antibiotics","🌱 Dr. Praeger's Veggie Burger — whole food ingredients, plant-based","🍔 Applegate Naturals Beef — no nitrates, grass-fed, cleaner"],
+  'hot dog':           ["🌭 Applegate Naturals Beef Hot Dogs — no nitrates, grass-fed","🐔 Applegate Chicken Sausage — way cleaner, lower sodium","🌱 Tofurky Sausage — plant-based, no processed meat"],
+  'french fries':      ["🍠 Alexia Sweet Potato Fries — baked, Vitamin A rich","🥦 Green Giant Veggie Fries — made from real vegetables","🌿 Cascadian Farm Straight-Cut — organic, cleaner potato fries"],
+  'chips':             ["💪 Quest Protein Chips — 18g protein, 140 calories","🐣 Hippeas Organic Chickpea Puffs — high fiber, plant protein","🌽 Siete Grain-Free Chips — cassava-based, cleaner ingredients","🍿 PopCorners Flex Protein Chips — 10g protein per bag"],
+  'candy':             ["🍬 SmartSweets — candy taste, 3g sugar, fiber-packed","🍫 Lily's Chocolate — stevia-sweetened, zero sugar spike","🥜 RXBAR — real ingredients, 12g protein, dates as sweetener"],
+  'soda':              ["🌿 Olipop — prebiotic soda, 9g fiber, 45 calories","🌱 Zevia — stevia-sweetened, zero sugar, zero calories","🫧 Spindrift Sparkling Water — real fruit juice, no sweeteners","💧 Waterloo Sparkling Water — zero sugar, natural flavors"],
+  'cake':              ["🥚 Kodiak Cakes Mug Cake — high protein, whole grain, microwave ready","💪 Built Bar — tastes like dessert, 17g protein, low sugar","🍫 Lily's Chocolate — bake with it instead for zero sugar spike"],
+  'cookies':           ["💪 Lenny & Larry's Complete Cookie — 16g protein, whole wheat","🥜 Quest Cookies — 15g protein, 5g net carbs","🌾 Siete Grain-Free Cookies — cleaner ingredients, no gluten"],
+  'donut':             ["💪 Enlightened Glazed Donuts — high protein, low sugar","🥚 Protein Donut Co. — 11g protein per donut","🍩 Quest Donuts — 12g protein, 4g net carbs"],
+  'pancakes':          ["🐻 Kodiak Cakes Power Cakes — 14g protein per serving, whole grain","🌾 Bob's Red Mill Protein Pancake Mix — plant-based, high fiber","💪 Premier Protein Pancake Mix — 30g protein per serving"],
+  'pancake':           ["🐻 Kodiak Cakes Power Cakes — 14g protein per serving, whole grain","🌾 Bob's Red Mill Protein Pancake Mix — plant-based, high fiber","💪 Premier Protein Pancake Mix — 30g protein per serving"],
+  'syrup':             ["🍯 Raw Manuka Honey — antibacterial, antioxidants, prebiotic","🍁 Lakanto Maple Syrup — monk fruit sweetened, zero sugar","🌿 ChocZero Maple Syrup — no sugar alcohols, keto-friendly"],
+  'maple syrup':       ["🍯 Raw Honey — more nutrients, antibacterial, lower glycemic","🍁 Lakanto Maple Syrup — monk fruit, zero sugar","🌿 ChocZero Maple — no sugar alcohols, great taste"],
+  'fried chicken':     ["🍗 Applegate Naturals Chicken Tenders — no antibiotics, cleaner","🥚 Bell & Evans Air-Chilled Chicken — bake yourself for way less fat","💪 Just Bare Chicken Strips — lightly breaded, high protein"],
+  'energy drink':      ["⚡ Celsius — green tea based, no artificial colors, cleaner energy","🌿 REIZE — low calorie, B vitamins, smart caffeine blend","💧 Hiball Energy — organic caffeine, no sugar, sparkling water base"],
+  'pasta salad':       ["🌱 Banza Chickpea Pasta Salad — same dish, 3x the protein","🥗 Quinoa Salad — complete protein, all 9 amino acids","🫘 Lentil Pasta Salad — iron-rich, high fiber, low glycemic"],
+  'caesar salad':      ["🥗 Bolthouse Farms Yogurt Caesar Dressing — same taste, 70% less fat","🥑 Primal Kitchen Caesar — avocado oil based, no seed oils","🌿 Skip croutons + add grilled chicken for a 10/10 meal instantly"],
+  'cobb salad':        ["🥗 Primal Kitchen Ranch — avocado oil, no seed oils","🥑 Swap bacon for avocado slices — healthy fats without nitrates","🍗 Add extra grilled chicken and halve the blue cheese"],
+  'egg salad':         ["🥛 Swap mayo for Siggi's Greek Yogurt — same creaminess, 2x protein","🥑 Use mashed avocado instead of mayo — healthy fats","🫘 Add chickpeas for extra plant protein and fiber"],
+  'corn':              ["🥦 Cauliflower — same versatility, way more nutrients","🫘 Edamame — plant protein powerhouse, all amino acids","🥕 Carrots — naturally sweet, Vitamin A, low glycemic"],
+  'cheese':            ["🧀 Organic Valley Cheese — no hormones, antibiotic-free","🥛 Tillamook — minimal ingredients, real aged cheese, cleaner","💪 Organic Valley String Cheese — portion-controlled, clean protein"],
+  'granola':           ["🌾 KIND Healthy Grains Granola — low sugar, whole grain","🥣 Bob's Red Mill Old Country Granola — minimal ingredients","🌱 Purely Elizabeth — low sugar, coconut oil, ancient grains"],
+  'peanut butter':     ["🌰 Justin's Almond Butter — more Vitamin E, magnesium, calcium","🥜 Crazy Richard's Natural PB — one ingredient: peanuts only","🌿 Wild Friends Almond Butter — no added sugar, clean label"],
+  'orange juice':      ["🍊 Eat the whole orange — fiber intact, slower sugar release","🫧 Spindrift Orange — real fruit, way less sugar","💧 Vitamin C from bell peppers instead — zero sugar, same vitamin"],
+  'coffee':            ["🍵 Rishi Organic Matcha — calm focus, L-theanine, no crash","🌿 Four Sigmatic Mushroom Coffee — adaptogenic, lower caffeine","☕ Bulletproof Coffee — grass-fed butter + MCT oil = sustained energy"],
 };
 
 const KEYS = Object.keys(FOODS);
@@ -333,7 +510,9 @@ let sugIndex = -1;
 input.addEventListener('input', ()=>{
   const q = input.value.trim().toLowerCase();
   if(!q){ sugBox.style.display='none'; return; }
-  const matches = KEYS.filter(k=>k.startsWith(q) || k.includes(q)).slice(0,6);
+  // Include Spanish alias matches
+  const esMatches = Object.keys(ES_ALIAS).filter(k=>k.startsWith(q)||k.includes(q)).map(k=>ES_ALIAS[k]);
+  const matches = [...new Set([...KEYS.filter(k=>k.startsWith(q)||k.includes(q)),...esMatches])].slice(0,6);
   if(!matches.length){ sugBox.style.display='none'; return; }
   sugBox.innerHTML = matches.map(k=>`
     <div class="sug-item" data-k="${k}">
@@ -363,7 +542,8 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) sug
 
 // ── ANALYZE ──
 function analyze(){
-  const q = input.value.trim().toLowerCase();
+  const raw = input.value.trim().toLowerCase();
+  const q = resolveQuery(raw);
   const food = FOODS[q];
   if(!food){ shake(); return; }
 
@@ -409,6 +589,17 @@ function analyze(){
   vbox.style.borderTopWidth = '3px';
   vbox.style.borderTopStyle = 'solid';
 
+  // Smart Swaps
+  const swapBox = document.getElementById('swapBox');
+  const swapList = document.getElementById('swapList');
+  const swaps = SWAPS[q];
+  if(swaps && food.r <= food.k){
+    swapList.innerHTML = swaps.map(s=>`<div class="swap-item"><span class="swap-arrow">→</span><span>${s}</span></div>`).join('');
+    swapBox.style.display = 'block';
+  } else {
+    swapBox.style.display = 'none';
+  }
+
   // Sound
   if(food.r>food.k) playHappy();
   else if(food.r<food.k) playVillain();
@@ -437,12 +628,196 @@ function renderRecent(){
     </div>`).join('');
 }
 
+// Spanish food aliases
+const ES_ALIAS = {
+  'manzana':'apple','plátano':'banana','plátanos':'banana','platano':'banana','fresa':'strawberry','fresas':'strawberry','arándano':'blueberry','arándanos':'blueberry','naranja':'orange','mango':'mango','sandía':'watermelon','uvas':'grapes','aguacate':'avocado','piña':'pineapple','cereza':'cherry','kiwi':'kiwi','durazno':'peach','limón':'lemon','brócoli':'broccoli','espinaca':'spinach','espinacas':'spinach','col rizada':'kale','zanahoria':'carrot','tomate':'tomato','camote':'sweet potato','pepino':'cucumber','maíz':'corn','apio':'celery','ajo':'garlic','cebolla':'onion','pimiento':'bell pepper','pimientos':'bell peppers','champiñones':'mushrooms','espárragos':'asparagus','calabacín':'zucchini','edamame':'edamame','pollo':'chicken','salmón':'salmon','atún':'tuna','huevos':'eggs','huevo':'eggs','carne':'beef','pavo':'turkey','camarones':'shrimp','frijoles':'beans','lentejas':'lentils','avena':'oatmeal','arroz integral':'brown rice','arroz blanco':'white rice','quinoa':'quinoa','pan blanco':'white bread','pan integral':'whole wheat bread','pasta':'pasta','leche':'milk','yogur griego':'greek yogurt','queso':'cheese','mantequilla':'butter','helado':'ice cream','pizza':'pizza','hamburguesa':'burger','hamburguesa de proteína':'protein burger','hamburguesa proteica':'protein burger','perro caliente':'hot dog','papas fritas':'french fries','papas':'chips','dulces':'candy','refresco':'soda','pastel':'cake','galletas':'cookies','dona':'donut','chocolate':'chocolate','chocolate oscuro':'dark chocolate','palomitas':'popcorn','panqueques':'pancakes','panqueque':'pancake','panqueques de proteína':'protein pancakes','miel':'honey','jarabe':'syrup','almendras':'almonds','nueces':'walnuts','mantequilla de maní':'peanut butter','mantequilla de almendra':'almond butter','mantequilla de anacardo':'cashew butter','semillas de chía':'chia seeds','agua':'water','té verde':'green tea','jugo de naranja':'orange juice','café':'coffee','bebida energética':'energy drink','aceite de oliva':'olive oil','avena cocida':'oats','ensalada':'salad','ensalada griega':'greek salad','ensalada mediterránea':'mediterranean salad','ensalada de quinoa':'quinoa salad','ensalada de pollo':'chicken salad','ensalada de atún':'tuna salad','ensalada de frutas':'fruit salad','ensalada César':'caesar salad','ensalada de espinaca':'spinach salad','ensalada de col rizada':'kale salad','claras de huevo':'egg whites','clara de huevo':'egg white','mantequilla kerrygold':'kerrygold','ghee':'ghee','mantequilla de hierba':'grass fed butter','pasta de garbanzos':'chickpea pasta','pasta de proteína':'protein pasta','salsa de pasta':'pasta sauce','salsa marinara':'marinara sauce','salsa casera de tomate':'homemade tomato sauce','salsa de tomate casera':'homemade tomato sauce','tortilla de harina':'flour tortilla','tortilla de maíz':'corn tortilla','tortilla baja en carbohidratos':'low carb tortilla','tortilla de espinaca':'spinach tortilla','tortilla de harina de almendra':'almond flour tortilla','tortilla de yuca':'cassava tortilla','pizza de corteza delgada':'thin crust pizza','pizza vegetariana':'veggie pizza','pollo frito':'fried chicken','papas dulces fritas':'sweet potato fries','arroz de coliflor':'cauliflower rice','batido':'smoothie','batido de proteína':'protein shake','granola':'granola','barra de proteína':'protein bar'
+};
+
+function resolveQuery(q){
+  return ES_ALIAS[q] || q;
+}
+
 function shake(){
   input.style.animation='none';
   input.style.borderColor='var(--red)';
   setTimeout(()=>input.style.borderColor='',800);
   playTone(200,'square',0.3,0.1);
 }
+
+// ── PHOTO SCAN ──────────────────────────────────────
+// Replace this URL with your Cloudflare Worker URL after setup
+const SCAN_ENDPOINT = 'YOUR_WORKER_URL_HERE';
+
+let photoData = null;
+let photoMime = null;
+
+function switchMode(mode){
+  document.getElementById('typeArea').style.display = mode==='type' ? '' : 'none';
+  document.getElementById('scanArea').style.display  = mode==='scan' ? '' : 'none';
+  document.getElementById('tabType').classList.toggle('active', mode==='type');
+  document.getElementById('tabScan').classList.toggle('active', mode==='scan');
+}
+
+function handleFile(file){
+  if(!file) return;
+  photoMime = file.type;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const dataUrl = e.target.result;
+    photoData = dataUrl.split(',')[1]; // base64 only
+    document.getElementById('scanPreview').src = dataUrl;
+    document.getElementById('scanDrop').style.display = 'none';
+    document.getElementById('scanPreviewWrap').style.display = '';
+    document.getElementById('scanBtn').style.display = '';
+    document.getElementById('scanMsg').innerHTML = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+// Drag & drop support
+(function(){
+  const drop = document.getElementById('scanDrop');
+  drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.style.borderColor='var(--green)'; });
+  drop.addEventListener('dragleave', ()=>{ drop.style.borderColor=''; });
+  drop.addEventListener('drop', e=>{ e.preventDefault(); drop.style.borderColor=''; handleFile(e.dataTransfer.files[0]); });
+})();
+
+function clearPhoto(){
+  photoData = null; photoMime = null;
+  document.getElementById('photoInput').value = '';
+  document.getElementById('scanPreviewWrap').style.display = 'none';
+  document.getElementById('scanBtn').style.display = 'none';
+  document.getElementById('scanDrop').style.display = '';
+  document.getElementById('scanMsg').innerHTML = '';
+}
+
+async function runPhotoAnalysis(){
+  if(!photoData){ return; }
+
+  if(SCAN_ENDPOINT === 'YOUR_WORKER_URL_HERE'){
+    document.getElementById('scanMsg').innerHTML =
+      '<div class="scan-setup"><p>📡 <strong>Almost there!</strong> The photo scan feature needs a one-time setup.<br>Contact Tagline to activate this feature.</p></div>';
+    return;
+  }
+
+  document.getElementById('scanBtn').disabled = true;
+  document.getElementById('scanLoading').style.display = '';
+  document.getElementById('scanMsg').innerHTML = '';
+
+  try {
+    const res = await fetch(SCAN_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        messages:[{
+          role:'user',
+          content:[
+            {type:'image', source:{type:'base64', media_type: photoMime, data: photoData}},
+            {type:'text', text:`You are a nutrition expert for a health app called Tagline. Analyze this food photo carefully.
+
+Respond ONLY with valid JSON — no other text:
+{
+  "foods": ["name of the main food or meal"],
+  "score": <integer 1-10, 10 = healthiest>,
+  "emoji": "<one food emoji>",
+  "hero": <true if score >= 6>,
+  "rewards": ["top benefit 1","benefit 2","benefit 3"],
+  "risks": ["top risk 1","risk 2"],
+  "verdict": "<2-3 sentences: honest, encouraging, educational>",
+  "swap": "<optional: one specific healthier swap if villain food>"
+}`}
+          ]
+        }]
+      })
+    });
+
+    const json = await res.json();
+    if(json.error){ throw new Error(json.error.message || 'API error'); }
+
+    let result;
+    try { result = JSON.parse(json.content[0].text); }
+    catch(e){ throw new Error('Could not read the response. Try again.'); }
+
+    document.getElementById('scanLoading').style.display = 'none';
+    document.getElementById('scanBtn').disabled = false;
+
+    showResult({
+      e:   result.emoji   || '🍽️',
+      r:   result.score   || 5,
+      k:   10 - (result.score || 5),
+      rw:  result.rewards || [],
+      rk:  result.risks   || [],
+      v:   result.verdict || '',
+      _swap: result.swap  || null
+    });
+
+  } catch(err){
+    document.getElementById('scanLoading').style.display = 'none';
+    document.getElementById('scanBtn').disabled = false;
+    document.getElementById('scanMsg').innerHTML =
+      `<div class="scan-error">⚠️ ${err.message || 'Something went wrong. Please try again.'}</div>`;
+  }
+}
+
+function showResult(food){
+  document.getElementById('emptyState').style.display='none';
+  document.getElementById('resultWrap').style.display='block';
+
+  document.getElementById('scoreLeft').textContent  = food.r+'/10';
+  document.getElementById('scoreRight').textContent = food.k+'/10';
+  document.getElementById('plateLeftDish').textContent  = food.e;
+  document.getElementById('plateRightDish').textContent = food.e;
+
+  const net = food.r - food.k;
+  const beam = document.getElementById('beam');
+  beam.classList.remove('idle');
+  beam.style.transform = `rotate(${-(net/10)*28}deg)`;
+
+  document.getElementById('rewardList').innerHTML = food.rw.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('riskList').innerHTML   = food.rk.map(x=>`<li>${x}</li>`).join('');
+
+  let emoji, label;
+  if(food.r>=9)         { emoji='🦸'; label='SUPERHERO FOOD!'; }
+  else if(food.r>=7)    { emoji='⭐'; label='Pretty Great!'; }
+  else if(food.r>food.k){ emoji='👍'; label='More Good Than Bad'; }
+  else if(food.r===food.k){ emoji='⚖️'; label="It's Balanced"; }
+  else if(food.k>=9)    { emoji='💀'; label='SUPER VILLAIN!'; }
+  else                  { emoji='👿'; label='Sneaky Villain!'; }
+
+  const vEmoji = document.getElementById('verdictEmoji');
+  vEmoji.textContent = emoji;
+  vEmoji.style.animation='none'; vEmoji.offsetHeight; vEmoji.style.animation='';
+  document.getElementById('verdictLabel').textContent = label;
+  document.getElementById('verdictText').textContent  = food.v;
+
+  const vbox = document.getElementById('verdictBox');
+  vbox.style.borderTopColor = food.r>food.k ? 'var(--green)' : food.r===food.k ? '#ffd600' : 'var(--red)';
+  vbox.style.borderTopWidth = '3px';
+  vbox.style.borderTopStyle = 'solid';
+
+  const swapBox  = document.getElementById('swapBox');
+  const swapList = document.getElementById('swapList');
+  if(food._swap && food.r <= food.k){
+    swapList.innerHTML = `<div class="swap-item"><span class="swap-arrow">→</span><span>💡 ${food._swap}</span></div>`;
+    swapBox.style.display = 'block';
+  } else {
+    swapBox.style.display = 'none';
+  }
+
+  if(food.r>food.k) playHappy();
+  else if(food.r<food.k) playVillain();
+  else playNeutral();
+
+  document.getElementById('resultWrap').scrollIntoView({behavior:'smooth',block:'start'});
+}
 </script>
+<style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
+<div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+<script src="lang.js"></script>
+<script src="tipjar.js"></script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}</script>
 </body>
 </html>
