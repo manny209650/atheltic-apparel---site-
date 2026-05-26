@@ -127,6 +127,31 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
 }
 .tl-lang-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Nunito',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;cursor:pointer;border-radius:50px;display:inline-flex;align-items:center;gap:5px;transition:background .2s}
 .tl-lang-btn:hover{background:rgba(255,255,255,.14)}.tl-flag{font-size:.8rem}
+
+/* ── PHOTO SCAN ── */
+.mode-tabs{display:flex;gap:8px;justify-content:center;margin:0 auto 20px;max-width:540px;padding:0 20px}
+.mode-tab{flex:1;padding:12px;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;border-radius:50px;transition:all .25s}
+.mode-tab.active{border-color:var(--green);background:rgba(0,230,118,.1);color:#fff}
+.scan-area{max-width:540px;margin:0 auto 32px;padding:0 20px}
+.scan-drop{border:2px dashed rgba(0,230,118,.35);border-radius:16px;padding:48px 24px;text-align:center;cursor:pointer;transition:border-color .25s,background .25s;background:rgba(0,230,118,.03)}
+.scan-drop:hover{border-color:var(--green);background:rgba(0,230,118,.07)}
+.scan-drop-icon{font-size:3rem;margin-bottom:12px}
+.scan-drop-title{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#fff;margin-bottom:6px}
+.scan-drop-sub{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.5}
+.scan-preview-wrap{position:relative;border-radius:16px;overflow:hidden;margin-bottom:16px}
+.scan-preview-wrap img{width:100%;max-height:300px;object-fit:cover;display:block;border-radius:16px}
+.scan-clear{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.7);border:none;color:#fff;font-size:.8rem;padding:6px 12px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800}
+.scan-btn{width:100%;padding:16px;background:linear-gradient(135deg,#00e676,#00bfa5);border:none;color:#000;font-family:'Fredoka One',cursive;font-size:1.1rem;border-radius:50px;cursor:pointer;transition:opacity .2s;margin-bottom:8px}
+.scan-btn:hover{opacity:.88}
+.scan-btn:disabled{opacity:.4;cursor:not-allowed}
+.scan-loading{text-align:center;padding:32px 0}
+.scan-spinner{width:48px;height:48px;border:4px solid rgba(0,230,118,.2);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scan-loading p{font-family:'Fredoka One',cursive;font-size:1.1rem;color:rgba(255,255,255,.6)}
+.scan-error{background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.3);border-radius:12px;padding:16px;text-align:center;color:#ff6b6b;font-family:'Nunito',sans-serif;font-size:.9rem;margin-top:12px}
+.scan-setup{background:rgba(0,230,118,.06);border:1px solid rgba(0,230,118,.2);border-radius:12px;padding:20px;text-align:center;margin-top:8px}
+.scan-setup p{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6}
+.scan-setup strong{color:var(--green)}
 </style>
 </head>
 <body>
@@ -147,13 +172,39 @@ body{background:var(--bg);font-family:'Nunito',sans-serif;color:#fff;min-height:
   <p class="hero-sub" data-i18n="fs-sub">Is your food a superhero or a villain? 🦸‍♂️🦹</p>
 </div>
 
+<!-- Mode Toggle -->
+<div class="mode-tabs">
+  <button class="mode-tab active" id="tabType" onclick="switchMode('type')">🔍 Type Food</button>
+  <button class="mode-tab" id="tabScan" onclick="switchMode('scan')">📸 Scan Photo</button>
+</div>
+
 <!-- Search -->
-<div class="search-wrap">
+<div class="search-wrap" id="typeArea">
   <div class="search-box">
     <input class="search-input" id="foodInput" type="text" placeholder="Type a food... 🍎🍔🥦" autocomplete="off">
     <button class="search-btn" onclick="analyze()" data-i18n="fs-btn">Check It! 🔍</button>
   </div>
   <div class="suggestions" id="suggestions"></div>
+</div>
+
+<!-- Photo Scan -->
+<div class="scan-area" id="scanArea" style="display:none">
+  <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(this.files[0])">
+  <div class="scan-drop" id="scanDrop" onclick="document.getElementById('photoInput').click()">
+    <div class="scan-drop-icon">📸</div>
+    <div class="scan-drop-title">Take a Photo or Upload</div>
+    <div class="scan-drop-sub">Tap to open camera · or drag &amp; drop an image here</div>
+  </div>
+  <div class="scan-preview-wrap" id="scanPreviewWrap" style="display:none">
+    <img id="scanPreview" src="" alt="Food photo">
+    <button class="scan-clear" onclick="clearPhoto()">✕ Clear</button>
+  </div>
+  <button class="scan-btn" id="scanBtn" onclick="runPhotoAnalysis()" style="display:none">🔬 Analyze This Food</button>
+  <div class="scan-loading" id="scanLoading" style="display:none">
+    <div class="scan-spinner"></div>
+    <p>Reading your food...</p>
+  </div>
+  <div id="scanMsg"></div>
 </div>
 
 <!-- Scale -->
@@ -591,6 +642,175 @@ function shake(){
   input.style.borderColor='var(--red)';
   setTimeout(()=>input.style.borderColor='',800);
   playTone(200,'square',0.3,0.1);
+}
+
+// ── PHOTO SCAN ──────────────────────────────────────
+// Replace this URL with your Cloudflare Worker URL after setup
+const SCAN_ENDPOINT = 'YOUR_WORKER_URL_HERE';
+
+let photoData = null;
+let photoMime = null;
+
+function switchMode(mode){
+  document.getElementById('typeArea').style.display = mode==='type' ? '' : 'none';
+  document.getElementById('scanArea').style.display  = mode==='scan' ? '' : 'none';
+  document.getElementById('tabType').classList.toggle('active', mode==='type');
+  document.getElementById('tabScan').classList.toggle('active', mode==='scan');
+}
+
+function handleFile(file){
+  if(!file) return;
+  photoMime = file.type;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const dataUrl = e.target.result;
+    photoData = dataUrl.split(',')[1]; // base64 only
+    document.getElementById('scanPreview').src = dataUrl;
+    document.getElementById('scanDrop').style.display = 'none';
+    document.getElementById('scanPreviewWrap').style.display = '';
+    document.getElementById('scanBtn').style.display = '';
+    document.getElementById('scanMsg').innerHTML = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+// Drag & drop support
+(function(){
+  const drop = document.getElementById('scanDrop');
+  drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.style.borderColor='var(--green)'; });
+  drop.addEventListener('dragleave', ()=>{ drop.style.borderColor=''; });
+  drop.addEventListener('drop', e=>{ e.preventDefault(); drop.style.borderColor=''; handleFile(e.dataTransfer.files[0]); });
+})();
+
+function clearPhoto(){
+  photoData = null; photoMime = null;
+  document.getElementById('photoInput').value = '';
+  document.getElementById('scanPreviewWrap').style.display = 'none';
+  document.getElementById('scanBtn').style.display = 'none';
+  document.getElementById('scanDrop').style.display = '';
+  document.getElementById('scanMsg').innerHTML = '';
+}
+
+async function runPhotoAnalysis(){
+  if(!photoData){ return; }
+
+  if(SCAN_ENDPOINT === 'YOUR_WORKER_URL_HERE'){
+    document.getElementById('scanMsg').innerHTML =
+      '<div class="scan-setup"><p>📡 <strong>Almost there!</strong> The photo scan feature needs a one-time setup.<br>Contact Tagline to activate this feature.</p></div>';
+    return;
+  }
+
+  document.getElementById('scanBtn').disabled = true;
+  document.getElementById('scanLoading').style.display = '';
+  document.getElementById('scanMsg').innerHTML = '';
+
+  try {
+    const res = await fetch(SCAN_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        messages:[{
+          role:'user',
+          content:[
+            {type:'image', source:{type:'base64', media_type: photoMime, data: photoData}},
+            {type:'text', text:`You are a nutrition expert for a health app called Tagline. Analyze this food photo carefully.
+
+Respond ONLY with valid JSON — no other text:
+{
+  "foods": ["name of the main food or meal"],
+  "score": <integer 1-10, 10 = healthiest>,
+  "emoji": "<one food emoji>",
+  "hero": <true if score >= 6>,
+  "rewards": ["top benefit 1","benefit 2","benefit 3"],
+  "risks": ["top risk 1","risk 2"],
+  "verdict": "<2-3 sentences: honest, encouraging, educational>",
+  "swap": "<optional: one specific healthier swap if villain food>"
+}`}
+          ]
+        }]
+      })
+    });
+
+    const json = await res.json();
+    if(json.error){ throw new Error(json.error.message || 'API error'); }
+
+    let result;
+    try { result = JSON.parse(json.content[0].text); }
+    catch(e){ throw new Error('Could not read the response. Try again.'); }
+
+    document.getElementById('scanLoading').style.display = 'none';
+    document.getElementById('scanBtn').disabled = false;
+
+    showResult({
+      e:   result.emoji   || '🍽️',
+      r:   result.score   || 5,
+      k:   10 - (result.score || 5),
+      rw:  result.rewards || [],
+      rk:  result.risks   || [],
+      v:   result.verdict || '',
+      _swap: result.swap  || null
+    });
+
+  } catch(err){
+    document.getElementById('scanLoading').style.display = 'none';
+    document.getElementById('scanBtn').disabled = false;
+    document.getElementById('scanMsg').innerHTML =
+      `<div class="scan-error">⚠️ ${err.message || 'Something went wrong. Please try again.'}</div>`;
+  }
+}
+
+function showResult(food){
+  document.getElementById('emptyState').style.display='none';
+  document.getElementById('resultWrap').style.display='block';
+
+  document.getElementById('scoreLeft').textContent  = food.r+'/10';
+  document.getElementById('scoreRight').textContent = food.k+'/10';
+  document.getElementById('plateLeftDish').textContent  = food.e;
+  document.getElementById('plateRightDish').textContent = food.e;
+
+  const net = food.r - food.k;
+  const beam = document.getElementById('beam');
+  beam.classList.remove('idle');
+  beam.style.transform = `rotate(${-(net/10)*28}deg)`;
+
+  document.getElementById('rewardList').innerHTML = food.rw.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('riskList').innerHTML   = food.rk.map(x=>`<li>${x}</li>`).join('');
+
+  let emoji, label;
+  if(food.r>=9)         { emoji='🦸'; label='SUPERHERO FOOD!'; }
+  else if(food.r>=7)    { emoji='⭐'; label='Pretty Great!'; }
+  else if(food.r>food.k){ emoji='👍'; label='More Good Than Bad'; }
+  else if(food.r===food.k){ emoji='⚖️'; label="It's Balanced"; }
+  else if(food.k>=9)    { emoji='💀'; label='SUPER VILLAIN!'; }
+  else                  { emoji='👿'; label='Sneaky Villain!'; }
+
+  const vEmoji = document.getElementById('verdictEmoji');
+  vEmoji.textContent = emoji;
+  vEmoji.style.animation='none'; vEmoji.offsetHeight; vEmoji.style.animation='';
+  document.getElementById('verdictLabel').textContent = label;
+  document.getElementById('verdictText').textContent  = food.v;
+
+  const vbox = document.getElementById('verdictBox');
+  vbox.style.borderTopColor = food.r>food.k ? 'var(--green)' : food.r===food.k ? '#ffd600' : 'var(--red)';
+  vbox.style.borderTopWidth = '3px';
+  vbox.style.borderTopStyle = 'solid';
+
+  const swapBox  = document.getElementById('swapBox');
+  const swapList = document.getElementById('swapList');
+  if(food._swap && food.r <= food.k){
+    swapList.innerHTML = `<div class="swap-item"><span class="swap-arrow">→</span><span>💡 ${food._swap}</span></div>`;
+    swapBox.style.display = 'block';
+  } else {
+    swapBox.style.display = 'none';
+  }
+
+  if(food.r>food.k) playHappy();
+  else if(food.r<food.k) playVillain();
+  else playNeutral();
+
+  document.getElementById('resultWrap').scrollIntoView({behavior:'smooth',block:'start'});
 }
 </script>
 <style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
