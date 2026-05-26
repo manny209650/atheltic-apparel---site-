@@ -6,8 +6,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#06060F",
-  "theme_color": "#E02020",
+  "background_color": "#FF6B00",
+  "theme_color": "#FF6B00",
   "categories": ["health", "lifestyle", "fitness", "finance"],
   "icons": [
     { "src": "icons/icon-72.png",            "sizes": "72x72",   "type": "image/png" },
