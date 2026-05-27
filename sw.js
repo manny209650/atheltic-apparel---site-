@@ -1,4 +1,4 @@
-const CACHE = 'tagline-v1';
+const CACHE = 'tagline-v2';
 
 const CORE = [
   '/index.html',
@@ -10,6 +10,7 @@ const CORE = [
   '/health-bulk.html',
   '/health-cali.html',
   '/health-truth.html',
+  '/community.html',
   '/lang.js',
   '/tipjar.js',
   '/daily.js',
