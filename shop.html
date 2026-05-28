@@ -1105,6 +1105,8 @@ const CM = {
   'green':'#16A34A','green-1':'#16A34A','kelly-green':'#22C55E','emerald-green':'#2D9B5A','green-gray':'#4B5563','teal':'#0D9488',
   'warm-tan':'#C4A882','sand':'#C2B280','khaki':'#BDB76B','beige-1':'#D4B896',
   'brown':'#8B6340','brown-1':'#8B6340','brown-2':'#8B5E3C','off-brown':'#8B6F52',
+  'navy':'#1E3A8A','slate':'#708090','maroon':'#800000','blue':'#2563EB',
+  'pink':'#EC4899',
 };
 const gc = k => CM[k] || '#888';
 
@@ -1139,6 +1141,7 @@ const PRODUCTS = [
     cats:['all','womens','hoodies'],
     img:'images/products/womens-sweatshirt-gray.jpg',
     colors:['gray','teal','cream','navy','slate','brown'],
+    imgs:{gray:'images/products/womens-sweatshirt-gray.jpg',teal:'images/products/womens-sweatshirt-teal.jpg',cream:'images/products/womens-sweatshirt-cream.jpg',navy:'images/products/womens-sweatshirt-navy.jpg',slate:'images/products/womens-sweatshirt-slate.jpg',brown:'images/products/womens-sweatshirt-brown.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1147,6 +1150,7 @@ const PRODUCTS = [
     cats:['all','womens','tops'],
     img:'images/products/womens-crop-tee-white.jpg',
     colors:['white','blue','black','red'],
+    imgs:{white:'images/products/womens-crop-tee-white.jpg',blue:'images/products/womens-crop-tee-blue.jpg',black:'images/products/womens-crop-tee-black.jpg',red:'images/products/womens-crop-tee-red.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1159,11 +1163,12 @@ const PRODUCTS = [
   },
   {
     handle:'boxe-tees',title:"Box'e Tee's",
-    desc:"100% Cotton · Box-fit",price:25,badge:'',
+    desc:"100% Cotton · Box-fit · TL logo",price:25,badge:'',
     cats:['all','tops','mens','womens'],
     img:'images/products/mens-box-tee-white.jpg',
-    colors:['orange','cream','brown','white','light-grey'],
-    sizes:['S','M','L','XL','2XL']
+    colors:['white','orange','brown','cream','gray'],
+    imgs:{white:'images/products/mens-box-tee-white.jpg',orange:'images/products/mens-box-tee-orange.jpg',brown:'images/products/mens-box-tee-brown.jpg',cream:'images/products/mens-box-tee-cream.jpg',gray:'images/products/mens-box-tee-gray.jpg'},
+    sizes:['S','M','L','XL']
   },
   {
     handle:'boxy-tanks',title:'BOXY Tanks',
@@ -1250,7 +1255,8 @@ const PRODUCTS = [
     desc:'Running shorts · 90% polyester 10% spandex',price:30,badge:'',noCustom:true,
     cats:['all','womens','bottoms'],
     img:'images/products/womens-2-1-shorts-green.jpg',
-    colors:['black','pink-1','emerald-green'],
+    colors:['green','pink','black'],
+    imgs:{green:'images/products/womens-2-1-shorts-green.jpg',pink:'images/products/womens-2-1-shorts-pink.jpg',black:'images/products/womens-2-1-shorts-black.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1258,7 +1264,8 @@ const PRODUCTS = [
     desc:'100% polyester · Breathable design',price:25,badge:'',
     cats:['all','mens','bottoms'],
     img:'images/products/mens-basketball-shorts-black.jpg',
-    colors:['yellow','burgundy','red','light-blue','purple','white','black'],
+    colors:['black','white','blue','red','maroon','purple','yellow'],
+    imgs:{black:'images/products/mens-basketball-shorts-black.jpg',white:'images/products/mens-basketball-shorts-white.jpg',blue:'images/products/mens-basketball-shorts-blue.jpg',red:'images/products/mens-basketball-shorts-red.jpg',maroon:'images/products/mens-basketball-shorts-maroon.jpg',purple:'images/products/mens-basketball-shorts-purple.jpg',yellow:'images/products/mens-basketball-shorts-yellow.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1330,7 +1337,8 @@ const PRODUCTS = [
     desc:'100% polyester · Windproof · Waterproof',price:45,badge:'',
     cats:['all','mens','jackets'],
     img:'images/products/mens-runner-vest-gray.jpg',
-    colors:['green-1','black','orange'],
+    colors:['gray','orange','green'],
+    imgs:{gray:'images/products/mens-runner-vest-gray.jpg',orange:'images/products/mens-runner-vest-orange.jpg',green:'images/products/mens-runner-vest-green.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1494,7 +1502,12 @@ function pdpPickColor(el){
   var all = document.querySelectorAll('.pdp-swatch');
   for(var i=0;i<all.length;i++) all[i].classList.remove('sel');
   el.classList.add('sel');
-  document.getElementById('pdpColorName').textContent = el.getAttribute('data-c').replace(/-/g,' ');
+  var c = el.getAttribute('data-c');
+  document.getElementById('pdpColorName').textContent = c.replace(/-/g,' ');
+  var p = PRODUCTS.find(function(x){ return x.handle === pdpHandle; });
+  if(p && p.imgs && p.imgs[c]){
+    document.getElementById('pdpImg').src = p.imgs[c];
+  }
 }
 
 function pdpPickSize(el){
