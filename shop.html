@@ -15,7 +15,7 @@
     return;
   }
   /* Force reload if browser served a cached old version */
-  var PAGE_VER='v7';
+  var PAGE_VER='v8';
   if(sessionStorage.getItem('tlShopVer')!==PAGE_VER){
     sessionStorage.setItem('tlShopVer',PAGE_VER);
     window.location.reload(true);
@@ -249,8 +249,10 @@ nav.scrolled{background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-botto
 .pdp-sz{font-size:.6rem;letter-spacing:.14em;border:1px solid rgba(255,255,255,.15);color:var(--muted);padding:6px 13px;cursor:pointer;transition:.2s;text-transform:uppercase}
 .pdp-sz:hover{border-color:var(--gold);color:#fff}
 .pdp-sz.sel{border-color:var(--gold);color:#fff;background:rgba(224,32,32,.12)}
+.pdp-sz.sold-out{opacity:.3;text-decoration:line-through;cursor:not-allowed;pointer-events:none}
 .pdp-buy{margin-top:auto;padding-top:18px;display:block;width:100%;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;background:var(--gold-grad);color:var(--space);border:none;padding:15px;cursor:pointer;transition:opacity .2s,transform .15s}
 .pdp-buy:hover{opacity:.85;transform:translateY(-1px)}
+.pdp-buy.locked{pointer-events:none;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);cursor:not-allowed}
 @media(max-width:680px){
   .pdp-modal{grid-template-columns:1fr;max-height:95vh}
   .pdp-img-col{aspect-ratio:4/3}
@@ -954,7 +956,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         <div class="pdp-sizes" id="pdpSizes"></div>
       </div>
 
-      <button class="pdp-buy" id="pdpBuyBtn" onclick="pdpBuyNow()" style="pointer-events:none;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);cursor:not-allowed">🔒 Coming Soon</button>
+      <button class="pdp-buy locked" id="pdpBuyBtn" onclick="pdpBuyNow()">Buy Now</button>
     </div>
   </div>
 </div>
@@ -1404,17 +1406,17 @@ function openPDP(p){
     pdpPickColor(swatchWrap.firstChild);
   } else {
     document.getElementById('pdpColorsField').style.display='none';
+    pdpUpdateSizes('');
   }
 
-  var sizeWrap = document.getElementById('pdpSizes');
-  if(p.sizes && p.sizes.length){
-    sizeWrap.innerHTML = p.sizes.map(function(s){
-      return '<span class="pdp-sz" data-s="'+s+'" onclick="pdpPickSize(this)">'+s+'</span>';
-    }).join('');
-    document.getElementById('pdpSizesField').style.display='block';
-    pdpPickSize(sizeWrap.firstChild);
+  // buy button state
+  var btn = document.getElementById('pdpBuyBtn');
+  if(p.stripeLink){
+    btn.classList.remove('locked');
+    btn.textContent = 'Buy Now — $'+p.price;
   } else {
-    document.getElementById('pdpSizesField').style.display='none';
+    btn.classList.add('locked');
+    btn.textContent = '🔒 Coming Soon';
   }
 
   ov.style.display = 'flex';
@@ -1431,6 +1433,25 @@ function pdpPickColor(el){
   if(p && p.imgs && p.imgs[c]){
     document.getElementById('pdpImg').src = p.imgs[c];
   }
+  pdpUpdateSizes(c);
+}
+
+function pdpUpdateSizes(color){
+  var p = PRODUCTS.find(function(x){ return x.handle === pdpHandle; });
+  var sizeWrap = document.getElementById('pdpSizes');
+  if(!p || !p.sizes || !p.sizes.length){
+    document.getElementById('pdpSizesField').style.display='none';
+    return;
+  }
+  document.getElementById('pdpSizesField').style.display='block';
+  var soldOut = p.soldOut || [];
+  sizeWrap.innerHTML = p.sizes.map(function(s){
+    var out = soldOut.indexOf(color+'-'+s) > -1;
+    return '<span class="pdp-sz'+(out?' sold-out':'')+'" data-s="'+s+'" '+(out?'':'onclick="pdpPickSize(this)"')+'>'+s+'</span>';
+  }).join('');
+  var first = sizeWrap.querySelector('.pdp-sz:not(.sold-out)');
+  if(first) pdpPickSize(first);
+  else document.getElementById('pdpSizeName').textContent = 'Sold Out';
 }
 
 function pdpPickSize(el){
@@ -1447,7 +1468,13 @@ function closePDP(){
 }
 
 function pdpBuyNow(){
-  /* Shop locked — purchasing disabled until all products are finalized */
+  var p = PRODUCTS.find(function(x){ return x.handle === pdpHandle; });
+  if(!p || !p.stripeLink) return;
+  var color = document.getElementById('pdpColorName').textContent.trim();
+  var size = document.getElementById('pdpSizeName').textContent.trim();
+  var ref = encodeURIComponent(p.title + ' | ' + color + ' | ' + size);
+  var sep = p.stripeLink.indexOf('?') > -1 ? '&' : '?';
+  window.open(p.stripeLink + sep + 'client_reference_id=' + ref, '_blank');
 }
 
 function openCustomOrder(p){
