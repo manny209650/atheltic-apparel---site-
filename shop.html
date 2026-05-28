@@ -15,7 +15,7 @@
     return;
   }
   /* Force reload if browser served a cached old version */
-  var PAGE_VER='v6';
+  var PAGE_VER='v7';
   if(sessionStorage.getItem('tlShopVer')!==PAGE_VER){
     sessionStorage.setItem('tlShopVer',PAGE_VER);
     window.location.reload(true);
@@ -1122,19 +1122,12 @@ const PRODUCTS = [
   },
   {
     handle:'3-d-embroidery-hoodie',title:'3-D Embroidery Hoodie',
-    desc:'100% Cotton · Lightweight · 3-D embroidered',price:45,badge:'',
+    desc:'100% Cotton · Lightweight · TAGLINE God. Health. Wealth.',price:45,badge:'',
     cats:['all','hoodies','mens','womens'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_4981aa0e-9864-43bd-9e9e-c30e28e472b3.jpg?v=1775531157',
-    colors:['cream','black','pink-1'],
+    img:'images/products/3d-embroidery-hoodie-black.jpg',
+    colors:['black','cream','pink'],
+    imgs:{black:'images/products/3d-embroidery-hoodie-black.jpg',cream:'images/products/3d-embroidery-hoodie-cream.jpg',pink:'images/products/3d-embroidery-hoodie-pink.jpg'},
     sizes:['S','M','L','XL','2XL']
-  },
-  {
-    handle:'tl-hoodies',title:'"TL" Winter Hoodie',
-    desc:"Men's warm fleece hoodie",price:45,badge:'',
-    cats:['all','mens','hoodies'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',
-    colors:['blue-1','gray','light-grey'],
-    sizes:['S','M','L','XL']
   },
   {
     handle:'womens-zipup-jacket',title:"Women's Zip-up Jacket",
@@ -1209,43 +1202,11 @@ const PRODUCTS = [
     sizes:['S','M','L','XL']
   },
   {
-    handle:'tl-rocket',title:'TL "Rocket" Shirt',
-    desc:'Quick dry breathable · 80% polyester 20% spandex',price:30,badge:'',
-    cats:['all','tops','mens'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_95ca150e-60c6-4308-90f2-6310c8096b6a.jpg?v=1768722286',
-    colors:['warm-tan'],
-    sizes:['S','M','L','XL']
-  },
-  {
     handle:'shirt',title:'"Everyday" Shirt',
     desc:'Quick dry yoga wear · Scallop curved hem',price:25,badge:'',
     cats:['all','tops','womens'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8c64d9c2-9284-4019-b2f5-cb4ef82f3df6.png?v=1768914448',
     colors:['warm-tan','green-1','white','pink-1','purple','frost-blue-1'],
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'men-s',title:'Quick-Dry Shirt',
-    desc:"Men's quick dry breathable sports tee",price:20,badge:'',
-    cats:['all','tops','mens'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/7E62E8C7-9832-4D8F-B46A-AE8249EDD544.jpg?v=1761546662',
-    colors:['clear','baby-blue'],
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'men-s-zip-up-shirt',title:'"TTM" Quarter-Zip',
-    desc:"Men's quarter-zip shirt",price:35,badge:'',
-    cats:['all','tops','mens'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B2796E1A-0A02-4370-BC1A-87BDFE471E5A.png?v=1762482462',
-    colors:['dark-fog','green','frost-blue','warm-tan','white'],
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'men-s-quarter-zip-up-long-sleeve',title:'Quarter-Zip Long Sleeve',
-    desc:'Quick-dry breathable active wear',price:35,badge:'',
-    cats:['all','tops','mens'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0025.jpg?v=1761716083',
-    colors:['gray','black-1','gray-2'],
     sizes:['S','M','L','XL']
   },
   {
@@ -1255,14 +1216,6 @@ const PRODUCTS = [
     img:'images/products/womens-sports-bra-pink.jpg',
     colors:['pink','maroon','black','navy','taupe'],
     imgs:{pink:'images/products/womens-sports-bra-pink.jpg',maroon:'images/products/womens-sports-bra-maroon.jpg',black:'images/products/womens-sports-bra-black.jpg',navy:'images/products/womens-sports-bra-navy.jpg',taupe:'images/products/womens-sports-bra-taupe.jpg'},
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'women-s-sports-bra',title:'Irregular Bra',
-    desc:"Women's irregular strap yoga vest",price:25,badge:'',noCustom:true,
-    cats:['all','womens','tops'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B723BBA2-B00A-4C9A-8283-226AFEB8C698.jpg?v=1761548691',
-    colors:['white','black'],
     sizes:['S','M','L','XL']
   },
   {
@@ -1301,68 +1254,12 @@ const PRODUCTS = [
     sizes:['S','M','L','XL']
   },
   {
-    handle:'women-s-butter-soft-leggings',title:'"Butter-Soft" Leggings',
-    desc:'Double-brushed · 80% nylon 20% elastane · High waist',price:30,badge:'',noCustom:true,
-    cats:['all','womens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/AEEB6281-985A-423A-AAA8-097D87601F6D.jpg?v=1762231785',
-    colors:['sand','brown-1','warm-tan'],
-    sizes:['S','M','L']
-  },
-  {
-    handle:'mens-pants',title:"Men's Running Pants",
-    desc:'Ankle zipper · Lightweight breathable track pants',price:30,badge:'',
-    cats:['all','mens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_570552c0-1a69-472d-9320-398747b35f08.jpg?v=1775536043',
-    colors:['navy-blue','warm-tan','light-grey'],
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'tl-winter-sweatpants',title:'"TL" Winter Sweatpants',
-    desc:"Men's warm fleece sweatpants",price:45,badge:'',
-    cats:['all','mens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',
-    colors:['blue-1','light-grey','gray'],
-    sizes:['S','M','L','XL']
-  },
-  {
     handle:'womens-cargo-pants',title:"Women's Cargo Pants",
     desc:"Wide-leg cargo · Elastic waist · TAGLINE logo",price:55,badge:'New',
     cats:['all','womens','bottoms'],
     img:'images/products/womens-cargo-pants-black.jpg',
     colors:['black','navy'],
     imgs:{black:'images/products/womens-cargo-pants-black.jpg',navy:'images/products/womens-cargo-pants-navy.jpg'},
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'cargo-sweatpants',title:'Cargo Sweatpants',
-    desc:"Women's baggy street wear · Multi-pocket",price:55,badge:'Trending',
-    cats:['all','womens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_7c4f5b99-50af-43eb-ac4e-81ff780a2b4b.jpg?v=1768725457',
-    colors:['black-1','navy-blue'],
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'men-s-sport-pants',title:'Sport Pants',
-    desc:'Breathable quick dry jogging pants · Back pocket',price:35,badge:'',
-    cats:['all','mens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/ECE25F92-576E-4A30-B8F5-CCD44DB470B0.jpg?v=1761627349',
-    colors:['dark-fog','black','green-gray'],
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'sport-pants',title:'Outdoor Sport Pants',
-    desc:"Men's side zipper pocket sport pants",price:55,badge:'',
-    cats:['all','mens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/BD848E54-21F0-4255-B1F1-7D0A533C1E35.jpg?v=1761554034',
-    colors:['gray-1','black','dark-fog'],
-    sizes:['S','M','L','XL']
-  },
-  {
-    handle:'light-slim-fit-flex-pants',title:'Slim-Fit "Scrubs"',
-    desc:'Quick-dry breathable fitness trousers',price:35,badge:'',noCustom:true,
-    cats:['all','mens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/8C4F7825-DEEA-4CEF-955E-C5432C6FB34B.jpg?v=1761544634',
-    colors:['beige-1','silver','gray','warm-tan'],
     sizes:['S','M','L','XL']
   },
   {
