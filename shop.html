@@ -1107,6 +1107,7 @@ const CM = {
   'brown':'#8B6340','brown-1':'#8B6340','brown-2':'#8B5E3C','off-brown':'#8B6F52',
   'navy':'#1E3A8A','slate':'#708090','maroon':'#800000','blue':'#2563EB',
   'pink':'#EC4899',
+  'charcoal':'#36454F','taupe':'#B5A397','beige':'#F5F5DC','sky-blue':'#87CEEB',
 };
 const gc = k => CM[k] || '#888';
 
@@ -1136,6 +1137,24 @@ const PRODUCTS = [
     sizes:['S','M','L','XL']
   },
   {
+    handle:'womens-zipup-jacket',title:"Women's Zip-up Jacket",
+    desc:'Form-fit athletic jacket · Thumbhole cuffs · 6 colors',price:55,badge:'New',
+    cats:['all','womens','jackets'],
+    img:'images/products/womens-zipup-jacket-cream.jpg',
+    colors:['cream','teal','slate','dark-gray','navy','brown'],
+    imgs:{cream:'images/products/womens-zipup-jacket-cream.jpg',teal:'images/products/womens-zipup-jacket-teal.jpg',slate:'images/products/womens-zipup-jacket-slate.jpg','dark-gray':'images/products/womens-zipup-jacket-dark-gray.jpg',navy:'images/products/womens-zipup-jacket-navy.jpg',brown:'images/products/womens-zipup-jacket-brown.jpg'},
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'womens-open-back-top',title:"Women's Open Back Top",
+    desc:'Halter neck · V-front · Athletic fit',price:32,badge:'New',noCustom:true,
+    cats:['all','womens','tops'],
+    img:'images/products/womens-open-back-top-blue.jpg',
+    colors:['blue'],
+    imgs:{blue:'images/products/womens-open-back-top-blue.jpg'},
+    sizes:['S','M','L','XL']
+  },
+  {
     handle:'untitled-nov4_20-32',title:"Women's Sweatshirt",
     desc:'Form-fit zip-up · 6 colors · Thumbhole cuffs',price:45,badge:'',
     cats:['all','womens','hoodies'],
@@ -1155,10 +1174,11 @@ const PRODUCTS = [
   },
   {
     handle:'3-d-embroidery-t-shirt',title:'3-D Embroidery T-Shirt',
-    desc:'100% cotton · Heavyweight oversized',price:30,badge:'',
+    desc:'100% cotton · Heavyweight oversized · 3D embroidered',price:30,badge:'',
     cats:['all','tops','mens','womens'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_caac77bf-a368-4c9f-8dba-f96b475ed42c.jpg?v=1775534730',
-    colors:['black','white-1'],
+    img:'images/products/3d-embroidery-tee-charcoal.jpg',
+    colors:['charcoal','white','black'],
+    imgs:{charcoal:'images/products/3d-embroidery-tee-charcoal.jpg',white:'images/products/3d-embroidery-tee-white.jpg',black:'images/products/3d-embroidery-tee-black.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1179,11 +1199,12 @@ const PRODUCTS = [
     sizes:['S','M','L','XL']
   },
   {
-    handle:'mens-gym-shirt',title:"Men's Gym Shirt",
-    desc:'True to size · 95% polyamide 5% elastane',price:30,badge:'',
+    handle:'mens-gym-shirt',title:"Men's Compression Shirt",
+    desc:'95% polyamide 5% elastane · Compression fit · 5 colors',price:30,badge:'',
     cats:['all','tops','mens'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_65a0576e-dbba-443f-a04a-5d91f6d91d20.jpg?v=1775552279',
-    colors:['navy-blue','black','milk-white','off-brown','grey'],
+    img:'images/products/mens-compression-shirt-black.jpg',
+    colors:['black','brown','charcoal','navy','silver'],
+    imgs:{black:'images/products/mens-compression-shirt-black.jpg',brown:'images/products/mens-compression-shirt-brown.jpg',charcoal:'images/products/mens-compression-shirt-charcoal.jpg',navy:'images/products/mens-compression-shirt-navy.jpg',silver:'images/products/mens-compression-shirt-silver.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1227,11 +1248,12 @@ const PRODUCTS = [
     sizes:['S','M','L','XL']
   },
   {
-    handle:'womens-sport-bra',title:"Women's Sport Bra",
-    desc:'95% polyamide 5% elastane · Medium support',price:30,badge:'',noCustom:true,
+    handle:'womens-sport-bra',title:"Women's Sports Bra",
+    desc:'95% polyamide 5% elastane · Halter neck · Medium support',price:30,badge:'',noCustom:true,
     cats:['all','womens','tops'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_70148a65-ac5c-4e67-b9c8-10d2ad789c1c.jpg?v=1775552279',
-    colors:['black','khaki','wine-red','pink-1','purple-1'],
+    img:'images/products/womens-sports-bra-pink.jpg',
+    colors:['pink','maroon','black','navy','taupe'],
+    imgs:{pink:'images/products/womens-sports-bra-pink.jpg',maroon:'images/products/womens-sports-bra-maroon.jpg',black:'images/products/womens-sports-bra-black.jpg',navy:'images/products/womens-sports-bra-navy.jpg',taupe:'images/products/womens-sports-bra-taupe.jpg'},
     sizes:['S','M','L','XL']
   },
   {
@@ -1244,10 +1266,11 @@ const PRODUCTS = [
   },
   {
     handle:'womens-gym-shorts',title:"Women's Gym Shorts",
-    desc:'90% polyamide 10% elastane · High waist',price:20,badge:'',noCustom:true,
+    desc:'90% polyamide 10% elastane · High-waist biker shorts · 10 colors',price:20,badge:'',noCustom:true,
     cats:['all','womens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_1210f229-9c09-47f0-9203-2aa876bb70fb.jpg?v=1775552279',
-    colors:['wine-red','pink-1','warm-tan','gray','hard-blue','khaki','purple-1'],
+    img:'images/products/womens-gym-shorts-maroon.jpg',
+    colors:['maroon','black','navy','taupe','teal','dark-gray','pink','light-blue','beige','white'],
+    imgs:{maroon:'images/products/womens-gym-shorts-maroon.jpg',black:'images/products/womens-gym-shorts-black.jpg',navy:'images/products/womens-gym-shorts-navy.jpg',taupe:'images/products/womens-gym-shorts-taupe.jpg',teal:'images/products/womens-gym-shorts-teal.jpg','dark-gray':'images/products/womens-gym-shorts-dark-gray.jpg',pink:'images/products/womens-gym-shorts-pink.jpg','light-blue':'images/products/womens-gym-shorts-light-blue.jpg',beige:'images/products/womens-gym-shorts-beige.jpg',white:'images/products/womens-gym-shorts-white.jpg'},
     sizes:['XS','S','M','L','XL']
   },
   {
@@ -1298,6 +1321,15 @@ const PRODUCTS = [
     cats:['all','mens','bottoms'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',
     colors:['blue-1','light-grey','gray'],
+    sizes:['S','M','L','XL']
+  },
+  {
+    handle:'womens-cargo-pants',title:"Women's Cargo Pants",
+    desc:"Wide-leg cargo · Elastic waist · TAGLINE logo",price:55,badge:'New',
+    cats:['all','womens','bottoms'],
+    img:'images/products/womens-cargo-pants-black.jpg',
+    colors:['black','navy'],
+    imgs:{black:'images/products/womens-cargo-pants-black.jpg',navy:'images/products/womens-cargo-pants-navy.jpg'},
     sizes:['S','M','L','XL']
   },
   {
