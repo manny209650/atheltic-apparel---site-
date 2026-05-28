@@ -15,7 +15,7 @@
     return;
   }
   /* Force reload if browser served a cached old version */
-  var PAGE_VER='v5';
+  var PAGE_VER='v6';
   if(sessionStorage.getItem('tlShopVer')!==PAGE_VER){
     sessionStorage.setItem('tlShopVer',PAGE_VER);
     window.location.reload(true);
