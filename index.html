@@ -13,8 +13,8 @@
 <title>TAGLINE — Athletic Apparel</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden}
-body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px env(safe-area-inset-bottom,16px);font-family:-apple-system,'Helvetica Neue',sans-serif;color:#fff;position:relative}
+html{width:100%;background:#06060F}
+body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center;padding:48px 20px 60px;font-family:-apple-system,'Helvetica Neue',sans-serif;color:#fff;position:relative;overflow-x:hidden}
 
 /* ── STARS ── */
 .star{position:fixed;border-radius:50%;pointer-events:none;animation:twinkle var(--d,3s) ease-in-out var(--del,0s) infinite alternate}
@@ -43,12 +43,11 @@ body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;displ
 
 /* ── HUB CARDS ── */
 .hubs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:460px;margin:0 auto}
-.hub{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;min-height:100px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;touch-action:manipulation}
+.hub{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;min-height:100px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;touch-action:manipulation;cursor:pointer}
 .hub:active{transform:scale(.94);opacity:.85}
 .hub-icon{font-size:clamp(1.5rem,5vw,1.9rem);line-height:1}
 .hub-name{font-size:clamp(.6rem,.65rem,1rem);letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#fff}
 .hub-sub{font-size:clamp(.5rem,.55rem,.9rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);line-height:1.5}
-
 .hub-faith{border-color:rgba(160,90,255,.22);background:rgba(120,50,220,.07)}
 .hub-faith:hover{border-color:rgba(160,90,255,.55);background:rgba(120,50,220,.18);box-shadow:0 6px 22px rgba(120,50,220,.25);transform:translateY(-3px)}
 .hub-health{border-color:rgba(0,210,100,.22);background:rgba(0,180,80,.07)}
@@ -56,15 +55,37 @@ body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;displ
 .hub-wealth{border-color:rgba(220,170,0,.22);background:rgba(200,150,0,.07)}
 .hub-wealth:hover{border-color:rgba(220,170,0,.55);background:rgba(200,150,0,.18);box-shadow:0 6px 22px rgba(200,150,0,.25);transform:translateY(-3px)}
 
+/* ── DAILY DROP SECTION ── */
+.daily-section{position:relative;z-index:10;width:100%;max-width:500px;margin-top:44px}
+.daily-label{font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:16px}
+.daily-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.daily-card{padding:16px 12px;text-align:left;border-radius:2px}
+.daily-card-label{font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px;font-weight:700}
+.daily-card-body{font-size:.65rem;line-height:1.75;color:rgba(255,255,255,.78)}
+.daily-card-ref{font-size:.55rem;margin-top:8px;opacity:.6;font-style:italic}
+.d-faith{background:rgba(120,50,220,.08);border:1px solid rgba(160,90,255,.2)}
+.d-faith .daily-card-label{color:rgba(160,90,255,.8)}
+.d-health{background:rgba(0,170,70,.08);border:1px solid rgba(0,200,80,.2)}
+.d-health .daily-card-label{color:rgba(0,210,80,.8)}
+.d-wealth{background:rgba(200,150,0,.08);border:1px solid rgba(220,170,0,.2)}
+.d-wealth .daily-card-label{color:rgba(220,170,0,.8)}
+.ticker-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.6rem}
+.ticker-row:last-child{border-bottom:none}
+.ticker-sym{color:rgba(255,255,255,.5);font-size:.52rem}
+.ticker-up{color:#00dc64}
+.ticker-dn{color:#ff4d4d}
+
 /* ── MOBILE ── */
 @media(max-width:480px){
-  body{padding:24px 16px 20px}
+  body{padding:32px 16px 50px}
   .hubs{gap:8px}
   .hub{padding:14px 8px;min-height:90px;gap:6px}
   .hub-sub{display:none}
+  .daily-grid{grid-template-columns:1fr}
+  .daily-card{padding:14px 12px}
 }
 
-/* ── SHORT SCREENS (landscape phones) ── */
+/* ── SHORT SCREENS ── */
 @media(max-height:560px){
   #rocket{font-size:2rem;margin-bottom:10px}
   .tagline{margin-bottom:6px}
@@ -98,9 +119,9 @@ body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;displ
   <div class="tagline" data-i18n="idx-sub">God · Health · Wealth</div>
   <div class="headline" data-i18n="idx-headline">Faith-Forward Athletic Apparel</div>
   <p class="sub" data-i18n="idx-body">Built for believers who chase greatness.</p>
-  <a href="shop.html" onclick="window.location='shop.html';return false;" style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;margin-bottom:4px;padding:14px 36px;background:linear-gradient(135deg,#C3953C,#E8B84B);color:#07072A;font-family:-apple-system,'Helvetica Neue',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;touch-action:manipulation" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Shop the Collection →</a>
+  <a href="shop.html" style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;margin-bottom:4px;padding:14px 36px;background:linear-gradient(135deg,#C3953C,#E8B84B);color:#07072A;font-family:-apple-system,'Helvetica Neue',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;touch-action:manipulation">Shop the Collection →</a>
 
-  <div class="hubs">
+  <div class="hubs" style="margin-top:16px">
     <a href="god.html" class="hub hub-faith">
       <span class="hub-icon">✝️</span>
       <span class="hub-name" data-i18n="idx-faith-name">Faith Hub</span>
@@ -117,9 +138,36 @@ body{background:#06060F;min-height:100vh;min-height:-webkit-fill-available;displ
       <span class="hub-sub" data-i18n="idx-wealth-sub">Money · Build<br>Grow</span>
     </a>
   </div>
-  <a href="community.html" style="display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:14px 32px;background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,107,0,.05));border:1px solid rgba(255,107,0,.4);color:#FF8C00;font-family:-apple-system,'Helvetica Neue',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:all .3s" onmouseover="this.style.background='linear-gradient(135deg,rgba(255,107,0,.25),rgba(255,107,0,.1))';this.style.borderColor='rgba(255,107,0,.8)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,107,0,.05))';this.style.borderColor='rgba(255,107,0,.4)'">
+  <a href="community.html" style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:14px 32px;background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,107,0,.05));border:1px solid rgba(255,107,0,.4);color:#FF8C00;font-family:-apple-system,'Helvetica Neue',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;touch-action:manipulation">
     <span style="font-size:1rem">📬</span> Get the Daily Drop — Free
   </a>
+</div>
+
+<!-- ── DAILY DROP ── -->
+<div class="daily-section">
+  <div class="daily-label">Today's Drop</div>
+  <div class="daily-grid">
+
+    <!-- FAITH -->
+    <div class="daily-card d-faith">
+      <div class="daily-card-label">✝ Scripture</div>
+      <div id="scripture-v" class="daily-card-body">Loading…</div>
+      <div id="scripture-r" class="daily-card-ref"></div>
+    </div>
+
+    <!-- HEALTH -->
+    <div class="daily-card d-health">
+      <div class="daily-card-label">💪 The Juice</div>
+      <div id="juice-v" class="daily-card-body">Loading…</div>
+    </div>
+
+    <!-- WEALTH -->
+    <div class="daily-card d-wealth">
+      <div class="daily-card-label">📈 Markets</div>
+      <div id="market-v" class="daily-card-body">Loading…</div>
+    </div>
+
+  </div>
 </div>
 
 <script>
@@ -152,7 +200,6 @@ function spawnShoot(){
 }
 spawnShoot();
 
-
 /* ── UFO ── */
 var ufo=document.getElementById('ufo'),uX=-80,uT=0;
 (function animUFO(){
@@ -161,12 +208,94 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
   ufo.style.top=(window.innerHeight*0.1+Math.sin(uT*0.55)*16)+'px';
   uT+=0.016;requestAnimationFrame(animUFO);
 })();
+
+/* ── SCRIPTURE OF THE DAY ── */
+var scriptFallbacks=[
+  {t:'"I can do all things through Christ who strengthens me."',r:'Philippians 4:13'},
+  {t:'"The Lord is my shepherd; I shall not want."',r:'Psalm 23:1'},
+  {t:'"For God so loved the world that He gave His only Son."',r:'John 3:16'},
+  {t:'"Trust in the Lord with all your heart and lean not on your own understanding."',r:'Proverbs 3:5'},
+  {t:'"Be strong and courageous. Do not be afraid; do not be discouraged."',r:'Joshua 1:9'},
+  {t:'"But those who hope in the Lord will renew their strength."',r:'Isaiah 40:31'},
+  {t:'"Commit to the Lord whatever you do, and He will establish your plans."',r:'Proverbs 16:3'}
+];
+fetch('https://labs.bible.org/api/?passage=votd&type=json')
+  .then(function(r){return r.json();})
+  .then(function(d){
+    var v=d[0];
+    document.getElementById('scripture-v').textContent='“'+v.text+'”';
+    document.getElementById('scripture-r').textContent=v.bookname+' '+v.chapter+':'+v.verse;
+  })
+  .catch(function(){
+    var day=Math.floor(Date.now()/86400000);
+    var f=scriptFallbacks[day%scriptFallbacks.length];
+    document.getElementById('scripture-v').textContent=f.t;
+    document.getElementById('scripture-r').textContent=f.r;
+  });
+
+/* ── THE JUICE ── */
+var juices=[
+  'Celery juice on an empty stomach feeds the liver with sodium cluster salts and reduces deep inflammation.',
+  'Wild blueberries have the highest antioxidant count of any food — they repair the brain and bind toxic heavy metals.',
+  'Lemon water first thing in the morning flushes the lymphatic system and activates your body\'s natural detox.',
+  'Sea moss provides 92 of the 102 minerals your body needs. Add it to your smoothies daily.',
+  'Ginger reduces cortisol levels. Add it to your morning routine to lower stress and fight inflammation.',
+  'Spirulina is the most nutrient-dense food on Earth — protein, iron, B12, and chlorophyll all in one.',
+  'Turmeric + black pepper activates curcumin absorption by 2000%. Anti-inflammatory powerhouse.',
+  'Raw honey coats and repairs the gut lining. A spoonful before bed supports overnight healing.',
+  'Chlorophyll builds your blood. Drink it daily for oxygen-rich, clean, alkaline circulation.',
+  'Cucumber is 96% water and flushes the kidneys. Juice it with mint for adrenal support.',
+  'Burdock root purifies the blood and clears chronic skin conditions from the inside out.',
+  'Papaya enzymes break down undigested protein and reduce gut inflammation after heavy meals.',
+  'Dandelion root tea cleanses the liver and supports bile flow for deeper fat digestion.',
+  'Watermelon juice flushes the kidneys and drops uric acid — great for joint pain and recovery.',
+  'Aloe vera juice heals the intestinal tract and feeds the beneficial bacteria your gut needs.'
+];
+var jDay=Math.floor(Date.now()/86400000);
+document.getElementById('juice-v').textContent=juices[jDay%juices.length];
+
+/* ── MARKETS (ETFs + Stocks) ── */
+var symbols=[
+  {sym:'SPY',label:'S&P 500'},
+  {sym:'QQQ',label:'NASDAQ 100'},
+  {sym:'VTI',label:'Total Market'},
+  {sym:'SCHD',label:'Dividends'}
+];
+var mkEl=document.getElementById('market-v');
+Promise.all(symbols.map(function(t){
+  return fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+t.sym+'?interval=1d&range=1d',{headers:{'Accept':'application/json'}})
+    .then(function(r){return r.json();})
+    .catch(function(){return null;});
+}))
+.then(function(results){
+  var html='';
+  results.forEach(function(d,i){
+    if(!d){return;}
+    try{
+      var meta=d.chart.result[0].meta;
+      var price=meta.regularMarketPrice;
+      var prev=meta.chartPreviousClose||meta.regularMarketPreviousClose||price;
+      var chg=((price-prev)/prev*100);
+      var up=chg>=0;
+      var sign=up?'▲':'▼';
+      html+='<div class="ticker-row">'
+        +'<span class="ticker-sym">'+symbols[i].label+'</span>'
+        +'<span><b>$'+price.toFixed(2)+'</b> '
+        +'<span class="'+(up?'ticker-up':'ticker-dn')+'">'+sign+Math.abs(chg).toFixed(2)+'%</span>'
+        +'</span></div>';
+    }catch(e){}
+  });
+  mkEl.innerHTML=html||'<span style="color:rgba(255,255,255,.4);font-size:.6rem">Market data unavailable</span>';
+})
+.catch(function(){
+  mkEl.innerHTML='<a href="https://finance.yahoo.com" target="_blank" style="color:rgba(220,170,0,.7);font-size:.62rem;text-decoration:none">View Markets on Yahoo Finance →</a>';
+});
 </script>
 <style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
 <div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 <script src="lang.js"></script>
 <script src="tipjar.js"></script>
-<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});navigator.serviceWorker.addEventListener('controllerchange',function(){window.location.reload();});}</script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}</script>
 </body>
 </html>
