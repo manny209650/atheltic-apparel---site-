@@ -167,6 +167,6 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 <script src="lang.js"></script>
 <script src="tipjar.js"></script>
-<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});}</script>
+<script>if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js").catch(()=>{});navigator.serviceWorker.addEventListener('controllerchange',function(){window.location.reload();});}</script>
 </body>
 </html>
