@@ -1,22 +1,15 @@
-const CACHE = 'tagline-v3';
+const CACHE = 'tagline-v4';
 
 const CORE = [
   '/index.html',
+  '/shop.html',
   '/health.html',
   '/wealth.html',
-  '/market.html',
-  '/food-scale.html',
   '/god.html',
-  '/health-bulk.html',
-  '/health-cali.html',
-  '/health-truth.html',
   '/community.html',
   '/lang.js',
   '/tipjar.js',
-  '/daily.js',
   '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
 ];
 
 // Install: cache core pages
@@ -35,22 +28,28 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Fetch: network first, fall back to cache
+// Fetch: network first, fall back to cache; never block navigation silently
 self.addEventListener('fetch', e => {
-  // Skip non-GET and cross-origin requests
   if (e.request.method !== 'GET') return;
   if (!e.request.url.startsWith(self.location.origin)) return;
 
   e.respondWith(
     fetch(e.request)
       .then(res => {
-        // Cache a fresh copy for next time
         if (res.ok) {
           const clone = res.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
         }
         return res;
       })
-      .catch(() => caches.match(e.request))
+      .catch(() =>
+        caches.match(e.request).then(cached => {
+          // Return cached version if available, otherwise let browser handle it
+          if (cached) return cached;
+          // For navigation requests with no cache, return index.html as fallback
+          if (e.request.mode === 'navigate') return caches.match('/index.html');
+          return new Response('', { status: 503 });
+        })
+      )
   );
 });
