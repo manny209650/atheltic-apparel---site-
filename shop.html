@@ -1229,7 +1229,7 @@ const PRODUCTS = [
     colors:['black','white','blue','red','maroon','purple','yellow'],
     imgs:{black:'images/products/mens-basketball-shorts-black.jpg',white:'images/products/mens-basketball-shorts-white.jpg',blue:'images/products/mens-basketball-shorts-blue.jpg',red:'images/products/mens-basketball-shorts-red.jpg',maroon:'images/products/mens-basketball-shorts-maroon.jpg',purple:'images/products/mens-basketball-shorts-purple.jpg',yellow:'images/products/mens-basketball-shorts-yellow.jpg'},
     sizes:['S','M','L','XL'],
-    soldOut:['yellow-S','maroon-S','red-S','blue-S','purple-S']
+    soldOut:['yellow-S','maroon-S','red-S','blue-S','purple-S','black-S']
   },
   {
     handle:'men-s-2-for-1-compression-shorts',title:'2-in-1 Compression Shorts',
@@ -1310,11 +1310,11 @@ function renderShop(filter='all'){
   document.getElementById('shopCount').textContent = list.length+' items';
 
   grid.innerHTML = list.map(p=>`
-    <div class="prod-card" onclick="window.location.href='product.html?h=${p.handle}'">
+    <div class="prod-card" onclick="viewProduct('${p.handle}')">
       <div class="prod-img">
         ${p.badge ? `<div class="badge ${badgeClass(p.badge)}">${p.badge}</div>` : ''}
         <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)';this.style.display='block'">
-        <button class="prod-hover-btn" onclick="event.stopPropagation();window.location.href='product.html?h=${p.handle}'">View Product →</button>
+        <button class="prod-hover-btn" onclick="event.stopPropagation();viewProduct('${p.handle}')">View Product →</button>
       </div>
       <div class="prod-info">
         <div>
@@ -1384,8 +1384,9 @@ function openPDP(p){
   document.getElementById('pdpDesc').textContent = p.desc;
   document.getElementById('pdpPrice').textContent = p.price > 0 ? '$'+p.price : '';
 
+  var catMap={'mens':"Men's",'womens':"Women's",'hoodies':'Hoodies','tops':'Tops','bottoms':'Bottoms','jackets':'Jackets','custom':'Custom'};
   var cat = (p.cats||[]).find(function(c){return c!=='all';}) || '';
-  document.getElementById('pdpEyebrow').textContent = cat.replace(/-/g,' ');
+  document.getElementById('pdpEyebrow').textContent = catMap[cat] || cat.replace(/-/g,' ');
 
   var badge = document.getElementById('pdpImgBadge');
   if(p.badge){ badge.textContent=p.badge; badge.className='pdp-img-badge badge '+badgeClass(p.badge); badge.style.display='block'; }
@@ -1589,6 +1590,12 @@ function submitContact(e){
 
 /* ── INITIAL RENDER ── */
 renderShop();
+
+/* ── AUTO-OPEN PRODUCT FROM URL ── */
+(function(){
+  var op = new URLSearchParams(window.location.search).get('open');
+  if(op) setTimeout(function(){ viewProduct(op); }, 120);
+})();
 </script>
 <script src="daily.js"></script>
 </body>

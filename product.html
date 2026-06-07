@@ -136,52 +136,9 @@ const PRODUCTS=[
 
 function badgeClass(b){return b==='New'?'badge-new':b==='Best Seller'||b==='Bestseller'?'badge-hot':'badge-ltd';}
 
-var handle = new URLSearchParams(window.location.search).get('h');
-var p = PRODUCTS.find(function(x){return x.handle===handle;});
-
-if(!p){
-  document.getElementById('notFound').style.display='block';
-} else {
-  document.title = 'TAGLINE — '+p.title;
-  var cat = (p.cats||[]).find(function(c){return c!=='all';}) || '';
-  var page = document.getElementById('page');
-  page.innerHTML =
-    '<div class="product-grid">'
-      +'<div class="img-col">'
-        +'<img class="product-img" src="'+p.img+'" alt="'+p.title+'">'
-        +(p.badge?'<div class="product-badge '+badgeClass(p.badge)+'">'+p.badge+'</div>':'')
-      +'</div>'
-      +'<div class="info-col">'
-        +'<p class="product-cat">'+cat.replace(/-/g,' ')+'</p>'
-        +'<h1 class="product-name">'+p.title+'</h1>'
-        +(p.price>0?'<p class="product-price">$'+p.price+'</p>':p.badge==='Custom'?'<p class="product-price" style="font-size:1rem">$5 Lock · Custom Quote</p>':'')
-        +'<p class="product-desc">'+p.desc+'</p>'
-        +(p.colors&&p.colors.length?
-          '<div class="field"><div class="field-label">Color &nbsp;<strong id="colorName">'+p.colors[0].replace(/-/g,' ')+'</strong></div>'
-          +'<div class="swatches">'
-          +p.colors.map(function(c,i){return '<div class="swatch'+(i===0?' sel':'')+'" style="background:'+gc(c)+'" data-c="'+c+'" onclick="pickColor(this)" title="'+c.replace(/-/g,' ')+'"></div>';}).join('')
-          +'</div></div>':'')
-        +(p.sizes&&p.sizes.length?
-          '<div class="field"><div class="field-label">Size &nbsp;<strong id="sizeName">'+p.sizes[0]+'</strong></div>'
-          +'<div class="sizes">'
-          +p.sizes.map(function(s,i){return '<div class="sz'+(i===0?' sel':'')+'" data-s="'+s+'" onclick="pickSize(this)">'+s+'</div>';}).join('')
-          +'</div></div>':'')
-        +'<div class="buy-btn" id="buyBtn">🔒 Coming Soon</div>'
-        +'<p class="coming-note">Shop opens soon — check back shortly</p>'
-      +'</div>'
-    +'</div>';
-}
-
-function pickColor(el){
-  document.querySelectorAll('.swatch').forEach(function(s){s.classList.remove('sel');});
-  el.classList.add('sel');
-  document.getElementById('colorName').textContent = el.getAttribute('data-c').replace(/-/g,' ');
-}
-function pickSize(el){
-  document.querySelectorAll('.sz').forEach(function(s){s.classList.remove('sel');});
-  el.classList.add('sel');
-  document.getElementById('sizeName').textContent = el.getAttribute('data-s');
-}
+/* Redirect to shop.html and auto-open the correct product */
+var h = new URLSearchParams(window.location.search).get('h');
+window.location.replace('shop.html' + (h ? '?open=' + encodeURIComponent(h) : ''));
 </script>
 </body>
 </html>
