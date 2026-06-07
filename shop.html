@@ -15,7 +15,7 @@
     return;
   }
   /* Force reload if browser served a cached old version */
-  var PAGE_VER='v8';
+  var PAGE_VER='v9';
   if(sessionStorage.getItem('tlShopVer')!==PAGE_VER){
     sessionStorage.setItem('tlShopVer',PAGE_VER);
     window.location.reload(true);
@@ -1129,7 +1129,8 @@ const PRODUCTS = [
     img:'images/products/3d-embroidery-hoodie-black.jpg',
     colors:['black','cream','pink'],
     imgs:{black:'images/products/3d-embroidery-hoodie-black.jpg',cream:'images/products/3d-embroidery-hoodie-cream.jpg',pink:'images/products/3d-embroidery-hoodie-pink.jpg'},
-    sizes:['S','M','L','XL','2XL']
+    sizes:['S','M','L','XL','2XL'],
+    soldOut:['cream-2XL','black-2XL','pink-M','pink-L','pink-XL','pink-2XL']
   },
   {
     handle:'womens-zipup-jacket',title:"Women's Zip-up Jacket",
@@ -1174,7 +1175,8 @@ const PRODUCTS = [
     img:'images/products/3d-embroidery-tee-charcoal.jpg',
     colors:['charcoal','white','black'],
     imgs:{charcoal:'images/products/3d-embroidery-tee-charcoal.jpg',white:'images/products/3d-embroidery-tee-white.jpg',black:'images/products/3d-embroidery-tee-black.jpg'},
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:['white-M']
   },
   {
     handle:'boxe-tees',title:"Box'e Tee's",
@@ -1183,7 +1185,8 @@ const PRODUCTS = [
     img:'images/products/mens-box-tee-white.jpg',
     colors:['white','orange','brown','cream','gray'],
     imgs:{white:'images/products/mens-box-tee-white.jpg',orange:'images/products/mens-box-tee-orange.jpg',brown:'images/products/mens-box-tee-brown.jpg',cream:'images/products/mens-box-tee-cream.jpg',gray:'images/products/mens-box-tee-gray.jpg'},
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:['orange-S','gray-S','brown-S','cream-S']
   },
   {
     handle:'boxy-tanks',title:'BOXY Tanks',
@@ -1201,7 +1204,8 @@ const PRODUCTS = [
     img:'images/products/mens-compression-shirt-black.jpg',
     colors:['black','brown','charcoal','navy','silver'],
     imgs:{black:'images/products/mens-compression-shirt-black.jpg',brown:'images/products/mens-compression-shirt-brown.jpg',charcoal:'images/products/mens-compression-shirt-charcoal.jpg',navy:'images/products/mens-compression-shirt-navy.jpg',silver:'images/products/mens-compression-shirt-silver.jpg'},
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:['navy-S']
   },
   {
     handle:'womens-sport-bra',title:"Women's Sports Bra",
@@ -1219,7 +1223,8 @@ const PRODUCTS = [
     img:'images/products/womens-gym-shorts-maroon.jpg',
     colors:['maroon','black','navy','taupe','teal','dark-gray','pink','light-blue','beige','white'],
     imgs:{maroon:'images/products/womens-gym-shorts-maroon.jpg',black:'images/products/womens-gym-shorts-black.jpg',navy:'images/products/womens-gym-shorts-navy.jpg',taupe:'images/products/womens-gym-shorts-taupe.jpg',teal:'images/products/womens-gym-shorts-teal.jpg','dark-gray':'images/products/womens-gym-shorts-dark-gray.jpg',pink:'images/products/womens-gym-shorts-pink.jpg','light-blue':'images/products/womens-gym-shorts-light-blue.jpg',beige:'images/products/womens-gym-shorts-beige.jpg',white:'images/products/womens-gym-shorts-white.jpg'},
-    sizes:['XS','S','M','L','XL']
+    sizes:['XS','S','M','L','XL'],
+    soldOut:['dark-gray-M','navy-M','beige-M']
   },
   {
     handle:'womens-2-1-shorts',title:"Women's 2-1 Shorts",
@@ -1228,7 +1233,8 @@ const PRODUCTS = [
     img:'images/products/womens-2-1-shorts-green.jpg',
     colors:['green','pink','black'],
     imgs:{green:'images/products/womens-2-1-shorts-green.jpg',pink:'images/products/womens-2-1-shorts-pink.jpg',black:'images/products/womens-2-1-shorts-black.jpg'},
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:['black-S','green-S']
   },
   {
     handle:'mens-basketball-shorts',title:"Men's Basketball Shorts",
@@ -1237,7 +1243,8 @@ const PRODUCTS = [
     img:'images/products/mens-basketball-shorts-black.jpg',
     colors:['black','white','blue','red','maroon','purple','yellow'],
     imgs:{black:'images/products/mens-basketball-shorts-black.jpg',white:'images/products/mens-basketball-shorts-white.jpg',blue:'images/products/mens-basketball-shorts-blue.jpg',red:'images/products/mens-basketball-shorts-red.jpg',maroon:'images/products/mens-basketball-shorts-maroon.jpg',purple:'images/products/mens-basketball-shorts-purple.jpg',yellow:'images/products/mens-basketball-shorts-yellow.jpg'},
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:['yellow-S','maroon-S','red-S','blue-S','purple-S']
   },
   {
     handle:'men-s-2-for-1-compression-shorts',title:'2-in-1 Compression Shorts',
@@ -1245,7 +1252,8 @@ const PRODUCTS = [
     cats:['all','mens','bottoms'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0022.jpg?v=1761716083',
     colors:['black','grey'],
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:['black-S','grey-M']
   },
   {
     handle:'womens-cargo-pants',title:"Women's Cargo Pants",
@@ -1271,7 +1279,8 @@ const PRODUCTS = [
     cats:['all','mens','tops'],
     img:'https://i.ibb.co/Vcdg0dcD/IMG-3641.png',
     colors:['chinese-red','navy-blue','nio-grey'],
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:['chinese-red-M','navy-blue-L','nio-grey-XL']
   },
   {
     handle:'mens-2in1-tights',title:"Men's 2-in-1 Compression Tights",
@@ -1411,7 +1420,8 @@ function openPDP(p){
 
   // buy button state
   var btn = document.getElementById('pdpBuyBtn');
-  if(p.stripeLink){
+  var link = p.stripeLink || STRIPE_LINKS[p.handle] || '';
+  if(link){
     btn.classList.remove('locked');
     btn.textContent = 'Buy Now — $'+p.price;
   } else {
@@ -1469,12 +1479,13 @@ function closePDP(){
 
 function pdpBuyNow(){
   var p = PRODUCTS.find(function(x){ return x.handle === pdpHandle; });
-  if(!p || !p.stripeLink) return;
+  var link = p && (p.stripeLink || STRIPE_LINKS[p.handle]);
+  if(!link) return;
   var color = document.getElementById('pdpColorName').textContent.trim();
   var size = document.getElementById('pdpSizeName').textContent.trim();
   var ref = encodeURIComponent(p.title + ' | ' + color + ' | ' + size);
-  var sep = p.stripeLink.indexOf('?') > -1 ? '&' : '?';
-  window.open(p.stripeLink + sep + 'client_reference_id=' + ref, '_blank');
+  var sep = link.indexOf('?') > -1 ? '&' : '?';
+  window.open(link + sep + 'client_reference_id=' + ref, '_blank');
 }
 
 function openCustomOrder(p){
