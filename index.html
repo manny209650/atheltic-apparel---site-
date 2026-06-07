@@ -58,7 +58,7 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
 /* ── DAILY DROP SECTION ── */
 .daily-section{position:relative;z-index:10;width:100%;max-width:500px;margin-top:44px}
 .daily-label{font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:16px}
-.daily-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .daily-card{padding:16px 12px;text-align:left;border-radius:2px}
 .daily-card-label{font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px;font-weight:700}
 .daily-card-body{font-size:.65rem;line-height:1.75;color:rgba(255,255,255,.78)}
@@ -67,13 +67,10 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
 .d-faith .daily-card-label{color:rgba(160,90,255,.8)}
 .d-health{background:rgba(0,170,70,.08);border:1px solid rgba(0,200,80,.2)}
 .d-health .daily-card-label{color:rgba(0,210,80,.8)}
-.d-wealth{background:rgba(200,150,0,.08);border:1px solid rgba(220,170,0,.2)}
+.d-wealth{background:rgba(200,150,0,.08);border:1px solid rgba(220,170,0,.2);margin-top:10px;overflow:hidden}
 .d-wealth .daily-card-label{color:rgba(220,170,0,.8)}
-.ticker-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.6rem}
-.ticker-row:last-child{border-bottom:none}
-.ticker-sym{color:rgba(255,255,255,.5);font-size:.52rem}
-.ticker-up{color:#00dc64}
-.ticker-dn{color:#ff4d4d}
+.tradingview-widget-container{width:100%;min-height:44px}
+.tradingview-widget-container__widget{width:100%}
 
 /* ── MOBILE ── */
 @media(max-width:480px){
@@ -161,13 +158,35 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
       <div id="juice-v" class="daily-card-body">Loading…</div>
     </div>
 
-    <!-- WEALTH -->
-    <div class="daily-card d-wealth">
-      <div class="daily-card-label">📈 Markets</div>
-      <div id="market-v" class="daily-card-body">Loading…</div>
-    </div>
-
   </div>
+
+  <!-- WEALTH — full-width live ticker -->
+  <div class="daily-card d-wealth">
+    <div class="daily-card-label">📈 Markets · Live</div>
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          {"proName": "AMEX:SPY",    "title": "S&P 500"},
+          {"proName": "NASDAQ:QQQ",  "title": "NASDAQ 100"},
+          {"proName": "AMEX:SCHD",   "title": "Dividends"},
+          {"proName": "AMEX:VTI",    "title": "Total Mkt"},
+          {"proName": "NASDAQ:AAPL", "title": "Apple"},
+          {"proName": "NASDAQ:NVDA", "title": "NVIDIA"},
+          {"proName": "NASDAQ:TSLA", "title": "Tesla"},
+          {"proName": "NYSE:BRK.B",  "title": "Berkshire"}
+        ],
+        "showSymbolLogo": false,
+        "colorTheme": "dark",
+        "isTransparent": true,
+        "displayMode": "compact",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -209,31 +228,37 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
   uT+=0.016;requestAnimationFrame(animUFO);
 })();
 
-/* ── SCRIPTURE OF THE DAY ── */
+/* ── SCRIPTURE ── */
 var scriptFallbacks=[
-  {t:'"I can do all things through Christ who strengthens me."',r:'Philippians 4:13'},
-  {t:'"The Lord is my shepherd; I shall not want."',r:'Psalm 23:1'},
-  {t:'"For God so loved the world that He gave His only Son."',r:'John 3:16'},
-  {t:'"Trust in the Lord with all your heart and lean not on your own understanding."',r:'Proverbs 3:5'},
-  {t:'"Be strong and courageous. Do not be afraid; do not be discouraged."',r:'Joshua 1:9'},
-  {t:'"But those who hope in the Lord will renew their strength."',r:'Isaiah 40:31'},
-  {t:'"Commit to the Lord whatever you do, and He will establish your plans."',r:'Proverbs 16:3'}
+  {t:'”I can do all things through Christ who strengthens me.”',r:'Philippians 4:13'},
+  {t:'”The Lord is my shepherd; I shall not want.”',r:'Psalm 23:1'},
+  {t:'”For God so loved the world that He gave His only Son.”',r:'John 3:16'},
+  {t:'”Trust in the Lord with all your heart and lean not on your own understanding.”',r:'Proverbs 3:5'},
+  {t:'”Be strong and courageous. Do not be afraid; do not be discouraged.”',r:'Joshua 1:9'},
+  {t:'”But those who hope in the Lord will renew their strength.”',r:'Isaiah 40:31'},
+  {t:'”Commit to the Lord whatever you do, and He will establish your plans.”',r:'Proverbs 16:3'},
+  {t:'”No weapon formed against you shall prosper.”',r:'Isaiah 54:17'},
+  {t:'”The Lord your God is with you wherever you go.”',r:'Joshua 1:9'},
+  {t:'”With man this is impossible, but with God all things are possible.”',r:'Matthew 19:26'},
+  {t:'”Delight yourself in the Lord and He will give you the desires of your heart.”',r:'Psalm 37:4'},
+  {t:'”Cast all your anxiety on Him because He cares for you.”',r:'1 Peter 5:7'},
+  {t:'”For I know the plans I have for you, plans to prosper you and not to harm you.”',r:'Jeremiah 29:11'},
+  {t:'”Seek first His kingdom and His righteousness, and all these things will be given to you.”',r:'Matthew 6:33'}
 ];
 fetch('https://labs.bible.org/api/?passage=votd&type=json')
   .then(function(r){return r.json();})
   .then(function(d){
     var v=d[0];
-    document.getElementById('scripture-v').textContent='“'+v.text+'”';
+    document.getElementById('scripture-v').textContent='”'+v.text+'”';
     document.getElementById('scripture-r').textContent=v.bookname+' '+v.chapter+':'+v.verse;
   })
   .catch(function(){
-    var day=Math.floor(Date.now()/86400000);
-    var f=scriptFallbacks[day%scriptFallbacks.length];
+    var f=scriptFallbacks[Math.floor(Math.random()*scriptFallbacks.length)];
     document.getElementById('scripture-v').textContent=f.t;
     document.getElementById('scripture-r').textContent=f.r;
   });
 
-/* ── THE JUICE ── */
+/* ── THE JUICE — random every visit ── */
 var juices=[
   'Celery juice on an empty stomach feeds the liver with sodium cluster salts and reduces deep inflammation.',
   'Wild blueberries have the highest antioxidant count of any food — they repair the brain and bind toxic heavy metals.',
@@ -249,47 +274,18 @@ var juices=[
   'Papaya enzymes break down undigested protein and reduce gut inflammation after heavy meals.',
   'Dandelion root tea cleanses the liver and supports bile flow for deeper fat digestion.',
   'Watermelon juice flushes the kidneys and drops uric acid — great for joint pain and recovery.',
-  'Aloe vera juice heals the intestinal tract and feeds the beneficial bacteria your gut needs.'
+  'Aloe vera juice heals the intestinal tract and feeds the beneficial bacteria your gut needs.',
+  'Moringa leaf has 7x the vitamin C of oranges and 4x the calcium of milk. Real superfood.',
+  'Black seed oil (Nigella sativa) has been used for 2,000 years — antiviral, anti-inflammatory, immune booster.',
+  'Activated charcoal binds toxins in the gut and pulls them out before they hit your bloodstream.',
+  'Pineapple core contains the highest bromelain concentration — eat the core for joint healing.',
+  'Nettle leaf tea is loaded with iron and silica — supports hair growth and iron-deficiency fatigue.',
+  'Dragon fruit feeds the gut microbiome with prebiotic fiber that beneficial bacteria thrive on.',
+  'Beetroot juice opens blood vessels and delivers nitric oxide straight to working muscles.',
+  'Maca root from the Andes balances hormones, boosts energy, and supports athletic endurance.',
+  'Coconut water has the same electrolyte profile as human plasma — best natural rehydration drink.'
 ];
-var jDay=Math.floor(Date.now()/86400000);
-document.getElementById('juice-v').textContent=juices[jDay%juices.length];
-
-/* ── MARKETS (ETFs + Stocks) ── */
-var symbols=[
-  {sym:'SPY',label:'S&P 500'},
-  {sym:'QQQ',label:'NASDAQ 100'},
-  {sym:'VTI',label:'Total Market'},
-  {sym:'SCHD',label:'Dividends'}
-];
-var mkEl=document.getElementById('market-v');
-Promise.all(symbols.map(function(t){
-  return fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+t.sym+'?interval=1d&range=1d',{headers:{'Accept':'application/json'}})
-    .then(function(r){return r.json();})
-    .catch(function(){return null;});
-}))
-.then(function(results){
-  var html='';
-  results.forEach(function(d,i){
-    if(!d){return;}
-    try{
-      var meta=d.chart.result[0].meta;
-      var price=meta.regularMarketPrice;
-      var prev=meta.chartPreviousClose||meta.regularMarketPreviousClose||price;
-      var chg=((price-prev)/prev*100);
-      var up=chg>=0;
-      var sign=up?'▲':'▼';
-      html+='<div class="ticker-row">'
-        +'<span class="ticker-sym">'+symbols[i].label+'</span>'
-        +'<span><b>$'+price.toFixed(2)+'</b> '
-        +'<span class="'+(up?'ticker-up':'ticker-dn')+'">'+sign+Math.abs(chg).toFixed(2)+'%</span>'
-        +'</span></div>';
-    }catch(e){}
-  });
-  mkEl.innerHTML=html||'<span style="color:rgba(255,255,255,.4);font-size:.6rem">Market data unavailable</span>';
-})
-.catch(function(){
-  mkEl.innerHTML='<a href="https://finance.yahoo.com" target="_blank" style="color:rgba(220,170,0,.7);font-size:.62rem;text-decoration:none">View Markets on Yahoo Finance →</a>';
-});
+document.getElementById('juice-v').textContent=juices[Math.floor(Math.random()*juices.length)];
 </script>
 <style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
 <div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
