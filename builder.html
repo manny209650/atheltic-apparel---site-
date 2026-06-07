@@ -3,44 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Custom Merch Builder — TAGLINE</title>
-<meta name="description" content="Design your own custom Tagline Apparel. Upload logos, pick colors, choose placement — front and back. $5 design deposit to lock your spot.">
+<title>Custom Merch — TAGLINE</title>
+<meta name="description" content="Design your own custom TAGLINE apparel. Pick your garment, material, and send us your details. $5 deposit locks your spot.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold: #E02020;
-  --gold-bright: #FF3333;
-  --gold-dark: #AA0000;
-  --blue: #1B3DD8;
-  --blue-bright: #4361EE;
-  --white: #FFFFFF;
-  --space: #06060F;
-  --space2: #0C0C1E;
-  --space3: #111126;
-  --muted: #8A8AAA;
-  --text: #DDE0F0;
-  --card: #0D0D25;
-  --border-gold: rgba(224,32,32,0.18);
-  --border-soft: rgba(255,255,255,0.07);
-  --gold-grad: linear-gradient(135deg,#FF3333 0%,#E02020 50%,#AA0000 100%);
-  --blue-grad: linear-gradient(135deg,#4361EE 0%,#1B3DD8 100%);
-  --red: #E02020;
+:root{
+  --gold:#E02020;--gold-bright:#FF3333;--gold-dark:#AA0000;
+  --white:#FFFFFF;--space:#06060F;--space2:#0C0C1E;--space3:#111126;
+  --muted:#8A8AAA;--text:#DDE0F0;--card:#0D0D25;
+  --border-gold:rgba(224,32,32,.18);--border-soft:rgba(255,255,255,.07);
+  --gold-grad:linear-gradient(135deg,#FF3333 0%,#E02020 50%,#AA0000 100%);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
 
-/* ── UTILITY ── */
-.gold-text{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.section-label{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,5rem);line-height:.95;letter-spacing:.04em;color:var(--white);margin-bottom:56px}
-.section-title .g{color:var(--gold)}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
-
-/* ── CURSOR ── */
+/* CURSOR */
 @media(pointer:fine){
   body{cursor:none}
   .cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s}
@@ -48,14 +28,13 @@ body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;ov
   a,button,[onclick]{cursor:none!important}
 }
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,backdrop-filter .3s;background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-gold)}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,15,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-gold)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.12em;text-decoration:none;color:var(--white)}
 .nav-logo .g{color:var(--gold)}
 .nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
-.nav-links a:hover{color:var(--gold)}
-.nav-links a.active{color:var(--gold)}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
 .nav-cta{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-grad);color:var(--space);padding:10px 24px;text-decoration:none;font-weight:700;transition:opacity .3s,transform .2s}
 .nav-cta:hover{opacity:.85;transform:translateY(-1px)}
 .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
@@ -65,114 +44,77 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:f
 .mob-menu a{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:.1em;color:var(--white);text-decoration:none;transition:color .3s}
 .mob-menu a:hover{color:var(--gold)}
 .mob-close{position:absolute;top:24px;right:28px;background:none;border:none;font-size:1.8rem;color:var(--muted);cursor:pointer}
-@media(max-width:900px){
-  nav{padding:20px 24px}
-  .nav-links,.nav-cta{display:none}
-  .nav-burger{display:flex}
-}
+@media(max-width:900px){nav{padding:20px 24px}.nav-links,.nav-cta{display:none}.nav-burger{display:flex}}
 
-/* ── PAGE HERO ── */
-.builder-hero{background:linear-gradient(135deg,#07072A 0%,#0D1B4D 50%,#07072A 100%);padding:140px 60px 80px;position:relative;overflow:hidden;border-bottom:1px solid rgba(224,32,32,.15)}
-.builder-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(67,97,238,.1) 0%,transparent 65%);pointer-events:none}
-.builder-hero-inner{position:relative;z-index:2;max-width:760px}
-.builder-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);letter-spacing:.04em;line-height:.92;color:var(--white);margin-bottom:20px}
-.builder-hero h1 span{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.builder-hero p{font-size:.95rem;color:var(--muted);line-height:1.8;max-width:560px}
+/* HERO */
+.hero{background:linear-gradient(135deg,#07072A 0%,#0D1B4D 50%,#07072A 100%);padding:140px 60px 80px;position:relative;overflow:hidden;border-bottom:1px solid rgba(224,32,32,.15)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(67,97,238,.1) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:700px}
 .back-link{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:24px;transition:color .3s}
 .back-link:hover{color:var(--gold)}
-@media(max-width:768px){.builder-hero{padding:110px 24px 60px}}
+.hero-label{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6.5rem);letter-spacing:.04em;line-height:.92;color:var(--white);margin-bottom:20px}
+.hero h1 span{background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:.95rem;color:var(--muted);line-height:1.8;max-width:540px}
+@media(max-width:768px){.hero{padding:110px 24px 60px}}
 
-/* ── BUILDER ── */
-.builder-sec{background:var(--space2);padding:80px 60px}
-.builder-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.builder-preview{position:sticky;top:96px;background:var(--card);border:1px solid var(--border-gold);padding:44px 32px;display:flex;flex-direction:column;align-items:center;gap:16px}
-.prev-lbl{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.prev-wrap{width:100%;max-width:260px;position:relative;aspect-ratio:3/4;background:#1A1A2E;border:1px solid rgba(255,255,255,.06);overflow:hidden}
-#prevSvg{width:100%;height:100%}
-#logoOverlay{position:absolute;pointer-events:none;object-fit:contain;display:none}
-#textOverlay{position:absolute;pointer-events:none;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;color:rgba(0,0,0,.4);white-space:nowrap;transform:translate(-50%,-50%)}
-.side-toggle{display:flex;width:100%;border:1px solid var(--border-gold);overflow:hidden;margin-bottom:2px}
-.side-btn{flex:1;padding:9px;background:none;border:none;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .25s;font-weight:600}
-.side-btn.active{background:var(--gold-grad);color:var(--space)}
-.side-btn:not(.active):hover{background:rgba(224,32,32,.08);color:var(--text)}
-.prev-garment-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--gold)}
-.prev-color-name{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.builder-controls{display:flex;flex-direction:column;gap:24px}
-.ctrl-block{background:var(--card);border:1px solid var(--border-soft);padding:26px 22px}
-.ctrl-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(224,32,32,.1)}
-.ctrl-num{font-family:'Bebas Neue',sans-serif;font-size:.85rem;background:var(--gold-grad);color:var(--space);width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ctrl-title{font-size:.66rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:600}
-.garment-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:320px;overflow-y:auto;padding-right:4px}
-.garment-opts::-webkit-scrollbar{width:4px}
-.garment-opts::-webkit-scrollbar-track{background:transparent}
-.garment-opts::-webkit-scrollbar-thumb{background:rgba(224,32,32,.3);border-radius:2px}
-.g-opt{border:1px solid rgba(255,255,255,.08);padding:0;text-align:left;cursor:pointer;background:var(--card);transition:border-color .3s,background .3s;width:100%;display:flex;align-items:center;gap:10px;overflow:hidden}
-.g-opt:hover,.g-opt.active{border-color:var(--gold);background:rgba(224,32,32,.06)}
-.g-opt-thumb{width:52px;height:52px;object-fit:cover;flex-shrink:0;display:block}
-.g-opt-info{padding:6px 8px 6px 0;flex:1;min-width:0}
-.g-opt-name{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .3s;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.g-opt-price{font-size:.65rem;color:var(--gold);font-weight:600;display:block;margin-top:2px}
-.g-opt.active .g-opt-name{color:var(--gold)}
-.jersey-style-opts{display:flex;flex-direction:column;gap:8px}
-.js-opt{display:flex;align-items:center;gap:14px;background:var(--space2);border:1.5px solid var(--border-soft);padding:12px 16px;cursor:pointer;transition:border-color .25s,background .25s;text-align:left;width:100%}
-.js-opt:hover{border-color:rgba(224,32,32,.35);background:var(--space3)}
-.js-opt.active{border-color:var(--gold);background:rgba(224,32,32,.08)}
-.js-opt-letter{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);line-height:1;min-width:28px;text-align:center}
-.js-opt-info{display:flex;flex-direction:column;gap:3px}
-.js-opt-name{font-size:.78rem;font-weight:600;color:var(--white);letter-spacing:.06em}
-.js-opt-desc{font-size:.68rem;color:var(--muted);line-height:1.4}
-.js-color-chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.js-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:3px 8px;font-size:.62rem;color:var(--muted);letter-spacing:.08em}
-.js-chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.swatches{display:flex;flex-wrap:wrap;gap:10px}
-.sw{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
-.sw:hover{transform:scale(1.2)}
-.sw.active{border-color:var(--gold)}
-.sw.active::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(255,255,255,.85)}
-.upload-zone{border:2px dashed rgba(224,32,32,.3);background:rgba(224,32,32,.03);padding:28px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s;position:relative}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--gold);background:rgba(224,32,32,.07)}
-.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.upload-icon{font-size:2rem;margin-bottom:8px;opacity:.5}
-.upload-txt{font-size:.78rem;color:var(--muted);line-height:1.65}
-.upload-txt strong{color:var(--gold)}
-#uploadPreviewImg{width:72px;height:72px;object-fit:contain;border:1px solid rgba(224,32,32,.2);margin:10px auto 0;display:none}
-.place-wrap{display:flex;gap:24px;align-items:flex-start}
-.place-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:150px;flex-shrink:0}
-.p-btn{aspect-ratio:1;border:1px solid rgba(255,255,255,.08);background:transparent;cursor:pointer;transition:background .2s,border-color .2s;font-size:.7rem;color:var(--muted);display:flex;align-items:center;justify-content:center}
-.p-btn:hover,.p-btn.active{background:rgba(224,32,32,.12);border-color:var(--gold);color:var(--gold)}
-.place-hint{font-size:.75rem;color:var(--muted);line-height:1.7}
-.text-inputs{display:flex;flex-direction:column;gap:10px}
-.c-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;padding:12px 16px;outline:none;width:100%;transition:border-color .3s}
-.c-input:focus{border-color:var(--gold)}
-.c-input::placeholder{color:var(--muted)}
-.font-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.f-opt{padding:6px 16px;border:1px solid rgba(255,255,255,.1);font-size:.7rem;cursor:pointer;color:var(--muted);background:transparent;transition:border-color .3s,color .3s}
-.f-opt:hover,.f-opt.active{border-color:var(--gold);color:var(--gold)}
-.f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8AAA' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-.f-sel option{background:var(--space3)}
-.form-g{display:flex;flex-direction:column;gap:6px}
-.form-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.order-sum{background:var(--card);border:1px solid var(--border-gold);padding:26px 22px}
-.price-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);padding:10px 0;border-bottom:1px solid rgba(224,32,32,.08)}
-.price-row strong{color:var(--text)}
-.deposit-box{background:rgba(224,32,32,.05);border:1px solid rgba(224,32,32,.18);padding:18px 16px;margin:14px 0 18px}
-.deposit-box-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.deposit-box-body{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:14px}
-.deposit-fee{font-family:'Bebas Neue',sans-serif;font-size:2rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
-.deposit-fee-sub{font-size:.7rem;color:var(--muted);line-height:1.5}
-.btn-order{width:100%;padding:18px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:opacity .3s,transform .2s}
-.btn-order:hover{opacity:.85;transform:translateY(-2px)}
-.btn-deposit{display:block;text-align:center;padding:15px;background:var(--gold-grad);color:var(--space);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;text-decoration:none;margin-top:14px;transition:opacity .3s}
+/* STEPS */
+.steps-sec{background:var(--space2);padding:80px 60px}
+.steps-wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+@media(max-width:768px){.steps-sec{padding:60px 20px}.steps-wrap{gap:40px}}
+
+.step-block{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.step-block.in{opacity:1;transform:translateY(0)}
+
+.step-head{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(224,32,32,.12)}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:.9rem;background:var(--gold-grad);color:var(--space);width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+.step-title{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.step-sub{font-size:.78rem;color:var(--muted);margin-top:3px}
+
+/* GARMENT CARDS */
+.garment-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:680px){.garment-grid{grid-template-columns:repeat(2,1fr)}}
+.g-card{background:var(--card);border:2px solid var(--border-soft);padding:32px 16px 24px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s,transform .2s;display:flex;flex-direction:column;align-items:center;gap:12px;user-select:none}
+.g-card:hover{border-color:rgba(224,32,32,.4);background:rgba(224,32,32,.04);transform:translateY(-3px)}
+.g-card.active{border-color:var(--gold);background:rgba(224,32,32,.07)}
+.g-icon{font-size:2.6rem;line-height:1}
+.g-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;color:var(--white);line-height:1}
+.g-card.active .g-name{color:var(--gold)}
+.g-desc{font-size:.68rem;color:var(--muted);line-height:1.5}
+
+/* MATERIAL CHIPS */
+.material-grid{display:flex;flex-wrap:wrap;gap:10px}
+.m-chip{background:transparent;border:1.5px solid rgba(255,255,255,.12);color:var(--muted);font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:.1em;padding:11px 20px;cursor:pointer;transition:border-color .3s,color .3s,background .3s;text-transform:uppercase}
+.m-chip:hover{border-color:rgba(224,32,32,.4);color:var(--text)}
+.m-chip.active{border-color:var(--gold);color:var(--gold);background:rgba(224,32,32,.07)}
+
+/* CONTACT FORM */
+.form-grid{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+.f-group{display:flex;flex-direction:column;gap:6px}
+.f-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.f-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;padding:13px 16px;outline:none;width:100%;transition:border-color .3s;-webkit-appearance:none}
+.f-input:focus{border-color:var(--gold)}
+.f-input::placeholder{color:var(--muted)}
+textarea.f-input{resize:vertical;min-height:100px}
+
+/* DEPOSIT BOX */
+.deposit-wrap{background:var(--card);border:1px solid var(--border-gold);padding:28px 24px;margin-top:8px}
+.dep-fee{font-family:'Bebas Neue',sans-serif;font-size:3rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px}
+.dep-fee-sub{font-size:.72rem;color:var(--muted);line-height:1.55;margin-bottom:16px}
+.dep-pricing{font-size:.72rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.btn-submit{width:100%;padding:18px;background:var(--gold-grad);color:var(--space);font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:opacity .3s,transform .2s}
+.btn-submit:hover{opacity:.85;transform:translateY(-2px)}
+
+/* SUCCESS STATE */
+.success-box{display:none;text-align:center;padding:28px;border:1px solid rgba(224,32,32,.3);background:rgba(224,32,32,.04);margin-top:8px}
+.success-box .icon{font-size:2.4rem;display:block;margin-bottom:12px}
+.success-box p{font-size:.88rem;color:var(--text);line-height:1.65;margin-bottom:18px}
+.btn-deposit{display:inline-block;padding:16px 36px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;text-decoration:none;transition:opacity .3s}
 .btn-deposit:hover{opacity:.85}
-.deposit-fine{font-size:.7rem;color:var(--muted);margin-top:10px;line-height:1.55;text-align:center}
-.order-note{text-align:center;font-size:.6rem;color:var(--muted);letter-spacing:.08em;margin-top:8px}
-.order-success{display:none;text-align:center;padding:20px;border:1px solid rgba(224,32,32,.3);background:rgba(224,32,32,.05)}
-.order-success .check{font-size:2.2rem;display:block;margin-bottom:10px}
-.order-success p{font-size:.85rem;color:var(--text);line-height:1.6}
-@media(max-width:900px){.builder-layout{grid-template-columns:1fr;gap:32px}.builder-preview{position:static}.builder-sec{padding:70px 24px}}
-@media(max-width:768px){.builder-sec{padding:70px 20px}}
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba(224,32,32,.12)}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
 .footer-logo-link{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.12em;text-decoration:none;color:var(--white);display:block;margin-bottom:8px}
@@ -187,14 +129,8 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
 .footer-social{display:flex;gap:10px}
 .soc{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.95rem;color:var(--muted);transition:border-color .3s,color .3s}
 .soc:hover{border-color:var(--gold);color:var(--gold)}
-.add-logo-btn{margin-top:8px;background:none;border:1px dashed rgba(224,32,32,.35);color:var(--muted);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;cursor:pointer;width:100%;transition:border-color .3s}
-.add-logo-btn:hover{border-color:var(--gold)}
-@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px};footer{padding:60px 24px 32px}}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;gap:32px}footer{padding:60px 24px 32px}}
 @media(max-width:480px){.footer-top{grid-template-columns:1fr}}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 <body>
@@ -202,276 +138,163 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- Mobile menu -->
+<!-- Mobile Menu -->
 <div class="mob-menu" id="mobMenu">
-  <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+  <button class="mob-close" id="mobClose" aria-label="Close">✕</button>
   <a href="index.html">Home</a>
-  <a href="index.html#shop">Shop</a>
+  <a href="shop.html">Shop</a>
   <a href="builder.html" style="color:var(--gold)">Create Merch</a>
   <a href="index.html#about">About</a>
   <a href="index.html#contact">Contact</a>
 </div>
 
 <!-- NAV -->
-<nav id="mainNav">
+<nav>
   <a href="index.html" class="nav-logo">TAG<span class="g">LINE</span></a>
   <ul class="nav-links">
-    <li><a href="index.html#shop">Shop</a></li>
+    <li><a href="shop.html">Shop</a></li>
     <li><a href="builder.html" class="active">Create Merch</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="index.html#shop" class="nav-cta">Shop Now</a>
+  <a href="shop.html" class="nav-cta">Shop Now</a>
   <button class="nav-burger" id="burger" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="builder-hero">
-  <div class="builder-hero-inner">
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
     <a href="index.html" class="back-link">← Back to Home</a>
-    <span class="section-label">Custom Merch</span>
+    <span class="hero-label">Custom Merch</span>
     <h1>Design Your<br><span>Kingdom Gear</span></h1>
-    <p>Upload your logos, pick your colors, set your placement — front and back. We'll send you a full quote within 24 hours. A $5 design deposit locks your spot and counts as credit toward your order.</p>
+    <p>Choose your garment, pick your material, then fill out the form. We'll send a full quote within 24 hours. A $5 design deposit locks your spot in the queue — counted as credit toward your final order.</p>
   </div>
 </div>
 
-<!-- BUILDER -->
-<section class="builder-sec" id="builder">
-  <div class="builder-layout">
-    <!-- LIVE PREVIEW -->
-    <div class="builder-preview reveal">
-      <div style="width:100%;display:flex;align-items:center;justify-content:space-between">
-        <p class="prev-lbl">Live Preview</p>
-        <p class="prev-lbl" id="sideLabel">Front View</p>
-      </div>
-      <div class="side-toggle">
-        <button class="side-btn active" onclick="selSide('front',this)">◼ Front</button>
-        <button class="side-btn" onclick="selSide('back',this)">Back ◼</button>
-      </div>
-      <div class="prev-wrap">
-        <svg id="prevSvg" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 10px 30px rgba(0,0,0,.85))">
-          <defs>
-            <linearGradient id="studioGrad" x1="0" y1="0" x2="0" y2="320" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#F6F6F6"/><stop offset="100%" stop-color="#E8E8E8"/></linearGradient>
-            <linearGradient id="pvGrad" x1="0" y1="0" x2="260" y2="320" gradientUnits="userSpaceOnUse">
-              <stop id="pvStop1" offset="0%" stop-color="#FF3333"/>
-              <stop id="pvStop2" offset="100%" stop-color="#AA0000"/>
-            </linearGradient>
-            <linearGradient id="pvHighlight" x1="60" y1="20" x2="190" y2="200" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(255,255,255,.24)"/>
-              <stop offset="45%" stop-color="rgba(255,255,255,.06)"/>
-              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-            </linearGradient>
-            <linearGradient id="pvSideShade" x1="0" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(0,0,0,.32)"/>
-              <stop offset="24%" stop-color="rgba(0,0,0,0)"/>
-              <stop offset="76%" stop-color="rgba(0,0,0,0)"/>
-              <stop offset="100%" stop-color="rgba(0,0,0,.32)"/>
-            </linearGradient>
-            <linearGradient id="pvBottomShade" x1="0" y1="195" x2="0" y2="310" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
-              <stop offset="100%" stop-color="rgba(0,0,0,.38)"/>
-            </linearGradient>
-            <filter id="pvBlur"><feGaussianBlur stdDeviation="5"/></filter>
-          </defs>
-          <g id="pvShape"></g>
-        </svg>
-        <img id="logoOverlay" alt="Logo preview" style="position:absolute;pointer-events:none;object-fit:contain;display:none;transform:translate(-50%,-50%);width:80px;height:80px;opacity:.75"/>
-      </div>
-      <p class="prev-garment-name" id="pvGarmentName">Sport Hoodie</p>
-      <p class="prev-color-name" id="pvColorName">Gold Rush</p>
-    </div>
+<!-- STEPS -->
+<section class="steps-sec">
+  <div class="steps-wrap">
 
-    <!-- CONTROLS -->
-    <div class="builder-controls reveal" style="transition-delay:.12s">
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">1</div><p class="ctrl-title">Choose Your Garment</p></div>
-        <div class="garment-opts" id="garmentOpts"></div>
-      </div>
-
-      <!-- JERSEY STYLE PICKER — shown only when a jersey product is selected -->
-      <div class="ctrl-block" id="jerseyStyleBlock" style="display:none">
-        <div class="ctrl-head"><div class="ctrl-num" style="background:var(--blue-grad)">✦</div><p class="ctrl-title">Jersey Style / Cut</p></div>
-        <p style="font-size:.73rem;color:var(--muted);margin-bottom:14px;line-height:1.55">Pick a design pattern — each style has different side panels and trim details. All styles can be made in any color.</p>
-        <div class="jersey-style-opts" id="jerseyStyleOpts">
-          <button class="js-opt active" data-style="A" onclick="selJerseyStyle(this,'A')">
-            <div class="js-opt-letter">A</div>
-            <div class="js-opt-info">
-              <span class="js-opt-name">Star Cut</span>
-              <span class="js-opt-desc">Geometric star-shaped side panels · Bold athletic look</span>
-              <div class="js-color-chips">
-                <span class="js-chip"><span class="js-chip-dot" style="background:#1A1A1A;border:1px solid rgba(255,255,255,.2)"></span>Black</span>
-                <span class="js-chip"><span class="js-chip-dot" style="background:#F5F5F5;border:1px solid rgba(0,0,0,.2)"></span>White</span>
-              </div>
-            </div>
-          </button>
-          <button class="js-opt" data-style="B" onclick="selJerseyStyle(this,'B')">
-            <div class="js-opt-letter">B</div>
-            <div class="js-opt-info">
-              <span class="js-opt-name">Wave Accent</span>
-              <span class="js-opt-desc">Curved swoosh side panels · Blue contrast trim</span>
-              <div class="js-color-chips">
-                <span class="js-chip"><span class="js-chip-dot" style="background:#CC0000"></span>Red</span>
-                <span class="js-chip"><span class="js-chip-dot" style="background:#8B1A1A"></span>Maroon</span>
-                <span class="js-chip"><span class="js-chip-dot" style="background:#FFFDD0;border:1px solid rgba(0,0,0,.15)"></span>Cream</span>
-              </div>
-            </div>
-          </button>
-          <button class="js-opt" data-style="C" onclick="selJerseyStyle(this,'C')">
-            <div class="js-opt-letter">C</div>
-            <div class="js-opt-info">
-              <span class="js-opt-name">Block Panel</span>
-              <span class="js-opt-desc">Clean color-block design · Modern contrast panels</span>
-              <div class="js-color-chips">
-                <span class="js-chip"><span class="js-chip-dot" style="background:#CC0000"></span>Red</span>
-                <span class="js-chip"><span class="js-chip-dot" style="background:#1A1A1A;border:1px solid rgba(255,255,255,.2)"></span>Black</span>
-              </div>
-            </div>
-          </button>
-          <button class="js-opt" data-style="D" onclick="selJerseyStyle(this,'D')">
-            <div class="js-opt-letter">D</div>
-            <div class="js-opt-info">
-              <span class="js-opt-name">Side Stripe</span>
-              <span class="js-opt-desc">Angled side stripes · Orange contrast trim · Classic athletic</span>
-              <div class="js-color-chips">
-                <span class="js-chip"><span class="js-chip-dot" style="background:#9BC4E2"></span>Columbia Blue</span>
-                <span class="js-chip"><span class="js-chip-dot" style="background:#F5F5F5;border:1px solid rgba(0,0,0,.2)"></span>White</span>
-              </div>
-            </div>
-          </button>
+    <!-- STEP 1: GARMENT -->
+    <div class="step-block" id="step1">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Choose Your Garment</div>
+          <div class="step-sub">What are we making?</div>
         </div>
       </div>
-
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">2</div><p class="ctrl-title">Primary Color</p></div>
-        <div class="swatches" id="swatchesWrap"></div>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">3</div><p class="ctrl-title">Upload Logos / Artwork</p></div>
-        <p style="font-size:.75rem;color:var(--muted);margin-bottom:12px;line-height:1.55">Add as many logos as you need — front chest, back, sleeve, whatever. Label each file so we know where it goes (e.g. "front-logo.png", "back-logo.png"). PNG preferred for best quality.</p>
-        <div class="upload-zone" id="uploadZone">
-          <input type="file" id="logoInput" accept="image/*" multiple onchange="handleLogoUpload(this)">
-          <div class="upload-icon">☁️</div>
-          <p class="upload-txt"><strong>Click to upload</strong> or drag &amp; drop<br>PNG, JPG, SVG — multiple files OK · max 10MB each</p>
-          <img id="uploadPreviewImg" alt="Uploaded logo preview">
+      <div class="garment-grid">
+        <div class="g-card" onclick="pickGarment(this,'Hoodie')">
+          <div class="g-icon">🧥</div>
+          <div class="g-name">Hoodie</div>
+          <div class="g-desc">Pullover or zip-up</div>
         </div>
-        <div id="extraLogos" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
-        <button type="button" class="add-logo-btn" onclick="addLogoSlot()">+ Add Another Logo</button>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">4</div><p class="ctrl-title">Logo / Text Placement</p></div>
-        <div class="place-wrap">
-          <div class="place-grid">
-            <button class="p-btn" onclick="selPlace(this,0)" title="Top Left">↖</button>
-            <button class="p-btn" onclick="selPlace(this,1)" title="Top Center">↑</button>
-            <button class="p-btn" onclick="selPlace(this,2)" title="Top Right">↗</button>
-            <button class="p-btn" onclick="selPlace(this,3)" title="Mid Left">←</button>
-            <button class="p-btn active" onclick="selPlace(this,4)" title="Center">●</button>
-            <button class="p-btn" onclick="selPlace(this,5)" title="Mid Right">→</button>
-            <button class="p-btn" onclick="selPlace(this,6)" title="Bottom Left">↙</button>
-            <button class="p-btn" onclick="selPlace(this,7)" title="Bottom Center">↓</button>
-            <button class="p-btn" onclick="selPlace(this,8)" title="Bottom Right">↘</button>
-          </div>
-          <p class="place-hint">Click a zone to<br>set where your<br>logo or text<br>appears on<br>the garment.</p>
+        <div class="g-card" onclick="pickGarment(this,'T-Shirt')">
+          <div class="g-icon">👕</div>
+          <div class="g-name">T-Shirt</div>
+          <div class="g-desc">Box-fit or athletic cut</div>
         </div>
-        <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
-          <button class="p-btn" style="width:100%;font-size:.58rem;letter-spacing:.1em;padding:8px" onclick="selPlace(this,9)" title="Across Chest — shoulder to shoulder">↔ ACROSS CHEST</button>
-          <button class="p-btn" style="width:100%;font-size:.58rem;letter-spacing:.1em;padding:8px" onclick="selPlace(this,10)" title="Across Back — shoulder to shoulder">↔ ACROSS BACK</button>
+        <div class="g-card" onclick="pickGarment(this,'Crewneck')">
+          <div class="g-icon">🫱</div>
+          <div class="g-name">Crewneck</div>
+          <div class="g-desc">Classic crew sweatshirt</div>
         </div>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">5</div><p class="ctrl-title">Custom Text (Optional)</p></div>
-        <div class="text-inputs">
-          <input class="c-input" type="text" id="customTextIn" placeholder="Your name, team name, or motto…" maxlength="24" oninput="updateText(this.value)">
-          <div class="font-opts">
-            <button class="f-opt active" onclick="selFont(this,'Bebas Neue')">Block</button>
-            <button class="f-opt" onclick="selFont(this,'Cinzel')">Serif</button>
-            <button class="f-opt" onclick="selFont(this,'Inter')">Clean</button>
-          </div>
-        </div>
-      </div>
-      <div class="ctrl-block">
-        <div class="ctrl-head"><div class="ctrl-num">6</div><p class="ctrl-title">Order Details</p></div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="form-g"><label class="form-lbl">Your Name</label><input class="c-input" type="text" id="ordName" placeholder="Full name"></div>
-          <div class="form-g"><label class="form-lbl">Email</label><input class="c-input" type="email" id="ordEmail" placeholder="you@example.com"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <div class="form-g">
-              <label class="form-lbl">Size</label>
-              <select class="c-input f-sel" id="ordSize">
-                <option value="">— Size —</option>
-                <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
-              </select>
-            </div>
-            <div class="form-g">
-              <label class="form-lbl">Qty</label>
-              <select class="c-input f-sel" id="ordQty">
-                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="10">10+</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Material Preference</label>
-            <select class="c-input f-sel" id="ordMaterial">
-              <option value="">— Fabric feel? —</option>
-              <option>Soft / Fleece (hoodie weight)</option>
-              <option>Lightweight / Breathable (gym wear)</option>
-              <option>Compression / Fitted stretch</option>
-              <option>Cotton / Casual feel</option>
-              <option>Moisture-wicking / Performance</option>
-              <option>No preference — your recommendation</option>
-            </select>
-          </div>
-          <div class="form-g" id="reversibleRow" style="display:none">
-            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
-              <input type="checkbox" id="reversibleCheck" style="width:16px;height:16px;accent-color:var(--red)">
-              <span><span class="form-lbl" style="margin:0">Make jersey reversible</span><br><span style="font-size:.72rem;color:var(--muted)">Two colors, one jersey — additional charge applies. Mention desired 2nd color in notes.</span></span>
-            </label>
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Number &amp; Name on Jersey (if applicable)</label>
-            <input class="c-input" type="text" id="ordJerseyName" placeholder="e.g. BARRAGAN #23 — or leave blank" style="display:none">
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Embroidery or Print?</label>
-            <select class="c-input f-sel" id="ordDecoration">
-              <option value="">— Decoration type? —</option>
-              <option>Embroidery (stitched, premium)</option>
-              <option>Screen print (bold, flat color)</option>
-              <option>DTG / Direct-to-garment (photo quality)</option>
-              <option>Heat transfer / Vinyl</option>
-              <option>Puff / 3D embroidery</option>
-              <option>Not sure — advise me</option>
-            </select>
-          </div>
-          <div class="form-g">
-            <label class="form-lbl">Logo Size &amp; Placement Notes</label>
-            <textarea class="c-input" id="ordNotes" rows="4" placeholder="Tell us exactly where each logo goes and how big. Example: 'Front left chest — small logo (3 in), back center — large logo (10 in), right sleeve — mini TL mark.' Also note any pantone colors, thread colors, or special requests." style="resize:vertical"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="order-sum">
-        <div class="price-row"><span>Garment</span><strong id="sumGarment">Sport Hoodie</strong></div>
-        <div class="price-row" id="sumStyleRow" style="display:none"><span>Jersey Style</span><strong id="sumStyle">Option A — Star Cut</strong></div>
-        <div class="price-row"><span>Color</span><strong id="sumColor">Gold Rush</strong></div>
-        <div class="price-row"><span>Size</span><strong id="sumSizeDisplay">—</strong></div>
-        <div class="deposit-box">
-          <div class="deposit-box-label">Pricing</div>
-          <div class="deposit-box-body">Final price varies by embroidery style, logo size, and print type. We'll text or email your full quote within 24 hrs — no surprises.</div>
-          <div class="deposit-fee">$5 Design Deposit</div>
-          <div class="deposit-fee-sub">Locks your spot in our queue · Applied as credit toward your final order · Non-refundable if you decide not to order</div>
-        </div>
-        <button class="btn-order" onclick="submitOrder()">Submit Design Request →</button>
-        <p class="order-note">We'll reach out within 24 hrs with your custom quote · Production 3–5 weeks</p>
-        <div class="order-success" id="orderSuccess">
-          <span class="check">🙏</span>
-          <p><strong>Design request submitted!</strong><br>Pay the $5 deposit to lock your spot in our queue. It counts as credit toward your final order.</p>
-          <a id="depositBtn" href="#" target="_blank" rel="noopener" class="btn-deposit">Pay $5 Design Deposit →</a>
-          <p class="deposit-fine">Non-refundable if you decide not to order.<br>We'll reach out within 24 hrs with your quote. Philippians 4:13.</p>
+        <div class="g-card" onclick="pickGarment(this,'Sweatpants')">
+          <div class="g-icon">🩲</div>
+          <div class="g-name">Sweatpants</div>
+          <div class="g-desc">Joggers or straight leg</div>
         </div>
       </div>
     </div>
+
+    <!-- STEP 2: MATERIAL -->
+    <div class="step-block" id="step2" style="transition-delay:.1s">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Choose Your Material</div>
+          <div class="step-sub">How should it feel?</div>
+        </div>
+      </div>
+      <div class="material-grid">
+        <button class="m-chip" onclick="pickMaterial(this,'100% Cotton')">100% Cotton</button>
+        <button class="m-chip" onclick="pickMaterial(this,'Fleece — Heavyweight')">Fleece — Heavyweight</button>
+        <button class="m-chip" onclick="pickMaterial(this,'French Terry — Mid-weight')">French Terry — Mid-weight</button>
+        <button class="m-chip" onclick="pickMaterial(this,'Polyester Blend — Performance')">Polyester Blend — Performance</button>
+        <button class="m-chip" onclick="pickMaterial(this,'Moisture-Wicking')">Moisture-Wicking</button>
+        <button class="m-chip" onclick="pickMaterial(this,'No preference — advise me')">No Preference — Advise Me</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: CONTACT FORM -->
+    <div class="step-block" id="step3" style="transition-delay:.2s">
+      <div class="step-head">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Your Order Details</div>
+          <div class="step-sub">We'll reach out within 24 hours with a full quote.</div>
+        </div>
+      </div>
+
+      <div id="formWrap">
+        <div class="form-grid">
+          <div class="form-row">
+            <div class="f-group">
+              <label class="f-label" for="fName">Full Name</label>
+              <input class="f-input" type="text" id="fName" placeholder="Your name" autocomplete="name">
+            </div>
+            <div class="f-group">
+              <label class="f-label" for="fEmail">Email</label>
+              <input class="f-input" type="email" id="fEmail" placeholder="you@example.com" autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="f-group">
+              <label class="f-label" for="fPhone">Phone / Instagram (optional)</label>
+              <input class="f-input" type="text" id="fPhone" placeholder="Phone or @handle">
+            </div>
+            <div class="f-group">
+              <label class="f-label" for="fQty">Quantity</label>
+              <select class="f-input" id="fQty">
+                <option value="1">1 piece</option>
+                <option value="2">2 pieces</option>
+                <option value="3">3 pieces</option>
+                <option value="5">5 pieces</option>
+                <option value="10">10+ pieces</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-group">
+            <label class="f-label" for="fColors">Colors</label>
+            <input class="f-input" type="text" id="fColors" placeholder="e.g. Black with red logo, or all black…">
+          </div>
+          <div class="f-group">
+            <label class="f-label" for="fNotes">Design Notes &amp; Logo Info</label>
+            <textarea class="f-input" id="fNotes" placeholder="Tell us what you want on the garment — logo placement, any text, sizes needed, embroidery vs. screen print, or upload reference images via email to tagline.space@gmail.com after submitting."></textarea>
+          </div>
+        </div>
+
+        <div class="deposit-wrap">
+          <div class="dep-fee">$5 Design Deposit</div>
+          <div class="dep-fee-sub">Locks your spot in our queue · Applied as credit toward your final order · Non-refundable if you decide not to order</div>
+          <div class="dep-pricing">Final price depends on embroidery style, logo size, and decoration type. We'll send your full quote within 24 hrs — no surprises. Production is 3–5 weeks after approval.</div>
+          <button class="btn-submit" onclick="submitRequest()">Submit Design Request →</button>
+          <p style="font-size:.68rem;color:var(--muted);margin-top:12px;text-align:center;line-height:1.6">By submitting you'll be directed to pay the $5 deposit via Stripe to confirm your spot.</p>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-box" id="successBox">
+        <span class="icon">🙏</span>
+        <p><strong>Design request received!</strong><br>Pay the $5 deposit below to lock your spot in our queue. It counts as credit toward your final order. We'll reach out within 24 hrs with your custom quote.</p>
+        <a href="https://buy.stripe.com/7sY28r5Fm1nA9xR301asg0h" target="_blank" rel="noopener" class="btn-deposit">Pay $5 Design Deposit →</a>
+        <p style="font-size:.68rem;color:var(--muted);margin-top:14px;line-height:1.6">Non-refundable if you decide not to order. Philippians 4:13.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -486,11 +309,11 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
     <div>
       <span class="footer-col-h">Shop</span>
       <ul class="footer-links">
-        <li><a href="index.html#shop">New Arrivals</a></li>
-        <li><a href="index.html#shop">Hoodies</a></li>
-        <li><a href="index.html#shop">Tops</a></li>
-        <li><a href="index.html#shop">Bottoms</a></li>
-        <li><a href="index.html#shop">Jackets</a></li>
+        <li><a href="shop.html">New Arrivals</a></li>
+        <li><a href="shop.html">Hoodies</a></li>
+        <li><a href="shop.html">Tops</a></li>
+        <li><a href="shop.html">Bottoms</a></li>
+        <li><a href="shop.html">Jackets</a></li>
       </ul>
     </div>
     <div>
@@ -520,78 +343,7 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
 </footer>
 
 <script>
-const CM = {
-  'warm-tan':'#C4A882','grey':'#888','gray':'#888','gray-1':'#777','gray-2':'#999',
-  'white':'#F5F5F5','white-1':'#F5F5F5','navy-blue':'#1E3A8A','black':'#1A1A1A',
-  'black-1':'#1A1A1A','milk-white':'#F5F2E8','off-brown':'#8B6F52','khaki':'#8B7355',
-  'wine-red':'#7B1A1A','pink-1':'#F4A7B9','purple-1':'#7C3AED','purple':'#7C3AED',
-  'orange':'#E87010','light-grey':'#D0D0D0','brown-2':'#8B5E3C','brown-1':'#8B5E3C',
-  'brown':'#8B5E3C','dark-fog':'#555','hard-blue':'#1E4D8C','emerald-green':'#2D9B5A',
-  'blue-1':'#4A6FA5','green-1':'#2D7A4A','green':'#2D7A4A','yellow':'#FFD700',
-  'burgundy':'#722F37','red':'#CC0000','light-blue':'#ADD8E6','sand':'#C4A882',
-  'clear':'#E8E8E8','rose-gold':'#C8936A','frost-blue':'#6BB4C8','frost-blue-1':'#6BB4C8',
-  'silver':'#C0C0C0','green-gray':'#4A7A6A','baby-blue':'#ADD8E6','beige-1':'#D4C5A0',
-  'chinese-red':'#CC2020','nio-grey':'#7A7A7A','kelly-green':'#4CAF50',
-  'maroon':'#8B1A1A','cream':'#FFFDD0','columbia-blue':'#9BC4E2','royal-blue':'#2255CC','orange':'#E87010'
-};
-const gc = k => CM[k] || '#888';
-
-const PRODUCTS = [
-  {handle:'untitled-jan17_23-53',title:'TL "Rocket" Hoodie',desc:'Heavyweight fleece · 430g',price:55,cats:['all','mens','hoodies'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_b5276775-498d-4315-8251-37c7234be6b4.jpg?v=1768722983',colors:['black']},
-  {handle:'3-d-embroidery-hoodie',title:'3-D Embroidery Hoodie',desc:'Light-Weight · 65% cotton 35% polyester',price:45,cats:['all','hoodies','mens','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_4981aa0e-9864-43bd-9e9e-c30e28e472b3.jpg?v=1775531157',colors:['white','black','pink-1']},
-  {handle:'tl-hoodies',title:'"TL" Winter Hoodie',desc:"Men's warm fleece hoodie",price:45,cats:['all','mens','hoodies'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',colors:['blue-1','gray','light-grey']},
-  {handle:'untitled-nov4_20-32',title:"Women's Hoodie",desc:'Loose casual fitness sports hoodie',price:35,cats:['all','womens','hoodies'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/A610FF16-6BA4-4255-90B0-F42AB7246271.jpg?v=1762317317',colors:['sand','clear','rose-gold','warm-tan']},
-  {handle:'3-d-embroidery-t-shirt',title:'3-D Embroidery T-Shirt',desc:'100% cotton · Heavyweight oversized',price:30,cats:['all','tops','mens','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_caac77bf-a368-4c9f-8dba-f96b475ed42c.jpg?v=1775534730',colors:['black','white-1']},
-  {handle:'boxe-tees',title:"Box'e Tee's",desc:"100% Cotton · Box-fit",price:20,cats:['all','tops','mens','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_935aa918-1d27-4cb2-96fb-e191e14f38f3.jpg?v=1775552279',colors:['orange','white-1','light-grey','brown-2','dark-fog']},
-  {handle:'boxy-tanks',title:'BOXY Tanks',desc:'100% cotton · Box-Fit',price:30,cats:['all','tops','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/CD67E94D-AF63-4D2F-AD7D-CEC2A442674B.jpg?v=1778476132',colors:['warm-tan','grey','white-1']},
-  {handle:'mens-gym-shirt',title:"Men's Gym Shirt",desc:'True to size · 95% polyamide 5% elastane',price:30,cats:['all','tops','mens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_65a0576e-dbba-443f-a04a-5d91f6d91d20.jpg?v=1775552279',colors:['navy-blue','black','milk-white','off-brown','grey']},
-  {handle:'tl-rocket',title:'TL "Rocket" Shirt',desc:'Quick dry breathable · 80% polyester 20% spandex',price:30,cats:['all','tops','mens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_95ca150e-60c6-4308-90f2-6310c8096b6a.jpg?v=1768722286',colors:['warm-tan']},
-  {handle:'shirt',title:'"Everyday" Shirt',desc:'Quick dry yoga wear · Scallop curved hem',price:25,cats:['all','tops','womens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8c64d9c2-9284-4019-b2f5-cb4ef82f3df6.png?v=1768914448',colors:['warm-tan','green-1','white','pink-1','purple','frost-blue-1']},
-  {handle:'men-s',title:'Quick-Dry Shirt',desc:"Men's quick dry breathable sports tee",price:20,cats:['all','tops','mens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/7E62E8C7-9832-4D8F-B46A-AE8249EDD544.jpg?v=1761546662',colors:['clear','baby-blue']},
-  {handle:'men-s-zip-up-shirt',title:'"TTM" Quarter-Zip',desc:"Men's quarter-zip shirt",price:35,cats:['all','tops','mens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B2796E1A-0A02-4370-BC1A-87BDFE471E5A.png?v=1762482462',colors:['dark-fog','green','frost-blue','warm-tan','white']},
-  {handle:'men-s-quarter-zip-up-long-sleeve',title:'Quarter-Zip Long Sleeve',desc:'Quick-dry breathable active wear',price:35,cats:['all','tops','mens'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0025.jpg?v=1761716083',colors:['gray','black-1','gray-2']},
-  {handle:'womens-sport-bra',title:"Women's Sport Bra",desc:'95% polyamide 5% elastane · Medium support',price:30,noCustom:true,cats:['all','womens','tops'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_70148a65-ac5c-4e67-b9c8-10d2ad789c1c.jpg?v=1775552279',colors:['black','khaki','wine-red','pink-1','purple-1']},
-  {handle:'women-s-sports-bra-1',title:'Open-Back Top',desc:"Women's backless top · Removable pad · 79% nylon",price:15,noCustom:true,cats:['all','womens','tops'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/12F0C544-CB97-40D1-88BC-116B7BEBE75E.jpg?v=1762498096',colors:['frost-blue']},
-  {handle:'women-s-sports-bra',title:'Irregular Bra',desc:"Women's irregular strap yoga vest",price:25,noCustom:true,cats:['all','womens','tops'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/B723BBA2-B00A-4C9A-8283-226AFEB8C698.jpg?v=1761548691',colors:['warm-tan','white']},
-  {handle:'womens-gym-shorts',title:"Women's Gym Shorts",desc:'90% polyamide 10% elastane · High waist',price:20,noCustom:true,cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_1210f229-9c09-47f0-9203-2aa876bb70fb.jpg?v=1775552279',colors:['wine-red','pink-1','warm-tan','gray','hard-blue','khaki','purple-1']},
-  {handle:'womens-2-1-shorts',title:"Women's 2-1 Shorts",desc:'Running shorts · 90% polyester 10% spandex',price:30,noCustom:true,cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_26e60b6f-49f2-4a3a-b34d-2140bfdf784e.jpg?v=1775536820',colors:['black','pink-1','emerald-green']},
-  {handle:'mens-basketball-shorts',title:"Men's Basketball Shorts",desc:'100% polyester · Breathable design',price:25,cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_59c8766e-4591-468f-8075-8b4287f30a9f.jpg?v=1775535578',colors:['yellow','burgundy','red','light-blue','purple','white','black']},
-  {handle:'men-s-2-for-1-compression-shorts',title:'2-in-1 Compression Shorts',desc:'Nylon · Running training basketball shorts',price:40,cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0022.jpg?v=1761716083',colors:['black','brown','gray']},
-  {handle:'women-s-v-back-leggings',title:'V-Back Leggings',desc:'Scrunch flare V-back · 79% nylon 21% spandex',price:30,noCustom:true,cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/C9A62656-04B4-4D2A-9E0D-198664A3B7C2.jpg?v=1762498097',colors:['frost-blue']},
-  {handle:'women-s-butter-soft-leggings',title:'"Butter-Soft" Leggings',desc:'Double-brushed · 80% nylon 20% elastane · High waist',price:30,noCustom:true,cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/AEEB6281-985A-423A-AAA8-097D87601F6D.jpg?v=1762231785',colors:['sand','brown-1','warm-tan']},
-  {handle:'mens-pants',title:"Men's Running Pants",desc:'Ankle zipper · Lightweight breathable track pants',price:30,cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_570552c0-1a69-472d-9320-398747b35f08.jpg?v=1775536043',colors:['navy-blue','warm-tan','light-grey']},
-  {handle:'tl-winter-sweatpants',title:'"TL" Winter Sweatpants',desc:"Men's warm fleece sweatpants",price:45,cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_8db61751-179f-4792-94db-fa33145c04eb.jpg?v=1768915828',colors:['blue-1','light-grey','gray']},
-  {handle:'cargo-sweatpants',title:'Cargo Sweatpants',desc:"Women's baggy street wear · Multi-pocket",price:55,cats:['all','womens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_7c4f5b99-50af-43eb-ac4e-81ff780a2b4b.jpg?v=1768725457',colors:['black-1','navy-blue']},
-  {handle:'men-s-sport-pants',title:'Sport Pants',desc:'Breathable quick dry jogging pants · Back pocket',price:35,cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/ECE25F92-576E-4A30-B8F5-CCD44DB470B0.jpg?v=1761627349',colors:['dark-fog','black','green-gray']},
-  {handle:'sport-pants',title:'Outdoor Sport Pants',desc:"Men's side zipper pocket sport pants",price:55,cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/BD848E54-21F0-4255-B1F1-7D0A533C1E35.jpg?v=1761554034',colors:['gray-1','black','dark-fog']},
-  {handle:'light-slim-fit-flex-pants',title:'Slim-Fit "Scrubs"',desc:'Quick-dry breathable fitness trousers',price:35,noCustom:true,cats:['all','mens','bottoms'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/8C4F7825-DEEA-4CEF-955E-C5432C6FB34B.jpg?v=1761544634',colors:['beige-1','silver','gray','warm-tan']},
-  {handle:'mensrunner-vest',title:"Men's Runner Vest",desc:'100% polyester · Windproof · Waterproof',price:45,cats:['all','mens','jackets'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_0a5e02aa-8e81-4e92-963d-cee6741b086c.jpg?v=1775536851',colors:['green-1','black','orange']},
-  {handle:'men-s-light-jacket',title:'Oversized Light Sweater',desc:'High quality hooded zip track jacket',price:65,cats:['all','mens','jackets'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/F329367F-4612-4CBE-A66D-A7BD3BC84DC1.jpg?v=1761553089',colors:['light-blue','silver','gray','frost-blue-1']},
-  {handle:'women-s-slim-jacket',title:'Slim Sweatshirt',desc:"Women's hooded drawstring slim fit jacket",price:50,noCustom:true,cats:['all','womens','jackets'],img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0038.jpg?v=1761716083',colors:['dark-fog','black-1']},
-  {handle:'3-d-embroidery-crewneck',title:'3-D Embroidery Crewneck',desc:'3-D embroidered · God. Health. Wealth.',price:40,cats:['all','mens','tops'],img:'PENDING',colors:['chinese-red','navy-blue','nio-grey']},
-  {handle:'mens-compression-pants',title:"Men's Compression Pants",desc:'Compression · Without logo',price:20,cats:['all','mens','bottoms'],img:'PENDING',colors:['white','black']},
-  {handle:'mens-single-leg-compression-pants',title:"Men's Single Leg Compression Pants",desc:'Single leg compression · Without logo',price:25,cats:['all','mens','bottoms'],img:'PENDING',colors:['white','black','grey']},
-  {handle:'custom-basketball-jersey',title:'Basketball Jersey',desc:'Custom jersey · Full sublimation or embroidery · Can be reversible',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-placeholder.svg',colors:['black','white','red','maroon','cream','columbia-blue','navy-blue','royal-blue','kelly-green','yellow','purple','grey']},
-  {handle:'custom-jersey-shorts-set',title:'Jersey + Shorts Set',desc:'Matching jersey & shorts · Custom numbers, names & logos · Reversible jersey option available',price:0,noCustom:false,cats:['all','mens','custom'],img:'jersey-set-placeholder.svg',colors:['black','white','red','maroon','cream','columbia-blue','navy-blue','royal-blue','kelly-green','yellow','purple','grey']}
-];
-
-const DESIGN_DEPOSIT_URL = ''; // ← Paste $5 Stripe link here
-
-const STRIPE_LINKS={
-  'mens-basketball-shorts':'https://buy.stripe.com/eVq8wPffW3vIbFZ301asg00',
-  '3-d-embroidery-crewneck':'https://buy.stripe.com/3cIcN56Jq2rE39tbwxasg01',
-  'mens-gym-shirt':'https://buy.stripe.com/28E5kDaZG1nAbFZastasg02',
-  'women-s-slim-jacket':'https://buy.stripe.com/7sY28r8Ry0jweSb8klasg03',
-  'untitled-nov4_20-32':'https://buy.stripe.com/fZucN5ebS1nA6lFastasg04',
-  '3-d-embroidery-hoodie':'https://buy.stripe.com/cNi7sLebS8Q26lF0RTasg05',
-  '3-d-embroidery-t-shirt':'https://buy.stripe.com/bJe3cvd7O3vI4dxcABasg06',
-  'womens-sport-bra':'https://buy.stripe.com/7sYcN5ffW7LYh0jcABasg07',
-  'mens-compression-pants':'https://buy.stripe.com/28EeVdc3K6HUdO77ghasg08',
-  'mens-single-leg-compression-pants':'https://buy.stripe.com/eVq00jffW2rE11lfMNasg09',
-  'tl-rocket':'https://buy.stripe.com/5kQ3cv2tafeqh0j1VXasg0a',
-};
-
-/* ── CURSOR ── */
+/* CURSOR */
 const cur=document.getElementById('cursor');
 const ring=document.getElementById('cursorRing');
 if(cur&&ring){
@@ -609,478 +361,59 @@ if(cur&&ring){
   });
 }
 
-/* ── MOBILE MENU ── */
+/* MOBILE MENU */
 document.getElementById('burger').addEventListener('click',()=>document.getElementById('mobMenu').classList.add('open'));
 document.getElementById('mobClose').addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open'));
-function closeMob(){document.getElementById('mobMenu').classList.remove('open');}
 
-/* ── SCROLL REVEAL ── */
+/* SCROLL REVEAL */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+},{threshold:0.08});
+document.querySelectorAll('.step-block').forEach(el=>obs.observe(el));
 
-/* ── UPLOAD DRAG/DROP ── */
-const uploadZone=document.getElementById('uploadZone');
-['dragover','dragleave','drop'].forEach(evt=>{
-  uploadZone.addEventListener(evt,e=>{
-    e.preventDefault();
-    uploadZone.classList.toggle('drag',evt==='dragover');
-    if(evt==='drop'&&e.dataTransfer.files[0]) handleLogoUpload({files:e.dataTransfer.files});
-  });
-});
+/* STATE */
+let selGarment='', selMaterial='';
 
-/* ── BUILDER STATE ── */
-function getGarmentType(title){
-  const t=title.toLowerCase();
-  if(t.includes('jersey')) return 'jersey';
-  if(t.includes('hoodie')) return 'hoodie';
-  if(t.includes('crewneck')||t.includes('crew')) return 'crewneck';
-  if(t.includes('quarter-zip')||t.includes('quarter zip')||t.includes('zip')) return 'quarter-zip';
-  if(t.includes('jacket')||t.includes('sweatshirt')) return 'jacket';
-  if(t.includes('short')) return 'shorts';
-  if(t.includes('legging')||t.includes('pant')||t.includes('jogger')) return 'pants';
-  if(t.includes('compression')&&(t.includes('shirt')||t.includes('tee')||t.includes('top'))) return 'compression-tee';
-  if(t.includes('compression')) return 'pants';
-  if(t.includes('bra')) return 'bra';
-  if(t.includes('box')||t.includes('oversized')) return 'boxy-tee';
-  return 'tee';
-}
-function getGarmentPaths(type){
-  const g='url(#pvGrad)',hi='url(#pvHighlight)',ss='url(#pvSideShade)',bs='url(#pvBottomShade)',dk='rgba(0,0,0,.16)';
-  const bg=`<rect width="260" height="320" fill="url(#studioGrad)"/><ellipse cx="130" cy="312" rx="72" ry="5" fill="rgba(0,0,0,.1)" filter="url(#pvBlur)"/>`;
-  const pvt=`<text id="pvText" x="130" y="180" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.82)" text-anchor="middle" letter-spacing="4" opacity="0"></text>`;
-  switch(type){
-    case 'jersey': return bg+`
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${g}"/>
-      <path d="M42 62 Q22 76 16 120 Q18 152 40 157 L42 62" fill="url(#studioGrad)"/>
-      <path d="M218 62 Q238 76 244 120 Q242 152 220 157 L218 62" fill="url(#studioGrad)"/>
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${hi}"/>
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${ss}"/>
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${bs}"/>
-      <path d="M92 46 Q110 38 130 36 Q150 38 168 46 Q152 56 130 54 Q108 56 92 46 Z" fill="${dk}"/>
-      <path d="M42 157 Q24 154 16 120 Q18 76 42 62" stroke="rgba(0,0,0,.1)" stroke-width="1.5" fill="none"/>
-      <path d="M218 157 Q236 154 244 120 Q242 76 218 62" stroke="rgba(0,0,0,.1)" stroke-width="1.5" fill="none"/>
-      <line x1="92" y1="46" x2="42" y2="62" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="168" y1="46" x2="218" y2="62" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="42" y1="157" x2="36" y2="292" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
-      <line x1="218" y1="157" x2="224" y2="292" stroke="rgba(0,0,0,.08)" stroke-width="1"/>
-      <rect x="36" y="283" width="188" height="9" rx="1" fill="${dk}"/>
-      ${pvt}`;
-    case 'hoodie': return bg+`
-      <path d="M80 68 Q86 6 130 2 Q174 6 180 68 Q158 26 130 24 Q102 26 80 68 Z" fill="${g}" opacity=".9"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${g}"/>
-      <path d="M80 68 L4 108 L6 150 Q14 157 26 155 L30 122 Z" fill="${g}"/>
-      <path d="M180 68 L256 108 L254 150 Q246 157 234 155 L230 122 Z" fill="${g}"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${hi}"/>
-      <path d="M80 68 L4 108 L6 150 Q14 157 26 155 L30 122 Z" fill="${hi}" opacity=".7"/>
-      <path d="M180 68 L256 108 L254 150 Q246 157 234 155 L230 122 Z" fill="${hi}" opacity=".7"/>
-      <path d="M80 68 Q86 6 130 2 Q174 6 180 68 Q158 26 130 24 Q102 26 80 68 Z" fill="${hi}" opacity=".5"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${ss}"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${bs}"/>
-      <path d="M80 68 Q96 52 130 48 Q164 52 180 68" stroke="rgba(0,0,0,.12)" stroke-width="1.5" fill="none"/>
-      <path d="M116 48 L110 92" stroke="${dk}" stroke-width="2" stroke-linecap="round"/>
-      <path d="M144 48 L150 92" stroke="${dk}" stroke-width="2" stroke-linecap="round"/>
-      <ellipse cx="110" cy="93" rx="3" ry="3" fill="${dk}"/>
-      <ellipse cx="150" cy="93" rx="3" ry="3" fill="${dk}"/>
-      <path d="M88 215 Q88 250 110 254 L150 254 Q172 250 172 215 Z" stroke="rgba(0,0,0,.1)" stroke-width="1.2" fill="rgba(0,0,0,.04)"/>
-      <rect x="4" y="148" width="23" height="9" rx="2" fill="${dk}"/>
-      <rect x="233" y="148" width="23" height="9" rx="2" fill="${dk}"/>
-      <rect x="22" y="283" width="216" height="9" rx="2" fill="${dk}"/>
-      ${pvt}`;
-    case 'crewneck': return bg+`
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${g}"/>
-      <path d="M98 55 Q115 44 130 42 Q145 44 162 55 Q148 66 130 64 Q112 66 98 55 Z" fill="${dk}"/>
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${hi}"/>
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${ss}"/>
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${bs}"/>
-      <line x1="98" y1="55" x2="28" y2="68" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="162" y1="55" x2="232" y2="68" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="30" y1="138" x2="28" y2="292" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <line x1="230" y1="138" x2="232" y2="292" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <rect x="4" y="130" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="234" y="130" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="28" y="282" width="204" height="10" rx="2" fill="${dk}"/>
-      ${pvt}`;
-    case 'quarter-zip': return bg+`
-      <path d="M98 52 Q130 40 162 52 L232 66 L255 96 L254 130 Q248 138 238 140 L230 136 L232 292 L28 292 L30 136 L22 140 Q12 138 6 130 L5 96 L28 66 Z" fill="${g}"/>
-      <path d="M98 52 Q114 44 130 42 Q146 44 162 52 L162 44 Q146 34 130 32 Q114 34 98 44 Z" fill="${dk}" opacity=".8"/>
-      <line x1="130" y1="42" x2="130" y2="165" stroke="rgba(0,0,0,.22)" stroke-width="2.5" stroke-linecap="round"/>
-      <rect x="126" y="163" width="8" height="6" rx="1" fill="${dk}"/>
-      <line x1="126" y1="42" x2="126" y2="165" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-      <line x1="134" y1="42" x2="134" y2="165" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-      <path d="M98 52 Q130 40 162 52 L232 66 L255 96 L254 130 Q248 138 238 140 L230 136 L232 292 L28 292 L30 136 L22 140 Q12 138 6 130 L5 96 L28 66 Z" fill="${hi}"/>
-      <path d="M98 52 Q130 40 162 52 L232 66 L255 96 L254 130 Q248 138 238 140 L230 136 L232 292 L28 292 L30 136 L22 140 Q12 138 6 130 L5 96 L28 66 Z" fill="${ss}"/>
-      <path d="M98 52 Q130 40 162 52 L232 66 L255 96 L254 130 Q248 138 238 140 L230 136 L232 292 L28 292 L30 136 L22 140 Q12 138 6 130 L5 96 L28 66 Z" fill="${bs}"/>
-      <rect x="4" y="128" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="234" y="128" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="28" y="282" width="204" height="10" rx="2" fill="${dk}"/>
-      ${pvt}`;
-    case 'jacket': return bg+`
-      <path d="M98 52 Q114 40 130 38 L130 292 L28 292 L30 136 L22 140 Q12 138 6 130 L5 96 L28 66 Z" fill="${g}"/>
-      <path d="M162 52 Q146 40 130 38 L130 292 L232 292 L230 136 L238 140 Q248 138 254 130 L255 96 L232 66 Z" fill="${g}" opacity=".9"/>
-      <path d="M98 52 Q114 40 130 38 L130 292 L28 292 L30 136 L22 140 Q12 138 6 130 L5 96 L28 66 Z" fill="${hi}"/>
-      <path d="M162 52 Q146 40 130 38 L130 292 L232 292 L230 136 L238 140 Q248 138 254 130 L255 96 L232 66 Z" fill="${hi}" opacity=".7"/>
-      <path d="M98 52 Q114 40 130 38 L130 292 L28 292 L30 136 L22 140 Q12 138 6 130 L5 96 L28 66 Z" fill="${ss}"/>
-      <path d="M162 52 Q146 40 130 38 L130 292 L232 292 L230 136 L238 140 Q248 138 254 130 L255 96 L232 66 Z" fill="${bs}"/>
-      <path d="M130 38 L108 68 L118 80 L130 64 Z" fill="rgba(0,0,0,.18)"/>
-      <path d="M130 38 L152 68 L142 80 L130 64 Z" fill="rgba(0,0,0,.12)"/>
-      <line x1="130" y1="38" x2="130" y2="292" stroke="rgba(0,0,0,.28)" stroke-width="2"/>
-      <rect x="4" y="128" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="234" y="128" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="42" y="194" width="50" height="3" rx="1" fill="rgba(0,0,0,.14)"/>
-      <rect x="168" y="194" width="50" height="3" rx="1" fill="rgba(0,0,0,.14)"/>
-      ${pvt}`;
-    case 'shorts': return bg+`
-      <rect x="44" y="58" width="172" height="22" rx="4" fill="${g}"/>
-      <path d="M44 78 Q38 195 32 215 Q58 226 94 220 L130 130 L166 220 Q202 226 228 215 Q222 195 216 78 Z" fill="${g}"/>
-      <path d="M44 78 Q38 195 32 215 Q58 226 94 220 L130 130 L166 220 Q202 226 228 215 Q222 195 216 78 Z" fill="${hi}"/>
-      <path d="M44 78 Q38 195 32 215 Q58 226 94 220 L130 130 L166 220 Q202 226 228 215 Q222 195 216 78 Z" fill="${ss}"/>
-      <path d="M44 78 Q38 195 32 215 Q58 226 94 220 L130 130 L166 220 Q202 226 228 215 Q222 195 216 78 Z" fill="${bs}"/>
-      <line x1="118" y1="58" x2="114" y2="80" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
-      <line x1="142" y1="58" x2="146" y2="80" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
-      <line x1="130" y1="78" x2="130" y2="130" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
-      <path d="M60 82 Q62 104 60 118" stroke="rgba(0,0,0,.1)" stroke-width="1.5" fill="none"/>
-      <path d="M200 82 Q198 104 200 118" stroke="rgba(0,0,0,.1)" stroke-width="1.5" fill="none"/>
-      ${pvt}`;
-    case 'pants': return bg+`
-      <rect x="55" y="48" width="150" height="22" rx="4" fill="${g}" opacity=".9"/>
-      <path d="M55 68 Q48 294 40 305 L120 305 L130 115 L140 305 L220 305 Q212 294 205 68 Z" fill="${g}"/>
-      <path d="M55 68 Q48 294 40 305 L120 305 L130 115 L140 305 L220 305 Q212 294 205 68 Z" fill="${hi}"/>
-      <path d="M55 68 Q48 294 40 305 L120 305 L130 115 L140 305 L220 305 Q212 294 205 68 Z" fill="${ss}"/>
-      <line x1="130" y1="68" x2="130" y2="115" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
-      <line x1="72" y1="68" x2="55" y2="305" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <line x1="188" y1="68" x2="205" y2="305" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      ${pvt}`;
-    case 'bra': return bg+`
-      <path d="M52 108 Q78 62 130 58 Q182 62 208 108 Q180 128 130 124 Q80 128 52 108 Z" fill="${g}"/>
-      <path d="M52 108 Q80 132 130 128 Q180 132 208 108 L208 158 Q180 175 130 170 Q80 175 52 158 Z" fill="${g}" opacity=".9"/>
-      <path d="M52 108 Q78 62 130 58 Q182 62 208 108 Q180 128 130 124 Q80 128 52 108 Z" fill="${hi}"/>
-      <path d="M52 108 Q80 132 130 128 Q180 132 208 108 L208 158 Q180 175 130 170 Q80 175 52 158 Z" fill="${hi}" opacity=".7"/>
-      <path d="M52 108 Q78 62 130 58 Q182 62 208 108 Q180 128 130 124 Q80 128 52 108 Z" fill="${ss}"/>
-      <path d="M85 58 Q78 38 70 50" stroke="${g}" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M175 58 Q182 38 190 50" stroke="${g}" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <line x1="130" y1="58" x2="130" y2="128" stroke="rgba(0,0,0,.09)" stroke-width="1.5"/>
-      <path d="M52 158 Q130 162 208 158" stroke="rgba(0,0,0,.1)" stroke-width="1.5" fill="none"/>
-      ${pvt}`;
-    default: return bg+`
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${g}"/>
-      <path d="M100 52 Q115 42 130 40 Q145 42 160 52 Q147 62 130 60 Q113 62 100 52 Z" fill="${dk}"/>
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${hi}"/>
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${ss}"/>
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${bs}"/>
-      <line x1="100" y1="52" x2="28" y2="66" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="160" y1="52" x2="232" y2="66" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="30" y1="138" x2="28" y2="292" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <line x1="230" y1="138" x2="232" y2="292" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <rect x="28" y="282" width="204" height="10" rx="2" fill="${dk}"/>
-      ${pvt}`;
-  }
-}
-function getGarmentPathsBack(type){
-  const g='url(#pvGrad)',hi='url(#pvHighlight)',ss='url(#pvSideShade)',bs='url(#pvBottomShade)',dk='rgba(0,0,0,.16)';
-  const bg=`<rect width="260" height="320" fill="url(#studioGrad)"/><ellipse cx="130" cy="312" rx="72" ry="5" fill="rgba(0,0,0,.1)" filter="url(#pvBlur)"/>`;
-  const pvt=`<text id="pvText" x="130" y="188" font-family="'Bebas Neue',sans-serif" font-size="20" fill="rgba(0,0,0,.82)" text-anchor="middle" letter-spacing="4" opacity="0"></text>`;
-  switch(type){
-    case 'jersey': return bg+`
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${g}"/>
-      <path d="M42 62 Q22 76 16 120 Q18 152 40 157 L42 62" fill="url(#studioGrad)"/>
-      <path d="M218 62 Q238 76 244 120 Q242 152 220 157 L218 62" fill="url(#studioGrad)"/>
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${hi}"/>
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${ss}"/>
-      <path d="M92 46 Q130 36 168 46 L218 62 L224 292 L36 292 L42 62 Z" fill="${bs}"/>
-      <path d="M108 46 Q130 38 152 46 Q140 55 130 53 Q120 55 108 46 Z" fill="${dk}"/>
-      <path d="M42 157 Q24 154 16 120 Q18 76 42 62" stroke="rgba(0,0,0,.1)" stroke-width="1.5" fill="none"/>
-      <path d="M218 157 Q236 154 244 120 Q242 76 218 62" stroke="rgba(0,0,0,.1)" stroke-width="1.5" fill="none"/>
-      <line x1="92" y1="46" x2="42" y2="62" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="168" y1="46" x2="218" y2="62" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="130" y1="50" x2="130" y2="283" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <rect x="36" y="283" width="188" height="9" rx="1" fill="${dk}"/>
-      ${pvt}`;
-    case 'hoodie': return bg+`
-      <path d="M80 68 Q86 6 130 2 Q174 6 180 68 Q158 26 130 24 Q102 26 80 68 Z" fill="${g}" opacity=".9"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${g}"/>
-      <path d="M80 68 L4 108 L6 150 Q14 157 26 155 L30 122 Z" fill="${g}"/>
-      <path d="M180 68 L256 108 L254 150 Q246 157 234 155 L230 122 Z" fill="${g}"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${hi}"/>
-      <path d="M80 68 L4 108 L6 150 Q14 157 26 155 L30 122 Z" fill="${hi}" opacity=".7"/>
-      <path d="M180 68 L256 108 L254 150 Q246 157 234 155 L230 122 Z" fill="${hi}" opacity=".7"/>
-      <path d="M80 68 Q86 6 130 2 Q174 6 180 68 Q158 26 130 24 Q102 26 80 68 Z" fill="${hi}" opacity=".5"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${ss}"/>
-      <path d="M80 68 L28 120 L22 292 L238 292 L232 120 L180 68 Z" fill="${bs}"/>
-      <line x1="130" y1="2" x2="130" y2="68" stroke="rgba(0,0,0,.14)" stroke-width="1.5"/>
-      <rect x="4" y="148" width="23" height="9" rx="2" fill="${dk}"/>
-      <rect x="233" y="148" width="23" height="9" rx="2" fill="${dk}"/>
-      <rect x="22" y="283" width="216" height="9" rx="2" fill="${dk}"/>
-      <line x1="130" y1="68" x2="130" y2="283" stroke="rgba(0,0,0,.06)" stroke-width="1"/>
-      ${pvt}`;
-    case 'quarter-zip':
-    case 'crewneck':
-    case 'jacket': return bg+`
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${g}"/>
-      <path d="M108 55 Q130 46 152 55 Q140 64 130 62 Q120 64 108 55 Z" fill="${dk}"/>
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${hi}"/>
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${ss}"/>
-      <path d="M98 55 Q130 42 162 55 L232 68 L255 96 L254 132 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 6 132 L5 96 L28 68 Z" fill="${bs}"/>
-      <rect x="4" y="130" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="234" y="130" width="22" height="12" rx="3" fill="${dk}"/>
-      <rect x="28" y="282" width="204" height="10" rx="2" fill="${dk}"/>
-      ${pvt}`;
-    case 'shorts': return bg+`
-      <rect x="44" y="58" width="172" height="22" rx="4" fill="${g}"/>
-      <path d="M44 78 Q38 195 32 215 Q58 226 94 220 L130 130 L166 220 Q202 226 228 215 Q222 195 216 78 Z" fill="${g}"/>
-      <path d="M44 78 Q38 195 32 215 Q58 226 94 220 L130 130 L166 220 Q202 226 228 215 Q222 195 216 78 Z" fill="${hi}"/>
-      <path d="M44 78 Q38 195 32 215 Q58 226 94 220 L130 130 L166 220 Q202 226 228 215 Q222 195 216 78 Z" fill="${ss}"/>
-      <line x1="130" y1="78" x2="130" y2="130" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
-      <rect x="78" y="98" width="40" height="26" rx="2" fill="rgba(0,0,0,.1)"/>
-      <rect x="142" y="98" width="40" height="26" rx="2" fill="rgba(0,0,0,.1)"/>
-      ${pvt}`;
-    case 'pants': return bg+`
-      <rect x="55" y="48" width="150" height="22" rx="4" fill="${g}" opacity=".9"/>
-      <path d="M55 68 Q48 294 40 305 L120 305 L130 115 L140 305 L220 305 Q212 294 205 68 Z" fill="${g}"/>
-      <path d="M55 68 Q48 294 40 305 L120 305 L130 115 L140 305 L220 305 Q212 294 205 68 Z" fill="${hi}"/>
-      <path d="M55 68 Q48 294 40 305 L120 305 L130 115 L140 305 L220 305 Q212 294 205 68 Z" fill="${ss}"/>
-      <line x1="130" y1="68" x2="130" y2="115" stroke="rgba(0,0,0,.09)" stroke-width="1"/>
-      <line x1="72" y1="68" x2="55" y2="305" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <line x1="188" y1="68" x2="205" y2="305" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <rect x="68" y="80" width="50" height="28" rx="2" fill="rgba(0,0,0,.1)"/>
-      <rect x="142" y="80" width="50" height="28" rx="2" fill="rgba(0,0,0,.1)"/>
-      ${pvt}`;
-    case 'bra': return bg+`
-      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${g}"/>
-      <path d="M88 55 Q80 38 72 48 L72 120 Q82 126 130 124 Q178 126 188 120 L188 48 Q180 38 172 55" stroke="${g}" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M112 28 Q122 16 130 14 Q138 16 148 28 L148 55 Q138 48 130 46 Q122 48 112 55 Z" fill="${g}"/>
-      <path d="M72 148 Q82 168 130 163 Q178 168 188 148 L188 120 Q178 126 130 124 Q82 126 72 120 Z" fill="${hi}"/>
-      ${pvt}`;
-    default: return bg+`
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${g}"/>
-      <path d="M108 52 Q130 43 152 52 Q140 61 130 59 Q120 61 108 52 Z" fill="${dk}"/>
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${hi}"/>
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${ss}"/>
-      <path d="M100 52 Q130 40 160 52 L232 66 L255 94 L253 130 Q248 140 238 142 L230 138 L232 292 L28 292 L30 138 L22 142 Q12 140 7 130 L5 94 L28 66 Z" fill="${bs}"/>
-      <line x1="100" y1="52" x2="28" y2="66" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="160" y1="52" x2="232" y2="66" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
-      <line x1="30" y1="138" x2="28" y2="292" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <line x1="230" y1="138" x2="232" y2="292" stroke="rgba(0,0,0,.07)" stroke-width="1"/>
-      <rect x="28" y="282" width="204" height="10" rx="2" fill="${dk}"/>
-      ${pvt}`;
-  }
-}
-function updateGarmentSVG(title){
-  const shape=document.getElementById('pvShape');
-  const type=getGarmentType(title);
-  if(shape) shape.innerHTML=curSide==='back'?getGarmentPathsBack(type):getGarmentPaths(type);
-}
-const COLOR_NAMES={
-  'warm-tan':'Warm Tan','grey':'Grey','gray':'Grey','gray-1':'Grey','gray-2':'Grey',
-  'white':'White','white-1':'White','navy-blue':'Navy Blue','black':'Black','black-1':'Black',
-  'milk-white':'Milk White','off-brown':'Off Brown','khaki':'Khaki','wine-red':'Wine Red',
-  'pink-1':'Pink','purple-1':'Purple','purple':'Purple','orange':'Orange',
-  'light-grey':'Light Grey','brown-2':'Brown','brown-1':'Brown','brown':'Brown',
-  'dark-fog':'Dark Fog','hard-blue':'Hard Blue','emerald-green':'Emerald Green',
-  'blue-1':'Blue','green-1':'Green','green':'Green','yellow':'Yellow','burgundy':'Burgundy',
-  'red':'Red','light-blue':'Light Blue','sand':'Sand','clear':'White','rose-gold':'Rose Gold',
-  'frost-blue':'Frost Blue','frost-blue-1':'Frost Blue','silver':'Silver',
-  'green-gray':'Green Gray','baby-blue':'Baby Blue','beige-1':'Beige',
-  'chinese-red':'Chinese Red','nio-grey':'Nio Grey','kelly-green':'Kelly Green',
-  'maroon':'Maroon','cream':'Cream','columbia-blue':'Columbia Blue','royal-blue':'Royal Blue'
-};
-function colorLabel(key){return COLOR_NAMES[key]||(key.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()));}
-function darkenHex(hex,amt=35){
-  let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-  r=Math.max(0,r-amt);g=Math.max(0,g-amt);b=Math.max(0,b-amt);
-  return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
-}
-function isLight(hex){
-  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-  return(r*299+g*587+b*114)/1000>160;
-}
-function renderSwatches(colors){
-  const wrap=document.getElementById('swatchesWrap');
-  wrap.innerHTML=colors.map((key,i)=>{
-    const hex=gc(key);const name=colorLabel(key);
-    const extra=isLight(hex)?';border-color:rgba(0,0,0,.25)':'';
-    return `<div class="sw${i===0?' active':''}" style="background:${hex}${extra}" onclick="selColor(this,'${name}','${hex}','${darkenHex(hex)}')" title="${name}"></div>`;
-  }).join('');
-  const firstEl=wrap.querySelector('.sw');
-  if(firstEl) firstEl.click();
-}
-function renderGarmentPicker(){
-  const wrap=document.getElementById('garmentOpts');
-  const customProducts=PRODUCTS.filter(p=>!p.noCustom);
-  wrap.innerHTML=customProducts.map((p,i)=>`
-    <button class="g-opt${i===0?' active':''}" data-handle="${p.handle}" data-price="${p.price}" onclick="selGarmentProduct(this)">
-      <img class="g-opt-thumb" src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.background='var(--space2)'">
-      <span class="g-opt-info">
-        <span class="g-opt-name">${p.title}</span>
-        <span class="g-opt-price">${p.price>0?'$'+p.price:'Custom'}</span>
-      </span>
-    </button>
-  `).join('');
-  const first=customProducts[0];
-  curGarment=first.title;
-  document.getElementById('pvGarmentName').textContent=first.title;
-  document.getElementById('sumGarment').textContent=first.title;
-  updateGarmentSVG(first.title);
-  renderSwatches(first.colors);
-  const firstIsJersey=first.title.toLowerCase().includes('jersey');
-  document.getElementById('jerseyStyleBlock').style.display=firstIsJersey?'block':'none';
-  document.getElementById('sumStyleRow').style.display=firstIsJersey?'flex':'none';
-  if(firstIsJersey){document.getElementById('reversibleRow').style.display='block';document.getElementById('ordJerseyName').style.display='block';}
-}
-const JERSEY_STYLES={
-  A:{name:'Star Cut',desc:'Geometric star-shaped side panels'},
-  B:{name:'Wave Accent',desc:'Curved swoosh panels · Blue trim'},
-  C:{name:'Block Panel',desc:'Clean color-block design'},
-  D:{name:'Side Stripe',desc:'Angled side stripes · Orange trim'}
-};
-let curJerseyStyle='A';
-function selJerseyStyle(el,style){
-  document.querySelectorAll('.js-opt').forEach(o=>o.classList.remove('active'));
+function pickGarment(el, name){
+  document.querySelectorAll('.g-card').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
-  curJerseyStyle=style;
-  const s=JERSEY_STYLES[style];
-  document.getElementById('sumStyle').textContent=`Option ${style} — ${s.name}`;
-}
-function selGarmentProduct(el){
-  document.querySelectorAll('.g-opt').forEach(o=>o.classList.remove('active'));
-  el.classList.add('active');
-  const handle=el.dataset.handle;
-  const product=PRODUCTS.find(p=>p.handle===handle);
-  const name=product?product.title:el.querySelector('.g-opt-name').textContent;
-  curGarment=name;
-  document.getElementById('pvGarmentName').textContent=name;
-  document.getElementById('sumGarment').textContent=name;
-  updateGarmentSVG(name);
-  renderSwatches(product?product.colors:['black']);
-  const isJersey=name.toLowerCase().includes('jersey');
-  document.getElementById('reversibleRow').style.display=isJersey?'block':'none';
-  document.getElementById('ordJerseyName').style.display=isJersey?'block':'none';
-  document.getElementById('jerseyStyleBlock').style.display=isJersey?'block':'none';
-  document.getElementById('sumStyleRow').style.display=isJersey?'flex':'none';
-}
-let curGarment='Sport Hoodie',curColor='Gold Rush',hasLogo=false,hasText=false;
-let curSide='front';
-const sideState={
-  front:{hasLogo:false,logoSrc:null,placeIdx:4,text:'',font:"'Bebas Neue',sans-serif"},
-  back: {hasLogo:false,logoSrc:null,placeIdx:4,text:'',font:"'Bebas Neue',sans-serif"}
-};
-const pvPos=[
-  {x:'78',y:'112'},{x:'130',y:'100'},{x:'182',y:'112'},
-  {x:'82',y:'162'},{x:'130',y:'188'},{x:'178',y:'162'},
-  {x:'82',y:'242'},{x:'130',y:'258'},{x:'178',y:'242'},
-  {x:'130',y:'130'},{x:'130',y:'200'}
-];
-const lPos=[
-  {left:'30%',top:'35%'},{left:'50%',top:'32%'},{left:'70%',top:'35%'},
-  {left:'31%',top:'51%'},{left:'50%',top:'59%'},{left:'69%',top:'51%'},
-  {left:'31%',top:'76%'},{left:'50%',top:'81%'},{left:'69%',top:'76%'},
-  {left:'50%',top:'41%',wide:true},{left:'50%',top:'63%',wide:true}
-];
-let curPlaceIdx=4;
-function selSide(side,btn){
-  const st=sideState[curSide];
-  st.hasLogo=hasLogo;st.placeIdx=curPlaceIdx;
-  st.text=document.getElementById('customTextIn').value;
-  const pvT=document.getElementById('pvText');
-  if(pvT)st.font=pvT.style.fontFamily||"'Bebas Neue',sans-serif";
-  curSide=side;
-  document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('sideLabel').textContent=side==='front'?'Front View':'Back View';
-  const ns=sideState[side];
-  hasLogo=ns.hasLogo;curPlaceIdx=ns.placeIdx;
-  document.querySelectorAll('.p-btn').forEach((b,i)=>b.classList.toggle('active',i===curPlaceIdx));
-  const textIn=document.getElementById('customTextIn');
-  textIn.value=ns.text;
-  updateGarmentSVG(curGarment);
-  const pvT2=document.getElementById('pvText');
-  if(pvT2){pvT2.textContent=ns.text||'TAGLINE';pvT2.style.fontFamily=ns.font;
-    const pos=pvPos[curPlaceIdx];pvT2.setAttribute('x',pos.x);pvT2.setAttribute('y',pos.y);}
-  const logo=document.getElementById('logoOverlay');
-  if(ns.hasLogo&&ns.logoSrc){logo.src=ns.logoSrc;logo.style.display='block';
-    const lp=lPos[curPlaceIdx];logo.style.left=lp.left;logo.style.top=lp.top;if(lp.wide){logo.style.width='150px';logo.style.height='48px';}else{logo.style.width='80px';logo.style.height='80px';}}
-  else{logo.style.display='none';}
-}
-function selColor(el,name,c1,c2){
-  document.querySelectorAll('.sw').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');curColor=name;
-  document.getElementById('pvColorName').textContent=name;
-  document.getElementById('sumColor').textContent=name;
-  document.getElementById('pvStop1').setAttribute('stop-color',c1);
-  document.getElementById('pvStop2').setAttribute('stop-color',c2);
-  const pvTxt=document.getElementById('pvText');
-  if(pvTxt){
-    const fill=isLight(c1)?'rgba(0,0,0,.85)':'rgba(255,255,255,.9)';
-    pvTxt.setAttribute('fill',fill);
-  }
-}
-function selPlace(el,idx){
-  document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');curPlaceIdx=idx;
-  sideState[curSide].placeIdx=idx;
-  const p=pvPos[idx];
-  document.getElementById('pvText').setAttribute('x',p.x);
-  document.getElementById('pvText').setAttribute('y',p.y);
-  const logo=document.getElementById('logoOverlay');
-  if(logo.style.display!=='none'){
-    const lp=lPos[idx];logo.style.left=lp.left;logo.style.top=lp.top;
-    if(lp.wide){logo.style.width='150px';logo.style.height='48px';}
-    else{logo.style.width='80px';logo.style.height='80px';}
-  }
-}
-function updateText(val){
-  hasText=val.trim().length>0;
-  sideState[curSide].text=val;
-  const pvT=document.getElementById('pvText');
-  if(pvT){pvT.textContent=val.trim();pvT.setAttribute('opacity',val.trim().length>0?'0.9':'0');}
-}
-function selFont(el,font){
-  document.querySelectorAll('.f-opt').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  const ff=`'${font}',sans-serif`;
-  sideState[curSide].font=ff;
-  document.getElementById('pvText').style.fontFamily=ff;
-}
-function handleLogoUpload(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    document.getElementById('uploadPreviewImg').src=e.target.result;
-    document.getElementById('uploadPreviewImg').style.display='block';
-    const logo=document.getElementById('logoOverlay');
-    logo.src=e.target.result;logo.style.display='block';
-    const lp=lPos[curPlaceIdx];logo.style.left=lp.left;logo.style.top=lp.top;
-    hasLogo=true;
-    sideState[curSide].hasLogo=true;
-    sideState[curSide].logoSrc=e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-function updatePrice(){}
-let extraLogoCount=0;
-function addLogoSlot(){
-  extraLogoCount++;
-  const wrap=document.getElementById('extraLogos');
-  const div=document.createElement('div');
-  div.style.cssText='display:flex;align-items:center;gap:8px';
-  div.innerHTML=`<input type="file" accept="image/*" class="c-input" style="font-size:.78rem;padding:8px 10px;flex:1" placeholder="Logo ${extraLogoCount+1}"><button type="button" onclick="this.parentNode.remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:4px">✕</button>`;
-  wrap.appendChild(div);
-}
-function submitOrder(){
-  const name=document.getElementById('ordName').value.trim();
-  const email=document.getElementById('ordEmail').value.trim();
-  const size=document.getElementById('ordSize').value;
-  if(!name||!email||!size){alert('Please fill in your name, email, and size before submitting.');return;}
-  document.getElementById('sumSizeDisplay').textContent=size;
-  const depositLink=DESIGN_DEPOSIT_URL||'#';
-  document.getElementById('depositBtn').href=depositLink;
-  document.getElementById('orderSuccess').style.display='block';
-  document.querySelector('.btn-order').style.display='none';
-  document.getElementById('orderSuccess').scrollIntoView({behavior:'smooth',block:'nearest'});
+  selGarment=name;
 }
 
-renderGarmentPicker();
+function pickMaterial(el, name){
+  document.querySelectorAll('.m-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  selMaterial=name;
+}
+
+function submitRequest(){
+  const name=document.getElementById('fName').value.trim();
+  const email=document.getElementById('fEmail').value.trim();
+  if(!name){alert('Please enter your name.');document.getElementById('fName').focus();return;}
+  if(!email||!email.includes('@')){alert('Please enter a valid email.');document.getElementById('fEmail').focus();return;}
+
+  const qty=document.getElementById('fQty').value;
+  const colors=document.getElementById('fColors').value.trim();
+  const notes=document.getElementById('fNotes').value.trim();
+  const phone=document.getElementById('fPhone').value.trim();
+
+  const subject=encodeURIComponent('Custom Order — '+(selGarment||'Custom Garment')+' ('+(selMaterial||'Material TBD')+')');
+  const body=encodeURIComponent(
+    'Name: '+name+'\n'+
+    'Email: '+email+'\n'+
+    'Phone/IG: '+(phone||'—')+'\n'+
+    'Garment: '+(selGarment||'—')+'\n'+
+    'Material: '+(selMaterial||'—')+'\n'+
+    'Qty: '+qty+'\n'+
+    'Colors: '+(colors||'—')+'\n'+
+    'Notes: '+(notes||'—')
+  );
+  window.open('mailto:tagline.space@gmail.com?subject='+subject+'&body='+body,'_blank');
+
+  document.getElementById('formWrap').style.display='none';
+  document.getElementById('successBox').style.display='block';
+  document.getElementById('step3').scrollIntoView({behavior:'smooth',block:'start'});
+}
 </script>
 </body>
 </html>
