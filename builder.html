@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Custom Merch — TAGLINE</title>
-<meta name="description" content="Design your own custom TAGLINE apparel. Pick your garment, material, and send us your details. $5 deposit locks your spot.">
+<meta name="description" content="Design your own custom TAGLINE apparel. Pick your garment, material, place your logo, and submit. $5 deposit locks your spot.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -88,6 +88,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:f
 .m-chip:hover{border-color:rgba(224,32,32,.4);color:var(--text)}
 .m-chip.active{border-color:var(--gold);color:var(--gold);background:rgba(224,32,32,.07)}
 
+/* LOGO UPLOAD */
+.logo-drop{border:2px dashed rgba(224,32,32,.3);background:rgba(224,32,32,.03);padding:36px 24px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s;position:relative;margin-bottom:24px}
+.logo-drop:hover,.logo-drop.drag{border-color:var(--gold);background:rgba(224,32,32,.07)}
+.logo-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.logo-drop-icon{font-size:2rem;margin-bottom:10px;opacity:.5}
+.logo-drop p{font-size:.82rem;color:var(--muted);line-height:1.6}
+.logo-drop p strong{color:var(--gold)}
+.logo-drop-sub{font-size:.7rem !important;margin-top:4px}
+
+/* PLACEMENT CANVAS */
+.canvas-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.side-toggle{display:flex;gap:0;border:1px solid var(--border-gold);overflow:hidden;width:fit-content;margin:0 auto 16px}
+.side-btn{padding:9px 28px;background:none;border:none;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .25s;font-weight:600}
+.side-btn.active{background:var(--gold-grad);color:var(--space)}
+.side-btn:not(.active):hover{background:rgba(224,32,32,.08);color:var(--text)}
+#placementCanvas{border:1px solid var(--border-gold);display:block;max-width:100%;cursor:grab;touch-action:none}
+#placementCanvas:active{cursor:grabbing}
+.canvas-hint{font-size:.72rem;color:var(--muted);text-align:center}
+.resize-row{display:flex;align-items:center;gap:12px;margin-top:12px;justify-content:center}
+.resize-row label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.resize-row input[type=range]{width:160px;accent-color:var(--gold)}
+.placement-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:8px;line-height:1.5}
+.logo-filename{font-size:.75rem;color:var(--gold);text-align:center;margin-bottom:16px;font-weight:600}
+
 /* CONTACT FORM */
 .form-grid{display:flex;flex-direction:column;gap:14px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -97,7 +121,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:f
 .f-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;padding:13px 16px;outline:none;width:100%;transition:border-color .3s;-webkit-appearance:none}
 .f-input:focus{border-color:var(--gold)}
 .f-input::placeholder{color:var(--muted)}
-textarea.f-input{resize:vertical;min-height:100px}
+textarea.f-input{resize:vertical;min-height:90px}
 
 /* DEPOSIT BOX */
 .deposit-wrap{background:var(--card);border:1px solid var(--border-gold);padding:28px 24px;margin-top:8px}
@@ -113,6 +137,7 @@ textarea.f-input{resize:vertical;min-height:100px}
 .success-box p{font-size:.88rem;color:var(--text);line-height:1.65;margin-bottom:18px}
 .btn-deposit{display:inline-block;padding:16px 36px;background:var(--gold-grad);color:var(--space);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;text-decoration:none;transition:opacity .3s}
 .btn-deposit:hover{opacity:.85}
+.placement-preview{max-width:200px;border:1px solid var(--border-gold);margin:12px auto 20px;display:block}
 
 /* FOOTER */
 footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba(224,32,32,.12)}
@@ -169,7 +194,7 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
     <a href="index.html" class="back-link">← Back to Home</a>
     <span class="hero-label">Custom Merch</span>
     <h1>Design Your<br><span>Kingdom Gear</span></h1>
-    <p>Choose your garment, pick your material, then fill out the form. We'll send a full quote within 24 hours. A $5 design deposit locks your spot in the queue — counted as credit toward your final order.</p>
+    <p>Pick your garment, material, and drop your logo exactly where you want it. We'll quote you within 24 hours. $5 design deposit locks your spot.</p>
   </div>
 </div>
 
@@ -239,10 +264,47 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
       </div>
     </div>
 
-    <!-- STEP 3: CONTACT FORM -->
-    <div class="step-block" id="step3" style="transition-delay:.2s">
+    <!-- STEP 3: LOGO PLACEMENT -->
+    <div class="step-block" id="step3logo" style="transition-delay:.15s">
       <div class="step-head">
         <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Logo Placement</div>
+          <div class="step-sub">Upload your logo, then drag it exactly where you want it on the garment. (Optional but helpful!)</div>
+        </div>
+      </div>
+
+      <!-- Upload zone -->
+      <div class="logo-drop" id="logoDrop">
+        <input type="file" id="logoFile" accept="image/*" onchange="handleLogoUpload(this)">
+        <div class="logo-drop-icon">☁</div>
+        <p><strong>Click to upload your logo</strong> or drag &amp; drop here</p>
+        <p class="logo-drop-sub">PNG with transparent background works best · JPG or SVG also accepted</p>
+      </div>
+
+      <!-- Canvas placement tool (appears after upload) -->
+      <div id="canvasSection" style="display:none">
+        <p class="logo-filename" id="logoFilename"></p>
+        <div class="side-toggle">
+          <button class="side-btn active" id="frontBtn" onclick="setSide('front',this)">Front</button>
+          <button class="side-btn" id="backBtn" onclick="setSide('back',this)">Back</button>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="placementCanvas" width="300" height="400"></canvas>
+          <p class="canvas-hint">Drag your logo to position it on the garment</p>
+          <div class="resize-row">
+            <label>Logo size</label>
+            <input type="range" id="logoSize" min="20" max="220" value="80" oninput="resizeLogo(this.value)">
+          </div>
+          <p class="placement-note">Your logo position will be captured and sent with your order request.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: CONTACT FORM -->
+    <div class="step-block" id="step4" style="transition-delay:.2s">
+      <div class="step-head">
+        <div class="step-num">4</div>
         <div>
           <div class="step-title">Your Order Details</div>
           <div class="step-sub">We'll reach out within 24 hours with a full quote.</div>
@@ -282,24 +344,25 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
             <input class="f-input" type="text" id="fColors" placeholder="e.g. Black with red logo, or all black…">
           </div>
           <div class="f-group">
-            <label class="f-label" for="fNotes">Design Notes &amp; Logo Info</label>
-            <textarea class="f-input" id="fNotes" placeholder="Tell us what you want on the garment — logo placement, any text, sizes needed, embroidery vs. screen print, or upload reference images via email to tagline.space@gmail.com after submitting."></textarea>
+            <label class="f-label" for="fNotes">Additional Notes</label>
+            <textarea class="f-input" id="fNotes" placeholder="Sizes needed, embroidery vs. screen print, text on garment, any other details…"></textarea>
           </div>
         </div>
 
         <div class="deposit-wrap">
           <div class="dep-fee">$5 Design Deposit</div>
           <div class="dep-fee-sub">Locks your spot in our queue · Applied as credit toward your final order · Non-refundable if you decide not to order</div>
-          <div class="dep-pricing">Final price depends on embroidery style, logo size, and decoration type. We'll send your full quote within 24 hrs — no surprises. Production is 3–5 weeks after approval.</div>
+          <div class="dep-pricing">Final price depends on decoration type, logo size, and quantity. We'll send your full quote within 24 hrs — no surprises. Production 3–5 weeks after approval.</div>
           <button class="btn-submit" onclick="submitRequest()">Submit Design Request →</button>
-          <p style="font-size:.68rem;color:var(--muted);margin-top:12px;text-align:center;line-height:1.6">By submitting you'll be directed to pay the $5 deposit via Stripe to confirm your spot.</p>
+          <p style="font-size:.68rem;color:var(--muted);margin-top:12px;text-align:center;line-height:1.6">After submitting, pay the $5 deposit via Stripe to confirm your spot in the queue.</p>
         </div>
       </div>
 
       <!-- SUCCESS -->
       <div class="success-box" id="successBox">
         <span class="icon">🙏</span>
-        <p><strong>Design request received!</strong><br>Pay the $5 deposit below to lock your spot in our queue. It counts as credit toward your final order. We'll reach out within 24 hrs with your custom quote.</p>
+        <p><strong>Design request received!</strong><br>Your logo placement has been saved. Pay the $5 deposit below to lock your spot — we'll reply within 24 hrs with your quote. Please also reply to our email with your original logo file attached.</p>
+        <img id="placementPreview" class="placement-preview" alt="Your logo placement" style="display:none">
         <a href="https://buy.stripe.com/7sY28r5Fm1nA9xR301asg0h" target="_blank" rel="noopener" class="btn-deposit">Pay $5 Design Deposit →</a>
         <p style="font-size:.68rem;color:var(--muted);margin-top:14px;line-height:1.6">Non-refundable if you decide not to order. Philippians 4:13.</p>
       </div>
@@ -388,6 +451,7 @@ function pickGarment(el, name){
   document.querySelectorAll('.g-card').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
   selGarment=name;
+  if(logoImg) drawCanvas();
 }
 
 function pickMaterial(el, name){
@@ -396,19 +460,308 @@ function pickMaterial(el, name){
   selMaterial=name;
 }
 
+/* LOGO DRAG PLACEMENT */
+const canvas = document.getElementById('placementCanvas');
+const ctx = canvas.getContext('2d');
+let logoImg = null;
+let logoFileSrc = '';
+let logoX = 110, logoY = 120, logoW = 80, logoH = 80;
+let isDragging = false;
+let dragOffX = 0, dragOffY = 0;
+let curSide = 'front';
+// Store positions for front/back independently
+const sideState = {
+  front: { x:110, y:120 },
+  back:  { x:110, y:120 }
+};
+
+/* Drag-and-drop file into upload zone */
+const logoDrop = document.getElementById('logoDrop');
+['dragover','dragleave','drop'].forEach(evt=>{
+  logoDrop.addEventListener(evt, e=>{
+    e.preventDefault();
+    logoDrop.classList.toggle('drag', evt==='dragover');
+    if(evt==='drop' && e.dataTransfer.files[0]) processLogoFile(e.dataTransfer.files[0]);
+  });
+});
+
+function handleLogoUpload(input){
+  if(input.files[0]) processLogoFile(input.files[0]);
+}
+
+function processLogoFile(file){
+  document.getElementById('logoFilename').textContent = '📎 ' + file.name;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      logoImg = img;
+      logoFileSrc = e.target.result;
+      // Scale logo to reasonable default size
+      const scale = Math.min(80/img.width, 80/img.height);
+      logoW = Math.round(img.width * scale);
+      logoH = Math.round(img.height * scale);
+      document.getElementById('logoSize').value = Math.max(logoW, logoH);
+      logoX = Math.round((300 - logoW) / 2);
+      logoY = 120;
+      sideState.front = { x:logoX, y:logoY };
+      sideState.back  = { x:logoX, y:logoY };
+      document.getElementById('canvasSection').style.display = 'block';
+      drawCanvas();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function setSide(side, btn){
+  // Save current position
+  sideState[curSide] = { x:logoX, y:logoY };
+  curSide = side;
+  // Restore saved position for new side
+  logoX = sideState[side].x;
+  logoY = sideState[side].y;
+  document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  drawCanvas();
+}
+
+function resizeLogo(val){
+  const sz = parseInt(val);
+  if(!logoImg) return;
+  const ratio = logoImg.width / logoImg.height;
+  if(ratio >= 1){ logoW = sz; logoH = Math.round(sz / ratio); }
+  else          { logoH = sz; logoW = Math.round(sz * ratio); }
+  drawCanvas();
+}
+
+/* Draw garment silhouette + logo on canvas */
+function drawCanvas(){
+  const W = 300, H = 400;
+  ctx.clearRect(0, 0, W, H);
+
+  /* Background */
+  ctx.fillStyle = '#0C0C1E';
+  ctx.fillRect(0, 0, W, H);
+
+  /* Grid lines (subtle) */
+  ctx.strokeStyle = 'rgba(255,255,255,.04)';
+  ctx.lineWidth = 1;
+  for(let x=0; x<=W; x+=50){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+  for(let y=0; y<=H; y+=50){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+  const gt = (selGarment||'').toLowerCase();
+  const isBottom = gt==='shorts'||gt==='sweatpants';
+  const isTrack = gt==='tracksuit';
+
+  ctx.strokeStyle = 'rgba(224,32,32,0.55)';
+  ctx.lineWidth = 2;
+  ctx.fillStyle = 'rgba(224,32,32,0.06)';
+
+  if(isBottom && gt==='shorts'){
+    drawShorts();
+  } else if(isBottom && gt==='sweatpants'){
+    drawSweatpants();
+  } else {
+    /* Default: torso garment (hoodie, crewneck, tee, tracksuit) */
+    const hasHood = gt==='hoodie'||gt==='tracksuit';
+    drawTorso(hasHood, curSide);
+  }
+
+  /* Front/Back label */
+  ctx.fillStyle = 'rgba(224,32,32,0.4)';
+  ctx.font = '500 10px Inter, sans-serif';
+  ctx.letterSpacing = '0.15em';
+  ctx.textAlign = 'center';
+  ctx.fillText(curSide === 'front' ? 'FRONT VIEW' : 'BACK VIEW', W/2, H - 12);
+
+  /* Draw logo */
+  if(logoImg){
+    ctx.drawImage(logoImg, logoX, logoY, logoW, logoH);
+    /* Drag handle outline */
+    ctx.strokeStyle = 'rgba(224,32,32,0.7)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4,3]);
+    ctx.strokeRect(logoX, logoY, logoW, logoH);
+    ctx.setLineDash([]);
+  }
+}
+
+function drawTorso(hasHood, side){
+  const W=300, H=400;
+  ctx.beginPath();
+  if(hasHood && side==='front'){
+    /* Hood */
+    ctx.moveTo(108, 70);
+    ctx.bezierCurveTo(108, 30, 150, 14, 150, 14);
+    ctx.bezierCurveTo(150, 14, 192, 30, 192, 70);
+  }
+  /* Shoulder line */
+  ctx.moveTo(108, 70);
+  ctx.lineTo(50, 95);
+  /* Left sleeve */
+  ctx.lineTo(18, 115);
+  ctx.lineTo(14, 190);
+  ctx.lineTo(46, 195);
+  /* Left body */
+  ctx.lineTo(44, 370);
+  /* Bottom */
+  ctx.lineTo(256, 370);
+  /* Right body */
+  ctx.lineTo(254, 195);
+  /* Right sleeve */
+  ctx.lineTo(286, 190);
+  ctx.lineTo(282, 115);
+  ctx.lineTo(250, 95);
+  /* Shoulder line */
+  ctx.lineTo(192, 70);
+
+  if(hasHood && side==='front'){
+    ctx.bezierCurveTo(192, 30, 150, 14, 150, 14);
+    ctx.bezierCurveTo(150, 14, 108, 30, 108, 70);
+  } else {
+    /* Neckline */
+    ctx.quadraticCurveTo(150, side==='back' ? 50 : 58, 108, 70);
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  /* Cuffs */
+  ctx.strokeStyle = 'rgba(224,32,32,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(14,190); ctx.lineTo(46,195); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(254,195); ctx.lineTo(286,190); ctx.stroke();
+  /* Hem */
+  ctx.beginPath(); ctx.moveTo(44,370); ctx.lineTo(256,370); ctx.stroke();
+  /* Pocket for hoodie */
+  if(hasHood && side==='front'){
+    ctx.strokeStyle='rgba(224,32,32,0.25)'; ctx.lineWidth=1.2;
+    ctx.strokeRect(102, 290, 96, 52);
+    ctx.beginPath(); ctx.moveTo(150,290); ctx.lineTo(150,342); ctx.stroke();
+  }
+  /* Back seam */
+  if(side==='back'){
+    ctx.strokeStyle='rgba(224,32,32,0.2)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(150,70); ctx.lineTo(150,370); ctx.stroke();
+  }
+}
+
+function drawShorts(){
+  const W=300, H=400;
+  /* Waistband */
+  ctx.fillStyle='rgba(224,32,32,0.1)';
+  ctx.fillRect(70, 60, 160, 28);
+  ctx.strokeRect(70, 60, 160, 28);
+  /* Left leg */
+  ctx.beginPath();
+  ctx.moveTo(70,88); ctx.lineTo(52,260); ctx.lineTo(138,260); ctx.lineTo(150,88);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  /* Right leg */
+  ctx.beginPath();
+  ctx.moveTo(230,88); ctx.lineTo(248,260); ctx.lineTo(162,260); ctx.lineTo(150,88);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  /* Hem lines */
+  ctx.strokeStyle='rgba(224,32,32,0.3)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(52,260); ctx.lineTo(138,260); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(162,260); ctx.lineTo(248,260); ctx.stroke();
+}
+
+function drawSweatpants(){
+  const W=300, H=400;
+  /* Waistband */
+  ctx.fillStyle='rgba(224,32,32,0.1)';
+  ctx.fillRect(65, 40, 170, 28);
+  ctx.strokeRect(65, 40, 170, 28);
+  /* Left leg */
+  ctx.beginPath();
+  ctx.moveTo(65,68); ctx.lineTo(44,370); ctx.lineTo(140,370); ctx.lineTo(150,68);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  /* Right leg */
+  ctx.beginPath();
+  ctx.moveTo(235,68); ctx.lineTo(256,370); ctx.lineTo(160,370); ctx.lineTo(150,68);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  /* Ankle cuffs */
+  ctx.strokeStyle='rgba(224,32,32,0.3)'; ctx.lineWidth=1.2;
+  ctx.beginPath(); ctx.moveTo(44,370); ctx.lineTo(140,370); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(160,370); ctx.lineTo(256,370); ctx.stroke();
+}
+
+/* Canvas pointer events (mouse + touch) */
+function getCanvasPos(e){
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const src = e.touches ? e.touches[0] : e;
+  return {
+    x: (src.clientX - rect.left) * scaleX,
+    y: (src.clientY - rect.top)  * scaleY
+  };
+}
+
+function onPointerDown(e){
+  if(!logoImg) return;
+  const {x, y} = getCanvasPos(e);
+  if(x >= logoX && x <= logoX+logoW && y >= logoY && y <= logoY+logoH){
+    isDragging = true;
+    dragOffX = x - logoX;
+    dragOffY = y - logoY;
+    e.preventDefault();
+  }
+}
+function onPointerMove(e){
+  if(!isDragging) return;
+  e.preventDefault();
+  const {x, y} = getCanvasPos(e);
+  logoX = Math.max(0, Math.min(x - dragOffX, canvas.width  - logoW));
+  logoY = Math.max(0, Math.min(y - dragOffY, canvas.height - logoH));
+  drawCanvas();
+}
+function onPointerUp(){
+  if(isDragging){
+    isDragging = false;
+    sideState[curSide] = { x:logoX, y:logoY };
+  }
+}
+
+canvas.addEventListener('mousedown',  onPointerDown);
+canvas.addEventListener('mousemove',  onPointerMove);
+canvas.addEventListener('mouseup',    onPointerUp);
+canvas.addEventListener('touchstart', onPointerDown, {passive:false});
+canvas.addEventListener('touchmove',  onPointerMove, {passive:false});
+canvas.addEventListener('touchend',   onPointerUp);
+
+/* Describe placement in human-readable text */
+function describePlacement(x, y, w, h, side){
+  const cx = x + w/2, cy = y + h/2;
+  const px = cx / 300, py = cy / 400;
+  const horiz = px < 0.38 ? 'left' : px > 0.62 ? 'right' : 'center';
+  const vert  = py < 0.3  ? 'upper' : py > 0.65 ? 'lower' : 'mid';
+  return side.charAt(0).toUpperCase()+side.slice(1)+' — '+vert+' '+horiz;
+}
+
+/* SUBMIT */
 function submitRequest(){
-  const name=document.getElementById('fName').value.trim();
-  const email=document.getElementById('fEmail').value.trim();
-  if(!name){alert('Please enter your name.');document.getElementById('fName').focus();return;}
-  if(!email||!email.includes('@')){alert('Please enter a valid email.');document.getElementById('fEmail').focus();return;}
+  const name  = document.getElementById('fName').value.trim();
+  const email = document.getElementById('fEmail').value.trim();
+  if(!name) { alert('Please enter your name.'); document.getElementById('fName').focus(); return; }
+  if(!email||!email.includes('@')) { alert('Please enter a valid email.'); document.getElementById('fEmail').focus(); return; }
 
-  const qty=document.getElementById('fQty').value;
-  const colors=document.getElementById('fColors').value.trim();
-  const notes=document.getElementById('fNotes').value.trim();
-  const phone=document.getElementById('fPhone').value.trim();
+  const qty    = document.getElementById('fQty').value;
+  const colors = document.getElementById('fColors').value.trim();
+  const notes  = document.getElementById('fNotes').value.trim();
+  const phone  = document.getElementById('fPhone').value.trim();
 
-  const subject=encodeURIComponent('Custom Order — '+(selGarment||'Custom Garment')+' ('+(selMaterial||'Material TBD')+')');
-  const body=encodeURIComponent(
+  /* Capture canvas snapshot */
+  let placementDesc = '(no logo uploaded)';
+  let canvasDataUrl = '';
+  if(logoImg){
+    placementDesc = describePlacement(logoX, logoY, logoW, logoH, curSide);
+    canvasDataUrl = canvas.toDataURL('image/png');
+  }
+
+  const subject = encodeURIComponent('Custom Order — '+(selGarment||'Custom Garment')+' ('+(selMaterial||'Material TBD')+')');
+  const body = encodeURIComponent(
     'Name: '+name+'\n'+
     'Email: '+email+'\n'+
     'Phone/IG: '+(phone||'—')+'\n'+
@@ -416,13 +769,27 @@ function submitRequest(){
     'Material: '+(selMaterial||'—')+'\n'+
     'Qty: '+qty+'\n'+
     'Colors: '+(colors||'—')+'\n'+
-    'Notes: '+(notes||'—')
+    'Logo Placement: '+placementDesc+'\n'+
+    'Notes: '+(notes||'—')+'\n\n'+
+    '(Logo placement image will open separately — please save and attach it to this email, along with your original logo file.)'
   );
-  window.open('mailto:tagline.space@gmail.com?subject='+subject+'&body='+body,'_blank');
+  window.open('mailto:tagline.space@gmail.com?subject='+subject+'&body='+body, '_blank');
 
-  document.getElementById('formWrap').style.display='none';
-  document.getElementById('successBox').style.display='block';
-  document.getElementById('step3').scrollIntoView({behavior:'smooth',block:'start'});
+  /* Open canvas image in new tab so customer can save + attach it */
+  if(canvasDataUrl){
+    const preview = document.getElementById('placementPreview');
+    preview.src = canvasDataUrl;
+    preview.style.display = 'block';
+    /* Also trigger download */
+    const a = document.createElement('a');
+    a.href = canvasDataUrl;
+    a.download = 'logo-placement.png';
+    a.click();
+  }
+
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('successBox').style.display = 'block';
+  document.getElementById('step4').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 </script>
 </body>
