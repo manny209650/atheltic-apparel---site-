@@ -1104,8 +1104,9 @@ const PRODUCTS = [
     desc:'Heavyweight fleece · 430g',price:55,badge:'Best Seller',
     cats:['all','mens','hoodies'],
     img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/rn-image_picker_lib_temp_b5276775-498d-4315-8251-37c7234be6b4.jpg?v=1768722983',
-    colors:['black'],
-    sizes:['S','M','L','XL','2XL']
+    colors:['black','white','yellow','burgundy','red','ocean-blue','purple-rain'],
+    sizes:['XS','S','M','L','XL'],
+    soldOut:['yellow-S','yellow-XS','burgundy-S','burgundy-XS','red-S','red-XS','ocean-blue-S','ocean-blue-XS','purple-rain-S','purple-rain-XS','black-S','black-XS']
   },
   {
     handle:'3-d-embroidery-hoodie',title:'3-D Embroidery Hoodie',
@@ -1163,7 +1164,7 @@ const PRODUCTS = [
     colors:['white','orange','brown','cream','gray'],
     imgs:{white:'images/products/mens-box-tee-white.jpg',orange:'images/products/mens-box-tee-orange.jpg',brown:'images/products/mens-box-tee-brown.jpg',cream:'images/products/mens-box-tee-cream.jpg',gray:'images/products/mens-box-tee-gray.jpg'},
     sizes:['S','M','L','XL','2XL','3XL'],
-    soldOut:['orange-S','orange-XL','gray-S','brown-S','cream-S']
+    soldOut:['orange-S','gray-S','cream-S']
   },
   {
     handle:'boxy-tanks',title:'BOXY Tanks',
@@ -1227,10 +1228,11 @@ const PRODUCTS = [
     handle:'men-s-2-for-1-compression-shorts',title:'2-in-1 Compression Shorts',
     desc:'Nylon · Running training basketball shorts',price:40,badge:'',
     cats:['all','mens','bottoms'],
-    img:'https://cdn.shopify.com/s/files/1/0697/8365/0480/files/IMG-0022.jpg?v=1761716083',
-    colors:['black','grey'],
+    img:'images/products/mens-2in1-compression-shorts-black.jpg',
+    colors:['black','white','grey'],
+    imgs:{black:'images/products/mens-2in1-compression-shorts-black.jpg',white:'images/products/mens-2in1-compression-shorts-white.jpg',grey:'images/products/mens-2in1-compression-shorts-black.jpg'},
     sizes:['S','M','L','XL'],
-    soldOut:['black-S','grey-M']
+    soldOut:['black-S','white-S','grey-S','grey-L','grey-XL']
   },
   {
     handle:'womens-cargo-pants',title:"Women's Cargo Pants",
@@ -1276,7 +1278,8 @@ const PRODUCTS = [
     img:'images/products/mens-compression-pants-black.jpg',
     colors:['black','white'],
     imgs:{black:'images/products/mens-compression-pants-black.jpg',white:'images/products/mens-compression-pants-white.jpg'},
-    sizes:['S','M','L','XL']
+    sizes:['S','M','L','XL'],
+    soldOut:[]
   },
   {
     handle:'mens-single-leg-compression-pants',title:"Men's Single Leg Compression Pants",
