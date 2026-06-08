@@ -72,7 +72,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:f
 .step-sub{font-size:.78rem;color:var(--muted);margin-top:3px}
 
 /* GARMENT CARDS */
-.garment-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.garment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media(max-width:680px){.garment-grid{grid-template-columns:repeat(2,1fr)}}
 .g-card{background:var(--card);border:2px solid var(--border-soft);padding:32px 16px 24px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s,transform .2s;display:flex;flex-direction:column;align-items:center;gap:12px;user-select:none}
 .g-card:hover{border-color:rgba(224,32,32,.4);background:rgba(224,32,32,.04);transform:translateY(-3px)}
@@ -192,20 +192,30 @@ footer{background:var(--space3);padding:64px 60px 36px;border-top:1px solid rgba
           <div class="g-name">Hoodie</div>
           <div class="g-desc">Pullover or zip-up</div>
         </div>
+        <div class="g-card" onclick="pickGarment(this,'Crewneck')">
+          <div class="g-icon">👔</div>
+          <div class="g-name">Crewneck</div>
+          <div class="g-desc">Classic crew sweatshirt</div>
+        </div>
         <div class="g-card" onclick="pickGarment(this,'T-Shirt')">
           <div class="g-icon">👕</div>
           <div class="g-name">T-Shirt</div>
           <div class="g-desc">Box-fit or athletic cut</div>
         </div>
-        <div class="g-card" onclick="pickGarment(this,'Crewneck')">
-          <div class="g-icon">🫱</div>
-          <div class="g-name">Crewneck</div>
-          <div class="g-desc">Classic crew sweatshirt</div>
+        <div class="g-card" onclick="pickGarment(this,'Shorts')">
+          <div class="g-icon">🩳</div>
+          <div class="g-name">Shorts</div>
+          <div class="g-desc">Athletic, basketball or casual</div>
         </div>
         <div class="g-card" onclick="pickGarment(this,'Sweatpants')">
-          <div class="g-icon">🩲</div>
+          <div class="g-icon">👖</div>
           <div class="g-name">Sweatpants</div>
           <div class="g-desc">Joggers or straight leg</div>
+        </div>
+        <div class="g-card" onclick="pickGarment(this,'Tracksuit')">
+          <div class="g-icon">🏃</div>
+          <div class="g-name">Tracksuit</div>
+          <div class="g-desc">Matching jacket + pants set</div>
         </div>
       </div>
     </div>
