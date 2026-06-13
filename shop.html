@@ -1137,7 +1137,7 @@ const PRODUCTS = [
     colors:['charcoal','white','black'],
     imgs:{charcoal:'images/products/3d-embroidery-tee-charcoal.jpg',white:'images/products/3d-embroidery-tee-white.jpg',black:'images/products/3d-embroidery-tee-black.jpg'},
     sizes:['S','M','L','XL'],
-    soldOut:['white-M']
+    soldOut:['white-M','charcoal-M']
   },
   {
     handle:'boxe-tees',title:"Box'e Tee's",
@@ -1561,6 +1561,13 @@ function submitContact(e){
 
 /* ── INITIAL RENDER ── */
 renderShop();
+
+/* scroll to products on load if no other hash */
+if(!location.hash || location.hash==='#home'){
+  window.addEventListener('load',()=>{
+    document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  });
+}
 
 /* ── AUTO-OPEN PRODUCT FROM URL ── */
 (function(){
