@@ -1,4 +1,4 @@
-const CACHE = 'tagline-v14';
+const CACHE = 'tagline-v15';
 
 const CORE = [
   '/index.html',
@@ -7,6 +7,7 @@ const CORE = [
   '/wealth.html',
   '/god.html',
   '/community.html',
+  '/flights.html',
   '/lang.js',
   '/tipjar.js',
   '/manifest.json',
