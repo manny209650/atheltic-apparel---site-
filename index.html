@@ -42,7 +42,7 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
 .sub{font-size:clamp(.8rem,.9rem,1rem);color:rgba(255,255,255,.38);max-width:300px;line-height:1.8;margin:0 auto 28px}
 
 /* ── HUB CARDS ── */
-.hubs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:460px;margin:0 auto}
+.hubs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:520px;margin:0 auto}
 .hub{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;min-height:100px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;touch-action:manipulation;cursor:pointer}
 .hub:active{transform:scale(.94);opacity:.85}
 .hub-icon{font-size:clamp(1.5rem,5vw,1.9rem);line-height:1}
@@ -54,6 +54,8 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
 .hub-health:hover{border-color:rgba(0,220,100,.55);background:rgba(0,180,80,.18);box-shadow:0 6px 22px rgba(0,180,80,.25);transform:translateY(-3px)}
 .hub-wealth{border-color:rgba(220,170,0,.22);background:rgba(200,150,0,.07)}
 .hub-wealth:hover{border-color:rgba(220,170,0,.55);background:rgba(200,150,0,.18);box-shadow:0 6px 22px rgba(200,150,0,.25);transform:translateY(-3px)}
+.hub-flights{border-color:rgba(30,144,255,.22);background:rgba(30,144,255,.07)}
+.hub-flights:hover{border-color:rgba(30,144,255,.55);background:rgba(30,144,255,.18);box-shadow:0 6px 22px rgba(30,144,255,.25);transform:translateY(-3px)}
 
 /* ── DAILY DROP SECTION ── */
 .daily-section{position:relative;z-index:10;width:100%;max-width:500px;margin-top:44px}
@@ -75,7 +77,7 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
 /* ── MOBILE ── */
 @media(max-width:480px){
   body{padding:32px 16px 50px}
-  .hubs{gap:8px}
+  .hubs{gap:8px;grid-template-columns:repeat(2,1fr)}
   .hub{padding:14px 8px;min-height:90px;gap:6px}
   .hub-sub{display:none}
   .daily-grid{grid-template-columns:1fr}
@@ -133,6 +135,11 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
       <span class="hub-icon">💰</span>
       <span class="hub-name" data-i18n="idx-wealth-name">Wealth Hub</span>
       <span class="hub-sub" data-i18n="idx-wealth-sub">Money · Build<br>Grow</span>
+    </a>
+    <a href="flights.html" class="hub hub-flights">
+      <span class="hub-icon">✈️</span>
+      <span class="hub-name" data-i18n="idx-flights-name">Flight Deals</span>
+      <span class="hub-sub" data-i18n="idx-flights-sub">SFO · SMF · OAK<br>SCK · MCE</span>
     </a>
   </div>
   <a href="community.html" style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:14px 32px;background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,107,0,.05));border:1px solid rgba(255,107,0,.4);color:#FF8C00;font-family:-apple-system,'Helvetica Neue',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;touch-action:manipulation">
