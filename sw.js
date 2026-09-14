@@ -1,4 +1,4 @@
-const CACHE = 'tagline-v17';
+const CACHE = 'tagline-v18';
 
 const CORE = [
   '/index.html',

@@ -423,7 +423,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 .float{animation:float 5s ease-in-out infinite}
 /* ── DISCOUNTS ── */
 .discounts-sec{padding:100px 60px;background:var(--space2)}
-.discounts-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto}
+.discounts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:1200px;margin:0 auto}
 .discount-card{background:var(--card);border:1px solid var(--border);padding:48px 40px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:20px}
 .discount-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad)}
 .discount-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(224,32,32,.1);border:1px solid rgba(224,32,32,.3);padding:5px 14px;border-radius:100px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);width:fit-content}
@@ -777,6 +777,24 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
           <strong>You're In!</strong>
           Check your inbox — your <span style="color:var(--red)">10% off code</span> is on its way. Welcome to the family.
         </div>
+      </div>
+    </div>
+
+
+    <!-- AMBASSADOR: JORGE -->
+    <div class="discount-card reveal" style="transition-delay:.2s">
+      <span class="discount-badge">🤝 Ambassador Code</span>
+      <div>
+        <div class="discount-pct">15%</div>
+        <div class="discount-title">OFF — Jorge's Exclusive Code</div>
+      </div>
+      <p class="discount-desc">Sent by Jorge? Use his code at checkout for 15% off your entire order. Valid on all Tagline gear.</p>
+      <div style="margin-top:8px">
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(224,32,32,.08);border:1px dashed rgba(224,32,32,.4);padding:18px 22px;">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.12em;color:#fff">JORGE15</span>
+          <button onclick="navigator.clipboard.writeText('JORGE15').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1800)})" style="margin-left:auto;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-grad);color:#fff;border:none;padding:8px 18px;cursor:pointer;font-weight:700">Copy</button>
+        </div>
+        <p style="font-size:.72rem;color:var(--muted);margin-top:10px;line-height:1.5">Enter code <strong style="color:var(--text)">JORGE15</strong> at checkout to apply your 15% discount.</p>
       </div>
     </div>
 
