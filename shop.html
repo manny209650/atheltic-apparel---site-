@@ -27,6 +27,8 @@
   --card: #0D0D25;
   --border-gold: rgba(224,32,32,0.18);
   --border-soft: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.07);
+  --red: #E02020;
   --gold-grad: linear-gradient(135deg,#FF3333 0%,#E02020 50%,#AA0000 100%);
   --blue-grad: linear-gradient(135deg,#4361EE 0%,#1B3DD8 100%);
   --hero-bg: radial-gradient(ellipse at 50% 0%,#0B1640 0%,#060610 50%,#020208 100%);
@@ -1323,7 +1325,9 @@ function filterShop(cat, btn){
     });
   }
   renderShop(cat);
-  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  const shopEl=document.getElementById('shop');
+  const rect=shopEl.getBoundingClientRect();
+  if(rect.top<-10||rect.top>200) shopEl.scrollIntoView({behavior:'smooth'});
 }
 
 const STRIPE_TIP={'5':'https://buy.stripe.com/8x2fZhgk04zM7pJ8klasg0f','10':'https://buy.stripe.com/4gMbJ1d7O9U6dO7445asg0g','25':'https://buy.stripe.com/4gMbJ11p6c2e5hBdEFasg0i'};
@@ -1486,9 +1490,7 @@ function submitCustomOrder(e){
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body: JSON.stringify(data)
   }).then(()=>{
-    if(STRIPE_CUSTOM_LOCK && STRIPE_CUSTOM_LOCK!=='https://buy.stripe.com/7sY28r5Fm1nA9xR301asg0h'){
-      window.open(STRIPE_CUSTOM_LOCK,'_blank');
-    }
+    window.open(STRIPE_CUSTOM_LOCK,'_blank');
     form.innerHTML='<p style="text-align:center;padding:40px 0;color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.8">Order locked! ✅<br><span style="color:rgba(195,149,60,.8);font-size:.75rem;letter-spacing:.1em">Complete the $5 payment in the new tab.<br>We\'ll send your custom quote within 24 hours.</span></p>';
   }).catch(()=>{
     alert('Something went wrong. Please try again.');
