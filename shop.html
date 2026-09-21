@@ -714,7 +714,7 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
 <section style="background:var(--space2);padding:100px 60px;text-align:center" id="builder">
   <span class="section-label reveal" style="display:block">Create Merch</span>
   <h2 class="section-title reveal" style="text-align:center">Custom <span class="g">Kingdom Gear</span></h2>
-  <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.85;max-width:620px;margin:0 auto 48px;transition-delay:.1s">Upload your logos, pick colors, set placement — front and back. We'll send a full quote within 24 hours. A $5 design deposit locks your spot in our queue and counts as credit toward your order.</p>
+  <p class="reveal" style="font-size:.95rem;color:var(--muted);line-height:1.85;max-width:620px;margin:0 auto 48px;transition-delay:.1s">Upload your logos, pick colors, set placement — front and back. We'll send a full quote within 24 hours. A $10 design deposit locks your spot in our queue and counts as credit toward your order.</p>
   <div class="reveal" style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-bottom:64px;transition-delay:.15s">
     <a href="builder.html" class="btn-primary" style="font-size:.75rem;padding:20px 52px">Design Your Gear →</a>
     <a href="#contact" class="btn-ghost" style="font-size:.75rem;padding:20px 52px">Ask a Question</a>
@@ -732,8 +732,8 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
     </div>
     <div class="feat-card">
       <div class="feat-card-icon">💬</div>
-      <p class="feat-card-title">$5 Design Deposit</p>
-      <p class="feat-card-desc">Submit your design request and pay $5 to lock your spot. Applied as credit toward your order. Quote in 24 hrs.</p>
+      <p class="feat-card-title">$10 Design Deposit</p>
+      <p class="feat-card-desc">Submit your design request and pay $10 to lock your spot. Applied as credit toward your order. Quote in 24 hrs.</p>
     </div>
   </div>
 </section>
@@ -1031,9 +1031,9 @@ footer{background:var(--space3);padding:80px 60px 40px;border-top:1px solid rgba
         <textarea class="co-textarea" name="co_notes" placeholder="Anything else — player names, numbers, specific placements, reference images, etc."></textarea>
       </div>
       <div class="co-fee-note">
-        <strong>$5 Order Lock Fee</strong> — This reserves your spot and confirms your request is real. After submitting, you'll be redirected to pay $5 via Stripe. Your custom quote will be sent to your email within 24 hours. The $5 goes toward your final order.
+        <strong>$10 Order Lock Fee</strong> — This reserves your spot and confirms your request is real. After submitting, you'll be redirected to pay $10 via Stripe. Your custom quote will be sent to your email within 24 hours. The $10 goes toward your final order.
       </div>
-      <button class="co-submit" type="submit">Lock My Order & Pay $5 →</button>
+      <button class="co-submit" type="submit">Lock My Order & Pay $10 →</button>
     </form>
   </div>
 </div>
@@ -1303,7 +1303,7 @@ function renderShop(filter='all'){
           <p class="prod-name">${p.title}</p>
           <p class="prod-cat">${p.desc}</p>
         </div>
-        ${p.badge==='Custom' ? `<p class="prod-price" style="font-size:.9rem">$5 LOCK · QUOTE</p>` : `<p class="prod-price">$${p.price}</p>`}
+        ${p.badge==='Custom' ? `<p class="prod-price" style="font-size:.9rem">$10 LOCK · QUOTE</p>` : `<p class="prod-price">$${p.price}</p>`}
       </div>
       <div class="prod-dots">
         ${p.colors.map(c=>`<span class="prod-dot" style="background:${gc(c)}" title="${c.replace(/-/g,' ')}"></span>`).join('')}
@@ -1491,7 +1491,7 @@ function submitCustomOrder(e){
     body: JSON.stringify(data)
   }).then(()=>{
     window.open(STRIPE_CUSTOM_LOCK,'_blank');
-    form.innerHTML='<p style="text-align:center;padding:40px 0;color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.8">Order locked! ✅<br><span style="color:rgba(195,149,60,.8);font-size:.75rem;letter-spacing:.1em">Complete the $5 payment in the new tab.<br>We\'ll send your custom quote within 24 hours.</span></p>';
+    form.innerHTML='<p style="text-align:center;padding:40px 0;color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.8">Order locked! ✅<br><span style="color:rgba(195,149,60,.8);font-size:.75rem;letter-spacing:.1em">Complete the $10 payment in the new tab.<br>We\'ll send your custom quote within 24 hours.</span></p>';
   }).catch(()=>{
     alert('Something went wrong. Please try again.');
   });
