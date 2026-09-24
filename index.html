@@ -264,23 +264,11 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
   document.getElementById('scripture-r').textContent = '— ' + verse.ref;
   var bgRef = encodeURIComponent(verse.ref);
   document.getElementById('scripture-bglink').href = 'https://www.biblegateway.com/verse/en/' + bgRef;
+  var bgRef = encodeURIComponent(verse.ref);
+  document.getElementById('scripture-bglink').href = 'https://www.biblegateway.com/verse/en/' + bgRef;
   document.getElementById('scripture-more').innerHTML =
-    '<p style=”font-size:.63rem;line-height:1.75;color:rgba(255,255,255,.52)”>Tap the link below to read this passage in full context and explore the surrounding chapter.</p>';
-
-  // Try live API for today's specific verse of the day
-  fetch('https://labs.bible.org/api/?passage=votd&type=json')
-    .then(function(r){return r.json();})
-    .then(function(d){
-      var v=d[0];
-      document.getElementById('scripture-v').textContent='”'+v.text+'”';
-      document.getElementById('scripture-r').textContent='— '+v.bookname+' '+v.chapter+':'+v.verse;
-      var ref2=encodeURIComponent(v.bookname+' '+v.chapter+':'+v.verse);
-      document.getElementById('scripture-bglink').href='https://www.biblegateway.com/verse/en/'+ref2;
-      document.getElementById('scripture-more').innerHTML=
-        '<p style=”font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(160,90,255,.55);margin-bottom:5px”>'+v.bookname+' '+v.chapter+':'+v.verse+'</p>'+
-        '<p style=”font-size:.63rem;line-height:1.8;color:rgba(255,255,255,.52)”>From the Book of '+v.bookname+', Chapter '+v.chapter+'. Tap below to read the full chapter and surrounding context on BibleGateway.</p>';
-    })
-    .catch(function(){/* keep daily.js verse */});
+    '<p style=”font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(160,90,255,.55);margin-bottom:6px”>What it means</p>' +
+    '<p style=”font-size:.68rem;line-height:1.82;color:rgba(255,255,255,.72)”>' + verse.breakdown + '</p>';
 })();
 
 /* ── THE JUICE — today's full recipe from daily.js ── */
