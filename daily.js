@@ -264,6 +264,121 @@ const DAILY_STOCK = [
   {ticker:'MELI',name:'MercadoLibre',emoji:'🌎',thesis:'The Amazon + PayPal of Latin America. 700M+ people in the region are coming online and buying their first financial services and ecommerce products. MercadoLibre is in 18 countries with a near-monopoly position.',metric:'Revenue growing 35%+ · Fintech arm growing 40%+ · Latin America barely started'},
 ];
 
+const STOCK_SECTORS = [
+  {
+    sector: 'AI Software',
+    emoji: '🤖',
+    theme: 'Companies turning AI compute into sustainable cash flow',
+    stocks: [
+      { ticker: 'NVDA', name: 'NVIDIA', emoji: '🧠', exchange: 'nasdaq',
+        thesis: 'Every AI model — ChatGPT, Claude, Gemini — trains on NVIDIA GPUs. Blackwell demand outpaces supply. The AI infrastructure buildout has years of runway remaining.',
+        metric: 'Data center revenue +400% YoY · Supply constrained · Unbreakable CUDA moat' },
+      { ticker: 'PLTR', name: 'Palantir', emoji: '🤖', exchange: 'nyse',
+        thesis: 'AI software for government and enterprise — one of the only profitable AI-pure-play companies in the world. U.S. government AI contracts are accelerating.',
+        metric: 'Revenue +30% YoY · Profitable · DOGE-era gov\'t contracts expanding rapidly' },
+      { ticker: 'APP', name: 'AppLovin', emoji: '📱', exchange: 'nasdaq',
+        thesis: 'AI-powered mobile ad platform. Their AXON AI engine targets ads so accurately customers immediately reinvest — creating a powerful revenue flywheel.',
+        metric: 'Revenue +40% · Software platform +75% · Expanding into e-commerce ads' }
+    ]
+  },
+  {
+    sector: 'Cybersecurity',
+    emoji: '🛡️',
+    theme: 'Digital defense is not optional — it\'s a tax on the internet',
+    stocks: [
+      { ticker: 'CRWD', name: 'CrowdStrike', emoji: '🛡️', exchange: 'nasdaq',
+        thesis: 'Falcon platform is the gold standard in enterprise security. As AI creates more attack vectors, demand for best-in-class protection accelerates with it.',
+        metric: 'ARR +30% · 98% gross retention · 130%+ net dollar retention' },
+      { ticker: 'NET', name: 'Cloudflare', emoji: '☁️', exchange: 'nyse',
+        thesis: 'The internet runs on Cloudflare. Powers security, performance, and now AI inference for millions of sites. Every new AI app is a potential customer.',
+        metric: 'Revenue +25% · 130%+ net retention · AI inference expansion underway' },
+      { ticker: 'S', name: 'SentinelOne', emoji: '🔐', exchange: 'nyse',
+        thesis: 'AI-native cybersecurity built from scratch — not legacy software with AI bolted on. Autonomous threat detection with no human operator required.',
+        metric: 'Revenue +30% · Enterprise wins accelerating · AI-native architecture advantage' }
+    ]
+  },
+  {
+    sector: 'Consumer Growth',
+    emoji: '🛍️',
+    theme: 'Next-gen brands capturing the loyalty of younger consumers',
+    stocks: [
+      { ticker: 'CAVA', name: 'CAVA Group', emoji: '🥙', exchange: 'nyse',
+        thesis: 'Mediterranean fast-casual growing the way Chipotle did in 2010. Younger generations choosing real food over fast food — CAVA is leading that shift.',
+        metric: 'Same-store sales +double digits · 300 locations scaling to 1,000+' },
+      { ticker: 'CELH', name: 'Celsius Holdings', emoji: '🥤', exchange: 'nasdaq',
+        thesis: 'Premium fitness energy drink displacing Monster and Red Bull. PepsiCo distribution unlocked nationwide shelf space. International expansion barely started.',
+        metric: 'Revenue +25%+ · International just beginning · Healthier category winner' },
+      { ticker: 'DUOL', name: 'Duolingo', emoji: '🦉', exchange: 'nasdaq',
+        thesis: 'World\'s #1 language app — 90M+ daily users. Subscription growing 40%+. AI is making the product dramatically more effective and addictive every month.',
+        metric: 'Subscription revenue +45% · DAU +54% YoY · AI product improvements daily' }
+    ]
+  },
+  {
+    sector: 'Semiconductors',
+    emoji: '⚙️',
+    theme: 'The hardware layer every AI workload on the planet runs on',
+    stocks: [
+      { ticker: 'AMD', name: 'AMD', emoji: '⚙️', exchange: 'nasdaq',
+        thesis: 'Only credible NVIDIA competitor in AI chips. MI300X accelerators landing at customers who can\'t get NVIDIA supply. Also dominates server CPUs with EPYC.',
+        metric: 'AI GPU revenue +100%+ · EPYC server share growing · Data center wins' },
+      { ticker: 'ARM', name: 'ARM Holdings', emoji: '💻', exchange: 'nasdaq',
+        thesis: 'Nearly every AI chip, smartphone, and server CPU runs on ARM architecture. They collect royalties on every chip shipped — AI hardware scaling = ARM royalties scaling.',
+        metric: 'Royalty revenue +14%+ · AI chip adoption accelerating globally · Royalty model' },
+      { ticker: 'ALAB', name: 'Astera Labs', emoji: '🔌', exchange: 'nasdaq',
+        thesis: 'The unsung hero of the AI buildout. Makes connectivity chips that let GPUs communicate at speed inside data centers. NVIDIA GPUs need Astera to reach full performance.',
+        metric: 'Revenue +100%+ · Every new AI data center is a direct customer' }
+    ]
+  },
+  {
+    sector: 'Space & Frontier Tech',
+    emoji: '🚀',
+    theme: 'High-conviction frontier bets on the industries defining the next decade',
+    stocks: [
+      { ticker: 'RKLB', name: 'Rocket Lab', emoji: '🚀', exchange: 'nasdaq',
+        thesis: 'SpaceX competitor with 50+ successful launches. Expanding into medium rockets (Neutron) and satellite manufacturing. Space infrastructure is a multi-decade theme.',
+        metric: 'Revenue +55% · 100+ launch contracts in backlog · Neutron rocket in dev' },
+      { ticker: 'IONQ', name: 'IonQ', emoji: '⚛️', exchange: 'nyse',
+        thesis: 'Leader in trapped-ion quantum computing — the most stable approach. Partnerships with AWS, Google, and Microsoft. Early mover advantage in the next computing revolution.',
+        metric: 'Revenue +100%+ · Government + cloud contracts expanding · Category leader' },
+      { ticker: 'RXRX', name: 'Recursion Pharma', emoji: '🧬', exchange: 'nasdaq',
+        thesis: 'AI drug discovery company using machine learning to find drugs 10x faster. Partnered with NVIDIA to build the world\'s largest biology AI model.',
+        metric: 'NVIDIA partnership · 50+ drug programs in pipeline · Platform approach' }
+    ]
+  },
+  {
+    sector: 'Fintech & Digital Finance',
+    emoji: '💳',
+    theme: 'The next generation of financial infrastructure being built right now',
+    stocks: [
+      { ticker: 'COIN', name: 'Coinbase', emoji: '🪙', exchange: 'nasdaq',
+        thesis: 'The regulated U.S. crypto exchange. Every institutional Bitcoin ETF needs custody. Regulatory clarity is now a tailwind. Base L2 expanding ecosystem rapidly.',
+        metric: 'Institutional custody growing · Regulatory tailwinds increasing · Base L2' },
+      { ticker: 'HOOD', name: 'Robinhood', emoji: '📈', exchange: 'nasdaq',
+        thesis: 'Evolving from a stock app into a full financial platform for millennials and Gen Z. Adding crypto, retirement accounts, credit cards, and prediction markets.',
+        metric: 'Gold subscribers +90% · Revenue diversifying rapidly · Platform expanding' },
+      { ticker: 'MELI', name: 'MercadoLibre', emoji: '🌎', exchange: 'nasdaq',
+        thesis: 'Amazon + PayPal of Latin America. 700M+ people coming online buying their first ecommerce and financial products. Near-monopoly across 18 countries.',
+        metric: 'Revenue +35% · Fintech arm +40% · LatAm digital adoption still early' }
+    ]
+  },
+  {
+    sector: 'Platforms & Marketplaces',
+    emoji: '🌐',
+    theme: 'Network-effect moats that compound value with every new user added',
+    stocks: [
+      { ticker: 'SHOP', name: 'Shopify', emoji: '🛍️', exchange: 'nyse',
+        thesis: 'Operating system for modern commerce powering $200B+ in transactions. Expanding into B2B, offline, and financial services. Every small business going digital is a prospect.',
+        metric: 'Revenue +25% · Merchant solutions growing faster · Offline expansion' },
+      { ticker: 'RDDT', name: 'Reddit', emoji: '💬', exchange: 'nyse',
+        thesis: 'The internet\'s most authentic data source. Google pays for AI training data. Ad business is early-stage with massive room to grow into its user base.',
+        metric: 'DAU +40% · Google AI licensing deal · Ad revenue just accelerating' },
+      { ticker: 'UBER', name: 'Uber', emoji: '🚗', exchange: 'nyse',
+        thesis: 'Quietly became one of the most profitable platforms in tech. As robotaxis roll out, Uber\'s network becomes the marketplace that self-driving cars list on.',
+        metric: 'FCF positive · EBITDA margins expanding · Waymo robotaxi partnership' }
+    ]
+  }
+];
+
 function renderDailyCard(type){
   const configs = {
     verse: {
@@ -315,6 +430,29 @@ function renderDailyCard(type){
           <p class="dc-tip">📊 ${item.metric}</p>
           <p style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:10px;line-height:1.5">Not financial advice. Do your own research. Investing involves risk.</p>
         </details>`
+    },
+    stocks: {
+      item: getDailyItem(STOCK_SECTORS),
+      color: 'rgba(195,149,60,.06)',
+      border: 'rgba(195,149,60,.4)',
+      tag: null,
+      render: (sector) => `
+        <p class="dc-date" style="color:rgba(195,149,60,.7)">${sector.emoji} ${sector.sector.toUpperCase()} · TOP 3 TO WATCH</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);margin-bottom:20px;font-style:italic;line-height:1.5">${sector.theme}</p>
+        ${sector.stocks.map((s,i) => `
+          ${i > 0 ? '<div class="dc-stock-divider"></div>' : ''}
+          <div class="dc-stock-row">
+            <div class="dc-stock-top">
+              <span class="dc-ticker" style="font-size:1.2rem">${s.emoji} $${s.ticker}</span>
+              <span class="dc-ticker-name">${s.name}</span>
+              <a href="https://www.wallstreetzen.com/stocks/us/${s.exchange}/${s.ticker.toLowerCase()}/analysis" target="_blank" rel="noopener" class="dc-wsz-btn">WSZ Deep Dive →</a>
+            </div>
+            <p class="dc-text" style="font-size:.82rem;font-style:normal;margin:6px 0 4px;color:rgba(255,255,255,.78)">${s.thesis}</p>
+            <p class="dc-tip">📊 ${s.metric}</p>
+          </div>
+        `).join('')}
+        <p style="font-size:.55rem;color:rgba(255,255,255,.22);margin-top:20px;line-height:1.5;text-align:center;border-top:1px solid rgba(255,255,255,.06);padding-top:14px">Not financial advice. Do your own research. All investing involves risk of loss.</p>
+      `
     }
   };
   const c = configs[type];
@@ -350,6 +488,12 @@ function initDailyContent(){
   .dc-juice-name{font-family:'Bebas Neue',cursive,sans-serif;font-size:1.3rem;letter-spacing:.08em;color:#fff;margin-bottom:14px}
   .dc-ticker{font-family:'Bebas Neue',cursive,sans-serif;font-size:1.5rem;letter-spacing:.1em;color:#FFB800;margin-bottom:14px}
   .dc-ticker-name{font-size:.9rem;color:rgba(255,255,255,.5);letter-spacing:.05em;font-family:'Inter',sans-serif;font-weight:400}
+  .dc-stock-row{padding:10px 0}
+  .dc-stock-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .dc-stock-top .dc-ticker{margin-bottom:0;font-size:1.2rem}
+  .dc-stock-divider{height:1px;background:rgba(255,255,255,.07);margin:4px 0}
+  .dc-wsz-btn{font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:#FFB800;text-decoration:none;border:1px solid rgba(255,184,0,.35);padding:4px 11px;margin-left:auto;transition:border-color .2s,background .2s;white-space:nowrap}
+  .dc-wsz-btn:hover{border-color:#FFB800;background:rgba(255,184,0,.08)}
   .dc-details{margin-top:4px}
   .dc-summary{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,200,100,.8);cursor:pointer;font-weight:700;list-style:none;padding:6px 0}
   .dc-details[open] .dc-summary{color:rgba(0,200,100,1)}
