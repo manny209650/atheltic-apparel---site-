@@ -177,7 +177,7 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
       <details class="daily-xp">
         <summary>
           <div id="juice-name" class="daily-card-body">Loading…</div>
-          <div class="daily-tap-hint">Tap for full recipe →</div>
+          <div class="daily-tap-hint">Tap for benefits & price →</div>
         </summary>
         <div class="daily-expand-body">
           <div id="juice-recipe"></div>
@@ -276,13 +276,12 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
   var j = getDailyItem(DAILY_JUICE);
   document.getElementById('juice-name').innerHTML =
     '<span style=”font-weight:700;color:rgba(0,210,80,.95)”>'+j.emoji+' '+j.name+'</span>'+
-    (j.cost ? ' <span style=”font-size:.58rem;color:rgba(255,255,255,.32)”>'+j.cost+'</span>' : '');
+    '<p style=”font-size:.64rem;line-height:1.72;color:rgba(255,255,255,.62);margin-top:7px”>'+j.ingredients+'</p>';
   document.getElementById('juice-recipe').innerHTML =
-    '<p style=”font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,210,80,.55);margin-bottom:4px”>Ingredients</p>'+
-    '<p style=”font-size:.66rem;line-height:1.75;color:rgba(255,255,255,.72);margin-bottom:10px”>'+j.ingredients+'</p>'+
-    '<p style=”font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,210,80,.55);margin-bottom:4px”>Why it works</p>'+
-    '<p style=”font-size:.66rem;line-height:1.75;color:rgba(255,255,255,.58);margin-bottom:10px”>'+j.benefits+'</p>'+
-    '<p style=”font-size:.62rem;color:rgba(255,215,0,.65);font-style:italic;line-height:1.65”>💡 '+j.tip+'</p>';
+    '<p style=”font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,210,80,.55);margin-bottom:4px”>What it does for you</p>'+
+    '<p style=”font-size:.66rem;line-height:1.75;color:rgba(255,255,255,.65);margin-bottom:10px”>'+j.benefits+'</p>'+
+    '<p style=”font-size:.62rem;color:rgba(255,215,0,.65);font-style:italic;line-height:1.65;margin-bottom:8px”>💡 '+j.tip+'</p>'+
+    (j.cost ? '<p style=”font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,210,80,.45);margin-top:2px”>Estimated cost: <span style=”color:rgba(255,255,255,.55);font-style:normal;text-transform:none;letter-spacing:0”>'+j.cost+'</span></p>' : '');
 })();
 </script>
 <style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
