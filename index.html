@@ -68,6 +68,15 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
 .d-health{background:rgba(0,170,70,.08);border:1px solid rgba(0,200,80,.2)}
 .d-health .daily-card-label{color:rgba(0,210,80,.8)}
 .d-wealth{background:rgba(200,150,0,.08);border:1px solid rgba(220,170,0,.2);margin-top:10px;overflow:hidden}
+.daily-tap-hint{font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:9px;transition:color .2s}
+.daily-xp[open] .daily-tap-hint{display:none}
+.daily-xp summary{list-style:none;-webkit-appearance:none;cursor:pointer;outline:none;display:block}
+.daily-xp summary::-webkit-details-marker{display:none}
+.daily-hub-link{font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;display:inline-block;margin-top:8px;opacity:.8;transition:opacity .2s}
+.daily-hub-link:hover{opacity:1}
+.d-faith-link{color:rgba(160,90,255,.75)}
+.d-health-link{color:rgba(0,210,80,.75)}
+.daily-expand-body{margin-top:13px;padding-top:13px;border-top:1px solid rgba(255,255,255,.08)}
 .d-wealth .daily-card-label{color:rgba(220,170,0,.8)}
 .tradingview-widget-container{width:100%;min-height:44px}
 .tradingview-widget-container__widget{width:100%}
@@ -146,19 +155,36 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
   <div class="daily-grid">
 
     <!-- FAITH -->
-    <a href="god.html" class="daily-card d-faith" style="text-decoration:none;display:block;cursor:pointer">
+    <div class="daily-card d-faith">
       <div class="daily-card-label">✝ Scripture</div>
-      <div id="scripture-v" class="daily-card-body">Loading…</div>
-      <div id="scripture-r" class="daily-card-ref"></div>
-      <div style="font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(160,90,255,.6);margin-top:10px">Tap to explore faith hub →</div>
-    </a>
+      <details class="daily-xp">
+        <summary>
+          <div id="scripture-v" class="daily-card-body">Loading…</div>
+          <div id="scripture-r" class="daily-card-ref"></div>
+          <div class="daily-tap-hint">Tap for full verse →</div>
+        </summary>
+        <div class="daily-expand-body">
+          <div id="scripture-more"></div>
+          <a id="scripture-bglink" href="https://www.biblegateway.com" target="_blank" rel="noopener" class="daily-hub-link d-faith-link">Read in BibleGateway →</a>
+          <a href="god.html" class="daily-hub-link d-faith-link" style="display:block;margin-top:5px">Explore Faith Hub →</a>
+        </div>
+      </details>
+    </div>
 
     <!-- HEALTH -->
-    <a href="health.html" class="daily-card d-health" style="text-decoration:none;display:block;cursor:pointer">
+    <div class="daily-card d-health">
       <div class="daily-card-label">💪 The Juice</div>
-      <div id="juice-v" class="daily-card-body">Loading…</div>
-      <div style="font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,210,80,.6);margin-top:10px">Tap to explore health hub →</div>
-    </a>
+      <details class="daily-xp">
+        <summary>
+          <div id="juice-name" class="daily-card-body">Loading…</div>
+          <div class="daily-tap-hint">Tap for full recipe →</div>
+        </summary>
+        <div class="daily-expand-body">
+          <div id="juice-recipe"></div>
+          <a href="health.html" class="daily-hub-link d-health-link" style="display:block;margin-top:8px">Explore Health Hub →</a>
+        </div>
+      </details>
+    </div>
 
   </div>
 
@@ -191,6 +217,7 @@ body{width:100%;background:#06060F;min-height:100vh;display:flex;flex-direction:
 
 </div>
 
+<script src="daily.js"></script>
 <script>
 /* ── STARS ── */
 for(var i=0;i<100;i++){
@@ -230,64 +257,45 @@ var ufo=document.getElementById('ufo'),uX=-80,uT=0;
   uT+=0.016;requestAnimationFrame(animUFO);
 })();
 
-/* ── SCRIPTURE ── */
-var scriptFallbacks=[
-  {t:'”I can do all things through Christ who strengthens me.”',r:'Philippians 4:13'},
-  {t:'”The Lord is my shepherd; I shall not want.”',r:'Psalm 23:1'},
-  {t:'”For God so loved the world that He gave His only Son.”',r:'John 3:16'},
-  {t:'”Trust in the Lord with all your heart and lean not on your own understanding.”',r:'Proverbs 3:5'},
-  {t:'”Be strong and courageous. Do not be afraid; do not be discouraged.”',r:'Joshua 1:9'},
-  {t:'”But those who hope in the Lord will renew their strength.”',r:'Isaiah 40:31'},
-  {t:'”Commit to the Lord whatever you do, and He will establish your plans.”',r:'Proverbs 16:3'},
-  {t:'”No weapon formed against you shall prosper.”',r:'Isaiah 54:17'},
-  {t:'”The Lord your God is with you wherever you go.”',r:'Joshua 1:9'},
-  {t:'”With man this is impossible, but with God all things are possible.”',r:'Matthew 19:26'},
-  {t:'”Delight yourself in the Lord and He will give you the desires of your heart.”',r:'Psalm 37:4'},
-  {t:'”Cast all your anxiety on Him because He cares for you.”',r:'1 Peter 5:7'},
-  {t:'”For I know the plans I have for you, plans to prosper you and not to harm you.”',r:'Jeremiah 29:11'},
-  {t:'”Seek first His kingdom and His righteousness, and all these things will be given to you.”',r:'Matthew 6:33'}
-];
-fetch('https://labs.bible.org/api/?passage=votd&type=json')
-  .then(function(r){return r.json();})
-  .then(function(d){
-    var v=d[0];
-    document.getElementById('scripture-v').textContent='”'+v.text+'”';
-    document.getElementById('scripture-r').textContent=v.bookname+' '+v.chapter+':'+v.verse;
-  })
-  .catch(function(){
-    var f=scriptFallbacks[Math.floor(Math.random()*scriptFallbacks.length)];
-    document.getElementById('scripture-v').textContent=f.t;
-    document.getElementById('scripture-r').textContent=f.r;
-  });
+/* ── SCRIPTURE — daily.js verse, with live API override ── */
+(function(){
+  var verse = getDailyItem(DAILY_VERSES);
+  document.getElementById('scripture-v').textContent = '”' + verse.text + '”';
+  document.getElementById('scripture-r').textContent = '— ' + verse.ref;
+  var bgRef = encodeURIComponent(verse.ref);
+  document.getElementById('scripture-bglink').href = 'https://www.biblegateway.com/verse/en/' + bgRef;
+  document.getElementById('scripture-more').innerHTML =
+    '<p style=”font-size:.63rem;line-height:1.75;color:rgba(255,255,255,.52)”>Tap the link below to read this passage in full context and explore the surrounding chapter.</p>';
 
-/* ── THE JUICE — random every visit ── */
-var juices=[
-  'Celery juice on an empty stomach feeds the liver with sodium cluster salts and reduces deep inflammation.',
-  'Wild blueberries have the highest antioxidant count of any food — they repair the brain and bind toxic heavy metals.',
-  'Lemon water first thing in the morning flushes the lymphatic system and activates your body\'s natural detox.',
-  'Sea moss provides 92 of the 102 minerals your body needs. Add it to your smoothies daily.',
-  'Ginger reduces cortisol levels. Add it to your morning routine to lower stress and fight inflammation.',
-  'Spirulina is the most nutrient-dense food on Earth — protein, iron, B12, and chlorophyll all in one.',
-  'Turmeric + black pepper activates curcumin absorption by 2000%. Anti-inflammatory powerhouse.',
-  'Raw honey coats and repairs the gut lining. A spoonful before bed supports overnight healing.',
-  'Chlorophyll builds your blood. Drink it daily for oxygen-rich, clean, alkaline circulation.',
-  'Cucumber is 96% water and flushes the kidneys. Juice it with mint for adrenal support.',
-  'Burdock root purifies the blood and clears chronic skin conditions from the inside out.',
-  'Papaya enzymes break down undigested protein and reduce gut inflammation after heavy meals.',
-  'Dandelion root tea cleanses the liver and supports bile flow for deeper fat digestion.',
-  'Watermelon juice flushes the kidneys and drops uric acid — great for joint pain and recovery.',
-  'Aloe vera juice heals the intestinal tract and feeds the beneficial bacteria your gut needs.',
-  'Moringa leaf has 7x the vitamin C of oranges and 4x the calcium of milk. Real superfood.',
-  'Black seed oil (Nigella sativa) has been used for 2,000 years — antiviral, anti-inflammatory, immune booster.',
-  'Activated charcoal binds toxins in the gut and pulls them out before they hit your bloodstream.',
-  'Pineapple core contains the highest bromelain concentration — eat the core for joint healing.',
-  'Nettle leaf tea is loaded with iron and silica — supports hair growth and iron-deficiency fatigue.',
-  'Dragon fruit feeds the gut microbiome with prebiotic fiber that beneficial bacteria thrive on.',
-  'Beetroot juice opens blood vessels and delivers nitric oxide straight to working muscles.',
-  'Maca root from the Andes balances hormones, boosts energy, and supports athletic endurance.',
-  'Coconut water has the same electrolyte profile as human plasma — best natural rehydration drink.'
-];
-document.getElementById('juice-v').textContent=juices[Math.floor(Math.random()*juices.length)];
+  // Try live API for today's specific verse of the day
+  fetch('https://labs.bible.org/api/?passage=votd&type=json')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var v=d[0];
+      document.getElementById('scripture-v').textContent='”'+v.text+'”';
+      document.getElementById('scripture-r').textContent='— '+v.bookname+' '+v.chapter+':'+v.verse;
+      var ref2=encodeURIComponent(v.bookname+' '+v.chapter+':'+v.verse);
+      document.getElementById('scripture-bglink').href='https://www.biblegateway.com/verse/en/'+ref2;
+      document.getElementById('scripture-more').innerHTML=
+        '<p style=”font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(160,90,255,.55);margin-bottom:5px”>'+v.bookname+' '+v.chapter+':'+v.verse+'</p>'+
+        '<p style=”font-size:.63rem;line-height:1.8;color:rgba(255,255,255,.52)”>From the Book of '+v.bookname+', Chapter '+v.chapter+'. Tap below to read the full chapter and surrounding context on BibleGateway.</p>';
+    })
+    .catch(function(){/* keep daily.js verse */});
+})();
+
+/* ── THE JUICE — today's full recipe from daily.js ── */
+(function(){
+  var j = getDailyItem(DAILY_JUICE);
+  document.getElementById('juice-name').innerHTML =
+    '<span style=”font-weight:700;color:rgba(0,210,80,.95)”>'+j.emoji+' '+j.name+'</span>'+
+    (j.cost ? ' <span style=”font-size:.58rem;color:rgba(255,255,255,.32)”>'+j.cost+'</span>' : '');
+  document.getElementById('juice-recipe').innerHTML =
+    '<p style=”font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,210,80,.55);margin-bottom:4px”>Ingredients</p>'+
+    '<p style=”font-size:.66rem;line-height:1.75;color:rgba(255,255,255,.72);margin-bottom:10px”>'+j.ingredients+'</p>'+
+    '<p style=”font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,210,80,.55);margin-bottom:4px”>Why it works</p>'+
+    '<p style=”font-size:.66rem;line-height:1.75;color:rgba(255,255,255,.58);margin-bottom:10px”>'+j.benefits+'</p>'+
+    '<p style=”font-size:.62rem;color:rgba(255,215,0,.65);font-style:italic;line-height:1.65”>💡 '+j.tip+'</p>';
+})();
 </script>
 <style>.goog-te-banner-frame,.skiptranslate{display:none!important}body{top:0!important}</style>
 <div id="google_translate_element" style="display:none;height:0;overflow:hidden;visibility:hidden"></div>
