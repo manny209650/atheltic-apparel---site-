@@ -99,6 +99,19 @@ tfoot td{font-weight:600;color:#fff;border-top:1px solid var(--border)}
 .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
 .del:hover{color:var(--red-bright)}
 .empty{color:var(--muted);font-size:.85rem;padding:14px 0}
+svg.render,svg.plan{display:block;width:100%;height:auto}
+figure{margin:0 0 16px}
+figcaption{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.concept-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.concept-head p{color:var(--muted);font-size:.85rem;max-width:640px}
+.features{list-style:none;font-size:.85rem}
+.features li{padding:6px 0 6px 18px;position:relative;border-bottom:1px solid rgba(255,255,255,.05)}
+.features li::before{content:'';position:absolute;left:0;top:14px;width:8px;height:2px;background:var(--red)}
+.kv{display:flex;justify-content:space-between;gap:12px;font-size:.85rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.kv b{color:#fff;font-weight:600}
+tr.total td{font-weight:600;color:#fff;border-top:1px solid var(--border)}
+tr.good td{color:var(--ok)}
+td.best{color:var(--ok);font-weight:600}
 footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;border-top:1px solid var(--border)}
 </style>
 </head>
@@ -122,9 +135,11 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 
 <div class="tabs" role="tablist">
   <button class="tab active" data-tab="design">1 · Design & Budget</button>
-  <button class="tab" data-tab="timeline">2 · Timeline</button>
-  <button class="tab" data-tab="permits">3 · Permits & Legal</button>
-  <button class="tab" data-tab="expenses">4 · Expenses</button>
+  <button class="tab" data-tab="concepts">2 · Modern Concepts</button>
+  <button class="tab" data-tab="compare">3 · Sites & China Import</button>
+  <button class="tab" data-tab="timeline">4 · Timeline</button>
+  <button class="tab" data-tab="permits">5 · Permits & Legal</button>
+  <button class="tab" data-tab="expenses">6 · Expenses</button>
 </div>
 
 <main>
@@ -151,12 +166,16 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
       <div><label for="lotPrice">Land cost (USD, 0 if owned)</label><input id="lotPrice" type="number" min="0" step="1000" data-field="lotPrice"/></div>
       <div><label for="fx">Exchange rate (GTQ per USD)</label><input id="fx" type="number" min="1" step="0.01" data-field="fx"/></div>
       <div><label for="contingency">Contingency (%)</label><input id="contingency" type="number" min="0" max="40" data-field="contingency"/></div>
+      <div><label for="glassM2">Glazing — windows & sliders (m²)</label><input id="glassM2" type="number" min="0" step="5" data-field="glassM2"/></div>
+      <div><label for="marbleM2">Marble floors & surfaces (m²)</label><input id="marbleM2" type="number" min="0" step="5" data-field="marbleM2"/></div>
+      <div><label for="solarKw">Solar system size (kW)</label><input id="solarKw" type="number" min="0" step="1" data-field="solarKw"/></div>
     </div>
     <div class="grid" style="margin-top:14px">
       <label class="check"><input type="checkbox" data-field="pool"/> Swimming pool</label>
       <label class="check"><input type="checkbox" data-field="solar"/> Solar power system</label>
       <label class="check"><input type="checkbox" data-field="well"/> Water well + cistern</label>
       <label class="check"><input type="checkbox" data-field="wall"/> Perimeter wall & gate</label>
+      <label class="check"><input type="checkbox" data-field="importChina"/> Import glass, solar & marble from China</label>
     </div>
     <p class="note" id="regionNote"></p>
   </div>
@@ -178,6 +197,46 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
       </table>
     </div>
     <p class="note">Planning-grade estimates only (±25%). Prices vary with site slope, access roads, material transport and contractor. Get at least three written quotes (cotizaciones) from licensed contractors before committing.</p>
+  </div>
+</section>
+
+<!-- ============ CONCEPTS ============ -->
+<section class="panel" id="panel-concepts">
+  <h2>Modern Villa Concepts</h2>
+  <p class="lead">Two contemporary concepts, one for each site: concept illustrations and schematic floor plans to brief an architect with. They are not construction drawings — a colegiado architect and structural engineer must produce stamped plans to AGIES seismic norms.</p>
+  <div id="conceptList"></div>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section class="panel" id="panel-compare">
+  <h2>Puerto San José vs Lake Atitlán</h2>
+  <p class="lead">Each site is priced with its own concept (Casa Pacífico at the coast, Casa Atitlán on the lake), your contingency and exchange rate, and the China-import assumptions below. Edit land prices to match real listings.</p>
+  <div class="card">
+    <div class="grid">
+      <div><label for="cmpFinish">Finish level</label>
+        <select id="cmpFinish" data-field="cmpFinish">
+          <option value="standard">Standard</option><option value="premium">Premium</option><option value="luxury">Luxury</option>
+        </select></div>
+      <div><label for="landSJ">Land — Puerto San José (USD)</label><input id="landSJ" type="number" min="0" step="1000" data-site="sanjose"/></div>
+      <div><label for="landAT">Land — Lake Atitlán (USD)</label><input id="landAT" type="number" min="0" step="1000" data-site="atitlan"/></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Side by Side</h3>
+    <div class="table-wrap"><table id="cmpTable"></table></div>
+  </div>
+  <div class="card">
+    <h3>Total by Finish Level (with China import)</h3>
+    <div class="table-wrap"><table id="cmpMatrix"></table></div>
+  </div>
+  <div class="card">
+    <h3>Landed Cost of the China Shipment</h3>
+    <div id="landed"></div>
+  </div>
+  <div class="card">
+    <h3>China Import Assumptions</h3>
+    <div class="grid" id="impInputs"></div>
+    <p class="note">These defaults are placeholders — replace them with real supplier quotes and freight rates. Guatemala uses the Central American tariff (SAC) and has no free-trade agreement with China, so standard duty (DAI) rates apply, plus 12% IVA on the value including freight and duty. Solar equipment is often 0% duty; glass and stone usually carry duty. Have a licensed <em>agente aduanero</em> confirm the tariff codes before you order. Sea freight Shanghai → Puerto Quetzal is typically 30–45 days. Order tempered or laminated safety glass sized to final measurements taken on site, 5–10% spare marble, and pay for a third-party inspection before the container is loaded. Local prices are supplied-and-installed; imported items add the installation rates shown.</p>
   </div>
 </section>
 
@@ -269,16 +328,30 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 // Base structural+finish cost per m² in USD (Guatemala, 2026 planning figures).
 const FINISH = {standard:{m2:450,label:'Standard'}, premium:{m2:700,label:'Premium'}, luxury:{m2:1050,label:'Luxury'}};
 
+// mult: local cost multiplier · dur: build-duration multiplier · extras: site-specific works
+// inland: trucking cost (USD) for one container from Puerto Quetzal to the site.
 const REGIONS = {
-  antigua:  {label:'Antigua Guatemala / Sacatepéquez', mult:1.20, note:'Antigua’s historic zone requires design approval from the Consejo Nacional para la Protección de La Antigua Guatemala (CNPAG): colonial façades, clay-tile roofs and height limits. Expect longer permitting.'},
-  atitlan:  {label:'Lake Atitlán (Panajachel, San Marcos…)', mult:1.15, note:'Materials often arrive by boat or steep roads, adding transport cost. Lakeshore setbacks and wastewater rules are strictly enforced by AMSCLAE.'},
-  guatecity:{label:'Guatemala City / Carretera a El Salvador', mult:1.00, note:'Best contractor and material availability. Gated communities (condominios) often have their own architectural rules and approval fees.'},
-  pacific:  {label:'Pacific coast (Monterrico, El Paredón…)', mult:1.08, note:'Salt air and heat: specify corrosion-resistant fittings, and good ventilation. Beachfront land within the protected coastal strip is state-owned and usually leased, not titled.'},
-  peten:    {label:'Petén (Flores, Tikal area)', mult:1.10, note:'Remote logistics raise material prices. Check protected-area (CONAP) restrictions, especially near the Maya Biosphere Reserve.'},
-  xela:     {label:'Quetzaltenango (Xela) / Highlands', mult:0.95, note:'Cooler climate: budget for fireplaces or heating rather than A/C. Good local labour availability.'}
+  sanjose:  {label:'Puerto San José / Iztapa (Escuintla)', mult:1.03, dur:1.0, inland:350, inlandLabel:'Puerto Quetzal → site, ~15 km',
+             extras:[{id:'coastal', label:'Coastal upgrades — deeper footings on sand, 316 stainless, marine-grade aluminium', pct:.04}],
+             note:'About 15 minutes from Puerto Quetzal, Guatemala’s main Pacific container port, so imported materials arrive cheaply. Hot and humid year-round: budget for A/C, shade and cross-ventilation. Sandy soil and a high water table call for a soil study and deeper footings. The Constitution (Art. 122) reserves to the State a 3 km strip inland from the high-tide line, so many beach lots are OCRET leases rather than titled land — check before buying.'},
+  atitlan:  {label:'Lake Atitlán (Panajachel, San Marcos…)', mult:1.15, dur:1.2, inland:2200, inlandLabel:'Puerto Quetzal → lake, ~190 km + transfer to small trucks or boat',
+             extras:[{id:'slope', label:'Slope works — retaining walls, terracing & drainage', pct:.08},
+                     {id:'wwtp',  label:'Wastewater treatment plant (AMSCLAE rules)', usd:7000}],
+             note:'Volcano views and a spring-like climate (no A/C needed). Steep volcanic slopes mean retaining walls, careful drainage (storms Stan 2005 and Agatha 2010 caused major landslides) and a longer build. Containers can’t reach most lake villages, so goods are transloaded to small trucks or boats. AMSCLAE enforces wastewater treatment, and the 200 m around the shore is State reserve (OCRET).'},
+  antigua:  {label:'Antigua Guatemala / Sacatepéquez', mult:1.20, dur:1.1, inland:1100, inlandLabel:'Puerto Quetzal → Antigua, ~110 km',
+             note:'Antigua’s historic zone requires design approval from the Consejo Nacional para la Protección de La Antigua Guatemala (CNPAG): colonial façades, clay-tile roofs and height limits. Expect longer permitting.'},
+  guatecity:{label:'Guatemala City / Carretera a El Salvador', mult:1.00, dur:1.0, inland:900, inlandLabel:'Puerto Quetzal → Guatemala City, ~100 km',
+             note:'Best contractor and material availability. Gated communities (condominios) often have their own architectural rules and approval fees.'},
+  pacific:  {label:'Pacific coast (Monterrico, El Paredón…)', mult:1.08, dur:1.0, inland:600, inlandLabel:'Puerto Quetzal → coast, 40–90 km',
+             extras:[{id:'coastal', label:'Coastal upgrades — deeper footings on sand, 316 stainless, marine-grade aluminium', pct:.04}],
+             note:'Salt air and heat: specify corrosion-resistant fittings and good ventilation. Beachfront land within the 3 km coastal reserve is often State-owned and leased through OCRET, not titled.'},
+  peten:    {label:'Petén (Flores, Tikal area)', mult:1.10, dur:1.1, inland:3500, inlandLabel:'Puerto Quetzal → Petén, ~550 km',
+             note:'Remote logistics raise material prices. Check protected-area (CONAP) restrictions, especially near the Maya Biosphere Reserve.'},
+  xela:     {label:'Quetzaltenango (Xela) / Highlands', mult:0.95, dur:1.0, inland:1800, inlandLabel:'Puerto Quetzal → Xela, ~200 km',
+             note:'Cooler climate: budget for fireplaces or heating rather than A/C. Good local labour availability.'}
 };
 
-// Share of the base build cost per category.
+// Share of the base build cost per category. Glass, marble and solar are priced separately.
 const CATEGORIES = [
   {id:'design',  label:'Architect, engineering & soil study', share:.08},
   {id:'site',    label:'Site prep & earthworks',              share:.05},
@@ -287,64 +360,123 @@ const CATEGORIES = [
   {id:'roof',    label:'Roof (losa / teja)',                  share:.10},
   {id:'elec',    label:'Electrical',                          share:.07},
   {id:'plumb',   label:'Plumbing & septic',                   share:.07},
-  {id:'finish',  label:'Finishes — floors, tile, paint',      share:.15},
-  {id:'carp',    label:'Doors, windows & carpentry',          share:.08},
+  {id:'finish',  label:'Finishes — tile, plaster, paint',     share:.09},
+  {id:'carp',    label:'Doors & carpentry',                   share:.04},
   {id:'kitchen', label:'Kitchen & bathrooms fixtures',        share:.06}
 ];
 const EXTRAS = {
   pool:  {label:'Swimming pool',            usd:22000},
-  solar: {label:'Solar power system',       usd:9000},
   well:  {label:'Water well + cistern',     usd:12000},
   wall:  {label:'Perimeter wall & gate',    usd:15000}
 };
+
+// Materials that can be sourced locally or imported from China.
+// vol (m³) and kg are per unit incl. crating, for sizing the container.
+const MATERIALS = [
+  {id:'glass',  label:'Glass windows & sliders',             unit:'m²', qty:st => +st.glassM2 || 0, breakage:true,  vol:.12, kg:35},
+  {id:'marble', label:'Marble floors & surfaces',            unit:'m²', qty:st => +st.marbleM2 || 0, breakage:true, vol:.035, kg:60},
+  {id:'solar',  label:'Solar panels, inverter & batteries',  unit:'kW', qty:st => st.solar ? (+st.solarKw || 0) : 0, breakage:false, vol:.3, kg:90}
+];
+const IMP_FIELDS = [
+  ['glassFob','Glass FOB China ($/m²)'], ['glassLocal','Glass local, installed ($/m²)'], ['glassInstall','Glass install labour ($/m²)'], ['glassDuty','Glass duty DAI (%)'],
+  ['marbleFob','Marble FOB China ($/m²)'], ['marbleLocal','Marble local, installed ($/m²)'], ['marbleInstall','Marble install labour ($/m²)'], ['marbleDuty','Marble duty DAI (%)'],
+  ['solarFob','Solar FOB China ($/kW)'], ['solarLocal','Solar local, installed ($/kW)'], ['solarInstall','Solar install labour ($/kW)'], ['solarDuty','Solar duty DAI (%)'],
+  ['freight20','Sea freight, 20′ container ($)'], ['freight40','Sea freight, 40′ high-cube ($)'], ['insPct','Cargo insurance (% of FOB)'], ['broker','Customs broker & port fees ($)'],
+  ['inspection','Pre-shipment inspection ($)'], ['breakagePct','Extra for breakage/spares (%)'], ['iva','IVA (%)']
+];
 
 // Duration in weeks for a 200 m² villa; scaled by size. wet = weather-sensitive.
 const PHASES = [
   {id:'design', label:'Design & permits',       weeks:12, wet:false, note:'Plans stamped by a colegiado architect/engineer; municipal licence.'},
   {id:'site',   label:'Site prep & earthworks', weeks:3,  wet:true,  note:'Clearing, levelling, retaining walls, access road.'},
   {id:'found',  label:'Foundation',             weeks:4,  wet:true,  note:'Footings & ground beams to AGIES seismic norms.'},
-  {id:'struct', label:'Structure & walls',      weeks:10, wet:false, note:'Reinforced block walls, columns, beams.'},
+  {id:'struct', label:'Structure & walls',      weeks:10, wet:false, note:'Reinforced concrete frame and block walls.'},
   {id:'roof',   label:'Roof',                   weeks:4,  wet:true,  note:'Concrete slab or timber + clay tile. Pour in dry weather.'},
   {id:'mep',    label:'Electrical & plumbing',  weeks:6,  wet:false, note:'Rough-in, septic/treatment plant, utility connection.'},
-  {id:'finish', label:'Finishes',               weeks:10, wet:false, note:'Floors, tile, plaster, paint, carpentry, fixtures.'},
+  {id:'finish', label:'Finishes',               weeks:10, wet:false, note:'Glazing, marble, plaster, paint, carpentry, fixtures.'},
   {id:'ext',    label:'Exterior & landscaping', weeks:5,  wet:false, note:'Pool, walls, gardens, driveway.'}
 ];
 
 const PERMITS = [
   {id:'title',   title:'Verify land title', tag:'Land', desc:'Search the Registro General de la Propiedad (RGP) for ownership, liens (gravámenes) and boundaries. Get a certificación registral.'},
+  {id:'ocret',   title:'Check coastal / lakeshore reserve status (OCRET)', tag:'Land', desc:'The Constitution (Art. 122) reserves to the State a 3 km strip along the oceans and 200 m around lakes. Confirm whether the lot is private titled land or a State lease administered by OCRET — critical at Puerto San José and Lake Atitlán.'},
   {id:'survey',  title:'Survey & boundary check', tag:'Land', desc:'Hire a surveyor (agrimensor) to confirm the plot matches the registered plan and there are no encroachments.'},
-  {id:'nit',     title:'Get a NIT from SAT', tag:'Tax', desc:'Tax ID (Número de Identificación Tributaria) is needed to buy property and pay invoices. Foreigners register with their passport.'},
+  {id:'nit',     title:'Get a NIT from SAT', tag:'Tax', desc:'Tax ID (Número de Identificación Tributaria) is needed to buy property, import goods and pay invoices. Foreigners register with their passport.'},
   {id:'notary',  title:'Purchase deed with a notario', tag:'Land', desc:'The escritura pública is drafted by a Guatemalan notary and then registered at the RGP. Pay the IVA or timbres fiscales that apply to the sale.'},
-  {id:'soil',    title:'Soil study (estudio de suelos)', tag:'Design', desc:'Determines foundation design — essential in a seismic country.'},
+  {id:'soil',    title:'Soil study (estudio de suelos)', tag:'Design', desc:'Determines foundation design — essential in a seismic country, on coastal sand and on volcanic slopes.'},
   {id:'plans',   title:'Stamped architectural & structural plans', tag:'Design', desc:'Signed by a colegiado architect and structural engineer, following AGIES seismic design norms (NSE).'},
   {id:'env',     title:'Environmental registration (MARN)', tag:'Permit', desc:'Many municipalities require an environmental assessment instrument registered with the Ministerio de Ambiente before issuing a licence.'},
   {id:'special', title:'Special-zone approval if applicable', tag:'Permit', desc:'CNPAG (Antigua), AMSCLAE (Lake Atitlán), CONAP (protected areas), or HOA approval in a gated community.'},
   {id:'licence', title:'Licencia de construcción', tag:'Permit', desc:'Building permit from the local municipalidad. Fee is usually a percentage of the declared construction value. Display it on site.'},
+  {id:'customs', title:'Customs broker for the China shipment', tag:'Import', desc:'Hire a licensed agente aduanero before the container ships: confirm tariff codes (SAC) and duty rates, file the DUCA declaration, pay DAI + 12% IVA through SAT, and clear the goods at Puerto Quetzal.'},
   {id:'water',   title:'Water connection or well permit', tag:'Utilities', desc:'Municipal water service, or a permit for a private well.'},
-  {id:'power',   title:'Electricity connection', tag:'Utilities', desc:'Apply to EEGSA (central region) or ENERGUATE (rest of the country) for a meter and service contract.'},
+  {id:'power',   title:'Electricity connection', tag:'Utilities', desc:'Apply to EEGSA (central region) or ENERGUATE (rest of the country) for a meter and service contract, including any solar grid-tie.'},
   {id:'igss',    title:'Worker registration (IGSS)', tag:'Labour', desc:'Formal employees must be registered with the Instituto Guatemalteco de Seguridad Social. Confirm your contractor handles this.'},
-  {id:'contract',title:'Signed contractor agreement', tag:'Build', desc:'Fixed scope, payment schedule tied to milestones, retention (~10%) until completion, and a warranty period.'},
+  {id:'contract',title:'Signed contractor agreement', tag:'Build', desc:'Fixed scope, payment schedule tied to milestones, retention (~10%) until completion, and a warranty period. State which materials you supply (imported) and which the contractor supplies.'},
   {id:'final',   title:'Final inspection & occupancy', tag:'Close', desc:'Municipal final inspection, then update the property registration and IUSI (property tax) valuation.'}
 ];
+
+/* ---------- Concepts ---------- */
+const CONCEPTS = {
+  pacifico: {
+    name:'Casa Pacífico', site:'sanjose',
+    tagline:'A single-storey white concrete bar raised on a stone plinth, fully glazed toward the ocean, with a rooftop lounge and a 16 m infinity pool.',
+    specs:{area:300, bedrooms:3, bathrooms:3.5, pool:true, solar:true, solarKw:12, well:false, wall:true, glassM2:70, marbleM2:180},
+    features:[
+      '276 m² ground floor + 24 m² rooftop lounge with pergola',
+      'South façade almost entirely sliding glass — 70 m² of double-glazed, laminated panels',
+      'Deep roof overhangs and a raised 0.6 m plinth for shade, heat and storm water',
+      'Book-matched marble through living areas and bathrooms (≈180 m²)',
+      '12 kW solar + battery sized for daytime A/C in the coastal heat',
+      'Marine-grade aluminium frames and 316 stainless fittings against salt air'
+    ]
+  },
+  atitlan: {
+    name:'Casa Atitlán', site:'atitlan',
+    tagline:'Two stacked, cantilevered glass pavilions stepping down the hillside toward the lake and volcanoes, with an infinity pool on the lower terrace.',
+    specs:{area:290, bedrooms:3, bathrooms:3.5, pool:true, solar:true, solarKw:8, well:false, wall:false, glassM2:90, marbleM2:150},
+    features:[
+      'Upper level: living, dining and kitchen (128 m²) opening onto a cantilevered terrace',
+      'Lower level: three bedroom suites (128 m²) under the upper pavilion; 34 m² garage at the street',
+      'Floor-to-ceiling glass framing Volcán San Pedro, Tolimán and Atitlán — 90 m² of glazing',
+      'Reinforced-concrete frame keyed into terraced retaining walls; drainage designed for tropical storms',
+      '8 kW solar + battery (no A/C needed in the highland climate)',
+      'Marble floors throughout the living level and baths (≈150 m²)'
+    ]
+  }
+};
 
 /* ---------- State ---------- */
 const KEY = 'villa-guatemala-v1';
 const DEFAULTS = {
   name:'Casa del Volcán', region:'antigua', finish:'premium', area:220, bedrooms:4, bathrooms:3.5,
-  lotPrice:60000, fx:7.7, contingency:10, pool:true, solar:false, well:false, wall:true,
-  start:'', permits:{}, expenses:[]
+  lotPrice:60000, fx:7.7, contingency:10, pool:true, solar:false, solarKw:8, well:false, wall:true,
+  glassM2:45, marbleM2:120, importChina:false,
+  start:'', permits:{}, expenses:[],
+  cmpFinish:'premium', sites:{sanjose:70000, atitlan:90000},
+  imp:{glassFob:130, glassLocal:280, glassInstall:35, glassDuty:10,
+       marbleFob:45, marbleLocal:110, marbleInstall:18, marbleDuty:10,
+       solarFob:550, solarLocal:1400, solarInstall:150, solarDuty:0,
+       freight20:3300, freight40:4800, insPct:0.5, broker:900, inspection:400, breakagePct:5, iva:12}
 };
+const fresh = () => JSON.parse(JSON.stringify(DEFAULTS));
+function hydrate(obj){
+  const d = fresh(), s = Object.assign(d, obj || {});
+  s.imp = Object.assign(fresh().imp, (obj && obj.imp) || {});
+  s.sites = Object.assign(fresh().sites, (obj && obj.sites) || {});
+  return s;
+}
 let S = load();
 
 function load(){
-  try{ const raw = localStorage.getItem(KEY); if(raw) return Object.assign({}, DEFAULTS, JSON.parse(raw)); }catch(e){}
-  return JSON.parse(JSON.stringify(DEFAULTS));
+  try{ const raw = localStorage.getItem(KEY); if(raw) return hydrate(JSON.parse(raw)); }catch(e){}
+  return fresh();
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
 /* ---------- Helpers ---------- */
 const $ = id => document.getElementById(id);
-const usd = n => '$' + Math.round(n).toLocaleString('en-US');
+const usd = n => (n < 0 ? '−$' : '$') + Math.round(Math.abs(n)).toLocaleString('en-US');
 const gtq = n => 'Q' + Math.round(n).toLocaleString('en-US');
 const short = n => n >= 1e6 ? '$' + (n/1e6).toFixed(2) + 'M' : '$' + Math.round(n/1000) + 'K';
 const shortQ = n => n >= 1e6 ? 'Q' + (n/1e6).toFixed(2) + 'M' : 'Q' + Math.round(n/1000) + 'K';
@@ -353,34 +485,74 @@ const addDays = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); r
 const fmtDate = d => d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
 const iso = d => d.toISOString().slice(0,10);
 const isRainy = d => { const m = d.getMonth(); return m >= 4 && m <= 9; }; // May–Oct
+const sum = (arr, f) => arr.reduce((a, x) => a + f(x), 0);
+const regionOf = st => REGIONS[st.region] || REGIONS.guatecity;
 
-/* ---------- Estimate ---------- */
-function estimate(){
-  const f = FINISH[S.finish] || FINISH.premium;
-  const r = REGIONS[S.region] || REGIONS.guatecity;
-  const area = Math.max(0, +S.area || 0);
-  // Extra bathrooms beyond 1 per bedroom push cost up slightly.
-  const bathAdj = 1 + Math.max(0, (+S.bathrooms || 0) - (+S.bedrooms || 0)) * 0.02;
-  const base = area * f.m2 * r.mult * bathAdj;
-  const lines = CATEGORIES.map(c => ({id:c.id, label:c.label, usd: base * c.share}));
-  Object.keys(EXTRAS).forEach(k => { if(S[k]) lines.push({id:k, label:EXTRAS[k].label, usd: EXTRAS[k].usd * r.mult}); });
-  const land = +S.lotPrice || 0;
-  if(land > 0) lines.unshift({id:'land', label:'Land purchase', usd: land});
-  // Closing costs & taxes ~ 4% of land + licence fee ~1% of build value
-  const fees = land * 0.04 + base * 0.01;
-  lines.push({id:'fees', label:'Permits, notary & taxes', usd: fees});
-  const sub = lines.reduce((a,l) => a + l.usd, 0);
-  const cont = sub * (Math.max(0, +S.contingency || 0) / 100);
-  lines.push({id:'contingency', label:'Contingency', usd: cont});
-  return {lines, total: sub + cont, perM2: area ? base / area : 0};
+/* ---------- Import & estimate ---------- */
+// Landed cost of shipping the materials from China to the site, vs buying them locally.
+function importCalc(st){
+  const I = S.imp, r = regionOf(st), brk = 1 + (+I.breakagePct || 0) / 100;
+  const items = MATERIALS.map(m => ({m, qty: m.qty(st)})).filter(x => x.qty > 0).map(({m, qty}) => {
+    const shipQty = qty * (m.breakage ? brk : 1);
+    return {id:m.id, label:m.label, unit:m.unit, qty,
+      fob: shipQty * (+I[m.id + 'Fob'] || 0), dutyPct: +I[m.id + 'Duty'] || 0,
+      install: qty * (+I[m.id + 'Install'] || 0) * r.mult,
+      local: qty * (+I[m.id + 'Local'] || 0) * r.mult,
+      vol: shipQty * m.vol, kg: shipQty * m.kg};
+  });
+  const vol = sum(items, i => i.vol), kg = sum(items, i => i.kg), fobT = sum(items, i => i.fob);
+  let container = null;
+  if(items.length){
+    if(vol <= 28 && kg <= 20000) container = {label:'1 × 20′ container', usd: +I.freight20 || 0};
+    else { const n = Math.max(1, Math.ceil(vol / 65), Math.ceil(kg / 26000)); container = {label: n + ' × 40′ high-cube', usd: n * (+I.freight40 || 0)}; }
+  }
+  items.forEach(it => {
+    it.freight = fobT ? container.usd * it.fob / fobT + it.fob * (+I.insPct || 0) / 100 : 0;
+    const cif = it.fob + it.freight;
+    it.duty = cif * it.dutyPct / 100;
+    it.iva = (cif + it.duty) * (+I.iva || 0) / 100;
+    it.landed = cif + it.duty + it.iva;
+    it.total = it.landed + it.install;
+  });
+  const shared = items.length ? (+I.broker || 0) + (+I.inspection || 0) + r.inland : 0;
+  const total = sum(items, i => i.total) + shared, local = sum(items, i => i.local);
+  return {items, vol, kg, container, shared, total, local, savings: local - total, region: r};
 }
 
-function schedule(){
-  const scale = Math.max(0.6, Math.min(2, (+S.area || 200) / 200));
-  let cur = S.start ? new Date(S.start + 'T00:00:00') : nextDryStart();
+function estimate(st = S){
+  const f = FINISH[st.finish] || FINISH.premium;
+  const r = regionOf(st);
+  const area = Math.max(0, +st.area || 0);
+  // Extra bathrooms beyond 1 per bedroom push cost up slightly.
+  const bathAdj = 1 + Math.max(0, (+st.bathrooms || 0) - (+st.bedrooms || 0)) * 0.02;
+  const base = area * f.m2 * r.mult * bathAdj;
+  const lines = CATEGORIES.map(c => ({id:c.id, group:'build', label:c.label, usd: base * c.share}));
+  (r.extras || []).forEach(x => lines.push({id:'rx_' + x.id, group:'build', label:x.label, usd: x.pct ? base * x.pct : x.usd}));
+  const imp = importCalc(st);
+  if(st.importChina && imp.items.length){
+    imp.items.forEach(it => lines.push({id:'imp_' + it.id, group:'materials', label: it.label + ' — imported from China', usd: it.total}));
+    lines.push({id:'imp_logistics', group:'materials', label:'Import logistics — broker, port, inspection, trucking', usd: imp.shared});
+  } else {
+    imp.items.forEach(it => lines.push({id: it.id, group:'materials', label: it.label + ' — local supply', usd: it.local}));
+  }
+  Object.keys(EXTRAS).forEach(k => { if(st[k]) lines.push({id:k, group:'extras', label:EXTRAS[k].label, usd: EXTRAS[k].usd * r.mult}); });
+  const land = +st.lotPrice || 0;
+  if(land > 0) lines.unshift({id:'land', group:'land', label:'Land purchase', usd: land});
+  // Closing costs & taxes ~ 4% of land + licence fee ~1% of build value
+  lines.push({id:'fees', group:'fees', label:'Permits, notary & taxes', usd: land * 0.04 + base * 0.01});
+  const sub = sum(lines, l => l.usd);
+  const cont = sub * (Math.max(0, +st.contingency || 0) / 100);
+  lines.push({id:'contingency', group:'contingency', label:'Contingency', usd: cont});
+  const buildOnly = sum(lines.filter(l => l.group === 'build' || l.group === 'materials'), l => l.usd);
+  return {lines, total: sub + cont, perM2: area ? buildOnly / area : 0, imp};
+}
+
+function schedule(st = S){
+  const scale = Math.max(0.6, Math.min(2, (+st.area || 200) / 200)) * (regionOf(st).dur || 1);
+  let cur = st.start ? new Date(st.start + 'T00:00:00') : nextDryStart();
   return PHASES.map(p => {
     let weeks = p.id === 'design' ? p.weeks : Math.ceil(p.weeks * scale);
-    if(p.id === 'ext' && !S.pool && !S.wall) weeks = Math.ceil(weeks * 0.5);
+    if(p.id === 'ext' && !st.pool && !st.wall) weeks = Math.ceil(weeks * 0.5);
     const start = new Date(cur), end = addDays(start, weeks * 7);
     let wet = false;
     for(let d = new Date(start); d < end; d = addDays(d, 7)) if(isRainy(d)) { wet = true; break; }
@@ -388,6 +560,7 @@ function schedule(){
     return Object.assign({}, p, {weeks, start, end, inRain: p.wet && wet});
   });
 }
+const monthsOf = ph => Math.round((ph[ph.length-1].end - ph[0].start) / (30.44 * 864e5));
 
 // Earliest start such that design & permits wrap up in the dry season (Nov–Apr),
 // so earthworks and foundations begin while it is dry.
@@ -407,9 +580,7 @@ function renderDesign(){
   $('sTotalUsd').textContent = short(e.total);
   $('sTotalGtq').textContent = shortQ(e.total * fx);
   $('sPerM2').textContent = usd(e.perM2);
-  const ph = schedule();
-  const months = Math.round((ph[ph.length-1].end - ph[0].start) / (30.44 * 864e5));
-  $('sMonths').textContent = months + ' mo';
+  $('sMonths').textContent = monthsOf(schedule()) + ' mo';
   $('costBody').innerHTML = e.lines.map(l => {
     const pct = e.total ? l.usd / e.total * 100 : 0;
     return `<tr><td>${esc(l.label)}<div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div></td>
@@ -497,9 +668,270 @@ function syncInputs(){
     const v = S[el.dataset.field];
     if(el.type === 'checkbox') el.checked = !!v; else el.value = v ?? '';
   });
+  document.querySelectorAll('[data-site]').forEach(el => { el.value = S.sites[el.dataset.site]; });
+  renderImpInputs();
 }
 
-function renderAll(){ populateSelects(); renderDesign(); renderTimeline(); renderPermits(); renderExpenses(); }
+/* ---------- Concept drawings ---------- */
+function palm(x, y, h, lean){
+  const tx = x + lean, ty = y - h;
+  let s = `<path d="M${x} ${y} Q${x + lean * .2} ${y - h * .6} ${tx} ${ty}" stroke="#3A2A22" stroke-width="7" fill="none" stroke-linecap="round"/>`;
+  [[-70,20],[-48,-8],[-12,-24],[20,-22],[50,-6],[72,22],[-34,34],[36,34]].forEach(([dx,dy]) => {
+    s += `<path d="M${tx} ${ty} Q${tx + dx * .5} ${ty + dy - 22} ${tx + dx} ${ty + dy + 8}" stroke="#1C3A28" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  });
+  return s;
+}
+const mullions = (x0, x1, y0, y1, step) => { let d = ''; for(let x = x0 + step; x < x1 - 2; x += step) d += `M${x.toFixed(1)} ${y0}V${y1}`; return `<path d="${d}" stroke="#1E1E22" stroke-width="2"/>`; };
+
+function renderPacifico(){
+  let slats = ''; for(let x = 126; x < 178; x += 6) slats += `M${x} 250V316`;
+  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Pacífico concept illustration at sunset">
+  <defs>
+    <linearGradient id="pSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D2B53"/><stop offset=".6" stop-color="#C8607A"/><stop offset="1" stop-color="#FFB870"/></linearGradient>
+    <linearGradient id="pGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C6A0"/><stop offset="1" stop-color="#6F5068"/></linearGradient>
+    <linearGradient id="pPool" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2FA6CC"/><stop offset="1" stop-color="#8BE4F4"/></linearGradient>
+    <linearGradient id="pSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9BF94"/><stop offset="1" stop-color="#A88A62"/></linearGradient>
+  </defs>
+  <rect width="800" height="340" fill="url(#pSky)"/>
+  <circle cx="650" cy="300" r="46" fill="#FFD98A" opacity=".85"/>
+  <path d="M430 340 L575 236 Q590 226 605 236 L760 340Z" fill="#3B2F4F" opacity=".55"/>
+  <rect y="330" width="800" height="90" fill="url(#pSand)"/>
+  <!-- rooftop -->
+  <rect x="330" y="200" width="140" height="4" fill="#8B6A50"/>
+  <path d="M336 204V236M398 204V236M460 204V236" stroke="#8B6A50" stroke-width="3"/>
+  <rect x="120" y="222" width="350" height="14" fill="#CFEAF4" opacity=".28"/>
+  <path d="M120 222H470" stroke="#fff" stroke-opacity=".6"/>
+  <rect x="470" y="196" width="140" height="40" fill="#F4F1EC"/>
+  <rect x="480" y="202" width="120" height="34" fill="url(#pGlass)"/>
+  ${mullions(480, 600, 202, 236, 40)}
+  <rect x="462" y="190" width="156" height="7" fill="#FFFFFF"/>
+  <path d="M478 190l8-7h30l-8 7zM522 190l8-7h30l-8 7zM566 190l8-7h30l-8 7z" fill="#22335A" stroke="#8FA3C7" stroke-width=".6"/>
+  <!-- main volume -->
+  <rect x="120" y="244" width="560" height="74" fill="#F4F1EC"/>
+  <path d="${slats}" stroke="#A0785A" stroke-width="3"/>
+  <rect x="180" y="250" width="455" height="64" fill="url(#pGlass)"/>
+  <rect x="250" y="264" width="130" height="50" fill="#FFE2A8" opacity=".35"/>
+  <rect x="470" y="268" width="110" height="46" fill="#FFE2A8" opacity=".28"/>
+  ${mullions(180, 635, 250, 314, 65)}
+  <rect x="180" y="250" width="455" height="64" fill="none" stroke="#1E1E22" stroke-width="2"/>
+  <rect x="96" y="236" width="608" height="9" fill="#FFFFFF"/>
+  <rect x="120" y="245" width="560" height="5" fill="#000" opacity=".14"/>
+  <rect x="112" y="318" width="576" height="14" fill="#CFC8BE"/>
+  <!-- deck & pool -->
+  <rect x="100" y="330" width="600" height="10" fill="#9C7458"/>
+  <rect x="186" y="341" width="428" height="3" fill="#EEE"/>
+  <rect x="190" y="344" width="420" height="22" fill="url(#pPool)"/>
+  <path d="M205 352h60M300 358h90M430 351h70M530 359h50" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>
+  ${palm(58, 334, 160, 22)}${palm(742, 334, 140, -20)}${palm(700, 336, 92, -8)}
+</svg>`;
+}
+
+function renderAtitlan(){
+  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Atitlán concept illustration on the hillside above the lake">
+  <defs>
+    <linearGradient id="aSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FAAD6"/><stop offset="1" stop-color="#E4F0F5"/></linearGradient>
+    <linearGradient id="aLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C95B5"/><stop offset="1" stop-color="#1E5A74"/></linearGradient>
+    <linearGradient id="aGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CBE6F0"/><stop offset="1" stop-color="#4A7890"/></linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="url(#aSky)"/>
+  <ellipse cx="200" cy="50" rx="60" ry="12" fill="#fff" opacity=".6"/><ellipse cx="560" cy="80" rx="80" ry="14" fill="#fff" opacity=".55"/>
+  <path d="M530 345 L636 206 Q650 195 664 206 L770 345Z" fill="#7896A8"/>
+  <path d="M630 345 L730 180 Q744 168 758 182 L800 228 V345Z" fill="#5F7F94"/>
+  <rect x="500" y="318" width="300" height="27" fill="#fff" opacity=".18"/>
+  <rect x="500" y="345" width="300" height="75" fill="url(#aLake)"/>
+  <path d="M620 362h40M700 380h60M600 396h30M720 404h50" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/>
+  <path d="M672 372h40l-6 7h-28z" fill="#F4F4F4"/>
+  <path d="M0 60 L180 110 L330 170 L470 250 L560 345 V420 H0Z" fill="#6E8F5C"/>
+  <ellipse cx="150" cy="96" rx="11" ry="20" fill="#2E4A2A"/><ellipse cx="215" cy="112" rx="10" ry="18" fill="#2E4A2A"/><ellipse cx="410" cy="200" rx="12" ry="20" fill="#2E4A2A"/>
+  <path d="M0 88 L40 96 L70 100 V215 H250 V290 H545 L592 345 L600 420 H0Z" fill="#3F5B37"/>
+  <rect x="66" y="100" width="6" height="115" fill="#8A8478"/><rect x="246" y="215" width="6" height="75" fill="#8A8478"/>
+  <ellipse cx="24" cy="74" rx="12" ry="22" fill="#24401F"/><ellipse cx="572" cy="304" rx="12" ry="14" fill="#24401F"/>
+  <!-- garage at street -->
+  <rect x="6" y="64" width="58" height="32" fill="#2E2E33"/><rect x="14" y="72" width="42" height="24" fill="#8B6A50"/><rect x="2" y="59" width="66" height="6" fill="#EDEDED"/>
+  <!-- upper pavilion: living -->
+  <rect x="70" y="150" width="290" height="65" fill="#2B2D31"/>
+  <rect x="80" y="156" width="272" height="54" fill="url(#aGlass)"/>
+  <rect x="150" y="170" width="120" height="40" fill="#FFE7B8" opacity=".25"/>
+  ${mullions(80, 352, 156, 210, 45)}
+  <rect x="60" y="143" width="312" height="8" fill="#F2F2F2"/>
+  <rect x="360" y="211" width="46" height="4" fill="#F2F2F2"/>
+  <rect x="360" y="195" width="46" height="16" fill="#CFE8F2" opacity=".45" stroke="#fff" stroke-opacity=".7"/>
+  <!-- lower pavilion: bedrooms -->
+  <rect x="250" y="219" width="200" height="71" fill="#34373C"/>
+  <rect x="258" y="225" width="184" height="60" fill="url(#aGlass)"/>
+  ${mullions(258, 442, 225, 285, 46)}
+  <rect x="244" y="213" width="212" height="7" fill="#F2F2F2"/>
+  <!-- pool terrace -->
+  <rect x="450" y="288" width="95" height="4" fill="#9C7458"/>
+  <rect x="456" y="281" width="86" height="7" fill="#5CC8E0"/>
+  <rect x="454" y="279" width="90" height="2" fill="#EEE"/>
+</svg>`;
+}
+
+// Schematic floor plan in blueprint style. Units in metres; north (hillside / street) at the top.
+function planSVG(p){
+  const s = 30, m = 46, W = p.w * s + m * 2, H = p.h * s + m * 2;
+  const X = v => m + v * s, Y = v => m + v * s;
+  let g = `<svg viewBox="0 0 ${W} ${H}" class="plan" role="img" aria-label="${esc(p.title)} floor plan" font-family="Inter,sans-serif">
+  <defs><pattern id="grid-${p.id}" x="${m}" y="${m}" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><path d="M${s} 0H0V${s}" fill="none" stroke="rgba(255,255,255,.07)"/></pattern></defs>
+  <rect width="${W}" height="${H}" fill="#0B2545"/><rect width="${W}" height="${H}" fill="url(#grid-${p.id})"/>`;
+  (p.outdoor || []).forEach(o => {
+    const pool = o.pool;
+    g += `<rect x="${X(o.x)}" y="${Y(o.y)}" width="${o.w * s}" height="${o.h * s}" fill="${pool ? 'rgba(79,195,224,.3)' : 'none'}" stroke="${pool ? '#7FD8F0' : 'rgba(255,255,255,.45)'}" stroke-dasharray="${pool ? '' : '5 4'}" stroke-width="1.2"/>
+      <text x="${X(o.x + o.w / 2)}" y="${Y(o.y + o.h / 2) + 4}" fill="${pool ? '#BFEFFA' : 'rgba(255,255,255,.7)'}" font-size="10.5" text-anchor="middle">${esc(o.label)}</text>`;
+  });
+  p.rooms.forEach(r => {
+    const cx = X(r.x + r.w / 2), cy = Y(r.y + r.h / 2), narrow = r.w * s < 80, area = Math.round(r.w * r.h);
+    g += `<rect x="${X(r.x)}" y="${Y(r.y)}" width="${r.w * s}" height="${r.h * s}" fill="rgba(255,255,255,.035)" stroke="#E8F1FF" stroke-width="1.5"/>
+      <text x="${cx}" y="${cy - 2}" fill="#fff" font-size="${narrow ? 9 : 11}" font-weight="600" text-anchor="middle">${esc(r.label)}</text>
+      <text x="${cx}" y="${cy + 12}" fill="rgba(255,255,255,.6)" font-size="9" text-anchor="middle">${narrow ? area + ' m²' : `${r.w} × ${r.h} m · ${area} m²`}</text>`;
+  });
+  const bx = Math.min(...p.rooms.map(r => r.x)), by = Math.min(...p.rooms.map(r => r.y));
+  const bw = Math.max(...p.rooms.map(r => r.x + r.w)) - bx, bh = Math.max(...p.rooms.map(r => r.y + r.h)) - by;
+  g += `<rect x="${X(bx)}" y="${Y(by)}" width="${bw * s}" height="${bh * s}" fill="none" stroke="#fff" stroke-width="4"/>`;
+  (p.glass || []).forEach(([x1, y1, x2, y2]) => { g += `<line x1="${X(x1)}" y1="${Y(y1)}" x2="${X(x2)}" y2="${Y(y2)}" stroke="#7FD8F0" stroke-width="5"/>`; });
+  // dimension lines
+  g += `<path d="M${X(bx)} ${m - 20}H${X(bx + bw)}M${X(bx)} ${m - 26}v12M${X(bx + bw)} ${m - 26}v12" stroke="rgba(255,255,255,.6)"/>
+    <text x="${X(bx + bw / 2)}" y="${m - 25}" fill="rgba(255,255,255,.8)" font-size="10" text-anchor="middle">${bw} m</text>
+    <path d="M${m - 20} ${Y(by)}V${Y(by + bh)}M${m - 26} ${Y(by)}h12M${m - 26} ${Y(by + bh)}h12" stroke="rgba(255,255,255,.6)"/>
+    <text x="${m - 25}" y="${Y(by + bh / 2)}" fill="rgba(255,255,255,.8)" font-size="10" text-anchor="middle" transform="rotate(-90 ${m - 25} ${Y(by + bh / 2)})">${bh} m</text>
+    <g transform="translate(${W - 26} 26)"><path d="M0 -12L6 6L0 2L-6 6Z" fill="#fff"/><text y="18" fill="#fff" font-size="9" text-anchor="middle">N</text></g>
+    <text x="${W - m}" y="${H - 14}" fill="rgba(255,255,255,.7)" font-size="10" text-anchor="end">${esc(p.bottomLabel || '')}</text>
+    <line x1="${X(0)}" y1="${H - 18}" x2="${X(5)}" y2="${H - 18}" stroke="#fff" stroke-width="2"/><text x="${X(0)}" y="${H - 24}" fill="rgba(255,255,255,.7)" font-size="9">5 m</text>
+    <text x="${X(5) + 10}" y="${H - 14}" fill="#7FD8F0" font-size="9">━ glass wall</text>
+  </svg>`;
+  return g;
+}
+
+const PLANS = {
+  pacifico: [{
+    id:'pac', title:'Casa Pacífico — ground floor', w:24, h:18.5, bottomLabel:'↓ Beach & ocean',
+    rooms:[
+      {x:0, y:0, w:5.5, h:5.5, label:'Garage'}, {x:5.5, y:0, w:2, h:5.5, label:'Laundry'},
+      {x:7.5, y:0, w:2, h:5.5, label:'Entry'}, {x:9.5, y:0, w:4.5, h:5.5, label:'Kitchen'},
+      {x:14, y:0, w:4.5, h:5.5, label:'Bedroom 2'}, {x:18.5, y:0, w:2, h:5.5, label:'Bath 2'},
+      {x:20.5, y:0, w:3.5, h:5.5, label:'Master bath'},
+      {x:0, y:5.5, w:5, h:6, label:'Guest suite'}, {x:5, y:5.5, w:10, h:6, label:'Living · Dining'},
+      {x:15, y:5.5, w:9, h:6, label:'Master suite'}
+    ],
+    outdoor:[{x:0, y:11.5, w:24, h:3, label:'Shaded terrace · outdoor dining'}, {x:4, y:14.5, w:16, h:3.5, label:'Infinity pool 16 × 3.5 m', pool:true}],
+    glass:[[5, 11.5, 24, 11.5], [0.5, 11.5, 4.5, 11.5], [10, 0, 13.5, 0]]
+  }],
+  atitlan: [{
+    id:'atu', title:'Casa Atitlán — upper level (living)', w:16, h:10.5, bottomLabel:'↓ Lake & volcanoes',
+    rooms:[
+      {x:0, y:0, w:3.5, h:3.5, label:'Entry + stair'}, {x:3.5, y:0, w:3, h:3.5, label:'Powder/Laundry'},
+      {x:6.5, y:0, w:9.5, h:3.5, label:'Kitchen + island'}, {x:0, y:3.5, w:16, h:4.5, label:'Living · Dining (open plan)'}
+    ],
+    outdoor:[{x:0, y:8, w:16, h:2.5, label:'Cantilevered terrace · glass balustrade'}],
+    glass:[[0.3, 8, 15.7, 8], [16, 3.5, 16, 8]]
+  }, {
+    id:'atl', title:'Casa Atitlán — lower level (bedrooms)', w:16, h:12, bottomLabel:'↓ Lake & volcanoes',
+    rooms:[
+      {x:0, y:0, w:3.5, h:3.5, label:'Stair'}, {x:3.5, y:0, w:2.5, h:3.5, label:'Bath 2'},
+      {x:6, y:0, w:2.5, h:3.5, label:'Mech/Batt.'}, {x:8.5, y:0, w:2.5, h:3.5, label:'Bath 3'},
+      {x:11, y:0, w:5, h:3.5, label:'Master bath'},
+      {x:0, y:3.5, w:4.5, h:4.5, label:'Bedroom 2'}, {x:4.5, y:3.5, w:4.5, h:4.5, label:'Bedroom 3'},
+      {x:9, y:3.5, w:7, h:4.5, label:'Master suite'}
+    ],
+    outdoor:[{x:0, y:8, w:16, h:4, label:''}, {x:1.5, y:8.6, w:11, h:2.8, label:'Infinity pool 11 × 2.8 m', pool:true}],
+    glass:[[0.3, 8, 15.7, 8]]
+  }]
+};
+
+// State used to price a concept on its own site, with or without the China import.
+function conceptState(key, importChina, finish){
+  const c = CONCEPTS[key];
+  return Object.assign({}, S, c.specs, {region:c.site, lotPrice:S.sites[c.site], finish: finish || S.cmpFinish, importChina, name:c.name});
+}
+
+function renderConcepts(){
+  $('conceptList').innerHTML = Object.entries(CONCEPTS).map(([k, c]) => `
+    <div class="card">
+      <div class="concept-head">
+        <div><h3 style="font-size:1.9rem;margin-bottom:4px">${esc(c.name)}</h3><p>${esc(REGIONS[c.site].label)} — ${esc(c.tagline)}</p></div>
+        <button class="btn primary" data-use="${k}">Load into planner</button>
+      </div>
+      <figure>${k === 'pacifico' ? renderPacifico() : renderAtitlan()}<figcaption>Concept illustration</figcaption></figure>
+      <div class="two">
+        ${PLANS[k].map(p => `<figure>${planSVG(p)}<figcaption>${esc(p.title)}</figcaption></figure>`).join('')}
+        <div>
+          <ul class="features">${c.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
+          <div id="cs-${k}" style="margin-top:14px"></div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderConceptStats(){
+  Object.keys(CONCEPTS).forEach(k => {
+    const local = estimate(conceptState(k, false)), imp = estimate(conceptState(k, true));
+    $('cs-' + k).innerHTML = `
+      <div class="kv"><span>Built area</span><b>${CONCEPTS[k].specs.area} m² · ${CONCEPTS[k].specs.bedrooms} bed · ${CONCEPTS[k].specs.bathrooms} bath</b></div>
+      <div class="kv"><span>Estimate, local materials (${FINISH[S.cmpFinish].label})</span><b>${usd(local.total)}</b></div>
+      <div class="kv"><span>Estimate, glass/solar/marble from China</span><b style="color:var(--ok)">${usd(imp.total)}</b></div>
+      <div class="kv"><span>Build duration</span><b>${monthsOf(schedule(conceptState(k, true)))} months</b></div>`;
+  });
+}
+
+/* ---------- Site comparison ---------- */
+function renderCompare(){
+  const keys = Object.keys(CONCEPTS), fx = +S.fx || 7.7;
+  const data = keys.map(k => {
+    const stL = conceptState(k, false), stI = conceptState(k, true);
+    const L = estimate(stL), I = estimate(stI);
+    const grp = (e, g) => sum(e.lines.filter(l => l.group === g), l => l.usd);
+    return {k, c:CONCEPTS[k], r:REGIONS[CONCEPTS[k].site], L, I, grp, months: monthsOf(schedule(stI))};
+  });
+  const row = (label, f, opts = {}) => {
+    const vals = data.map(f);
+    let best = -1;
+    if(opts.lowest){ const nums = vals.map(v => v.n); best = nums.indexOf(Math.min(...nums)); }
+    return `<tr class="${opts.cls || ''}"><td>${label}</td>${vals.map((v, i) => `<td class="num${i === best ? ' best' : ''}">${typeof v === 'object' ? v.t : v}</td>`).join('')}</tr>`;
+  };
+  const money = n => ({n, t: usd(n)});
+  $('cmpTable').innerHTML = `<thead><tr><th></th>${data.map(d => `<th class="num">${esc(d.r.label.split(' (')[0])}</th>`).join('')}</tr></thead><tbody>
+    ${row('Concept', d => esc(d.c.name))}
+    ${row('Built area', d => d.c.specs.area + ' m²')}
+    ${row('Land', d => usd(d.grp(d.L, 'land')))}
+    ${row('Construction & site works', d => usd(d.grp(d.L, 'build')))}
+    ${row('Glass, marble & solar — local', d => usd(d.grp(d.L, 'materials')))}
+    ${row('Glass, marble & solar — from China', d => usd(d.grp(d.I, 'materials')))}
+    ${row('Pool, wall & other extras', d => usd(d.grp(d.L, 'extras')))}
+    ${row('Permits, notary & taxes', d => usd(d.grp(d.L, 'fees')))}
+    ${row('Contingency (' + S.contingency + '%)', d => usd(d.grp(d.I, 'contingency')))}
+    ${row('Total — local materials', d => money(d.L.total), {lowest:true, cls:'total'})}
+    ${row('Total — China import', d => money(d.I.total), {lowest:true, cls:'total'})}
+    ${row('Saved by importing', d => usd(d.L.total - d.I.total), {cls:'good'})}
+    ${row('Total in quetzales (import)', d => gtq(d.I.total * fx))}
+    ${row('Build cost per m² (import, excl. land)', d => money(d.I.perM2), {lowest:true})}
+    ${row('Container to site', d => esc(d.I.imp.container ? d.I.imp.container.label : '—'))}
+    ${row('Trucking from Puerto Quetzal', d => usd(d.r.inland))}
+    ${row('Estimated duration', d => ({n:d.months, t:d.months + ' months'}), {lowest:true})}
+  </tbody>`;
+
+  $('cmpMatrix').innerHTML = `<thead><tr><th>Finish level</th>${data.map(d => `<th class="num">${esc(d.c.name)}</th>`).join('')}</tr></thead><tbody>` +
+    Object.entries(FINISH).map(([f, v]) => `<tr><td>${v.label}${f === S.cmpFinish ? ' <span class="tag">selected</span>' : ''}</td>${
+      data.map(d => `<td class="num">${usd(estimate(conceptState(d.k, true, f)).total)}</td>`).join('')}</tr>`).join('') + '</tbody>';
+
+  $('landed').innerHTML = '<div class="two">' + data.map(d => {
+    const im = d.I.imp;
+    return `<div><h3 style="font-size:1.15rem">${esc(d.c.name)} → ${esc(d.r.label.split(' (')[0])}</h3>
+      <p style="font-size:.78rem;color:var(--muted);margin-bottom:8px">${esc(im.container.label)} · ≈${im.vol.toFixed(0)} m³ · ≈${(im.kg / 1000).toFixed(1)} t · ${esc(d.r.inlandLabel)}</p>
+      <div class="table-wrap"><table><thead><tr><th>Item</th><th class="num">FOB</th><th class="num">Freight+ins.</th><th class="num">Duty</th><th class="num">IVA</th><th class="num">Install</th><th class="num">Import total</th><th class="num">Local</th></tr></thead><tbody>
+      ${im.items.map(it => `<tr><td>${esc(it.label)}<div style="font-size:.7rem;color:var(--muted)">${it.qty} ${it.unit}</div></td><td class="num">${usd(it.fob)}</td><td class="num">${usd(it.freight)}</td><td class="num">${usd(it.duty)}</td><td class="num">${usd(it.iva)}</td><td class="num">${usd(it.install)}</td><td class="num">${usd(it.total)}</td><td class="num">${usd(it.local)}</td></tr>`).join('')}
+      <tr><td>Broker, port, inspection & trucking</td><td colspan="5"></td><td class="num">${usd(im.shared)}</td><td class="num">—</td></tr>
+      <tr class="total"><td>Total</td><td colspan="5"></td><td class="num">${usd(im.total)}</td><td class="num">${usd(im.local)}</td></tr>
+      <tr class="good"><td colspan="6">Savings before contingency</td><td class="num" colspan="2">${usd(im.savings)}</td></tr>
+      </tbody></table></div></div>`;
+  }).join('') + '</div>';
+}
+
+function renderImpInputs(){
+  $('impInputs').innerHTML = IMP_FIELDS.map(([k, l]) => `<div><label for="imp-${k}">${esc(l)}</label><input id="imp-${k}" type="number" min="0" step="any" data-imp="${k}" value="${S.imp[k]}"/></div>`).join('');
+}
+
+function renderAll(){ populateSelects(); renderDesign(); renderConceptStats(); renderCompare(); renderTimeline(); renderPermits(); renderExpenses(); }
 
 /* ---------- Events ---------- */
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
@@ -512,6 +944,22 @@ document.querySelectorAll('[data-field]').forEach(el => el.addEventListener(el.t
   S[f] = el.type === 'checkbox' ? el.checked : (el.type === 'number' ? (el.value === '' ? '' : +el.value) : el.value);
   save(); renderAll();
 }));
+
+document.querySelectorAll('[data-site]').forEach(el => el.addEventListener('input', () => {
+  S.sites[el.dataset.site] = +el.value || 0; save(); renderAll();
+}));
+$('impInputs').addEventListener('input', e => {
+  const k = e.target.dataset.imp; if(!k) return;
+  S.imp[k] = +e.target.value || 0; save(); renderAll();
+});
+$('conceptList').addEventListener('click', e => {
+  const k = e.target.dataset.use; if(!k) return;
+  const c = CONCEPTS[k];
+  Object.assign(S, c.specs, {region:c.site, lotPrice:S.sites[c.site], finish:S.cmpFinish, name:c.name, importChina:true});
+  save(); syncInputs(); renderAll();
+  document.querySelector('.tab[data-tab="design"]').click();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
 
 $('bestStart').addEventListener('click', () => { S.start = iso(nextDryStart()); $('start').value = S.start; save(); renderAll(); });
 
@@ -560,18 +1008,19 @@ $('exportJson').addEventListener('click', () => download(slug() + '.json', JSON.
 $('importJson').addEventListener('change', e => {
   const file = e.target.files[0]; if(!file) return;
   file.text().then(t => {
-    try{ S = Object.assign({}, DEFAULTS, JSON.parse(t)); save(); syncInputs(); renderAll(); }
+    try{ S = hydrate(JSON.parse(t)); save(); syncInputs(); renderAll(); }
     catch(err){ alert('That file is not a valid planner backup.'); }
   });
   e.target.value = '';
 });
 $('resetAll').addEventListener('click', () => {
   if(!confirm('Reset all villa data? This clears specs, checklist and expenses.')) return;
-  S = JSON.parse(JSON.stringify(DEFAULTS)); save(); syncInputs(); renderAll();
+  S = fresh(); save(); syncInputs(); renderAll();
 });
 
 /* ---------- Init ---------- */
 $('exDate').value = iso(new Date());
+renderConcepts();
 $('region').innerHTML = Object.entries(REGIONS).map(([k,v]) => `<option value="${k}">${esc(v.label)}</option>`).join('');
 syncInputs();
 renderAll();
