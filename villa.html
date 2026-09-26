@@ -420,28 +420,28 @@ const PERMITS = [
 const CONCEPTS = {
   pacifico: {
     name:'Casa Pacífico', site:'sanjose',
-    tagline:'A single-storey white concrete bar raised on a stone plinth, fully glazed toward the ocean, with a rooftop lounge and a 16 m infinity pool.',
-    specs:{area:300, bedrooms:3, bathrooms:3.5, pool:true, solar:true, solarKw:12, well:false, wall:true, glassM2:70, marbleM2:180},
+    tagline:'A single-storey white concrete pavilion raised on a stone plinth, fully glazed toward the ocean, with a pergola roof deck and an 11 m infinity pool.',
+    specs:{area:162, bedrooms:2, bathrooms:2, pool:true, solar:true, solarKw:8, well:false, wall:true, glassM2:45, marbleM2:110},
     features:[
-      '276 m² ground floor + 24 m² rooftop lounge with pergola',
-      'South façade almost entirely sliding glass — 70 m² of double-glazed, laminated panels',
-      'Deep roof overhangs and a raised 0.6 m plinth for shade, heat and storm water',
-      'Book-matched marble through living areas and bathrooms (≈180 m²)',
-      '12 kW solar + battery sized for daytime A/C in the coastal heat',
-      'Marine-grade aluminium frames and 316 stainless fittings against salt air'
+      '162 m² on one level: two ocean-facing bedroom suites either side of an open living space',
+      'South façade almost entirely sliding glass — 45 m² of double-glazed, laminated panels',
+      'Deep roof overhangs and a raised plinth for shade, heat and storm water',
+      'Roof deck with pergola and solar panels; carport at the street',
+      'Marble through living, kitchen and both bathrooms (≈110 m²)',
+      '8 kW solar + battery sized for daytime A/C; marine-grade aluminium and 316 stainless against salt air'
     ]
   },
   atitlan: {
     name:'Casa Atitlán', site:'atitlan',
     tagline:'Two stacked, cantilevered glass pavilions stepping down the hillside toward the lake and volcanoes, with an infinity pool on the lower terrace.',
-    specs:{area:290, bedrooms:3, bathrooms:3.5, pool:true, solar:true, solarKw:8, well:false, wall:false, glassM2:90, marbleM2:150},
+    specs:{area:180, bedrooms:2, bathrooms:2, pool:true, solar:true, solarKw:5, well:false, wall:false, glassM2:60, marbleM2:90},
     features:[
-      'Upper level: living, dining and kitchen (128 m²) opening onto a cantilevered terrace',
-      'Lower level: three bedroom suites (128 m²) under the upper pavilion; 34 m² garage at the street',
-      'Floor-to-ceiling glass framing Volcán San Pedro, Tolimán and Atitlán — 90 m² of glazing',
+      'Upper level (90 m²): kitchen, living and dining opening onto a cantilevered terrace',
+      'Lower level (90 m²): master suite and second bedroom, two bathrooms, pool terrace',
+      'Floor-to-ceiling glass framing Volcán San Pedro, Tolimán and Atitlán — 60 m² of glazing',
       'Reinforced-concrete frame keyed into terraced retaining walls; drainage designed for tropical storms',
-      '8 kW solar + battery (no A/C needed in the highland climate)',
-      'Marble floors throughout the living level and baths (≈150 m²)'
+      '5 kW solar + battery (no A/C needed in the highland climate); parking pad at the street',
+      'Marble floors on the living level and in both bathrooms (≈90 m²)'
     ]
   }
 };
@@ -449,9 +449,9 @@ const CONCEPTS = {
 /* ---------- State ---------- */
 const KEY = 'villa-guatemala-v1';
 const DEFAULTS = {
-  name:'Casa del Volcán', region:'antigua', finish:'premium', area:220, bedrooms:4, bathrooms:3.5,
+  name:'Casa del Volcán', region:'antigua', finish:'premium', area:160, bedrooms:2, bathrooms:2,
   lotPrice:60000, fx:7.7, contingency:10, pool:true, solar:false, solarKw:8, well:false, wall:true,
-  glassM2:45, marbleM2:120, importChina:false,
+  glassM2:45, marbleM2:100, importChina:false,
   start:'', permits:{}, expenses:[],
   cmpFinish:'premium', sites:{sanjose:70000, atitlan:90000},
   imp:{glassFob:130, glassLocal:280, glassInstall:35, glassDuty:10,
@@ -684,7 +684,7 @@ function palm(x, y, h, lean){
 const mullions = (x0, x1, y0, y1, step) => { let d = ''; for(let x = x0 + step; x < x1 - 2; x += step) d += `M${x.toFixed(1)} ${y0}V${y1}`; return `<path d="${d}" stroke="#1E1E22" stroke-width="2"/>`; };
 
 function renderPacifico(){
-  let slats = ''; for(let x = 126; x < 178; x += 6) slats += `M${x} 250V316`;
+  let slats = ''; for(let x = 186; x < 228; x += 6) slats += `M${x} 250V316`;
   return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Pacífico concept illustration at sunset">
   <defs>
     <linearGradient id="pSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D2B53"/><stop offset=".6" stop-color="#C8607A"/><stop offset="1" stop-color="#FFB870"/></linearGradient>
@@ -693,36 +693,31 @@ function renderPacifico(){
     <linearGradient id="pSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9BF94"/><stop offset="1" stop-color="#A88A62"/></linearGradient>
   </defs>
   <rect width="800" height="340" fill="url(#pSky)"/>
-  <circle cx="650" cy="300" r="46" fill="#FFD98A" opacity=".85"/>
-  <path d="M430 340 L575 236 Q590 226 605 236 L760 340Z" fill="#3B2F4F" opacity=".55"/>
+  <circle cx="660" cy="300" r="46" fill="#FFD98A" opacity=".85"/>
+  <path d="M440 340 L585 236 Q600 226 615 236 L770 340Z" fill="#3B2F4F" opacity=".55"/>
   <rect y="330" width="800" height="90" fill="url(#pSand)"/>
-  <!-- rooftop -->
-  <rect x="330" y="200" width="140" height="4" fill="#8B6A50"/>
-  <path d="M336 204V236M398 204V236M460 204V236" stroke="#8B6A50" stroke-width="3"/>
-  <rect x="120" y="222" width="350" height="14" fill="#CFEAF4" opacity=".28"/>
-  <path d="M120 222H470" stroke="#fff" stroke-opacity=".6"/>
-  <rect x="470" y="196" width="140" height="40" fill="#F4F1EC"/>
-  <rect x="480" y="202" width="120" height="34" fill="url(#pGlass)"/>
-  ${mullions(480, 600, 202, 236, 40)}
-  <rect x="462" y="190" width="156" height="7" fill="#FFFFFF"/>
-  <path d="M478 190l8-7h30l-8 7zM522 190l8-7h30l-8 7zM566 190l8-7h30l-8 7z" fill="#22335A" stroke="#8FA3C7" stroke-width=".6"/>
+  <!-- roof deck: pergola, glass rail, solar -->
+  <rect x="180" y="222" width="440" height="14" fill="#CFEAF4" opacity=".28"/>
+  <path d="M180 222H620" stroke="#fff" stroke-opacity=".6"/>
+  <rect x="420" y="196" width="170" height="5" fill="#8B6A50"/>
+  <path d="M426 201V236M506 201V236M584 201V236" stroke="#8B6A50" stroke-width="3"/>
+  <path d="M200 236l8-7h34l-8 7zM248 236l8-7h34l-8 7zM296 236l8-7h34l-8 7z" fill="#22335A" stroke="#8FA3C7" stroke-width=".6"/>
   <!-- main volume -->
-  <rect x="120" y="244" width="560" height="74" fill="#F4F1EC"/>
+  <rect x="180" y="244" width="440" height="74" fill="#F4F1EC"/>
   <path d="${slats}" stroke="#A0785A" stroke-width="3"/>
-  <rect x="180" y="250" width="455" height="64" fill="url(#pGlass)"/>
-  <rect x="250" y="264" width="130" height="50" fill="#FFE2A8" opacity=".35"/>
-  <rect x="470" y="268" width="110" height="46" fill="#FFE2A8" opacity=".28"/>
-  ${mullions(180, 635, 250, 314, 65)}
-  <rect x="180" y="250" width="455" height="64" fill="none" stroke="#1E1E22" stroke-width="2"/>
-  <rect x="96" y="236" width="608" height="9" fill="#FFFFFF"/>
-  <rect x="120" y="245" width="560" height="5" fill="#000" opacity=".14"/>
-  <rect x="112" y="318" width="576" height="14" fill="#CFC8BE"/>
+  <rect x="232" y="250" width="370" height="64" fill="url(#pGlass)"/>
+  <rect x="300" y="264" width="130" height="50" fill="#FFE2A8" opacity=".35"/>
+  ${mullions(232, 602, 250, 314, 62)}
+  <rect x="232" y="250" width="370" height="64" fill="none" stroke="#1E1E22" stroke-width="2"/>
+  <rect x="160" y="236" width="480" height="9" fill="#FFFFFF"/>
+  <rect x="180" y="245" width="440" height="5" fill="#000" opacity=".14"/>
+  <rect x="172" y="318" width="456" height="14" fill="#CFC8BE"/>
   <!-- deck & pool -->
-  <rect x="100" y="330" width="600" height="10" fill="#9C7458"/>
-  <rect x="186" y="341" width="428" height="3" fill="#EEE"/>
-  <rect x="190" y="344" width="420" height="22" fill="url(#pPool)"/>
-  <path d="M205 352h60M300 358h90M430 351h70M530 359h50" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>
-  ${palm(58, 334, 160, 22)}${palm(742, 334, 140, -20)}${palm(700, 336, 92, -8)}
+  <rect x="160" y="330" width="480" height="10" fill="#9C7458"/>
+  <rect x="246" y="341" width="308" height="3" fill="#EEE"/>
+  <rect x="250" y="344" width="300" height="22" fill="url(#pPool)"/>
+  <path d="M265 352h60M360 358h70M470 351h60" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>
+  ${palm(90, 334, 160, 22)}${palm(720, 334, 140, -20)}${palm(668, 336, 92, -8)}
 </svg>`;
 }
 
@@ -746,25 +741,25 @@ function renderAtitlan(){
   <path d="M0 88 L40 96 L70 100 V215 H250 V290 H545 L592 345 L600 420 H0Z" fill="#3F5B37"/>
   <rect x="66" y="100" width="6" height="115" fill="#8A8478"/><rect x="246" y="215" width="6" height="75" fill="#8A8478"/>
   <ellipse cx="24" cy="74" rx="12" ry="22" fill="#24401F"/><ellipse cx="572" cy="304" rx="12" ry="14" fill="#24401F"/>
-  <!-- garage at street -->
+  <!-- carport at street -->
   <rect x="6" y="64" width="58" height="32" fill="#2E2E33"/><rect x="14" y="72" width="42" height="24" fill="#8B6A50"/><rect x="2" y="59" width="66" height="6" fill="#EDEDED"/>
   <!-- upper pavilion: living -->
-  <rect x="70" y="150" width="290" height="65" fill="#2B2D31"/>
-  <rect x="80" y="156" width="272" height="54" fill="url(#aGlass)"/>
-  <rect x="150" y="170" width="120" height="40" fill="#FFE7B8" opacity=".25"/>
-  ${mullions(80, 352, 156, 210, 45)}
-  <rect x="60" y="143" width="312" height="8" fill="#F2F2F2"/>
-  <rect x="360" y="211" width="46" height="4" fill="#F2F2F2"/>
-  <rect x="360" y="195" width="46" height="16" fill="#CFE8F2" opacity=".45" stroke="#fff" stroke-opacity=".7"/>
+  <rect x="70" y="150" width="230" height="65" fill="#2B2D31"/>
+  <rect x="80" y="156" width="212" height="54" fill="url(#aGlass)"/>
+  <rect x="140" y="170" width="100" height="40" fill="#FFE7B8" opacity=".25"/>
+  ${mullions(80, 292, 156, 210, 53)}
+  <rect x="60" y="143" width="252" height="8" fill="#F2F2F2"/>
+  <rect x="300" y="211" width="46" height="4" fill="#F2F2F2"/>
+  <rect x="300" y="195" width="46" height="16" fill="#CFE8F2" opacity=".45" stroke="#fff" stroke-opacity=".7"/>
   <!-- lower pavilion: bedrooms -->
-  <rect x="250" y="219" width="200" height="71" fill="#34373C"/>
-  <rect x="258" y="225" width="184" height="60" fill="url(#aGlass)"/>
-  ${mullions(258, 442, 225, 285, 46)}
-  <rect x="244" y="213" width="212" height="7" fill="#F2F2F2"/>
+  <rect x="250" y="219" width="160" height="71" fill="#34373C"/>
+  <rect x="258" y="225" width="144" height="60" fill="url(#aGlass)"/>
+  ${mullions(258, 402, 225, 285, 48)}
+  <rect x="244" y="213" width="172" height="7" fill="#F2F2F2"/>
   <!-- pool terrace -->
-  <rect x="450" y="288" width="95" height="4" fill="#9C7458"/>
-  <rect x="456" y="281" width="86" height="7" fill="#5CC8E0"/>
-  <rect x="454" y="279" width="90" height="2" fill="#EEE"/>
+  <rect x="410" y="288" width="135" height="4" fill="#9C7458"/>
+  <rect x="436" y="281" width="100" height="7" fill="#5CC8E0"/>
+  <rect x="434" y="279" width="104" height="2" fill="#EEE"/>
 </svg>`;
 }
 
@@ -805,37 +800,34 @@ function planSVG(p){
 
 const PLANS = {
   pacifico: [{
-    id:'pac', title:'Casa Pacífico — ground floor', w:24, h:18.5, bottomLabel:'↓ Beach & ocean',
+    id:'pac', title:'Casa Pacífico — ground floor', w:17, h:16, bottomLabel:'↓ Beach & ocean',
     rooms:[
-      {x:0, y:0, w:5.5, h:5.5, label:'Garage'}, {x:5.5, y:0, w:2, h:5.5, label:'Laundry'},
-      {x:7.5, y:0, w:2, h:5.5, label:'Entry'}, {x:9.5, y:0, w:4.5, h:5.5, label:'Kitchen'},
-      {x:14, y:0, w:4.5, h:5.5, label:'Bedroom 2'}, {x:18.5, y:0, w:2, h:5.5, label:'Bath 2'},
-      {x:20.5, y:0, w:3.5, h:5.5, label:'Master bath'},
-      {x:0, y:5.5, w:5, h:6, label:'Guest suite'}, {x:5, y:5.5, w:10, h:6, label:'Living · Dining'},
-      {x:15, y:5.5, w:9, h:6, label:'Master suite'}
+      {x:0, y:0, w:2.5, h:4, label:'Bath 2'}, {x:2.5, y:0, w:2, h:4, label:'Laundry'},
+      {x:4.5, y:0, w:2.5, h:4, label:'Entry'}, {x:7, y:0, w:5, h:4, label:'Kitchen'},
+      {x:12, y:0, w:5, h:4, label:'Master bath'},
+      {x:0, y:4, w:4.5, h:5.5, label:'Bedroom 2'}, {x:4.5, y:4, w:7.5, h:5.5, label:'Living · Dining'},
+      {x:12, y:4, w:5, h:5.5, label:'Master suite'}
     ],
-    outdoor:[{x:0, y:11.5, w:24, h:3, label:'Shaded terrace · outdoor dining'}, {x:4, y:14.5, w:16, h:3.5, label:'Infinity pool 16 × 3.5 m', pool:true}],
-    glass:[[5, 11.5, 24, 11.5], [0.5, 11.5, 4.5, 11.5], [10, 0, 13.5, 0]]
+    outdoor:[{x:0, y:9.5, w:17, h:2.5, label:'Shaded terrace · outdoor dining'}, {x:3, y:12.5, w:11, h:3, label:'Infinity pool 11 × 3 m', pool:true}],
+    glass:[[0.3, 9.5, 16.7, 9.5], [7.5, 0, 11.5, 0]]
   }],
   atitlan: [{
-    id:'atu', title:'Casa Atitlán — upper level (living)', w:16, h:10.5, bottomLabel:'↓ Lake & volcanoes',
+    id:'atu', title:'Casa Atitlán — upper level (living)', w:12, h:10, bottomLabel:'↓ Lake',
     rooms:[
-      {x:0, y:0, w:3.5, h:3.5, label:'Entry + stair'}, {x:3.5, y:0, w:3, h:3.5, label:'Powder/Laundry'},
-      {x:6.5, y:0, w:9.5, h:3.5, label:'Kitchen + island'}, {x:0, y:3.5, w:16, h:4.5, label:'Living · Dining (open plan)'}
+      {x:0, y:0, w:3, h:3, label:'Entry + stair'}, {x:3, y:0, w:2.5, h:3, label:'Laundry'},
+      {x:5.5, y:0, w:6.5, h:3, label:'Kitchen + island'}, {x:0, y:3, w:12, h:4.5, label:'Living · Dining'}
     ],
-    outdoor:[{x:0, y:8, w:16, h:2.5, label:'Cantilevered terrace · glass balustrade'}],
-    glass:[[0.3, 8, 15.7, 8], [16, 3.5, 16, 8]]
+    outdoor:[{x:0, y:7.5, w:12, h:2.5, label:'Cantilevered terrace'}],
+    glass:[[0.3, 7.5, 11.7, 7.5], [12, 3, 12, 7.5]]
   }, {
-    id:'atl', title:'Casa Atitlán — lower level (bedrooms)', w:16, h:12, bottomLabel:'↓ Lake & volcanoes',
+    id:'atl', title:'Casa Atitlán — lower level (bedrooms)', w:12, h:11, bottomLabel:'↓ Lake',
     rooms:[
-      {x:0, y:0, w:3.5, h:3.5, label:'Stair'}, {x:3.5, y:0, w:2.5, h:3.5, label:'Bath 2'},
-      {x:6, y:0, w:2.5, h:3.5, label:'Mech/Batt.'}, {x:8.5, y:0, w:2.5, h:3.5, label:'Bath 3'},
-      {x:11, y:0, w:5, h:3.5, label:'Master bath'},
-      {x:0, y:3.5, w:4.5, h:4.5, label:'Bedroom 2'}, {x:4.5, y:3.5, w:4.5, h:4.5, label:'Bedroom 3'},
-      {x:9, y:3.5, w:7, h:4.5, label:'Master suite'}
+      {x:0, y:0, w:3, h:3, label:'Stair'}, {x:3, y:0, w:2.5, h:3, label:'Bath 2'},
+      {x:5.5, y:0, w:2, h:3, label:'Mech'}, {x:7.5, y:0, w:4.5, h:3, label:'Master bath'},
+      {x:0, y:3, w:5, h:4.5, label:'Bedroom 2'}, {x:5, y:3, w:7, h:4.5, label:'Master suite'}
     ],
-    outdoor:[{x:0, y:8, w:16, h:4, label:''}, {x:1.5, y:8.6, w:11, h:2.8, label:'Infinity pool 11 × 2.8 m', pool:true}],
-    glass:[[0.3, 8, 15.7, 8]]
+    outdoor:[{x:0, y:7.5, w:12, h:3.5, label:''}, {x:1, y:8.1, w:8, h:2.4, label:'Infinity pool 8 × 2.4 m', pool:true}],
+    glass:[[0.3, 7.5, 11.7, 7.5]]
   }]
 };
 
