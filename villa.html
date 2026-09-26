@@ -837,8 +837,154 @@ function conceptState(key, importChina, finish){
   return Object.assign({}, S, c.specs, {region:c.site, lotPrice:S.sites[c.site], finish: finish || S.cmpFinish, importChina, name:c.name});
 }
 
+/* ---------- Gallery: glass-walled views ---------- */
+// Casa Pacífico at night, two-point perspective from the pool corner.
+function renderNightPacifico(){
+  const lt = x => 220 - (x - 90) * 10 / 240, lb = x => 309 + (x - 90) * 21 / 240;     // left face top/bottom
+  const gt = x => 216 + (x - 345) * 13 / 400, gb = x => 324 - (x - 345) * 27 / 400;  // glass top/bottom
+  const rt = x => 198 + (x - 322) * 16 / 453;                                       // roof line
+  const stars = [[40,30],[120,70],[190,24],[260,56],[350,20],[420,64],[480,34],[560,18],[700,40],[760,90],[90,120],[300,110],[520,100],[740,150],[160,160]];
+  let slats = ''; for(let x = 104; x <= 200; x += 9) slats += `M${x} ${lt(x).toFixed(1)}V${lb(x).toFixed(1)}`;
+  let mull = ''; [425,505,585,665].forEach(x => { mull += `M${x} ${gt(x).toFixed(1)}V${gb(x).toFixed(1)}`; });
+  let lights = ''; for(let x = 370; x <= 730; x += 60){ const y = rt(x) + 13; lights += `<path d="M${x - 6} ${y}L${x - 22} ${y + 60}H${x + 22}L${x + 6} ${y}Z" fill="#FFE9B8" opacity=".07"/><circle cx="${x}" cy="${y}" r="2.2" fill="#FFF3CF"/>`; }
+  let pend = ''; [[470,238],[520,237],[600,236]].forEach(([x, y]) => { pend += `<path d="M${x} ${gt(x).toFixed(1)}V${y}" stroke="#5A4630"/><circle cx="${x}" cy="${y + 3}" r="4" fill="#FFF4D6"/>`; });
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Casa Pacífico at night with glowing floor-to-ceiling glass">
+  <defs>
+    <linearGradient id="nSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050818"/><stop offset=".6" stop-color="#1E2550"/><stop offset="1" stop-color="#34306A"/></linearGradient>
+    <linearGradient id="nGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE7B5"/><stop offset="1" stop-color="#E9974E"/></linearGradient>
+    <linearGradient id="nWall" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#D9CDB8"/><stop offset="1" stop-color="#57534E"/></linearGradient>
+    <linearGradient id="nWallR" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#B8AE9E"/><stop offset="1" stop-color="#4E4A45"/></linearGradient>
+    <radialGradient id="nPool" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#7FEBFF"/><stop offset="1" stop-color="#0A5F7C"/></radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#nSky)"/>
+  ${stars.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i % 3 ? 1 : 1.6}" fill="#fff" opacity=".8"/>`).join('')}
+  <circle cx="650" cy="72" r="42" fill="#F4F1E0" opacity=".07"/><circle cx="650" cy="72" r="17" fill="#F4F1E0"/>
+  <rect y="250" width="800" height="14" fill="#141B38"/>
+  <path d="M640 254h20M634 259h32" stroke="#F4F1E0" stroke-opacity=".5"/>
+  <rect y="262" width="800" height="188" fill="#16130F"/>
+  <path d="M60 312L330 340L800 308V340L440 394L40 330Z" fill="#3A2A20"/>
+  <path d="M400 352L770 327L782 345L450 386Z" fill="url(#nPool)"/>
+  <path d="M398 350L772 325" stroke="#E8E2D8" stroke-width="2"/>
+  <path d="M440 362L700 344L706 350L446 369Z" fill="#FFD58A" opacity=".28"/>
+  <path d="M470 372L680 357L684 361L474 377Z" fill="#FFD58A" opacity=".18"/>
+  <!-- house -->
+  <path d="M90 309L330 330L760 301V307L330 337L90 314Z" fill="#9C958B"/>
+  <path d="M90 220L330 210V330L90 309Z" fill="url(#nWall)"/>
+  <path d="${slats}" stroke="#7A5A40" stroke-width="3" opacity=".7"/>
+  <path d="M232 ${lt(232) + 8}L300 ${lt(300) + 8}V${lb(300) - 6}L232 ${lb(232) - 6}Z" fill="url(#nGlass)"/>
+  <path d="M330 210L760 225V301L330 330Z" fill="url(#nWallR)"/>
+  <path d="M345 216L745 229V297L345 324Z" fill="url(#nGlass)"/>
+  <path d="M420 300L560 291V309.5L420 319Z" fill="#6B4A34" opacity=".75"/>
+  <path d="M420 296L560 287V293L420 302Z" fill="#8A6448" opacity=".7"/>
+  <circle cx="372" cy="298" r="14" fill="#2E4A2A"/><circle cx="382" cy="288" r="9" fill="#3A5C33"/>
+  ${pend}
+  <path d="${mull}" stroke="#2A2520" stroke-width="2.5"/>
+  <path d="M345 216L745 229V297L345 324Z" fill="none" stroke="#2A2520" stroke-width="2.5"/>
+  <path d="M78 210L322 198V211L78 221Z" fill="#EDE8E0"/>
+  <path d="M322 198L775 214V224L322 211Z" fill="#F4F0EA"/>
+  ${lights}
+  <path d="M330 190L770 205V214L330 199Z" fill="#CFE8F2" opacity=".14"/>
+  <path d="M420 180L620 187" stroke="#6B5040" stroke-width="4"/>
+  <path d="M430 181V${rt(430).toFixed(1)}M525 184V${rt(525).toFixed(1)}M615 187V${rt(615).toFixed(1)}" stroke="#6B5040" stroke-width="3"/>
+  <ellipse cx="46" cy="332" rx="26" ry="6" fill="#FFD58A" opacity=".2"/><ellipse cx="786" cy="322" rx="26" ry="6" fill="#FFD58A" opacity=".2"/>
+  ${palm(40, 332, 190, 26)}${palm(786, 322, 170, -26)}
+</svg>`;
+}
+
+// Inside Casa Pacífico: living room looking through the sliding glass wall to pool and ocean.
+function renderInteriorPacifico(){
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Living room of Casa Pacífico looking through floor-to-ceiling glass to the pool and ocean">
+  <defs>
+    <linearGradient id="iSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC8F0"/><stop offset="1" stop-color="#E4F5FB"/></linearGradient>
+    <linearGradient id="iSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E8FB8"/><stop offset="1" stop-color="#1B6E96"/></linearGradient>
+    <linearGradient id="iMarble" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9E4DC"/><stop offset="1" stop-color="#FBF9F6"/></linearGradient>
+  </defs>
+  <rect x="60" y="40" width="680" height="160" fill="url(#iSky)"/>
+  <ellipse cx="220" cy="100" rx="70" ry="12" fill="#fff" opacity=".7"/><ellipse cx="560" cy="80" rx="90" ry="14" fill="#fff" opacity=".6"/>
+  <rect x="60" y="200" width="680" height="60" fill="url(#iSea)"/>
+  <path d="M120 222h60M300 236h90M520 226h70M640 244h50" stroke="#fff" stroke-opacity=".4" stroke-width="1.5"/>
+  <rect x="60" y="258" width="680" height="28" fill="#3FC6E0"/>
+  <path d="M60 258H740" stroke="#9BE8F6" stroke-width="2"/>
+  <rect x="60" y="286" width="680" height="74" fill="#C29A74"/>
+  <path d="M60 300H740M60 316H740M60 334H740" stroke="#A67E5A" stroke-width="1"/>
+  <rect x="120" y="296" width="70" height="10" rx="3" fill="#F6F3EE"/><rect x="220" y="296" width="70" height="10" rx="3" fill="#F6F3EE"/>
+  ${palm(690, 300, 160, -14)}
+  <!-- glass sheen -->
+  <path d="M150 40H200L110 360H60Z" fill="#fff" opacity=".08"/><path d="M470 40H495L435 360H410Z" fill="#fff" opacity=".06"/>
+  <!-- room -->
+  <path d="M0 0H800L740 40H60Z" fill="#F1ECE4"/>
+  ${[160, 320, 480, 640].map(x => `<ellipse cx="${x}" cy="20" rx="7" ry="3" fill="#FFF8E6"/>`).join('')}
+  <path d="M0 0L60 40V360L0 450Z" fill="#E4DED5"/><path d="M800 0L740 40V360L800 450Z" fill="#D8D1C6"/>
+  <path d="M0 450L60 360H740L800 450Z" fill="url(#iMarble)"/>
+  <path d="M90 380Q200 372 260 396T420 410M480 372Q560 390 640 380T780 430M40 430Q140 420 200 440" stroke="#BDB5AA" stroke-width="1" fill="none" opacity=".7"/>
+  <rect x="60" y="40" width="680" height="320" fill="none" stroke="#1E1E22" stroke-width="5"/>
+  <path d="M230 40V360M400 40V360M570 40V360" stroke="#1E1E22" stroke-width="4"/>
+  <!-- furniture -->
+  <ellipse cx="350" cy="384" rx="210" ry="9" fill="#000" opacity=".12"/>
+  <rect x="160" y="308" width="380" height="36" rx="6" fill="#D6CFC3"/>
+  <rect x="160" y="338" width="380" height="42" rx="4" fill="#E9E3D9"/>
+  <path d="M287 338V380M413 338V380" stroke="#D0C8BB"/>
+  <rect x="300" y="398" width="180" height="11" fill="#F7F5F2" stroke="#CFC8BD"/>
+  <rect x="312" y="409" width="6" height="18" fill="#2A2A2A"/><rect x="462" y="409" width="6" height="18" fill="#2A2A2A"/>
+  <rect x="84" y="330" width="40" height="44" fill="#3A3A3A"/>
+  <ellipse cx="96" cy="310" rx="10" ry="28" fill="#2F5E3A" transform="rotate(-20 96 310)"/>
+  <ellipse cx="112" cy="306" rx="10" ry="30" fill="#3A7045" transform="rotate(18 112 306)"/>
+  <ellipse cx="104" cy="296" rx="8" ry="30" fill="#2F5E3A"/>
+</svg>`;
+}
+
+// Inside Casa Atitlán: dining room behind a near-frameless glass wall, lake and volcanoes beyond.
+function renderInteriorAtitlan(){
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Dining room of Casa Atitlán looking through a glass wall to Lake Atitlán and its volcanoes">
+  <defs>
+    <linearGradient id="jSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8EC3E6"/><stop offset="1" stop-color="#EAF3F7"/></linearGradient>
+    <linearGradient id="jLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C95B5"/><stop offset="1" stop-color="#2A6C8C"/></linearGradient>
+    <linearGradient id="jRefl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFDDEA" stop-opacity=".35"/><stop offset="1" stop-color="#BFDDEA" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect x="60" y="40" width="680" height="200" fill="url(#jSky)"/>
+  <ellipse cx="330" cy="80" rx="80" ry="12" fill="#fff" opacity=".6"/>
+  <path d="M80 240L230 110Q250 98 270 112L420 240Z" fill="#7896A8"/>
+  <path d="M380 240L520 100Q540 88 560 100L610 140L640 120Q660 110 680 122L740 170V240Z" fill="#5E7C92"/>
+  <rect x="60" y="214" width="680" height="26" fill="#fff" opacity=".2"/>
+  <rect x="60" y="238" width="680" height="4" fill="#4F6A57"/>
+  <rect x="60" y="242" width="680" height="90" fill="url(#jLake)"/>
+  <path d="M140 270h50M330 290h80M540 262h60M620 300h50" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/>
+  <path d="M470 280h26l-4 5h-18z" fill="#F4F4F4"/>
+  ${[[90,330,40],[170,338,34],[640,332,42],[720,336,36]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .6}" fill="#355A2F"/>`).join('')}
+  <rect x="60" y="345" width="680" height="15" fill="#8A6A50"/>
+  <rect x="60" y="318" width="680" height="30" fill="#CFE8F2" opacity=".18"/>
+  <path d="M60 318H740" stroke="#DDEFF5" stroke-opacity=".8" stroke-width="2"/>
+  <path d="M130 40H175L95 360H60Z" fill="#fff" opacity=".07"/>
+  <!-- room -->
+  <path d="M0 0H800L740 40H60Z" fill="#5A4030"/>
+  <path d="M100 0L150 40M250 0L270 40M400 0V40M550 0L530 40M700 0L650 40" stroke="#3E2C20" stroke-width="2"/>
+  <path d="M0 0L60 40V360L0 450Z" fill="#57534F"/><path d="M800 0L740 40V360L800 450Z" fill="#4E4A46"/>
+  <path d="M0 450L60 360H740L800 450Z" fill="#3B3835"/>
+  <path d="M60 360H740L780 420H20Z" fill="url(#jRefl)"/>
+  <rect x="60" y="40" width="680" height="320" fill="none" stroke="#151515" stroke-width="3"/>
+  <path d="M287 40V360M513 40V360" stroke="#151515" stroke-width="2"/>
+  <!-- pendants -->
+  ${[330, 400, 470].map(x => `<path d="M${x} 20V248" stroke="#1A1A1A"/><path d="M${x - 14} 262Q${x} 244 ${x + 14} 262Z" fill="#1A1A1A"/><ellipse cx="${x}" cy="266" rx="16" ry="4" fill="#FFE2A8" opacity=".6"/>`).join('')}
+  <!-- dining table & chairs -->
+  <rect x="230" y="350" width="340" height="10" fill="#2A1E16"/>
+  <rect x="250" y="360" width="10" height="56" fill="#2A1E16"/><rect x="540" y="360" width="10" height="56" fill="#2A1E16"/>
+  ${[200, 600].map(x => `<rect x="${x - 16}" y="318" width="32" height="50" rx="4" fill="#1C1612"/><rect x="${x - 20}" y="364" width="40" height="8" fill="#1C1612"/><rect x="${x - 16}" y="372" width="5" height="40" fill="#1C1612"/><rect x="${x + 11}" y="372" width="5" height="40" fill="#1C1612"/>`).join('')}
+  <circle cx="400" cy="344" r="8" fill="#6E8B5A"/><rect x="394" y="344" width="12" height="7" fill="#C9C1B6"/>
+</svg>`;
+}
+
 function renderConcepts(){
-  $('conceptList').innerHTML = Object.entries(CONCEPTS).map(([k, c]) => `
+  const gallery = `
+    <div class="card">
+      <h3 style="font-size:1.9rem;margin-bottom:4px">Glass-Walled Views</h3>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:14px">How the imported floor-to-ceiling glass reads by night and from inside. Illustrations, not photographs — for real-world references, browse <a href="https://unsplash.com/s/photos/modern-glass-villa" target="_blank" rel="noopener" style="color:var(--red-bright)">modern glass villas on Unsplash</a> or <a href="https://www.pinterest.com/search/pins/?q=modern%20glass%20villa%20tropical" target="_blank" rel="noopener" style="color:var(--red-bright)">tropical glass villas on Pinterest</a>.</p>
+      <figure>${renderNightPacifico()}<figcaption>Casa Pacífico at night — sliding glass wall lit from within, reflected in the pool</figcaption></figure>
+      <div class="two">
+        <figure>${renderInteriorPacifico()}<figcaption>Casa Pacífico living room — glass wall onto pool, deck and ocean</figcaption></figure>
+        <figure>${renderInteriorAtitlan()}<figcaption>Casa Atitlán dining room — near-frameless glass toward the lake and volcanoes</figcaption></figure>
+      </div>
+    </div>`;
+  $('conceptList').innerHTML = gallery + Object.entries(CONCEPTS).map(([k, c]) => `
     <div class="card">
       <div class="concept-head">
         <div><h3 style="font-size:1.9rem;margin-bottom:4px">${esc(c.name)}</h3><p>${esc(REGIONS[c.site].label)} — ${esc(c.tagline)}</p></div>
