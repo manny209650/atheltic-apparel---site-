@@ -7,68 +7,68 @@ function getDailyItem(arr){
 }
 
 const DAILY_VERSES = [
-  {ref:'Philippians 4:13', text:'I can do all things through Christ who strengthens me.'},
-  {ref:'Proverbs 3:5', text:'Trust in the Lord with all your heart and lean not on your own understanding.'},
-  {ref:'Jeremiah 29:11', text:'For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future.'},
-  {ref:'Isaiah 40:31', text:'Those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary.'},
-  {ref:'Joshua 1:9', text:'Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.'},
-  {ref:'Romans 8:28', text:'And we know that in all things God works for the good of those who love him, who have been called according to his purpose.'},
-  {ref:'Psalm 23:1', text:'The Lord is my shepherd, I lack nothing.'},
-  {ref:'2 Timothy 1:7', text:'For God has not given us a spirit of fear, but of power and of love and of a sound mind.'},
-  {ref:'Matthew 19:26', text:'With man this is impossible, but with God all things are possible.'},
-  {ref:'Exodus 14:14', text:'The Lord will fight for you; you need only to be still.'},
-  {ref:'Psalm 37:4', text:'Delight yourself in the Lord, and he will give you the desires of your heart.'},
-  {ref:'Matthew 11:28', text:'Come to me, all you who are weary and burdened, and I will give you rest.'},
-  {ref:'Philippians 4:6', text:'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.'},
-  {ref:'Psalm 46:1', text:'God is our refuge and strength, an ever-present help in trouble.'},
-  {ref:'Psalm 34:19', text:'The righteous person may have many troubles, but the Lord delivers him from them all.'},
-  {ref:'Matthew 7:7', text:'Ask and it will be given to you; seek and you will find; knock and the door will be opened to you.'},
-  {ref:'Psalm 139:14', text:'I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.'},
-  {ref:'Isaiah 54:17', text:'No weapon forged against you will prevail, and you will refute every tongue that accuses you.'},
-  {ref:'Psalm 46:10', text:'Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.'},
-  {ref:'Proverbs 16:3', text:'Commit to the Lord whatever you do, and he will establish your plans.'},
-  {ref:'John 15:13', text:'Greater love has no one than this: to lay down one\'s life for one\'s friends.'},
-  {ref:'Proverbs 18:10', text:'The name of the Lord is a fortified tower; the righteous run to it and are safe.'},
-  {ref:'John 16:33', text:'I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart — I have overcome the world.'},
-  {ref:'Psalm 55:22', text:'Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.'},
-  {ref:'Galatians 6:9', text:'Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.'},
-  {ref:'Zephaniah 3:17', text:'The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you.'},
-  {ref:'Psalm 23:4', text:'Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.'},
-  {ref:'Philippians 4:19', text:'And my God will meet all your needs according to the riches of his glory in Christ Jesus.'},
-  {ref:'2 Corinthians 5:17', text:'Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!'},
-  {ref:'Numbers 6:24', text:'The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you.'},
-  {ref:'Matthew 22:37', text:'Love the Lord your God with all your heart and with all your soul and with all your mind.'},
-  {ref:'Ephesians 6:10', text:'Finally, be strong in the Lord and in his mighty power.'},
-  {ref:'Jeremiah 17:7', text:'Blessed is the one who trusts in the Lord, whose confidence is in him.'},
-  {ref:'John 15:5', text:'I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit.'},
-  {ref:'Nehemiah 8:10', text:'The joy of the Lord is your strength.'},
-  {ref:'Matthew 6:33', text:'Seek first his kingdom and his righteousness, and all these things will be given to you as well.'},
-  {ref:'Isaiah 40:29', text:'He gives strength to the weary and increases the power of the weak.'},
-  {ref:'1 Timothy 4:7', text:'Train yourself to be godly, for physical training is of some value, but godliness has value for all things.'},
-  {ref:'Romans 12:2', text:'Do not conform to the pattern of this world, but be transformed by the renewing of your mind.'},
-  {ref:'Colossians 3:23', text:'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.'},
-  {ref:'1 Corinthians 9:24', text:'Do you not know that in a race all the runners run, but only one gets the prize? Run in such a way as to get the prize.'},
-  {ref:'1 Corinthians 16:13', text:'Be on your guard; stand firm in the faith; be courageous; be strong.'},
-  {ref:'1 Corinthians 6:19', text:'Do you not know that your bodies are temples of the Holy Spirit, who is in you, whom you have received from God?'},
-  {ref:'1 Corinthians 6:20', text:'You were bought at a price. Therefore honor God with your bodies.'},
-  {ref:'Proverbs 31:25', text:'She is clothed with strength and dignity; she can laugh at the days to come.'},
-  {ref:'Proverbs 11:25', text:'A generous person will prosper; whoever refreshes others will be refreshed.'},
-  {ref:'Proverbs 13:11', text:'Wealth gained hastily will dwindle, but whoever gathers little by little will increase it.'},
-  {ref:'Proverbs 22:1', text:'A good name is more desirable than great riches; to be esteemed is better than silver or gold.'},
-  {ref:'Luke 6:38', text:'Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap.'},
-  {ref:'Deuteronomy 28:12', text:'The Lord will open the heavens, the storehouse of his bounty, to send rain on your land in season and to bless all the work of your hands.'},
-  {ref:'3 John 1:2', text:'Dear friend, I pray that you may enjoy good health and that all may go well with you, even as your soul is getting along well.'},
-  {ref:'Romans 12:21', text:'Do not be overcome by evil, but overcome evil with good.'},
-  {ref:'Proverbs 3:6', text:'In all your ways submit to him, and he will make your paths straight.'},
-  {ref:'Ephesians 3:20', text:'Now to him who is able to do immeasurably more than all we ask or imagine, according to his power that is at work within us.'},
-  {ref:'Psalm 27:1', text:'The Lord is my light and my salvation — whom shall I fear? The Lord is the stronghold of my life — of whom shall I be afraid?'},
-  {ref:'Isaiah 43:2', text:'When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you.'},
-  {ref:'Romans 5:3-4', text:'We also glory in our sufferings, because we know that suffering produces perseverance; perseverance, character; and character, hope.'},
-  {ref:'Psalm 91:11', text:'For he will command his angels concerning you to guard you in all your ways.'},
-  {ref:'Habakkuk 2:2', text:'Write the vision; make it plain on tablets, so he may run who reads it.'},
-  {ref:'Proverbs 4:23', text:'Above all else, guard your heart, for everything you do flows from it.'},
-  {ref:'Isaiah 26:3', text:'You will keep in perfect peace those whose minds are steadfast, because they trust in you.'},
-  {ref:'James 1:2-3', text:'Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.'},
+  {ref:'Philippians 4:13', text:'I can do all things through Christ who strengthens me.', breakdown:'You\'re not doing life alone. When you feel like you can\'t go on, God\'s strength fills the gap — you can push through anything because He\'s in your corner.'},
+  {ref:'Proverbs 3:5', text:'Trust in the Lord with all your heart and lean not on your own understanding.', breakdown:'Don\'t try to figure everything out by yourself. Give God the wheel and trust that He sees the bigger picture even when you don\'t.'},
+  {ref:'Jeremiah 29:11', text:'For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future.', breakdown:'God isn\'t making it up as He goes. He already has a specific, good plan mapped out for your life — one where things turn out well for you.'},
+  {ref:'Isaiah 40:31', text:'Those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary.', breakdown:'When you wait on God instead of running ahead on your own, He refills you. You stop burning out and start thriving in ways you couldn\'t on your own.'},
+  {ref:'Joshua 1:9', text:'Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.', breakdown:'God is literally telling you: don\'t be scared, don\'t be discouraged. He\'s with you everywhere you go — you don\'t have to face anything alone.'},
+  {ref:'Romans 8:28', text:'And we know that in all things God works for the good of those who love him, who have been called according to his purpose.', breakdown:'Even the hard stuff in your life isn\'t wasted. God takes every situation — good and bad — and works it toward something good for people who love Him.'},
+  {ref:'Psalm 23:1', text:'The Lord is my shepherd, I lack nothing.', breakdown:'When God is leading your life, you don\'t have to stress about running out. He takes care of everything you truly need.'},
+  {ref:'2 Timothy 1:7', text:'For God has not given us a spirit of fear, but of power and of love and of a sound mind.', breakdown:'Fear doesn\'t come from God. He put something completely different in you — strength, love, and a clear, calm mind to handle whatever comes your way.'},
+  {ref:'Matthew 19:26', text:'With man this is impossible, but with God all things are possible.', breakdown:'What looks completely impossible to human eyes is fully possible for God. No situation is too far gone or too broken for Him to change.'},
+  {ref:'Exodus 14:14', text:'The Lord will fight for you; you need only to be still.', breakdown:'You don\'t have to fight every battle yourself. Sometimes God just asks you to stop striving, get out of the way, and let Him handle it.'},
+  {ref:'Psalm 37:4', text:'Delight yourself in the Lord, and he will give you the desires of your heart.', breakdown:'When your relationship with God is your first priority, He aligns your heart\'s deepest desires with His will — and then He delivers them.'},
+  {ref:'Matthew 11:28', text:'Come to me, all you who are weary and burdened, and I will give you rest.', breakdown:'Jesus is directly inviting every tired, overwhelmed person to come to Him. You don\'t have to carry it all. He offers real rest — not just sleep, but peace.'},
+  {ref:'Philippians 4:6', text:'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.', breakdown:'Instead of spiraling in anxiety, bring every worry to God like a conversation. Talk to Him about it, thank Him, and let Him carry what you were never meant to carry alone.'},
+  {ref:'Psalm 46:1', text:'God is our refuge and strength, an ever-present help in trouble.', breakdown:'When everything around you falls apart, God is your safe place. He\'s not just nearby in hard times — He\'s right there in the middle of whatever you\'re going through.'},
+  {ref:'Psalm 34:19', text:'The righteous person may have many troubles, but the Lord delivers him from them all.', breakdown:'Life is hard for everyone, even people living right. But God promises to pull you through every single one of those hard moments — not some of them, all of them.'},
+  {ref:'Matthew 7:7', text:'Ask and it will be given to you; seek and you will find; knock and the door will be opened to you.', breakdown:'God isn\'t hiding from you. If you ask, seek, and keep knocking, He will respond — doors will open in your life that you could never open on your own.'},
+  {ref:'Psalm 139:14', text:'I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.', breakdown:'You weren\'t a mistake or an accident. God made you exactly the way you are on purpose, and the way He put you together was remarkable.'},
+  {ref:'Isaiah 54:17', text:'No weapon forged against you will prevail, and you will refute every tongue that accuses you.', breakdown:'No attack against you — from people, circumstances, or the enemy — will have the final word on your life. God already decided that outcome.'},
+  {ref:'Psalm 46:10', text:'Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.', breakdown:'God is reminding you to slow down and trust Him. You don\'t have to have it all figured out — He\'s God, and He\'s got it all under control.'},
+  {ref:'Proverbs 16:3', text:'Commit to the Lord whatever you do, and he will establish your plans.', breakdown:'Put God in charge of whatever you\'re building or working on. When you do, He makes sure your plans actually come together and succeed.'},
+  {ref:'John 15:13', text:'Greater love has no one than this: to lay down one\'s life for one\'s friends.', breakdown:'The greatest act of love is sacrificing yourself for someone else. This is what Jesus did for you — the ultimate example of what real love looks like.'},
+  {ref:'Proverbs 18:10', text:'The name of the Lord is a fortified tower; the righteous run to it and are safe.', breakdown:'God\'s name isn\'t just a word — it\'s a place of safety. When you\'re in danger or afraid, calling on God is like running inside a fortress that can\'t be broken.'},
+  {ref:'John 16:33', text:'I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart — I have overcome the world.', breakdown:'Jesus was upfront: life will be hard. But He also said He already won. You can have peace not because life is easy, but because He already overcame it all.'},
+  {ref:'Psalm 55:22', text:'Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.', breakdown:'You don\'t have to white-knuckle your problems. Hand them over to God and He will hold you steady — He won\'t let you completely fall apart.'},
+  {ref:'Galatians 6:9', text:'Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.', breakdown:'Don\'t quit doing the right thing just because you\'re tired and not seeing results yet. The payoff is coming — but you have to stay in it and not bail early.'},
+  {ref:'Zephaniah 3:17', text:'The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you.', breakdown:'God isn\'t disappointed in you — He actually rejoices over you. He\'s fighting for you and He genuinely delights in who you are.'},
+  {ref:'Psalm 23:4', text:'Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.', breakdown:'Even in your darkest, scariest seasons, you\'re not going through it alone. God is right there walking with you, guiding you and giving you comfort through the hard stretches.'},
+  {ref:'Philippians 4:19', text:'And my God will meet all your needs according to the riches of his glory in Christ Jesus.', breakdown:'God knows every need you have — and He has more than enough to meet all of them. You don\'t have to stress about running out because His supply doesn\'t run out.'},
+  {ref:'2 Corinthians 5:17', text:'Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!', breakdown:'When you give your life to Jesus, you become brand new. Your past doesn\'t define you anymore — a genuine fresh start is real and fully available to you.'},
+  {ref:'Numbers 6:24', text:'The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you.', breakdown:'This is one of the oldest blessings in history — God asking His people to bless you, protect you, and shine His goodness on your life.'},
+  {ref:'Matthew 22:37', text:'Love the Lord your God with all your heart and with all your soul and with all your mind.', breakdown:'Loving God isn\'t just a Sunday thing. It\'s an all-in commitment with every part of you — your feelings, your choices, and how you think.'},
+  {ref:'Ephesians 6:10', text:'Finally, be strong in the Lord and in his mighty power.', breakdown:'Your strength doesn\'t have to come from you alone. Draw on God\'s power — it\'s unlimited and available to you right now, today.'},
+  {ref:'Jeremiah 17:7', text:'Blessed is the one who trusts in the Lord, whose confidence is in him.', breakdown:'People who put their full trust in God are called blessed — not because life gets easy, but because their foundation never breaks no matter what happens.'},
+  {ref:'John 15:5', text:'I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit.', breakdown:'Jesus is saying: stay connected to me and you\'ll produce results you could never create on your own. The moment you cut that connection, nothing lasting gets built.'},
+  {ref:'Nehemiah 8:10', text:'The joy of the Lord is your strength.', breakdown:'The deep, settled joy that comes from knowing God is your actual source of energy and strength. When you\'re close to Him, you have fuel that others can\'t explain.'},
+  {ref:'Matthew 6:33', text:'Seek first his kingdom and his righteousness, and all these things will be given to you as well.', breakdown:'Make God and His ways your number one priority, and He takes care of everything else you need. Stop chasing things — chase Him first, and the rest follows.'},
+  {ref:'Isaiah 40:29', text:'He gives strength to the weary and increases the power of the weak.', breakdown:'When you\'re completely exhausted and feel like you have nothing left, God steps in. He literally gives strength to the tired and lifts up the people who feel the weakest.'},
+  {ref:'1 Timothy 4:7', text:'Train yourself to be godly, for physical training is of some value, but godliness has value for all things.', breakdown:'Working out your body has value, but working on your character and your relationship with God pays off in every single area of life — not just some of them.'},
+  {ref:'Romans 12:2', text:'Do not conform to the pattern of this world, but be transformed by the renewing of your mind.', breakdown:'Don\'t let the world squeeze you into its mold. Let God reshape how you think — because a transformed mind changes everything about how you live and who you become.'},
+  {ref:'Colossians 3:23', text:'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.', breakdown:'Whatever job or task you\'re doing, give it your full effort — because you\'re really doing it for God, not just for a paycheck, a grade, or someone\'s approval.'},
+  {ref:'1 Corinthians 9:24', text:'Do you not know that in a race all the runners run, but only one gets the prize? Run in such a way as to get the prize.', breakdown:'Life is like a race. Everyone is running, but not everyone pushes to actually win. Don\'t coast — bring everything you have, every single day.'},
+  {ref:'1 Corinthians 16:13', text:'Be on your guard; stand firm in the faith; be courageous; be strong.', breakdown:'Stay alert, stay grounded, and don\'t back down. This is a direct call to be spiritually tough, courageous, and unshakeable in what you believe.'},
+  {ref:'1 Corinthians 6:19', text:'Do you not know that your bodies are temples of the Holy Spirit, who is in you, whom you have received from God?', breakdown:'Your body isn\'t just yours — God\'s Spirit lives inside you. That changes how you treat yourself, what you put in your body, and how you live day to day.'},
+  {ref:'1 Corinthians 6:20', text:'You were bought at a price. Therefore honor God with your bodies.', breakdown:'You were purchased at the highest price possible — Jesus gave His life for you. The way you care for your body should reflect that kind of value.'},
+  {ref:'Proverbs 31:25', text:'She is clothed with strength and dignity; she can laugh at the days to come.', breakdown:'A strong woman doesn\'t fear the future — she faces it with confidence because her identity is in God, not in what circumstances look like right now.'},
+  {ref:'Proverbs 11:25', text:'A generous person will prosper; whoever refreshes others will be refreshed.', breakdown:'When you pour into other people, it comes back to you. Generosity isn\'t just good for others — it opens the door for you to be blessed in return.'},
+  {ref:'Proverbs 13:11', text:'Wealth gained hastily will dwindle, but whoever gathers little by little will increase it.', breakdown:'Money made quickly or dishonestly disappears fast. Steady, patient, consistent work builds wealth that actually lasts — slow is smooth, smooth is fast.'},
+  {ref:'Proverbs 22:1', text:'A good name is more desirable than great riches; to be esteemed is better than silver or gold.', breakdown:'Your reputation and character are worth more than any amount of money. People remember who you are long after they forget what you had.'},
+  {ref:'Luke 6:38', text:'Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap.', breakdown:'Giving generously starts a cycle. When you give freely, God gives back to you in abundance — overflowing, more than you put in.'},
+  {ref:'Deuteronomy 28:12', text:'The Lord will open the heavens, the storehouse of his bounty, to send rain on your land in season and to bless all the work of your hands.', breakdown:'God promises to bless the work of your hands when you walk with Him. He opens doors to provision and opportunity that you simply can\'t open by yourself.'},
+  {ref:'3 John 1:2', text:'Dear friend, I pray that you may enjoy good health and that all may go well with you, even as your soul is getting along well.', breakdown:'God cares about your whole life — not just your soul, but your physical health, your finances, your relationships. His desire is for you to thrive in every area.'},
+  {ref:'Romans 12:21', text:'Do not be overcome by evil, but overcome evil with good.', breakdown:'Don\'t let hard situations or evil people drag you down to their level. The way to beat darkness isn\'t to fight it with more darkness — it\'s to flood it with good.'},
+  {ref:'Proverbs 3:6', text:'In all your ways submit to him, and he will make your paths straight.', breakdown:'In every decision, every path, every project — invite God in. When you do, He straightens out the crooked, complicated roads ahead of you.'},
+  {ref:'Ephesians 3:20', text:'Now to him who is able to do immeasurably more than all we ask or imagine, according to his power that is at work within us.', breakdown:'God can do more than you can even think to ask for. His power working inside you goes beyond the limits of your own imagination — don\'t cap what He can do.'},
+  {ref:'Psalm 27:1', text:'The Lord is my light and my salvation — whom shall I fear? The Lord is the stronghold of my life — of whom shall I be afraid?', breakdown:'When God is your light and your protection, fear loses its grip. There\'s no person or situation that can threaten you beyond what God can handle.'},
+  {ref:'Isaiah 43:2', text:'When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you.', breakdown:'When you go through overwhelming, scary, dark seasons — God promises He\'ll be right there. You won\'t drown. He\'ll carry you through to the other side.'},
+  {ref:'Romans 5:3-4', text:'We also glory in our sufferings, because we know that suffering produces perseverance; perseverance, character; and character, hope.', breakdown:'Hard times aren\'t just things to survive. They build you — they create staying power in you, shape your character, and lead to a hope that doesn\'t disappoint.'},
+  {ref:'Psalm 91:11', text:'For he will command his angels concerning you to guard you in all your ways.', breakdown:'God actually assigns His angels to watch over you. You have real spiritual protection following you wherever you go — even when you can\'t see it.'},
+  {ref:'Habakkuk 2:2', text:'Write the vision; make it plain on tablets, so he may run who reads it.', breakdown:'Write down what God has put on your heart. A clear vision written out gives you direction — and when it\'s clear, others around you can understand and run with it too.'},
+  {ref:'Proverbs 4:23', text:'Above all else, guard your heart, for everything you do flows from it.', breakdown:'What\'s in your heart drives everything — your choices, your words, your relationships. Protect what you let in and pay attention to what comes out.'},
+  {ref:'Isaiah 26:3', text:'You will keep in perfect peace those whose minds are steadfast, because they trust in you.', breakdown:'Perfect peace comes from a mind that\'s focused on God. When you fix your thoughts on Him and trust Him, anxiety can\'t take hold the way it normally does.'},
+  {ref:'James 1:2-3', text:'Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.', breakdown:'This sounds backwards, but God says to see hard times as a gift — because going through them builds something in you that only real struggle can create.'},
 ];
 
 const DAILY_HEALTH = [
@@ -200,9 +200,9 @@ const DAILY_WEALTH = [
 const DAILY_JUICE = [
   {name:'Green Power',emoji:'🥬',ingredients:'2 cups spinach · 1 cucumber · 1 green apple · ½ lemon · 1" ginger',benefits:'Detoxes the liver, floods your cells with chlorophyll, alkalizes your body, and gives you clean all-day energy without a crash.',tip:'Drink on an empty stomach for maximum absorption.',cost:'~$4–5'},
   {name:'Immunity Booster',emoji:'🍊',ingredients:'3 oranges · 2 carrots · 1" turmeric · 1" ginger · pinch of black pepper',benefits:'Vitamin C + beta-carotene + curcumin = one of the most powerful immune-defense combos you can put in your body. The black pepper activates the turmeric by 2000%.',tip:'Make this at the first sign of a cold. It works.',cost:'~$3–4'},
-  {name:'Beet Champion',emoji:'🫀',ingredients:'1 medium beet · 2 apples · 3 carrots · ½ lemon · 1" ginger',benefits:'Beet nitrates dilate your blood vessels and increase oxygen delivery to muscles — the same mechanism as pre-workout. Athletes use this before training. It also deeply cleanses the liver.',tip:'Your urine may turn pink. That\',cost:'~$5–6's normal — it\'s just the beet pigment.'},
+  {name:'Beet Champion',emoji:'🫀',ingredients:'1 medium beet · 2 apples · 3 carrots · ½ lemon · 1" ginger',benefits:'Beet nitrates dilate your blood vessels and increase oxygen delivery to muscles — the same mechanism as pre-workout. Athletes use this before training. It also deeply cleanses the liver.',tip:'Your urine may turn pink. That\'s normal — it\'s just the beet pigment.',cost:'~$5–6'},
   {name:'Tropical Glow',emoji:'🍍',ingredients:'1 cup pineapple · 1 mango · 1 cup coconut water · ½" turmeric · squeeze of lime',benefits:'Bromelain from pineapple reduces inflammation and aids digestion. Mango adds Vitamins A, C, and B6. Coconut water replenishes electrolytes naturally.',tip:'Great post-workout or after a hot day in the sun.',cost:'~$6–7'},
-  {name:'Morning Energizer',emoji:'☀️',ingredients:'2 oranges · 1 grapefruit · 1 lemon · 1" ginger · optional: 1 tsp honey',benefits:'Natural sugars hit your bloodstream clean and fast. Vitamin C drives cortisol to a healthy morning peak. Ginger fires up digestion and reduces inflammation immediately.',tip:'Drink within 20 minutes of waking — before coffee. You won\',cost:'~$3–4't miss the coffee.'},
+  {name:'Morning Energizer',emoji:'☀️',ingredients:'2 oranges · 1 grapefruit · 1 lemon · 1" ginger · optional: 1 tsp honey',benefits:'Natural sugars hit your bloodstream clean and fast. Vitamin C drives cortisol to a healthy morning peak. Ginger fires up digestion and reduces inflammation immediately.',tip:'Drink within 20 minutes of waking — before coffee. You won\'t miss the coffee.',cost:'~$3–4'},
   {name:'Celery Gut Reset',emoji:'🌿',ingredients:'1 full bunch of celery (alone — nothing added)',benefits:'Celery juice on its own rebuilds stomach acid levels, heals the gut lining, flushes out pathogens, and reduces bloating. One of the most powerful solo juices you can drink. Thousands of people have reversed chronic gut issues with this one habit.',tip:'16 oz every morning on an empty stomach. Give it 30 days.',cost:'~$3–4'},
   {name:'Watermelon Refresh',emoji:'🍉',ingredients:'3 cups watermelon · 1 cucumber · ½ lime · handful of mint',benefits:'L-citrulline from watermelon converts to nitric oxide — improving blood flow and reducing muscle soreness. Cucumber hydrates at a cellular level. Mint calms the digestive tract.',tip:'Perfect summer juice. Best served cold.',cost:'~$5–6'},
   {name:'Purple Brain Fuel',emoji:'🫐',ingredients:'1 cup blueberries · ½ cup pomegranate seeds · 1 small beet · 1 apple',benefits:'Anthocyanins + ellagitannins + betaine = the most antioxidant-dense juice you can make. Directly reduces oxidative stress in the brain, improves memory, and protects neurons long-term.',tip:'Make this your Sunday reset juice before the week starts.',cost:'~$8–10'},
@@ -264,6 +264,121 @@ const DAILY_STOCK = [
   {ticker:'MELI',name:'MercadoLibre',emoji:'🌎',thesis:'The Amazon + PayPal of Latin America. 700M+ people in the region are coming online and buying their first financial services and ecommerce products. MercadoLibre is in 18 countries with a near-monopoly position.',metric:'Revenue growing 35%+ · Fintech arm growing 40%+ · Latin America barely started'},
 ];
 
+const STOCK_SECTORS = [
+  {
+    sector: 'AI Software',
+    emoji: '🤖',
+    theme: 'Companies turning AI compute into sustainable cash flow',
+    stocks: [
+      { ticker: 'NVDA', name: 'NVIDIA', emoji: '🧠', exchange: 'nasdaq',
+        thesis: 'Every AI model — ChatGPT, Claude, Gemini — trains on NVIDIA GPUs. Blackwell demand outpaces supply. The AI infrastructure buildout has years of runway remaining.',
+        metric: 'Data center revenue +400% YoY · Supply constrained · Unbreakable CUDA moat' },
+      { ticker: 'PLTR', name: 'Palantir', emoji: '🤖', exchange: 'nyse',
+        thesis: 'AI software for government and enterprise — one of the only profitable AI-pure-play companies in the world. U.S. government AI contracts are accelerating.',
+        metric: 'Revenue +30% YoY · Profitable · DOGE-era gov\'t contracts expanding rapidly' },
+      { ticker: 'APP', name: 'AppLovin', emoji: '📱', exchange: 'nasdaq',
+        thesis: 'AI-powered mobile ad platform. Their AXON AI engine targets ads so accurately customers immediately reinvest — creating a powerful revenue flywheel.',
+        metric: 'Revenue +40% · Software platform +75% · Expanding into e-commerce ads' }
+    ]
+  },
+  {
+    sector: 'Cybersecurity',
+    emoji: '🛡️',
+    theme: 'Digital defense is not optional — it\'s a tax on the internet',
+    stocks: [
+      { ticker: 'CRWD', name: 'CrowdStrike', emoji: '🛡️', exchange: 'nasdaq',
+        thesis: 'Falcon platform is the gold standard in enterprise security. As AI creates more attack vectors, demand for best-in-class protection accelerates with it.',
+        metric: 'ARR +30% · 98% gross retention · 130%+ net dollar retention' },
+      { ticker: 'NET', name: 'Cloudflare', emoji: '☁️', exchange: 'nyse',
+        thesis: 'The internet runs on Cloudflare. Powers security, performance, and now AI inference for millions of sites. Every new AI app is a potential customer.',
+        metric: 'Revenue +25% · 130%+ net retention · AI inference expansion underway' },
+      { ticker: 'S', name: 'SentinelOne', emoji: '🔐', exchange: 'nyse',
+        thesis: 'AI-native cybersecurity built from scratch — not legacy software with AI bolted on. Autonomous threat detection with no human operator required.',
+        metric: 'Revenue +30% · Enterprise wins accelerating · AI-native architecture advantage' }
+    ]
+  },
+  {
+    sector: 'Consumer Growth',
+    emoji: '🛍️',
+    theme: 'Next-gen brands capturing the loyalty of younger consumers',
+    stocks: [
+      { ticker: 'CAVA', name: 'CAVA Group', emoji: '🥙', exchange: 'nyse',
+        thesis: 'Mediterranean fast-casual growing the way Chipotle did in 2010. Younger generations choosing real food over fast food — CAVA is leading that shift.',
+        metric: 'Same-store sales +double digits · 300 locations scaling to 1,000+' },
+      { ticker: 'CELH', name: 'Celsius Holdings', emoji: '🥤', exchange: 'nasdaq',
+        thesis: 'Premium fitness energy drink displacing Monster and Red Bull. PepsiCo distribution unlocked nationwide shelf space. International expansion barely started.',
+        metric: 'Revenue +25%+ · International just beginning · Healthier category winner' },
+      { ticker: 'DUOL', name: 'Duolingo', emoji: '🦉', exchange: 'nasdaq',
+        thesis: 'World\'s #1 language app — 90M+ daily users. Subscription growing 40%+. AI is making the product dramatically more effective and addictive every month.',
+        metric: 'Subscription revenue +45% · DAU +54% YoY · AI product improvements daily' }
+    ]
+  },
+  {
+    sector: 'Semiconductors',
+    emoji: '⚙️',
+    theme: 'The hardware layer every AI workload on the planet runs on',
+    stocks: [
+      { ticker: 'AMD', name: 'AMD', emoji: '⚙️', exchange: 'nasdaq',
+        thesis: 'Only credible NVIDIA competitor in AI chips. MI300X accelerators landing at customers who can\'t get NVIDIA supply. Also dominates server CPUs with EPYC.',
+        metric: 'AI GPU revenue +100%+ · EPYC server share growing · Data center wins' },
+      { ticker: 'ARM', name: 'ARM Holdings', emoji: '💻', exchange: 'nasdaq',
+        thesis: 'Nearly every AI chip, smartphone, and server CPU runs on ARM architecture. They collect royalties on every chip shipped — AI hardware scaling = ARM royalties scaling.',
+        metric: 'Royalty revenue +14%+ · AI chip adoption accelerating globally · Royalty model' },
+      { ticker: 'ALAB', name: 'Astera Labs', emoji: '🔌', exchange: 'nasdaq',
+        thesis: 'The unsung hero of the AI buildout. Makes connectivity chips that let GPUs communicate at speed inside data centers. NVIDIA GPUs need Astera to reach full performance.',
+        metric: 'Revenue +100%+ · Every new AI data center is a direct customer' }
+    ]
+  },
+  {
+    sector: 'Space & Frontier Tech',
+    emoji: '🚀',
+    theme: 'High-conviction frontier bets on the industries defining the next decade',
+    stocks: [
+      { ticker: 'RKLB', name: 'Rocket Lab', emoji: '🚀', exchange: 'nasdaq',
+        thesis: 'SpaceX competitor with 50+ successful launches. Expanding into medium rockets (Neutron) and satellite manufacturing. Space infrastructure is a multi-decade theme.',
+        metric: 'Revenue +55% · 100+ launch contracts in backlog · Neutron rocket in dev' },
+      { ticker: 'IONQ', name: 'IonQ', emoji: '⚛️', exchange: 'nyse',
+        thesis: 'Leader in trapped-ion quantum computing — the most stable approach. Partnerships with AWS, Google, and Microsoft. Early mover advantage in the next computing revolution.',
+        metric: 'Revenue +100%+ · Government + cloud contracts expanding · Category leader' },
+      { ticker: 'RXRX', name: 'Recursion Pharma', emoji: '🧬', exchange: 'nasdaq',
+        thesis: 'AI drug discovery company using machine learning to find drugs 10x faster. Partnered with NVIDIA to build the world\'s largest biology AI model.',
+        metric: 'NVIDIA partnership · 50+ drug programs in pipeline · Platform approach' }
+    ]
+  },
+  {
+    sector: 'Fintech & Digital Finance',
+    emoji: '💳',
+    theme: 'The next generation of financial infrastructure being built right now',
+    stocks: [
+      { ticker: 'COIN', name: 'Coinbase', emoji: '🪙', exchange: 'nasdaq',
+        thesis: 'The regulated U.S. crypto exchange. Every institutional Bitcoin ETF needs custody. Regulatory clarity is now a tailwind. Base L2 expanding ecosystem rapidly.',
+        metric: 'Institutional custody growing · Regulatory tailwinds increasing · Base L2' },
+      { ticker: 'HOOD', name: 'Robinhood', emoji: '📈', exchange: 'nasdaq',
+        thesis: 'Evolving from a stock app into a full financial platform for millennials and Gen Z. Adding crypto, retirement accounts, credit cards, and prediction markets.',
+        metric: 'Gold subscribers +90% · Revenue diversifying rapidly · Platform expanding' },
+      { ticker: 'MELI', name: 'MercadoLibre', emoji: '🌎', exchange: 'nasdaq',
+        thesis: 'Amazon + PayPal of Latin America. 700M+ people coming online buying their first ecommerce and financial products. Near-monopoly across 18 countries.',
+        metric: 'Revenue +35% · Fintech arm +40% · LatAm digital adoption still early' }
+    ]
+  },
+  {
+    sector: 'Platforms & Marketplaces',
+    emoji: '🌐',
+    theme: 'Network-effect moats that compound value with every new user added',
+    stocks: [
+      { ticker: 'SHOP', name: 'Shopify', emoji: '🛍️', exchange: 'nyse',
+        thesis: 'Operating system for modern commerce powering $200B+ in transactions. Expanding into B2B, offline, and financial services. Every small business going digital is a prospect.',
+        metric: 'Revenue +25% · Merchant solutions growing faster · Offline expansion' },
+      { ticker: 'RDDT', name: 'Reddit', emoji: '💬', exchange: 'nyse',
+        thesis: 'The internet\'s most authentic data source. Google pays for AI training data. Ad business is early-stage with massive room to grow into its user base.',
+        metric: 'DAU +40% · Google AI licensing deal · Ad revenue just accelerating' },
+      { ticker: 'UBER', name: 'Uber', emoji: '🚗', exchange: 'nyse',
+        thesis: 'Quietly became one of the most profitable platforms in tech. As robotaxis roll out, Uber\'s network becomes the marketplace that self-driving cars list on.',
+        metric: 'FCF positive · EBITDA margins expanding · Waymo robotaxi partnership' }
+    ]
+  }
+];
+
 function renderDailyCard(type){
   const configs = {
     verse: {
@@ -315,6 +430,29 @@ function renderDailyCard(type){
           <p class="dc-tip">📊 ${item.metric}</p>
           <p style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:10px;line-height:1.5">Not financial advice. Do your own research. Investing involves risk.</p>
         </details>`
+    },
+    stocks: {
+      item: getDailyItem(STOCK_SECTORS),
+      color: 'rgba(195,149,60,.06)',
+      border: 'rgba(195,149,60,.4)',
+      tag: null,
+      render: (sector) => `
+        <p class="dc-date" style="color:rgba(195,149,60,.7)">${sector.emoji} ${sector.sector.toUpperCase()} · TOP 3 TO WATCH</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.42);margin-bottom:20px;font-style:italic;line-height:1.5">${sector.theme}</p>
+        ${sector.stocks.map((s,i) => `
+          ${i > 0 ? '<div class="dc-stock-divider"></div>' : ''}
+          <div class="dc-stock-row">
+            <div class="dc-stock-top">
+              <span class="dc-ticker" style="font-size:1.2rem">${s.emoji} $${s.ticker}</span>
+              <span class="dc-ticker-name">${s.name}</span>
+              <a href="https://www.wallstreetzen.com/stocks/us/${s.exchange}/${s.ticker.toLowerCase()}/analysis" target="_blank" rel="noopener" class="dc-wsz-btn">WSZ Deep Dive →</a>
+            </div>
+            <p class="dc-text" style="font-size:.82rem;font-style:normal;margin:6px 0 4px;color:rgba(255,255,255,.78)">${s.thesis}</p>
+            <p class="dc-tip">📊 ${s.metric}</p>
+          </div>
+        `).join('')}
+        <p style="font-size:.55rem;color:rgba(255,255,255,.22);margin-top:20px;line-height:1.5;text-align:center;border-top:1px solid rgba(255,255,255,.06);padding-top:14px">Not financial advice. Do your own research. All investing involves risk of loss.</p>
+      `
     }
   };
   const c = configs[type];
@@ -350,6 +488,12 @@ function initDailyContent(){
   .dc-juice-name{font-family:'Bebas Neue',cursive,sans-serif;font-size:1.3rem;letter-spacing:.08em;color:#fff;margin-bottom:14px}
   .dc-ticker{font-family:'Bebas Neue',cursive,sans-serif;font-size:1.5rem;letter-spacing:.1em;color:#FFB800;margin-bottom:14px}
   .dc-ticker-name{font-size:.9rem;color:rgba(255,255,255,.5);letter-spacing:.05em;font-family:'Inter',sans-serif;font-weight:400}
+  .dc-stock-row{padding:10px 0}
+  .dc-stock-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .dc-stock-top .dc-ticker{margin-bottom:0;font-size:1.2rem}
+  .dc-stock-divider{height:1px;background:rgba(255,255,255,.07);margin:4px 0}
+  .dc-wsz-btn{font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:#FFB800;text-decoration:none;border:1px solid rgba(255,184,0,.35);padding:4px 11px;margin-left:auto;transition:border-color .2s,background .2s;white-space:nowrap}
+  .dc-wsz-btn:hover{border-color:#FFB800;background:rgba(255,184,0,.08)}
   .dc-details{margin-top:4px}
   .dc-summary{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,200,100,.8);cursor:pointer;font-weight:700;list-style:none;padding:6px 0}
   .dc-details[open] .dc-summary{color:rgba(0,200,100,1)}

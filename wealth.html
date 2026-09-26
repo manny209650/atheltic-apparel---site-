@@ -199,6 +199,11 @@ footer a{color:var(--red);text-decoration:none}
       <span style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.08em;color:#fff">Scripture on Wealth</span>
       <span style="font-size:.72rem;color:var(--muted)">What God says about money</span>
     </a>
+    <a href="#sec-stockpicks" style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:20px 22px;background:linear-gradient(135deg,rgba(195,149,60,.1),rgba(224,32,32,.05));border:1px solid rgba(195,149,60,.35);text-decoration:none;transition:border-color .25s,transform .25s" onmouseover="this.style.borderColor='rgba(195,149,60,.8)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(195,149,60,.35)';this.style.transform=''">
+      <span style="font-size:1.6rem">📊</span>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.08em;background:linear-gradient(135deg,#FFD700,#C3953C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Sector Stock Picks</span>
+      <span style="font-size:.72rem;color:var(--muted)">Top 3 stocks per sector · Daily rotation</span>
+    </a>
   </div>
 </section>
 
@@ -732,6 +737,15 @@ footer a{color:var(--red);text-decoration:none}
   </div>
 </section>
 
+<!-- SECTOR STOCK PICKS -->
+<section class="content-sec" id="sec-stockpicks" style="padding-top:80px;padding-bottom:80px">
+  <span class="section-label">Daily Market Intelligence</span>
+  <h2 class="section-title">Sector Stock <span>Picks</span></h2>
+  <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px;max-width:680px">Every day we feature a different sector — with the top 3 stocks worth watching, backed by Wall Street Zen's deep fundamental analysis. Tap <strong style="color:rgba(195,149,60,.8)">WSZ Deep Dive →</strong> on any stock to see their full analysis, financials, and analyst scores.</p>
+  <p style="font-size:.72rem;color:rgba(224,32,32,.6);letter-spacing:.08em;margin-bottom:40px"><em>Not financial advice. Do your own research. Investing always involves risk of loss.</em></p>
+  <div data-daily="stocks" style="max-width:760px"></div>
+</section>
+
 <section class="content-sec" style="padding-top:80px;padding-bottom:80px">
   <span class="section-label" id="sec-scripture">Scripture on Money</span>
   <h2 class="section-title">What God Says About <span>Wealth</span></h2>
@@ -764,7 +778,7 @@ footer a{color:var(--red);text-decoration:none}
 </section>
 
 <section class="dc-outer" style="background:#07072A">
-  <div style="max-width:960px;margin:0 auto;padding:0 24px" data-daily="verse,wealth,stock"></div>
+  <div style="max-width:960px;margin:0 auto;padding:0 24px" data-daily="verse,wealth"></div>
 </section>
 
 <!-- NEWSLETTER CTA -->
