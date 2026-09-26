@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#E02020"/>
-<title>Villa Guatemala — Build Planner</title>
+<title>Casa Astrid — Villa Build Planner</title>
 <meta name="description" content="Plan, budget and track the construction of a villa in Guatemala — cost estimator, phase timeline, permit checklist and expense tracker."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -45,7 +45,7 @@ h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;col
 .card{background:var(--card);border:1px solid var(--border);padding:22px;margin-bottom:20px}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .two{display:grid;gap:20px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-@media(max-width:820px){.two{grid-template-columns:1fr}}
+@media(max-width:820px){.two{grid-template-columns:minmax(0,1fr)}}
 
 label{display:block;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 input,select{width:100%;background:#08081A;border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;font:400 .9rem 'Inter',sans-serif}
@@ -112,13 +112,17 @@ figcaption{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:
 tr.total td{font-weight:600;color:#fff;border-top:1px solid var(--border)}
 tr.good td{color:var(--ok)}
 td.best{color:var(--ok);font-weight:600}
+.tag.src-china{color:var(--ok);border-color:var(--ok);margin-left:0}
+.tag.src-local{color:var(--muted);border-color:rgba(255,255,255,.2);margin-left:0}
+input.qty{width:84px;padding:6px 8px;text-align:right}
+select.src-sel{width:auto;padding:6px 8px}
 footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;border-top:1px solid var(--border)}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">VILLA <span>GUATEMALA</span></a>
+  <a href="index.html" class="nav-logo">CASA <span>ASTRID</span></a>
   <div class="nav-actions">
     <button class="btn" id="exportCsv">Export CSV</button>
     <button class="btn" id="exportJson">Save JSON</button>
@@ -128,8 +132,8 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 </nav>
 
 <header class="hero">
-  <span class="hero-label">Build Planner</span>
-  <h1 class="hero-title">Villa Guatemala</h1>
+  <span class="hero-label">Villa Guatemala · Build Planner</span>
+  <h1 class="hero-title">Casa Astrid</h1>
   <p class="hero-sub">Estimate the budget, schedule around the rainy season, work through permits, and track every quetzal spent — from lot to keys.</p>
 </header>
 
@@ -166,16 +170,11 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
       <div><label for="lotPrice">Land cost (USD, 0 if owned)</label><input id="lotPrice" type="number" min="0" step="1000" data-field="lotPrice"/></div>
       <div><label for="fx">Exchange rate (GTQ per USD)</label><input id="fx" type="number" min="1" step="0.01" data-field="fx"/></div>
       <div><label for="contingency">Contingency (%)</label><input id="contingency" type="number" min="0" max="40" data-field="contingency"/></div>
-      <div><label for="glassM2">Glazing — windows & sliders (m²)</label><input id="glassM2" type="number" min="0" step="5" data-field="glassM2"/></div>
-      <div><label for="marbleM2">Marble floors & surfaces (m²)</label><input id="marbleM2" type="number" min="0" step="5" data-field="marbleM2"/></div>
-      <div><label for="solarKw">Solar system size (kW)</label><input id="solarKw" type="number" min="0" step="1" data-field="solarKw"/></div>
     </div>
     <div class="grid" style="margin-top:14px">
       <label class="check"><input type="checkbox" data-field="pool"/> Swimming pool</label>
-      <label class="check"><input type="checkbox" data-field="solar"/> Solar power system</label>
       <label class="check"><input type="checkbox" data-field="well"/> Water well + cistern</label>
       <label class="check"><input type="checkbox" data-field="wall"/> Perimeter wall & gate</label>
-      <label class="check"><input type="checkbox" data-field="importChina"/> Import glass, solar & marble from China</label>
     </div>
     <p class="note" id="regionNote"></p>
   </div>
@@ -185,6 +184,14 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
     <div class="stat"><div class="stat-num" id="sTotalGtq">—</div><div class="stat-label">Total estimate (GTQ)</div></div>
     <div class="stat"><div class="stat-num" id="sPerM2">—</div><div class="stat-label">Build cost / m²</div><div class="stat-sub">excl. land & extras</div></div>
     <div class="stat"><div class="stat-num" id="sMonths">—</div><div class="stat-label">Est. duration</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Sourcing Plan — China or Local?</h3>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:14px">An item comes from China only if its full landed cost — freight, duty, IVA, installation and its share of the broker, inspection and trucking — beats the local installed price by at least the threshold. Change quantities, or override any row.</p>
+    <div class="grid" style="margin-bottom:14px"><div><label for="threshold">Import only if it saves at least (%)</label><input id="threshold" type="number" min="0" max="80" data-ship="threshold"/></div></div>
+    <div class="table-wrap"><table id="srcTable"></table></div>
+    <p class="note" id="shipNote"></p>
   </div>
 
   <div class="card">
@@ -202,15 +209,15 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 
 <!-- ============ CONCEPTS ============ -->
 <section class="panel" id="panel-concepts">
-  <h2>Modern Villa Concepts</h2>
-  <p class="lead">Two contemporary concepts, one for each site: concept illustrations and schematic floor plans to brief an architect with. They are not construction drawings — a colegiado architect and structural engineer must produce stamped plans to AGIES seismic norms.</p>
+  <h2>Casa Astrid — Modern Concepts</h2>
+  <p class="lead">Casa Astrid in two versions, one for each site: concept illustrations and schematic floor plans to brief an architect with. They are not construction drawings — a colegiado architect and structural engineer must produce stamped plans to AGIES seismic norms.</p>
   <div id="conceptList"></div>
 </section>
 
 <!-- ============ COMPARE ============ -->
 <section class="panel" id="panel-compare">
-  <h2>Puerto San José vs Lake Atitlán</h2>
-  <p class="lead">Each site is priced with its own concept (Casa Pacífico at the coast, Casa Atitlán on the lake), your contingency and exchange rate, and the China-import assumptions below. Edit land prices to match real listings.</p>
+  <h2>Casa Astrid — Puerto San José vs Lake Atitlán</h2>
+  <p class="lead">Casa Astrid is priced at each site with its own design (Pacífico at the coast, Atitlán on the lake), your contingency and exchange rate, and the sourcing plan — China only where it pays. Edit land prices to match real listings.</p>
   <div class="card">
     <div class="grid">
       <div><label for="cmpFinish">Finish level</label>
@@ -226,17 +233,18 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
     <div class="table-wrap"><table id="cmpTable"></table></div>
   </div>
   <div class="card">
-    <h3>Total by Finish Level (with China import)</h3>
+    <h3>Total by Finish Level (smart sourcing)</h3>
     <div class="table-wrap"><table id="cmpMatrix"></table></div>
   </div>
   <div class="card">
-    <h3>Landed Cost of the China Shipment</h3>
+    <h3>What Comes From China — Per Site</h3>
     <div id="landed"></div>
   </div>
   <div class="card">
-    <h3>China Import Assumptions</h3>
-    <div class="grid" id="impInputs"></div>
-    <p class="note">These defaults are placeholders — replace them with real supplier quotes and freight rates. Guatemala uses the Central American tariff (SAC) and has no free-trade agreement with China, so standard duty (DAI) rates apply, plus 12% IVA on the value including freight and duty. Solar equipment is often 0% duty; glass and stone usually carry duty. Have a licensed <em>agente aduanero</em> confirm the tariff codes before you order. Sea freight Shanghai → Puerto Quetzal is typically 30–45 days. Order tempered or laminated safety glass sized to final measurements taken on site, 5–10% spare marble, and pay for a third-party inspection before the container is loaded. Local prices are supplied-and-installed; imported items add the installation rates shown.</p>
+    <h3>Price & Shipping Assumptions</h3>
+    <div class="table-wrap"><table id="priceTable"></table></div>
+    <div class="grid" id="shipInputs" style="margin-top:16px"></div>
+    <p class="note">These defaults are placeholders — replace them with real supplier quotes and freight rates. Guatemala uses the Central American tariff (SAC) and has no free-trade agreement with China, so standard duty (DAI) rates apply, plus 12% IVA on the value including freight and duty. Solar equipment is often 0% duty; glass, stone, furniture and fixtures usually carry duty. Have a licensed <em>agente aduanero</em> confirm the tariff codes before you order. Sea freight Shanghai → Puerto Quetzal is typically 30–45 days. Order tempered or laminated safety glass sized to final measurements taken on site, 5–10% spare marble, and pay for a third-party inspection before the container is loaded. Local prices are supplied-and-installed; imported items add the installation labour shown. Kitchen appliances are always bought locally for warranty and 120 V compatibility.</p>
   </div>
 </section>
 
@@ -318,7 +326,7 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 
 </main>
 
-<footer>Villa Guatemala Build Planner · Your data is saved in this browser only. Use “Save JSON” to back it up.</footer>
+<footer>Casa Astrid · Villa Guatemala Build Planner · Your data is saved in this browser only. Use “Save JSON” to back it up.</footer>
 
 <script>
 (function(){
@@ -351,7 +359,7 @@ const REGIONS = {
              note:'Cooler climate: budget for fireplaces or heating rather than A/C. Good local labour availability.'}
 };
 
-// Share of the base build cost per category. Glass, marble and solar are priced separately.
+// Share of the base build cost per category. Fit-out items (MATERIALS) are priced separately.
 const CATEGORIES = [
   {id:'design',  label:'Architect, engineering & soil study', share:.08},
   {id:'site',    label:'Site prep & earthworks',              share:.05},
@@ -360,9 +368,8 @@ const CATEGORIES = [
   {id:'roof',    label:'Roof (losa / teja)',                  share:.10},
   {id:'elec',    label:'Electrical',                          share:.07},
   {id:'plumb',   label:'Plumbing & septic',                   share:.07},
-  {id:'finish',  label:'Finishes — tile, plaster, paint',     share:.09},
-  {id:'carp',    label:'Doors & carpentry',                   share:.04},
-  {id:'kitchen', label:'Kitchen & bathrooms fixtures',        share:.06}
+  {id:'finish',  label:'Plaster, paint & waterproofing',      share:.05},
+  {id:'carp',    label:'Carpentry & trim',                    share:.02}
 ];
 const EXTRAS = {
   pool:  {label:'Swimming pool',            usd:22000},
@@ -370,19 +377,32 @@ const EXTRAS = {
   wall:  {label:'Perimeter wall & gate',    usd:15000}
 };
 
-// Materials that can be sourced locally or imported from China.
-// vol (m³) and kg are per unit incl. crating, for sizing the container.
+// Fit-out items that can come from China or be bought locally.
+// Prices are defaults (USD): fob = China factory price per unit, local = supplied & installed
+// in Guatemala, install = local labour to install an imported unit, duty = DAI %.
+// brk = % extra ordered for breakage/spares; vol (m³) and kg per unit incl. crating.
 const MATERIALS = [
-  {id:'glass',  label:'Glass windows & sliders',             unit:'m²', qty:st => +st.glassM2 || 0, breakage:true,  vol:.12, kg:35},
-  {id:'marble', label:'Marble floors & surfaces',            unit:'m²', qty:st => +st.marbleM2 || 0, breakage:true, vol:.035, kg:60},
-  {id:'solar',  label:'Solar panels, inverter & batteries',  unit:'kW', qty:st => st.solar ? (+st.solarKw || 0) : 0, breakage:false, vol:.3, kg:90}
+  {id:'glass',      label:'Windows & sliding glass walls',               unit:'m²',     fob:130,   local:280,   install:35,  duty:10, brk:5, vol:.12, kg:35,  tip:'Laminated, low-E glass, cut to measurements taken on site.'},
+  {id:'marble',     label:'Marble flooring — living areas',              unit:'m²',     fob:45,    local:110,   install:18,  duty:10, brk:8, vol:.035, kg:60, tip:'Order ~8% spare from the same batch so the veining matches.'},
+  {id:'tile',       label:'Porcelain tile — bedrooms, baths, terraces',   unit:'m²',     fob:14,    local:38,    install:12,  duty:10, brk:5, vol:.02, kg:24,  tip:'Heavy and cheap per m², so freight eats much of the saving.'},
+  {id:'cabinets',   label:'Kitchen cabinets — modern, flat-pack',        unit:'lin. m', fob:320,   local:750,   install:60,  duty:15, brk:0, vol:.9,  kg:90,  tip:'Send exact kitchen drawings; insist on soft-close branded hinges and runners.'},
+  {id:'counters',   label:'Quartz countertops & vanity tops',            unit:'m²',     fob:80,    local:250,   install:40,  duty:10, brk:5, vol:.08, kg:70,  tip:'Have sink and cooktop cut-outs made at the factory.'},
+  {id:'bath',       label:'Bathroom sets — toilet, vanity, shower, taps', unit:'set',    fob:900,   local:2500,  install:250, duty:15, brk:3, vol:1.2, kg:140, tip:'Confirm toilet rough-in size and US-standard (NPT) fittings.'},
+  {id:'doors',      label:'Interior doors, frames & hardware',           unit:'door',   fob:130,   local:350,   install:40,  duty:10, brk:0, vol:.15, kg:40,  tip:'Pre-hung doors save site carpentry.'},
+  {id:'lighting',   label:'Lighting fixtures — whole house',             unit:'lot',    fob:1500,  local:4500,  install:600, duty:10, brk:2, vol:2,   kg:150, tip:'Specify 120 V / 60 Hz and UL- or ETL-listed drivers.'},
+  {id:'solar',      label:'Solar panels, inverter & batteries',          unit:'kW',     fob:550,   local:1400,  install:150, duty:0,  brk:0, vol:.3,  kg:90,  tip:'Inverter must suit Guatemala’s 120/240 V, 60 Hz grid.'},
+  {id:'furniture',  label:'Furniture & décor package',                   unit:'lot',    fob:11000, local:28000, install:0,   duty:15, brk:2, vol:28,  kg:2500, tip:'Bulky — on its own it can push the order into a 40′ container.'},
+  {id:'appliances', label:'Kitchen appliances',                          unit:'lot',    fob:3000,  local:5500,  install:200, duty:10, brk:0, vol:3,   kg:350, localOnly:true, tip:'Buy locally: warranty and service, 120 V, and gas fittings to local standards.'}
 ];
-const IMP_FIELDS = [
-  ['glassFob','Glass FOB China ($/m²)'], ['glassLocal','Glass local, installed ($/m²)'], ['glassInstall','Glass install labour ($/m²)'], ['glassDuty','Glass duty DAI (%)'],
-  ['marbleFob','Marble FOB China ($/m²)'], ['marbleLocal','Marble local, installed ($/m²)'], ['marbleInstall','Marble install labour ($/m²)'], ['marbleDuty','Marble duty DAI (%)'],
-  ['solarFob','Solar FOB China ($/kW)'], ['solarLocal','Solar local, installed ($/kW)'], ['solarInstall','Solar install labour ($/kW)'], ['solarDuty','Solar duty DAI (%)'],
-  ['freight20','Sea freight, 20′ container ($)'], ['freight40','Sea freight, 40′ high-cube ($)'], ['insPct','Cargo insurance (% of FOB)'], ['broker','Customs broker & port fees ($)'],
-  ['inspection','Pre-shipment inspection ($)'], ['breakagePct','Extra for breakage/spares (%)'], ['iva','IVA (%)']
+const ALWAYS_LOCAL = [
+  ['Cement, rebar, concrete block, sand & gravel', 'Made in Guatemala; heavy and cheap, so shipping never pays.'],
+  ['Roofing, waterproofing, paint & plaster', 'Local products suit the climate and are easy to match for repairs.'],
+  ['Electrical wire, breakers, PVC & plumbing rough-in', 'Must meet local code and pass inspection.'],
+  ['Air-conditioning units', 'Sold locally (often Chinese brands anyway) with local warranty service.']
+];
+const SHIP_FIELDS = [
+  ['freight20','Sea freight, 20′ container ($)'], ['freight40','Sea freight, 40′ high-cube ($)'], ['insPct','Cargo insurance (% of FOB)'],
+  ['broker','Customs broker & port fees ($)'], ['inspection','Pre-shipment inspection ($)'], ['iva','IVA (%)']
 ];
 
 // Duration in weeks for a 200 m² villa; scaled by size. wet = weather-sensitive.
@@ -394,7 +414,7 @@ const PHASES = [
   {id:'roof',   label:'Roof',                   weeks:4,  wet:true,  note:'Concrete slab or timber + clay tile. Pour in dry weather.'},
   {id:'mep',    label:'Electrical & plumbing',  weeks:6,  wet:false, note:'Rough-in, septic/treatment plant, utility connection.'},
   {id:'finish', label:'Finishes',               weeks:10, wet:false, note:'Glazing, marble, plaster, paint, carpentry, fixtures.'},
-  {id:'ext',    label:'Exterior & landscaping', weeks:5,  wet:false, note:'Pool, walls, gardens, driveway.'}
+  {id:'ext',    label:'Exterior & landscaping', weeks:5,  wet:false, note:'Walls, gardens, driveway.'}
 ];
 
 const PERMITS = [
@@ -419,57 +439,64 @@ const PERMITS = [
 /* ---------- Concepts ---------- */
 const CONCEPTS = {
   pacifico: {
-    name:'Casa Pacífico', site:'sanjose',
-    tagline:'A single-storey white concrete pavilion raised on a stone plinth, fully glazed toward the ocean, with a pergola roof deck and an 11 m infinity pool.',
-    specs:{area:162, bedrooms:2, bathrooms:2, pool:true, solar:true, solarKw:8, well:false, wall:true, glassM2:45, marbleM2:110},
+    name:'Casa Astrid · Pacífico', site:'sanjose',
+    tagline:'A single-storey white concrete pavilion raised on a stone plinth, fully glazed toward the ocean, with a pergola roof deck and a native-planted garden.',
+    specs:{area:162, bedrooms:2, bathrooms:2, pool:false, well:false, wall:true,
+           qty:{glass:45, marble:80, tile:95, cabinets:6, counters:5, bath:2, doors:6, lighting:1, solar:8, furniture:1, appliances:1}},
     features:[
       '162 m² on one level: two ocean-facing bedroom suites either side of an open living space',
-      'South façade almost entirely sliding glass — 45 m² of double-glazed, laminated panels',
+      'South façade almost entirely sliding glass — 45 m² of laminated, low-E panels',
       'Deep roof overhangs and a raised plinth for shade, heat and storm water',
       'Roof deck with pergola and solar panels; carport at the street',
-      'Marble through living, kitchen and both bathrooms (≈110 m²)',
-      '8 kW solar + battery sized for daytime A/C; marine-grade aluminium and 316 stainless against salt air'
+      'Marble in the living areas, porcelain in bedrooms and baths, quartz kitchen',
+      'Shaded terrace opening onto a low-maintenance garden of dune grass and palms'
     ]
   },
   atitlan: {
-    name:'Casa Atitlán', site:'atitlan',
-    tagline:'Two stacked, cantilevered glass pavilions stepping down the hillside toward the lake and volcanoes, with an infinity pool on the lower terrace.',
-    specs:{area:180, bedrooms:2, bathrooms:2, pool:true, solar:true, solarKw:5, well:false, wall:false, glassM2:60, marbleM2:90},
+    name:'Casa Astrid · Atitlán', site:'atitlan',
+    tagline:'Two stacked, cantilevered glass pavilions stepping down the hillside toward the lake and volcanoes, with a garden terrace below.',
+    specs:{area:180, bedrooms:2, bathrooms:2, pool:false, well:false, wall:false,
+           qty:{glass:60, marble:90, tile:100, cabinets:7, counters:6, bath:2, doors:6, lighting:1, solar:5, furniture:1, appliances:1}},
     features:[
       'Upper level (90 m²): kitchen, living and dining opening onto a cantilevered terrace',
-      'Lower level (90 m²): master suite and second bedroom, two bathrooms, pool terrace',
+      'Lower level (90 m²): master suite, second bedroom and two bathrooms onto a garden terrace',
       'Floor-to-ceiling glass framing Volcán San Pedro, Tolimán and Atitlán — 60 m² of glazing',
       'Reinforced-concrete frame keyed into terraced retaining walls; drainage designed for tropical storms',
       '5 kW solar + battery (no A/C needed in the highland climate); parking pad at the street',
-      'Marble floors on the living level and in both bathrooms (≈90 m²)'
+      'Marble on the living level, porcelain below, quartz kitchen and vanities'
     ]
   }
 };
 
 /* ---------- State ---------- */
-const KEY = 'villa-guatemala-v1';
+const KEY = 'villa-guatemala-v2', OLD_KEY = 'villa-guatemala-v1';
 const DEFAULTS = {
-  name:'Casa del Volcán', region:'antigua', finish:'premium', area:160, bedrooms:2, bathrooms:2,
-  lotPrice:60000, fx:7.7, contingency:10, pool:true, solar:false, solarKw:8, well:false, wall:true,
-  glassM2:45, marbleM2:100, importChina:false,
+  name:'Casa Astrid', region:'sanjose', finish:'premium', area:162, bedrooms:2, bathrooms:2,
+  lotPrice:70000, fx:7.7, contingency:10, pool:false, well:false, wall:true,
+  qty: Object.assign({}, CONCEPTS.pacifico.specs.qty), src:{},
   start:'', permits:{}, expenses:[],
   cmpFinish:'premium', sites:{sanjose:70000, atitlan:90000},
-  imp:{glassFob:130, glassLocal:280, glassInstall:35, glassDuty:10,
-       marbleFob:45, marbleLocal:110, marbleInstall:18, marbleDuty:10,
-       solarFob:550, solarLocal:1400, solarInstall:150, solarDuty:0,
-       freight20:3300, freight40:4800, insPct:0.5, broker:900, inspection:400, breakagePct:5, iva:12}
+  mat: Object.fromEntries(MATERIALS.map(m => [m.id, {fob:m.fob, local:m.local, install:m.install, duty:m.duty}])),
+  ship:{freight20:3300, freight40:4800, insPct:0.5, broker:900, inspection:400, iva:12, threshold:15}
 };
 const fresh = () => JSON.parse(JSON.stringify(DEFAULTS));
 function hydrate(obj){
-  const d = fresh(), s = Object.assign(d, obj || {});
-  s.imp = Object.assign(fresh().imp, (obj && obj.imp) || {});
-  s.sites = Object.assign(fresh().sites, (obj && obj.sites) || {});
+  obj = obj || {};
+  const d = fresh(), s = Object.assign(d, obj);
+  ['qty', 'src', 'sites', 'ship'].forEach(k => { s[k] = Object.assign(fresh()[k], obj[k] || {}); });
+  s.mat = fresh().mat;
+  Object.keys(s.mat).forEach(id => Object.assign(s.mat[id], (obj.mat || {})[id] || {}));
   return s;
 }
 let S = load();
 
 function load(){
-  try{ const raw = localStorage.getItem(KEY); if(raw) return hydrate(JSON.parse(raw)); }catch(e){}
+  try{
+    const raw = localStorage.getItem(KEY); if(raw) return hydrate(JSON.parse(raw));
+    // Carry permits, expenses and dates over from the first version, with the new name and no pool.
+    const old = localStorage.getItem(OLD_KEY);
+    if(old){ const o = JSON.parse(old); return hydrate({permits:o.permits, expenses:o.expenses, start:o.start, fx:o.fx, contingency:o.contingency}); }
+  }catch(e){}
   return fresh();
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
@@ -488,35 +515,65 @@ const isRainy = d => { const m = d.getMonth(); return m >= 4 && m <= 9; }; // Ma
 const sum = (arr, f) => arr.reduce((a, x) => a + f(x), 0);
 const regionOf = st => REGIONS[st.region] || REGIONS.guatecity;
 
-/* ---------- Import & estimate ---------- */
-// Landed cost of shipping the materials from China to the site, vs buying them locally.
-function importCalc(st){
-  const I = S.imp, r = regionOf(st), brk = 1 + (+I.breakagePct || 0) / 100;
-  const items = MATERIALS.map(m => ({m, qty: m.qty(st)})).filter(x => x.qty > 0).map(({m, qty}) => {
-    const shipQty = qty * (m.breakage ? brk : 1);
-    return {id:m.id, label:m.label, unit:m.unit, qty,
-      fob: shipQty * (+I[m.id + 'Fob'] || 0), dutyPct: +I[m.id + 'Duty'] || 0,
-      install: qty * (+I[m.id + 'Install'] || 0) * r.mult,
-      local: qty * (+I[m.id + 'Local'] || 0) * r.mult,
-      vol: shipQty * m.vol, kg: shipQty * m.kg};
+/* ---------- Sourcing & estimate ---------- */
+function containerFor(vol, kg){
+  if(vol <= 0) return null;
+  if(vol <= 28 && kg <= 20000) return {label:'1 × 20′ container', usd: +S.ship.freight20 || 0};
+  const n = Math.max(1, Math.ceil(vol / 65), Math.ceil(kg / 26000));
+  return {label: n + ' × 40′ high-cube', usd: n * (+S.ship.freight40 || 0)};
+}
+
+// Landed cost of shipping `rows` together: freight shared by volume, broker/inspection/trucking by value.
+function shipment(rows, r){
+  const sh = S.ship, vol = sum(rows, x => x.vol), kg = sum(rows, x => x.kg), fobT = sum(rows, x => x.fob);
+  const container = containerFor(vol, kg);
+  const fixed = rows.length ? (+sh.broker || 0) + (+sh.inspection || 0) + r.inland : 0;
+  const out = {};
+  rows.forEach(x => {
+    const freight = (container ? container.usd * x.vol / vol : 0) + x.fob * (+sh.insPct || 0) / 100;
+    const cif = x.fob + freight, duty = cif * x.dutyPct / 100, iva = (cif + duty) * (+sh.iva || 0) / 100;
+    const fees = fobT ? fixed * x.fob / fobT : 0;
+    out[x.id] = {freight, duty, iva, fees, install: x.install, total: cif + duty + iva + x.install + fees};
   });
-  const vol = sum(items, i => i.vol), kg = sum(items, i => i.kg), fobT = sum(items, i => i.fob);
-  let container = null;
-  if(items.length){
-    if(vol <= 28 && kg <= 20000) container = {label:'1 × 20′ container', usd: +I.freight20 || 0};
-    else { const n = Math.max(1, Math.ceil(vol / 65), Math.ceil(kg / 26000)); container = {label: n + ' × 40′ high-cube', usd: n * (+I.freight40 || 0)}; }
+  return {rows: out, container, vol, kg, fixed};
+}
+
+// Decide, item by item, whether importing from China beats buying locally by the threshold.
+function sourcing(st){
+  const r = regionOf(st), q = st.qty || {}, th = (+S.ship.threshold || 0) / 100, over = st.src || {};
+  const rows = MATERIALS.map(m => {
+    const p = S.mat[m.id], qty = +q[m.id] || 0;
+    if(qty <= 0) return null;
+    const shipQty = qty * (1 + (m.brk || 0) / 100);
+    return {id:m.id, m, label:m.label, unit:m.unit, qty, fob: shipQty * (+p.fob || 0), dutyPct: +p.duty || 0,
+      install: qty * (+p.install || 0) * r.mult, local: qty * (+p.local || 0) * r.mult,
+      vol: shipQty * m.vol, kg: shipQty * m.kg, mode: m.localOnly ? 'local' : (over[m.id] || 'auto')};
+  }).filter(Boolean);
+  const importable = st.allLocal ? [] : rows.filter(x => !x.m.localOnly && x.mode !== 'local');
+  const pays = (x, sh) => sh.rows[x.id] && x.local - sh.rows[x.id].total >= th * x.local;
+  let chosen = importable.slice();
+  for(let pass = 0; pass < 6; pass++){
+    // Drop auto items that don't clear the threshold (each drop raises the others' share of fixed costs).
+    for(let i = 0; i < 12; i++){
+      const sh = shipment(chosen, r);
+      const next = chosen.filter(x => x.mode === 'china' || pays(x, sh));
+      if(next.length === chosen.length) break;
+      chosen = next;
+    }
+    // A smaller shipment may fit a cheaper container: let dropped items back in if they now pay.
+    const back = importable.find(x => !chosen.includes(x) && pays(x, shipment(chosen.concat([x]), r)));
+    if(!back) break;
+    chosen = chosen.concat([back]);
   }
-  items.forEach(it => {
-    it.freight = fobT ? container.usd * it.fob / fobT + it.fob * (+I.insPct || 0) / 100 : 0;
-    const cif = it.fob + it.freight;
-    it.duty = cif * it.dutyPct / 100;
-    it.iva = (cif + it.duty) * (+I.iva || 0) / 100;
-    it.landed = cif + it.duty + it.iva;
-    it.total = it.landed + it.install;
+  const ship = shipment(chosen, r);
+  rows.forEach(x => {
+    const inShip = ship.rows[x.id];
+    x.china = inShip || (x.m.localOnly || st.allLocal ? null : shipment(chosen.concat([x]), r).rows[x.id]);
+    x.source = inShip ? 'china' : 'local';
+    x.cost = inShip ? inShip.total : x.local;
+    x.savePct = x.china ? (x.local - x.china.total) / x.local : null;
   });
-  const shared = items.length ? (+I.broker || 0) + (+I.inspection || 0) + r.inland : 0;
-  const total = sum(items, i => i.total) + shared, local = sum(items, i => i.local);
-  return {items, vol, kg, container, shared, total, local, savings: local - total, region: r};
+  return {rows, ship, region:r, chosen, total: sum(rows, x => x.cost), local: sum(rows, x => x.local)};
 }
 
 function estimate(st = S){
@@ -528,13 +585,9 @@ function estimate(st = S){
   const base = area * f.m2 * r.mult * bathAdj;
   const lines = CATEGORIES.map(c => ({id:c.id, group:'build', label:c.label, usd: base * c.share}));
   (r.extras || []).forEach(x => lines.push({id:'rx_' + x.id, group:'build', label:x.label, usd: x.pct ? base * x.pct : x.usd}));
-  const imp = importCalc(st);
-  if(st.importChina && imp.items.length){
-    imp.items.forEach(it => lines.push({id:'imp_' + it.id, group:'materials', label: it.label + ' — imported from China', usd: it.total}));
-    lines.push({id:'imp_logistics', group:'materials', label:'Import logistics — broker, port, inspection, trucking', usd: imp.shared});
-  } else {
-    imp.items.forEach(it => lines.push({id: it.id, group:'materials', label: it.label + ' — local supply', usd: it.local}));
-  }
+  const src = sourcing(st);
+  src.rows.forEach(x => lines.push({id: (x.source === 'china' ? 'imp_' : '') + x.id, group:'materials',
+    label: x.label + (x.source === 'china' ? ' — from China' : ' — local'), usd: x.cost}));
   Object.keys(EXTRAS).forEach(k => { if(st[k]) lines.push({id:k, group:'extras', label:EXTRAS[k].label, usd: EXTRAS[k].usd * r.mult}); });
   const land = +st.lotPrice || 0;
   if(land > 0) lines.unshift({id:'land', group:'land', label:'Land purchase', usd: land});
@@ -543,8 +596,8 @@ function estimate(st = S){
   const sub = sum(lines, l => l.usd);
   const cont = sub * (Math.max(0, +st.contingency || 0) / 100);
   lines.push({id:'contingency', group:'contingency', label:'Contingency', usd: cont});
-  const buildOnly = sum(lines.filter(l => l.group === 'build' || l.group === 'materials'), l => l.usd);
-  return {lines, total: sub + cont, perM2: area ? buildOnly / area : 0, imp};
+  const buildOnly = sum(lines.filter(l => l.group === 'build' || (l.group === 'materials' && !/furniture/.test(l.id))), l => l.usd);
+  return {lines, total: sub + cont, perM2: area ? buildOnly / area : 0, src};
 }
 
 function schedule(st = S){
@@ -589,6 +642,7 @@ function renderDesign(){
   $('fUsd').textContent = usd(e.total);
   $('fGtq').textContent = gtq(e.total * fx);
   $('regionNote').textContent = (REGIONS[S.region] || {}).note || '';
+  renderSourcing(e);
 }
 
 function renderTimeline(){
@@ -669,7 +723,8 @@ function syncInputs(){
     if(el.type === 'checkbox') el.checked = !!v; else el.value = v ?? '';
   });
   document.querySelectorAll('[data-site]').forEach(el => { el.value = S.sites[el.dataset.site]; });
-  renderImpInputs();
+  $('threshold').value = S.ship.threshold;
+  renderPriceInputs();
 }
 
 /* ---------- Concept drawings ---------- */
@@ -685,11 +740,10 @@ const mullions = (x0, x1, y0, y1, step) => { let d = ''; for(let x = x0 + step; 
 
 function renderPacifico(){
   let slats = ''; for(let x = 186; x < 228; x += 6) slats += `M${x} 250V316`;
-  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Pacífico concept illustration at sunset">
+  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Astrid · Pacífico concept illustration at sunset">
   <defs>
     <linearGradient id="pSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D2B53"/><stop offset=".6" stop-color="#C8607A"/><stop offset="1" stop-color="#FFB870"/></linearGradient>
     <linearGradient id="pGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C6A0"/><stop offset="1" stop-color="#6F5068"/></linearGradient>
-    <linearGradient id="pPool" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2FA6CC"/><stop offset="1" stop-color="#8BE4F4"/></linearGradient>
     <linearGradient id="pSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9BF94"/><stop offset="1" stop-color="#A88A62"/></linearGradient>
   </defs>
   <rect width="800" height="340" fill="url(#pSky)"/>
@@ -712,17 +766,18 @@ function renderPacifico(){
   <rect x="160" y="236" width="480" height="9" fill="#FFFFFF"/>
   <rect x="180" y="245" width="440" height="5" fill="#000" opacity=".14"/>
   <rect x="172" y="318" width="456" height="14" fill="#CFC8BE"/>
-  <!-- deck & pool -->
+  <!-- deck & garden -->
   <rect x="160" y="330" width="480" height="10" fill="#9C7458"/>
-  <rect x="246" y="341" width="308" height="3" fill="#EEE"/>
-  <rect x="250" y="344" width="300" height="22" fill="url(#pPool)"/>
-  <path d="M265 352h60M360 358h70M470 351h60" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>
+  <path d="M236 345h328l12 22H224Z" fill="#8FA86A"/>
+  <path d="M392 340h16l10 30h-36Z" fill="#E6DCC8"/>
+  ${[[250,352,16],[290,356,12],[330,350,18],[470,352,16],[515,356,12],[552,351,15]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .55}" fill="#4E7A3E"/>`).join('')}
+  <path d="M232 366q6-14 12 0M268 368q5-12 10 0M520 367q6-14 12 0M560 368q5-12 10 0" stroke="#6E8F4A" stroke-width="2" fill="none"/>
   ${palm(90, 334, 160, 22)}${palm(720, 334, 140, -20)}${palm(668, 336, 92, -8)}
 </svg>`;
 }
 
 function renderAtitlan(){
-  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Atitlán concept illustration on the hillside above the lake">
+  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Astrid · Atitlán concept illustration on the hillside above the lake">
   <defs>
     <linearGradient id="aSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FAAD6"/><stop offset="1" stop-color="#E4F0F5"/></linearGradient>
     <linearGradient id="aLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C95B5"/><stop offset="1" stop-color="#1E5A74"/></linearGradient>
@@ -756,10 +811,11 @@ function renderAtitlan(){
   <rect x="258" y="225" width="144" height="60" fill="url(#aGlass)"/>
   ${mullions(258, 402, 225, 285, 48)}
   <rect x="244" y="213" width="172" height="7" fill="#F2F2F2"/>
-  <!-- pool terrace -->
+  <!-- garden terrace -->
   <rect x="410" y="288" width="135" height="4" fill="#9C7458"/>
-  <rect x="436" y="281" width="100" height="7" fill="#5CC8E0"/>
-  <rect x="434" y="279" width="104" height="2" fill="#EEE"/>
+  <rect x="440" y="279" width="34" height="9" fill="#8A8478"/><rect x="496" y="279" width="34" height="9" fill="#8A8478"/>
+  <ellipse cx="457" cy="277" rx="18" ry="8" fill="#5E8A48"/><ellipse cx="513" cy="277" rx="18" ry="8" fill="#5E8A48"/>
+  <path d="M423 288V270M421 272h4" stroke="#2A2A2A" stroke-width="2"/>
 </svg>`;
 }
 
@@ -771,9 +827,9 @@ function planSVG(p){
   <defs><pattern id="grid-${p.id}" x="${m}" y="${m}" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><path d="M${s} 0H0V${s}" fill="none" stroke="rgba(255,255,255,.07)"/></pattern></defs>
   <rect width="${W}" height="${H}" fill="#0B2545"/><rect width="${W}" height="${H}" fill="url(#grid-${p.id})"/>`;
   (p.outdoor || []).forEach(o => {
-    const pool = o.pool;
-    g += `<rect x="${X(o.x)}" y="${Y(o.y)}" width="${o.w * s}" height="${o.h * s}" fill="${pool ? 'rgba(79,195,224,.3)' : 'none'}" stroke="${pool ? '#7FD8F0' : 'rgba(255,255,255,.45)'}" stroke-dasharray="${pool ? '' : '5 4'}" stroke-width="1.2"/>
-      <text x="${X(o.x + o.w / 2)}" y="${Y(o.y + o.h / 2) + 4}" fill="${pool ? '#BFEFFA' : 'rgba(255,255,255,.7)'}" font-size="10.5" text-anchor="middle">${esc(o.label)}</text>`;
+    const g2 = o.garden;
+    g += `<rect x="${X(o.x)}" y="${Y(o.y)}" width="${o.w * s}" height="${o.h * s}" fill="${g2 ? 'rgba(120,180,90,.22)' : 'none'}" stroke="${g2 ? '#9BD18A' : 'rgba(255,255,255,.45)'}" stroke-dasharray="${g2 ? '2 3' : '5 4'}" stroke-width="1.2"/>
+      <text x="${X(o.x + o.w / 2)}" y="${Y(o.y + o.h / 2) + 4}" fill="${g2 ? '#CDEBC0' : 'rgba(255,255,255,.7)'}" font-size="10.5" text-anchor="middle">${esc(o.label)}</text>`;
   });
   p.rooms.forEach(r => {
     const cx = X(r.x + r.w / 2), cy = Y(r.y + r.h / 2), narrow = r.w * s < 80, area = Math.round(r.w * r.h);
@@ -800,7 +856,7 @@ function planSVG(p){
 
 const PLANS = {
   pacifico: [{
-    id:'pac', title:'Casa Pacífico — ground floor', w:17, h:16, bottomLabel:'↓ Beach & ocean',
+    id:'pac', title:'Casa Astrid · Pacífico — ground floor', w:17, h:16, bottomLabel:'↓ Beach & ocean',
     rooms:[
       {x:0, y:0, w:2.5, h:4, label:'Bath 2'}, {x:2.5, y:0, w:2, h:4, label:'Laundry'},
       {x:4.5, y:0, w:2.5, h:4, label:'Entry'}, {x:7, y:0, w:5, h:4, label:'Kitchen'},
@@ -808,11 +864,11 @@ const PLANS = {
       {x:0, y:4, w:4.5, h:5.5, label:'Bedroom 2'}, {x:4.5, y:4, w:7.5, h:5.5, label:'Living · Dining'},
       {x:12, y:4, w:5, h:5.5, label:'Master suite'}
     ],
-    outdoor:[{x:0, y:9.5, w:17, h:2.5, label:'Shaded terrace · outdoor dining'}, {x:3, y:12.5, w:11, h:3, label:'Infinity pool 11 × 3 m', pool:true}],
+    outdoor:[{x:0, y:9.5, w:17, h:2.5, label:'Shaded terrace · outdoor dining'}, {x:3, y:12.5, w:11, h:3, label:'Garden · dune grass & palms', garden:true}],
     glass:[[0.3, 9.5, 16.7, 9.5], [7.5, 0, 11.5, 0]]
   }],
   atitlan: [{
-    id:'atu', title:'Casa Atitlán — upper level (living)', w:12, h:10, bottomLabel:'↓ Lake',
+    id:'atu', title:'Casa Astrid · Atitlán — upper level (living)', w:12, h:10, bottomLabel:'↓ Lake',
     rooms:[
       {x:0, y:0, w:3, h:3, label:'Entry + stair'}, {x:3, y:0, w:2.5, h:3, label:'Laundry'},
       {x:5.5, y:0, w:6.5, h:3, label:'Kitchen + island'}, {x:0, y:3, w:12, h:4.5, label:'Living · Dining'}
@@ -820,25 +876,25 @@ const PLANS = {
     outdoor:[{x:0, y:7.5, w:12, h:2.5, label:'Cantilevered terrace'}],
     glass:[[0.3, 7.5, 11.7, 7.5], [12, 3, 12, 7.5]]
   }, {
-    id:'atl', title:'Casa Atitlán — lower level (bedrooms)', w:12, h:11, bottomLabel:'↓ Lake',
+    id:'atl', title:'Casa Astrid · Atitlán — lower level (bedrooms)', w:12, h:11, bottomLabel:'↓ Lake',
     rooms:[
       {x:0, y:0, w:3, h:3, label:'Stair'}, {x:3, y:0, w:2.5, h:3, label:'Bath 2'},
       {x:5.5, y:0, w:2, h:3, label:'Mech'}, {x:7.5, y:0, w:4.5, h:3, label:'Master bath'},
       {x:0, y:3, w:5, h:4.5, label:'Bedroom 2'}, {x:5, y:3, w:7, h:4.5, label:'Master suite'}
     ],
-    outdoor:[{x:0, y:7.5, w:12, h:3.5, label:''}, {x:1, y:8.1, w:8, h:2.4, label:'Infinity pool 8 × 2.4 m', pool:true}],
+    outdoor:[{x:0, y:7.5, w:12, h:3.5, label:''}, {x:1, y:8.1, w:8, h:2.4, label:'Garden terrace · planters', garden:true}],
     glass:[[0.3, 7.5, 11.7, 7.5]]
   }]
 };
 
-// State used to price a concept on its own site, with or without the China import.
-function conceptState(key, importChina, finish){
+// State used to price a concept on its own site: all local, or smart China sourcing.
+function conceptState(key, allLocal, finish){
   const c = CONCEPTS[key];
-  return Object.assign({}, S, c.specs, {region:c.site, lotPrice:S.sites[c.site], finish: finish || S.cmpFinish, importChina, name:c.name});
+  return Object.assign({}, S, c.specs, {qty: Object.assign({}, c.specs.qty), region:c.site, lotPrice:S.sites[c.site], finish: finish || S.cmpFinish, allLocal, name:c.name});
 }
 
 /* ---------- Gallery: glass-walled views ---------- */
-// Casa Pacífico at night, two-point perspective from the pool corner.
+// Casa Astrid · Pacífico at night, two-point perspective from the garden.
 function renderNightPacifico(){
   const lt = x => 220 - (x - 90) * 10 / 240, lb = x => 309 + (x - 90) * 21 / 240;     // left face top/bottom
   const gt = x => 216 + (x - 345) * 13 / 400, gb = x => 324 - (x - 345) * 27 / 400;  // glass top/bottom
@@ -848,13 +904,12 @@ function renderNightPacifico(){
   let mull = ''; [425,505,585,665].forEach(x => { mull += `M${x} ${gt(x).toFixed(1)}V${gb(x).toFixed(1)}`; });
   let lights = ''; for(let x = 370; x <= 730; x += 60){ const y = rt(x) + 13; lights += `<path d="M${x - 6} ${y}L${x - 22} ${y + 60}H${x + 22}L${x + 6} ${y}Z" fill="#FFE9B8" opacity=".07"/><circle cx="${x}" cy="${y}" r="2.2" fill="#FFF3CF"/>`; }
   let pend = ''; [[470,238],[520,237],[600,236]].forEach(([x, y]) => { pend += `<path d="M${x} ${gt(x).toFixed(1)}V${y}" stroke="#5A4630"/><circle cx="${x}" cy="${y + 3}" r="4" fill="#FFF4D6"/>`; });
-  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Casa Pacífico at night with glowing floor-to-ceiling glass">
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Casa Astrid · Pacífico at night with glowing floor-to-ceiling glass">
   <defs>
     <linearGradient id="nSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050818"/><stop offset=".6" stop-color="#1E2550"/><stop offset="1" stop-color="#34306A"/></linearGradient>
     <linearGradient id="nGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE7B5"/><stop offset="1" stop-color="#E9974E"/></linearGradient>
     <linearGradient id="nWall" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#D9CDB8"/><stop offset="1" stop-color="#57534E"/></linearGradient>
     <linearGradient id="nWallR" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#B8AE9E"/><stop offset="1" stop-color="#4E4A45"/></linearGradient>
-    <radialGradient id="nPool" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#7FEBFF"/><stop offset="1" stop-color="#0A5F7C"/></radialGradient>
   </defs>
   <rect width="800" height="450" fill="url(#nSky)"/>
   ${stars.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i % 3 ? 1 : 1.6}" fill="#fff" opacity=".8"/>`).join('')}
@@ -863,10 +918,10 @@ function renderNightPacifico(){
   <path d="M640 254h20M634 259h32" stroke="#F4F1E0" stroke-opacity=".5"/>
   <rect y="262" width="800" height="188" fill="#16130F"/>
   <path d="M60 312L330 340L800 308V340L440 394L40 330Z" fill="#3A2A20"/>
-  <path d="M400 352L770 327L782 345L450 386Z" fill="url(#nPool)"/>
-  <path d="M398 350L772 325" stroke="#E8E2D8" stroke-width="2"/>
-  <path d="M440 362L700 344L706 350L446 369Z" fill="#FFD58A" opacity=".28"/>
-  <path d="M470 372L680 357L684 361L474 377Z" fill="#FFD58A" opacity=".18"/>
+  <path d="M400 352L770 327L782 345L450 386Z" fill="#1F3522"/>
+  <path d="M430 356L760 334" stroke="#FFD58A" stroke-opacity=".12" stroke-width="10"/>
+  ${[[460,362],[540,356],[620,350],[700,344]].map(([x, y]) => `<ellipse cx="${x}" cy="${y + 4}" rx="16" ry="4" fill="#FFD58A" opacity=".25"/><rect x="${x - 2}" y="${y - 8}" width="4" height="12" fill="#D8CDB8"/><circle cx="${x}" cy="${y - 9}" r="2.4" fill="#FFF1C9"/>`).join('')}
+  ${[[480,378,14],[600,370,18],[720,356,14]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .5}" fill="#2B4A2C"/>`).join('')}
   <!-- house -->
   <path d="M90 309L330 330L760 301V307L330 337L90 314Z" fill="#9C958B"/>
   <path d="M90 220L330 210V330L90 309Z" fill="url(#nWall)"/>
@@ -891,9 +946,9 @@ function renderNightPacifico(){
 </svg>`;
 }
 
-// Inside Casa Pacífico: living room looking through the sliding glass wall to pool and ocean.
+// Inside Casa Astrid · Pacífico: living room looking through the sliding glass wall to garden and ocean.
 function renderInteriorPacifico(){
-  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Living room of Casa Pacífico looking through floor-to-ceiling glass to the pool and ocean">
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Living room of Casa Astrid · Pacífico looking through floor-to-ceiling glass to the garden and ocean">
   <defs>
     <linearGradient id="iSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC8F0"/><stop offset="1" stop-color="#E4F5FB"/></linearGradient>
     <linearGradient id="iSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E8FB8"/><stop offset="1" stop-color="#1B6E96"/></linearGradient>
@@ -903,8 +958,8 @@ function renderInteriorPacifico(){
   <ellipse cx="220" cy="100" rx="70" ry="12" fill="#fff" opacity=".7"/><ellipse cx="560" cy="80" rx="90" ry="14" fill="#fff" opacity=".6"/>
   <rect x="60" y="200" width="680" height="60" fill="url(#iSea)"/>
   <path d="M120 222h60M300 236h90M520 226h70M640 244h50" stroke="#fff" stroke-opacity=".4" stroke-width="1.5"/>
-  <rect x="60" y="258" width="680" height="28" fill="#3FC6E0"/>
-  <path d="M60 258H740" stroke="#9BE8F6" stroke-width="2"/>
+  <rect x="60" y="258" width="680" height="28" fill="#E3CFA4"/>
+  ${[90,150,230,330,420,500,580,660,720].map((x, i) => `<ellipse cx="${x}" cy="${284 - (i % 3) * 3}" rx="${22 + (i % 2) * 8}" ry="10" fill="${i % 2 ? '#6E9A4E' : '#88AE5E'}"/>`).join('')}
   <rect x="60" y="286" width="680" height="74" fill="#C29A74"/>
   <path d="M60 300H740M60 316H740M60 334H740" stroke="#A67E5A" stroke-width="1"/>
   <rect x="120" y="296" width="70" height="10" rx="3" fill="#F6F3EE"/><rect x="220" y="296" width="70" height="10" rx="3" fill="#F6F3EE"/>
@@ -933,9 +988,9 @@ function renderInteriorPacifico(){
 </svg>`;
 }
 
-// Inside Casa Atitlán: dining room behind a near-frameless glass wall, lake and volcanoes beyond.
+// Inside Casa Astrid · Atitlán: dining room behind a near-frameless glass wall, lake and volcanoes beyond.
 function renderInteriorAtitlan(){
-  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Dining room of Casa Atitlán looking through a glass wall to Lake Atitlán and its volcanoes">
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Dining room of Casa Astrid · Atitlán looking through a glass wall to Lake Atitlán and its volcanoes">
   <defs>
     <linearGradient id="jSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8EC3E6"/><stop offset="1" stop-color="#EAF3F7"/></linearGradient>
     <linearGradient id="jLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C95B5"/><stop offset="1" stop-color="#2A6C8C"/></linearGradient>
@@ -978,10 +1033,10 @@ function renderConcepts(){
     <div class="card">
       <h3 style="font-size:1.9rem;margin-bottom:4px">Glass-Walled Views</h3>
       <p style="color:var(--muted);font-size:.85rem;margin-bottom:14px">How the imported floor-to-ceiling glass reads by night and from inside. Illustrations, not photographs — for real-world references, browse <a href="https://unsplash.com/s/photos/modern-glass-villa" target="_blank" rel="noopener" style="color:var(--red-bright)">modern glass villas on Unsplash</a> or <a href="https://www.pinterest.com/search/pins/?q=modern%20glass%20villa%20tropical" target="_blank" rel="noopener" style="color:var(--red-bright)">tropical glass villas on Pinterest</a>.</p>
-      <figure>${renderNightPacifico()}<figcaption>Casa Pacífico at night — sliding glass wall lit from within, reflected in the pool</figcaption></figure>
+      <figure>${renderNightPacifico()}<figcaption>Casa Astrid · Pacífico at night — sliding glass wall lit from within, garden path lights</figcaption></figure>
       <div class="two">
-        <figure>${renderInteriorPacifico()}<figcaption>Casa Pacífico living room — glass wall onto pool, deck and ocean</figcaption></figure>
-        <figure>${renderInteriorAtitlan()}<figcaption>Casa Atitlán dining room — near-frameless glass toward the lake and volcanoes</figcaption></figure>
+        <figure>${renderInteriorPacifico()}<figcaption>Casa Astrid · Pacífico living room — glass wall onto deck, garden and ocean</figcaption></figure>
+        <figure>${renderInteriorAtitlan()}<figcaption>Casa Astrid · Atitlán dining room — near-frameless glass toward the lake and volcanoes</figcaption></figure>
       </div>
     </div>`;
   $('conceptList').innerHTML = gallery + Object.entries(CONCEPTS).map(([k, c]) => `
@@ -1003,23 +1058,49 @@ function renderConcepts(){
 
 function renderConceptStats(){
   Object.keys(CONCEPTS).forEach(k => {
-    const local = estimate(conceptState(k, false)), imp = estimate(conceptState(k, true));
+    const local = estimate(conceptState(k, true)), smart = estimate(conceptState(k, false));
+    const imported = smart.src.rows.filter(x => x.source === 'china').length;
     $('cs-' + k).innerHTML = `
       <div class="kv"><span>Built area</span><b>${CONCEPTS[k].specs.area} m² · ${CONCEPTS[k].specs.bedrooms} bed · ${CONCEPTS[k].specs.bathrooms} bath</b></div>
-      <div class="kv"><span>Estimate, local materials (${FINISH[S.cmpFinish].label})</span><b>${usd(local.total)}</b></div>
-      <div class="kv"><span>Estimate, glass/solar/marble from China</span><b style="color:var(--ok)">${usd(imp.total)}</b></div>
-      <div class="kv"><span>Build duration</span><b>${monthsOf(schedule(conceptState(k, true)))} months</b></div>`;
+      <div class="kv"><span>Estimate, everything bought locally (${FINISH[S.cmpFinish].label})</span><b>${usd(local.total)}</b></div>
+      <div class="kv"><span>Estimate, smart sourcing (${imported} items from China)</span><b style="color:var(--ok)">${usd(smart.total)}</b></div>
+      <div class="kv"><span>Build duration</span><b>${monthsOf(schedule(conceptState(k, false)))} months</b></div>`;
   });
+}
+
+const srcBadge = x => x.source === 'china' ? '<span class="tag src-china">China</span>' : '<span class="tag src-local">Local</span>';
+const pct = v => v == null ? '—' : Math.round(v * 100) + '%';
+
+// Interactive sourcing table for the current design (Design tab).
+function renderSourcing(e){
+  const src = e.src, sh = src.ship, fx = +S.fx || 7.7;
+  $('srcTable').innerHTML = `<thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Local, installed</th><th class="num">From China, landed</th><th class="num">Saving</th><th>Choice</th><th>Source</th></tr></thead><tbody>
+    ${MATERIALS.map(m => {
+      const x = src.rows.find(r => r.id === m.id), q = (S.qty || {})[m.id] || 0, mode = m.localOnly ? 'local' : ((S.src || {})[m.id] || 'auto');
+      return `<tr><td>${esc(m.label)}<div style="font-size:.7rem;color:var(--muted)">${esc(m.tip)}</div></td>
+        <td class="num" style="white-space:nowrap"><input class="qty" type="number" min="0" step="any" data-qty="${m.id}" value="${q}"/> <span style="font-size:.7rem;color:var(--muted)">${m.unit}</span></td>
+        <td class="num">${x ? usd(x.local) : '—'}</td>
+        <td class="num">${x && x.china ? usd(x.china.total) : '—'}</td>
+        <td class="num" style="color:${x && x.savePct >= (S.ship.threshold / 100) ? 'var(--ok)' : 'var(--muted)'}">${x ? pct(x.savePct) : '—'}</td>
+        <td><select class="src-sel" data-src="${m.id}"${m.localOnly ? ' disabled' : ''}>
+          ${[['auto','Auto'],['china','China'],['local','Local']].map(([v, l]) => `<option value="${v}"${v === mode ? ' selected' : ''}>${l}</option>`).join('')}</select></td>
+        <td>${x ? srcBadge(x) : '—'}</td></tr>`;
+    }).join('')}
+    ${ALWAYS_LOCAL.map(([l, why]) => `<tr style="opacity:.6"><td>${esc(l)}<div style="font-size:.7rem;color:var(--muted)">${esc(why)}</div></td><td colspan="5" class="num" style="font-size:.75rem;color:var(--muted)">in construction costs</td><td><span class="tag src-local">Local</span></td></tr>`).join('')}
+    <tr class="total"><td>Fit-out total</td><td></td><td class="num">${usd(src.local)}</td><td class="num">${usd(src.total)}</td><td class="num" style="color:var(--ok)">${src.local ? pct((src.local - src.total) / src.local) : '—'}</td><td colspan="2"></td></tr>
+  </tbody>`;
+  $('shipNote').innerHTML = sh.container
+    ? `<b>China shipment:</b> ${esc(sh.container.label)} · ≈${sh.vol.toFixed(0)} m³ · ≈${(sh.kg / 1000).toFixed(1)} t · broker, inspection & trucking ${usd(sh.fixed)} (${esc(src.region.inlandLabel)}). Fit-out saving vs buying everything locally: <b>${usd(src.local - src.total)}</b> (${gtq((src.local - src.total) * fx)}).${src.local < src.total ? ' <b style="color:var(--warn)">Your China overrides cost more than buying locally — set them back to Auto.</b>' : ''}`
+    : 'Nothing clears the threshold at these prices — buy everything locally.';
 }
 
 /* ---------- Site comparison ---------- */
 function renderCompare(){
   const keys = Object.keys(CONCEPTS), fx = +S.fx || 7.7;
   const data = keys.map(k => {
-    const stL = conceptState(k, false), stI = conceptState(k, true);
-    const L = estimate(stL), I = estimate(stI);
+    const L = estimate(conceptState(k, true)), I = estimate(conceptState(k, false));
     const grp = (e, g) => sum(e.lines.filter(l => l.group === g), l => l.usd);
-    return {k, c:CONCEPTS[k], r:REGIONS[CONCEPTS[k].site], L, I, grp, months: monthsOf(schedule(stI))};
+    return {k, c:CONCEPTS[k], r:REGIONS[CONCEPTS[k].site], L, I, grp, months: monthsOf(schedule(conceptState(k, false)))};
   });
   const row = (label, f, opts = {}) => {
     const vals = data.map(f);
@@ -1029,44 +1110,49 @@ function renderCompare(){
   };
   const money = n => ({n, t: usd(n)});
   $('cmpTable').innerHTML = `<thead><tr><th></th>${data.map(d => `<th class="num">${esc(d.r.label.split(' (')[0])}</th>`).join('')}</tr></thead><tbody>
-    ${row('Concept', d => esc(d.c.name))}
-    ${row('Built area', d => d.c.specs.area + ' m²')}
+    ${row('Version', d => esc(d.c.name))}
+    ${row('Built area', d => d.c.specs.area + ' m² · ' + d.c.specs.bedrooms + ' bed · ' + d.c.specs.bathrooms + ' bath')}
     ${row('Land', d => usd(d.grp(d.L, 'land')))}
     ${row('Construction & site works', d => usd(d.grp(d.L, 'build')))}
-    ${row('Glass, marble & solar — local', d => usd(d.grp(d.L, 'materials')))}
-    ${row('Glass, marble & solar — from China', d => usd(d.grp(d.I, 'materials')))}
-    ${row('Pool, wall & other extras', d => usd(d.grp(d.L, 'extras')))}
+    ${row('Fit-out, furniture & décor — all local', d => usd(d.grp(d.L, 'materials')))}
+    ${row('Fit-out, furniture & décor — smart sourcing', d => usd(d.grp(d.I, 'materials')))}
+    ${row('Wall & other extras', d => usd(d.grp(d.L, 'extras')))}
     ${row('Permits, notary & taxes', d => usd(d.grp(d.L, 'fees')))}
     ${row('Contingency (' + S.contingency + '%)', d => usd(d.grp(d.I, 'contingency')))}
-    ${row('Total — local materials', d => money(d.L.total), {lowest:true, cls:'total'})}
-    ${row('Total — China import', d => money(d.I.total), {lowest:true, cls:'total'})}
-    ${row('Saved by importing', d => usd(d.L.total - d.I.total), {cls:'good'})}
-    ${row('Total in quetzales (import)', d => gtq(d.I.total * fx))}
-    ${row('Build cost per m² (import, excl. land)', d => money(d.I.perM2), {lowest:true})}
-    ${row('Container to site', d => esc(d.I.imp.container ? d.I.imp.container.label : '—'))}
+    ${row('Total — everything local', d => money(d.L.total), {lowest:true, cls:'total'})}
+    ${row('Total — smart sourcing', d => money(d.I.total), {lowest:true, cls:'total'})}
+    ${row('Saved by sourcing from China', d => usd(d.L.total - d.I.total), {cls:'good'})}
+    ${row('Total in quetzales (smart)', d => gtq(d.I.total * fx))}
+    ${row('Build cost per m² (excl. land & furniture)', d => money(d.I.perM2), {lowest:true})}
+    ${row('Items from China', d => d.I.src.rows.filter(x => x.source === 'china').length + ' of ' + d.I.src.rows.length)}
+    ${row('Container to site', d => esc(d.I.src.ship.container ? d.I.src.ship.container.label : '—'))}
     ${row('Trucking from Puerto Quetzal', d => usd(d.r.inland))}
     ${row('Estimated duration', d => ({n:d.months, t:d.months + ' months'}), {lowest:true})}
   </tbody>`;
 
   $('cmpMatrix').innerHTML = `<thead><tr><th>Finish level</th>${data.map(d => `<th class="num">${esc(d.c.name)}</th>`).join('')}</tr></thead><tbody>` +
     Object.entries(FINISH).map(([f, v]) => `<tr><td>${v.label}${f === S.cmpFinish ? ' <span class="tag">selected</span>' : ''}</td>${
-      data.map(d => `<td class="num">${usd(estimate(conceptState(d.k, true, f)).total)}</td>`).join('')}</tr>`).join('') + '</tbody>';
+      data.map(d => `<td class="num">${usd(estimate(conceptState(d.k, false, f)).total)}</td>`).join('')}</tr>`).join('') + '</tbody>';
 
   $('landed').innerHTML = '<div class="two">' + data.map(d => {
-    const im = d.I.imp;
-    return `<div><h3 style="font-size:1.15rem">${esc(d.c.name)} → ${esc(d.r.label.split(' (')[0])}</h3>
-      <p style="font-size:.78rem;color:var(--muted);margin-bottom:8px">${esc(im.container.label)} · ≈${im.vol.toFixed(0)} m³ · ≈${(im.kg / 1000).toFixed(1)} t · ${esc(d.r.inlandLabel)}</p>
-      <div class="table-wrap"><table><thead><tr><th>Item</th><th class="num">FOB</th><th class="num">Freight+ins.</th><th class="num">Duty</th><th class="num">IVA</th><th class="num">Install</th><th class="num">Import total</th><th class="num">Local</th></tr></thead><tbody>
-      ${im.items.map(it => `<tr><td>${esc(it.label)}<div style="font-size:.7rem;color:var(--muted)">${it.qty} ${it.unit}</div></td><td class="num">${usd(it.fob)}</td><td class="num">${usd(it.freight)}</td><td class="num">${usd(it.duty)}</td><td class="num">${usd(it.iva)}</td><td class="num">${usd(it.install)}</td><td class="num">${usd(it.total)}</td><td class="num">${usd(it.local)}</td></tr>`).join('')}
-      <tr><td>Broker, port, inspection & trucking</td><td colspan="5"></td><td class="num">${usd(im.shared)}</td><td class="num">—</td></tr>
-      <tr class="total"><td>Total</td><td colspan="5"></td><td class="num">${usd(im.total)}</td><td class="num">${usd(im.local)}</td></tr>
-      <tr class="good"><td colspan="6">Savings before contingency</td><td class="num" colspan="2">${usd(im.savings)}</td></tr>
+    const src = d.I.src, sh = src.ship;
+    return `<div><h3 style="font-size:1.15rem">${esc(d.c.name)}</h3>
+      <p style="font-size:.78rem;color:var(--muted);margin-bottom:8px">${sh.container ? `${esc(sh.container.label)} · ≈${sh.vol.toFixed(0)} m³ · ≈${(sh.kg / 1000).toFixed(1)} t · ${esc(d.r.inlandLabel)}` : 'No shipment — everything local'}</p>
+      <div class="table-wrap"><table><thead><tr><th>Item</th><th class="num">Local</th><th class="num">China</th><th class="num">Saving</th><th>Source</th></tr></thead><tbody>
+      ${src.rows.map(x => `<tr><td>${esc(x.label)}<div style="font-size:.7rem;color:var(--muted)">${+x.qty.toFixed(1)} ${x.unit}${x.china ? ` · FOB ${usd(x.fob)} · freight ${usd(x.china.freight)} · duty+IVA ${usd(x.china.duty + x.china.iva)}` : ''}</div></td>
+        <td class="num">${usd(x.local)}</td><td class="num">${x.china ? usd(x.china.total) : '—'}</td><td class="num">${pct(x.savePct)}</td><td>${srcBadge(x)}</td></tr>`).join('')}
+      <tr class="total"><td>Fit-out total</td><td class="num">${usd(src.local)}</td><td class="num">${usd(src.total)}</td><td class="num">${src.local ? pct((src.local - src.total) / src.local) : '—'}</td><td></td></tr>
       </tbody></table></div></div>`;
   }).join('') + '</div>';
 }
 
-function renderImpInputs(){
-  $('impInputs').innerHTML = IMP_FIELDS.map(([k, l]) => `<div><label for="imp-${k}">${esc(l)}</label><input id="imp-${k}" type="number" min="0" step="any" data-imp="${k}" value="${S.imp[k]}"/></div>`).join('');
+function renderPriceInputs(){
+  const inp = (id, f, v) => `<input class="qty" type="number" min="0" step="any" data-mat="${id}:${f}" value="${v}"/>`;
+  $('priceTable').innerHTML = `<thead><tr><th>Item</th><th class="num">FOB China ($/unit)</th><th class="num">Local installed ($/unit)</th><th class="num">Install labour ($/unit)</th><th class="num">Duty DAI (%)</th></tr></thead><tbody>
+    ${MATERIALS.map(m => { const p = S.mat[m.id]; return `<tr><td>${esc(m.label)} <span style="font-size:.7rem;color:var(--muted)">per ${m.unit}</span></td>
+      <td class="num">${inp(m.id, 'fob', p.fob)}</td><td class="num">${inp(m.id, 'local', p.local)}</td><td class="num">${inp(m.id, 'install', p.install)}</td><td class="num">${inp(m.id, 'duty', p.duty)}</td></tr>`; }).join('')}
+  </tbody>`;
+  $('shipInputs').innerHTML = SHIP_FIELDS.map(([k, l]) => `<div><label for="ship-${k}">${esc(l)}</label><input id="ship-${k}" type="number" min="0" step="any" data-ship="${k}" value="${S.ship[k]}"/></div>`).join('');
 }
 
 function renderAll(){ populateSelects(); renderDesign(); renderConceptStats(); renderCompare(); renderTimeline(); renderPermits(); renderExpenses(); }
@@ -1086,14 +1172,22 @@ document.querySelectorAll('[data-field]').forEach(el => el.addEventListener(el.t
 document.querySelectorAll('[data-site]').forEach(el => el.addEventListener('input', () => {
   S.sites[el.dataset.site] = +el.value || 0; save(); renderAll();
 }));
-$('impInputs').addEventListener('input', e => {
-  const k = e.target.dataset.imp; if(!k) return;
-  S.imp[k] = +e.target.value || 0; save(); renderAll();
+document.addEventListener('input', e => {
+  const k = e.target.dataset.ship, m = e.target.dataset.mat;
+  if(k){ S.ship[k] = +e.target.value || 0; save(); renderAll(); }
+  if(m){ const [id, f] = m.split(':'); S.mat[id][f] = +e.target.value || 0; save(); renderAll(); }
+});
+$('srcTable').addEventListener('change', e => {
+  const q = e.target.dataset.qty, c = e.target.dataset.src;
+  if(q){ S.qty[q] = Math.max(0, +e.target.value || 0); }
+  else if(c){ if(e.target.value === 'auto') delete S.src[c]; else S.src[c] = e.target.value; }
+  else return;
+  save(); renderAll();
 });
 $('conceptList').addEventListener('click', e => {
   const k = e.target.dataset.use; if(!k) return;
   const c = CONCEPTS[k];
-  Object.assign(S, c.specs, {region:c.site, lotPrice:S.sites[c.site], finish:S.cmpFinish, name:c.name, importChina:true});
+  Object.assign(S, c.specs, {qty: Object.assign({}, c.specs.qty), region:c.site, lotPrice:S.sites[c.site], finish:S.cmpFinish, name:'Casa Astrid'});
   save(); syncInputs(); renderAll();
   document.querySelector('.tab[data-tab="design"]').click();
   window.scrollTo({top:0, behavior:'smooth'});
