@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#E02020"/>
-<title>Casa Astrid — Villa Build Planner</title>
+<title>Casa Valencia — Villa Build Planner</title>
 <meta name="description" content="Plan, budget and track the construction of a villa in Guatemala — cost estimator, phase timeline, permit checklist and expense tracker."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -116,13 +116,26 @@ td.best{color:var(--ok);font-weight:600}
 .tag.src-local{color:var(--muted);border-color:rgba(255,255,255,.2);margin-left:0}
 input.qty{width:84px;padding:6px 8px;text-align:right}
 select.src-sel{width:auto;padding:6px 8px}
+/* finish tiers: ordinal one-hue ramp (validated on the dark card surface) */
+:root{--tier-1:#1c5cab;--tier-2:#3987e5;--tier-3:#86b6ef}
+.tier-1{fill:var(--tier-1);background:var(--tier-1)}.tier-2{fill:var(--tier-2);background:var(--tier-2)}.tier-3{fill:var(--tier-3);background:var(--tier-3)}
+.glance-plot{position:relative}
+svg.glance-chart{display:block;width:100%;height:auto;font-family:Inter,sans-serif}
+svg.glance-chart .ax{fill:var(--muted);font-size:11px}
+svg.glance-chart .val{fill:var(--text);font-size:12px;font-weight:600}
+svg.glance-chart .grp{fill:var(--text);font-size:12px;letter-spacing:.08em}
+svg.glance-chart .bar{transition:opacity .15s}
+svg.glance-chart .bar.dim{opacity:.35}
+.glance-legend{margin:0 0 8px}
+i.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:8px}
+.tip{position:absolute;pointer-events:none;width:190px;background:#1A1A33;border:1px solid rgba(255,255,255,.15);padding:8px 10px;font-size:.75rem;line-height:1.5;color:var(--text)}
 footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;border-top:1px solid var(--border)}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">CASA <span>ASTRID</span></a>
+  <a href="index.html" class="nav-logo">CASA <span>VALENCIA</span></a>
   <div class="nav-actions">
     <button class="btn" id="exportCsv">Export CSV</button>
     <button class="btn" id="exportJson">Save JSON</button>
@@ -133,7 +146,7 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 
 <header class="hero">
   <span class="hero-label">Villa Guatemala · Build Planner</span>
-  <h1 class="hero-title">Casa Astrid</h1>
+  <h1 class="hero-title">Casa Valencia</h1>
   <p class="hero-sub">Estimate the budget, schedule around the rainy season, work through permits, and track every quetzal spent — from lot to keys.</p>
 </header>
 
@@ -209,15 +222,15 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 
 <!-- ============ CONCEPTS ============ -->
 <section class="panel" id="panel-concepts">
-  <h2>Casa Astrid — Modern Concepts</h2>
-  <p class="lead">Casa Astrid in two versions, one for each site: concept illustrations and schematic floor plans to brief an architect with. They are not construction drawings — a colegiado architect and structural engineer must produce stamped plans to AGIES seismic norms.</p>
+  <h2>Casa Valencia — Modern Concepts</h2>
+  <p class="lead">Casa Valencia in two versions, one for each site: concept illustrations and schematic floor plans to brief an architect with. They are not construction drawings — a colegiado architect and structural engineer must produce stamped plans to AGIES seismic norms.</p>
   <div id="conceptList"></div>
 </section>
 
 <!-- ============ COMPARE ============ -->
 <section class="panel" id="panel-compare">
-  <h2>Casa Astrid — Puerto San José vs Lake Atitlán</h2>
-  <p class="lead">Casa Astrid is priced at each site with its own design (Pacífico at the coast, Atitlán on the lake), your contingency and exchange rate, and the sourcing plan — China only where it pays. Edit land prices to match real listings.</p>
+  <h2>Casa Valencia — Puerto San José vs Lake Atitlán</h2>
+  <p class="lead">Casa Valencia is priced at each site with its own design (Pacífico at the coast, Atitlán on the lake), your contingency and exchange rate, and the sourcing plan — China only where it pays. Edit land prices to match real listings.</p>
   <div class="card">
     <div class="grid">
       <div><label for="cmpFinish">Finish level</label>
@@ -227,6 +240,10 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
       <div><label for="landSJ">Land — Puerto San José (USD)</label><input id="landSJ" type="number" min="0" step="1000" data-site="sanjose"/></div>
       <div><label for="landAT">Land — Lake Atitlán (USD)</label><input id="landAT" type="number" min="0" step="1000" data-site="atitlan"/></div>
     </div>
+  </div>
+  <div class="card">
+    <h3>At a Glance — Price & Build Time by Finish Level</h3>
+    <div id="glance"></div>
   </div>
   <div class="card">
     <h3>Side by Side</h3>
@@ -326,7 +343,7 @@ footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;b
 
 </main>
 
-<footer>Casa Astrid · Villa Guatemala Build Planner · Your data is saved in this browser only. Use “Save JSON” to back it up.</footer>
+<footer>Casa Valencia · Villa Guatemala Build Planner · Your data is saved in this browser only. Use “Save JSON” to back it up.</footer>
 
 <script>
 (function(){
@@ -439,7 +456,7 @@ const PERMITS = [
 /* ---------- Concepts ---------- */
 const CONCEPTS = {
   pacifico: {
-    name:'Casa Astrid · Pacífico', site:'sanjose',
+    name:'Casa Valencia · Pacífico', site:'sanjose',
     tagline:'A single-storey white concrete pavilion raised on a stone plinth, fully glazed toward the ocean, with a pergola roof deck and a native-planted garden.',
     specs:{area:162, bedrooms:2, bathrooms:2, pool:false, well:false, wall:true,
            qty:{glass:45, marble:80, tile:95, cabinets:6, counters:5, bath:2, doors:6, lighting:1, solar:8, furniture:1, appliances:1}},
@@ -453,7 +470,7 @@ const CONCEPTS = {
     ]
   },
   atitlan: {
-    name:'Casa Astrid · Atitlán', site:'atitlan',
+    name:'Casa Valencia · Atitlán', site:'atitlan',
     tagline:'Two stacked, cantilevered glass pavilions stepping down the hillside toward the lake and volcanoes, with a garden terrace below.',
     specs:{area:180, bedrooms:2, bathrooms:2, pool:false, well:false, wall:false,
            qty:{glass:60, marble:90, tile:100, cabinets:7, counters:6, bath:2, doors:6, lighting:1, solar:5, furniture:1, appliances:1}},
@@ -471,7 +488,7 @@ const CONCEPTS = {
 /* ---------- State ---------- */
 const KEY = 'villa-guatemala-v2', OLD_KEY = 'villa-guatemala-v1';
 const DEFAULTS = {
-  name:'Casa Astrid', region:'sanjose', finish:'premium', area:162, bedrooms:2, bathrooms:2,
+  name:'Casa Valencia', region:'sanjose', finish:'premium', area:162, bedrooms:2, bathrooms:2,
   lotPrice:70000, fx:7.7, contingency:10, pool:false, well:false, wall:true,
   qty: Object.assign({}, CONCEPTS.pacifico.specs.qty), src:{},
   start:'', permits:{}, expenses:[],
@@ -492,7 +509,8 @@ let S = load();
 
 function load(){
   try{
-    const raw = localStorage.getItem(KEY); if(raw) return hydrate(JSON.parse(raw));
+    const raw = localStorage.getItem(KEY);
+    if(raw){ const s = hydrate(JSON.parse(raw)); if(s.name === 'Casa Astrid') s.name = 'Casa Valencia'; return s; }
     // Carry permits, expenses and dates over from the first version, with the new name and no pool.
     const old = localStorage.getItem(OLD_KEY);
     if(old){ const o = JSON.parse(old); return hydrate({permits:o.permits, expenses:o.expenses, start:o.start, fx:o.fx, contingency:o.contingency}); }
@@ -606,6 +624,8 @@ function schedule(st = S){
   return PHASES.map(p => {
     let weeks = p.id === 'design' ? p.weeks : Math.ceil(p.weeks * scale);
     if(p.id === 'ext' && !st.pool && !st.wall) weeks = Math.ceil(weeks * 0.5);
+    // Higher finish levels need more specialty trades and longer finishing.
+    if(p.id === 'finish') weeks = Math.ceil(weeks * ({standard:.85, premium:1, luxury:1.3}[st.finish] || 1));
     const start = new Date(cur), end = addDays(start, weeks * 7);
     let wet = false;
     for(let d = new Date(start); d < end; d = addDays(d, 7)) if(isRainy(d)) { wet = true; break; }
@@ -740,7 +760,7 @@ const mullions = (x0, x1, y0, y1, step) => { let d = ''; for(let x = x0 + step; 
 
 function renderPacifico(){
   let slats = ''; for(let x = 186; x < 228; x += 6) slats += `M${x} 250V316`;
-  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Astrid · Pacífico concept illustration at sunset">
+  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Valencia · Pacífico concept illustration at sunset">
   <defs>
     <linearGradient id="pSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D2B53"/><stop offset=".6" stop-color="#C8607A"/><stop offset="1" stop-color="#FFB870"/></linearGradient>
     <linearGradient id="pGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C6A0"/><stop offset="1" stop-color="#6F5068"/></linearGradient>
@@ -777,7 +797,7 @@ function renderPacifico(){
 }
 
 function renderAtitlan(){
-  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Astrid · Atitlán concept illustration on the hillside above the lake">
+  return `<svg viewBox="0 0 800 420" class="render" role="img" aria-label="Casa Valencia · Atitlán concept illustration on the hillside above the lake">
   <defs>
     <linearGradient id="aSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FAAD6"/><stop offset="1" stop-color="#E4F0F5"/></linearGradient>
     <linearGradient id="aLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C95B5"/><stop offset="1" stop-color="#1E5A74"/></linearGradient>
@@ -856,7 +876,7 @@ function planSVG(p){
 
 const PLANS = {
   pacifico: [{
-    id:'pac', title:'Casa Astrid · Pacífico — ground floor', w:17, h:16, bottomLabel:'↓ Beach & ocean',
+    id:'pac', title:'Casa Valencia · Pacífico — ground floor', w:17, h:16, bottomLabel:'↓ Beach & ocean',
     rooms:[
       {x:0, y:0, w:2.5, h:4, label:'Bath 2'}, {x:2.5, y:0, w:2, h:4, label:'Laundry'},
       {x:4.5, y:0, w:2.5, h:4, label:'Entry'}, {x:7, y:0, w:5, h:4, label:'Kitchen'},
@@ -868,7 +888,7 @@ const PLANS = {
     glass:[[0.3, 9.5, 16.7, 9.5], [7.5, 0, 11.5, 0]]
   }],
   atitlan: [{
-    id:'atu', title:'Casa Astrid · Atitlán — upper level (living)', w:12, h:10, bottomLabel:'↓ Lake',
+    id:'atu', title:'Casa Valencia · Atitlán — upper level (living)', w:12, h:10, bottomLabel:'↓ Lake',
     rooms:[
       {x:0, y:0, w:3, h:3, label:'Entry + stair'}, {x:3, y:0, w:2.5, h:3, label:'Laundry'},
       {x:5.5, y:0, w:6.5, h:3, label:'Kitchen + island'}, {x:0, y:3, w:12, h:4.5, label:'Living · Dining'}
@@ -876,7 +896,7 @@ const PLANS = {
     outdoor:[{x:0, y:7.5, w:12, h:2.5, label:'Cantilevered terrace'}],
     glass:[[0.3, 7.5, 11.7, 7.5], [12, 3, 12, 7.5]]
   }, {
-    id:'atl', title:'Casa Astrid · Atitlán — lower level (bedrooms)', w:12, h:11, bottomLabel:'↓ Lake',
+    id:'atl', title:'Casa Valencia · Atitlán — lower level (bedrooms)', w:12, h:11, bottomLabel:'↓ Lake',
     rooms:[
       {x:0, y:0, w:3, h:3, label:'Stair'}, {x:3, y:0, w:2.5, h:3, label:'Bath 2'},
       {x:5.5, y:0, w:2, h:3, label:'Mech'}, {x:7.5, y:0, w:4.5, h:3, label:'Master bath'},
@@ -894,7 +914,7 @@ function conceptState(key, allLocal, finish){
 }
 
 /* ---------- Gallery: glass-walled views ---------- */
-// Casa Astrid · Pacífico at night, two-point perspective from the garden.
+// Casa Valencia · Pacífico at night, two-point perspective from the garden.
 function renderNightPacifico(){
   const lt = x => 220 - (x - 90) * 10 / 240, lb = x => 309 + (x - 90) * 21 / 240;     // left face top/bottom
   const gt = x => 216 + (x - 345) * 13 / 400, gb = x => 324 - (x - 345) * 27 / 400;  // glass top/bottom
@@ -904,7 +924,7 @@ function renderNightPacifico(){
   let mull = ''; [425,505,585,665].forEach(x => { mull += `M${x} ${gt(x).toFixed(1)}V${gb(x).toFixed(1)}`; });
   let lights = ''; for(let x = 370; x <= 730; x += 60){ const y = rt(x) + 13; lights += `<path d="M${x - 6} ${y}L${x - 22} ${y + 60}H${x + 22}L${x + 6} ${y}Z" fill="#FFE9B8" opacity=".07"/><circle cx="${x}" cy="${y}" r="2.2" fill="#FFF3CF"/>`; }
   let pend = ''; [[470,238],[520,237],[600,236]].forEach(([x, y]) => { pend += `<path d="M${x} ${gt(x).toFixed(1)}V${y}" stroke="#5A4630"/><circle cx="${x}" cy="${y + 3}" r="4" fill="#FFF4D6"/>`; });
-  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Casa Astrid · Pacífico at night with glowing floor-to-ceiling glass">
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Casa Valencia · Pacífico at night with glowing floor-to-ceiling glass">
   <defs>
     <linearGradient id="nSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050818"/><stop offset=".6" stop-color="#1E2550"/><stop offset="1" stop-color="#34306A"/></linearGradient>
     <linearGradient id="nGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE7B5"/><stop offset="1" stop-color="#E9974E"/></linearGradient>
@@ -946,9 +966,9 @@ function renderNightPacifico(){
 </svg>`;
 }
 
-// Inside Casa Astrid · Pacífico: living room looking through the sliding glass wall to garden and ocean.
+// Inside Casa Valencia · Pacífico: living room looking through the sliding glass wall to garden and ocean.
 function renderInteriorPacifico(){
-  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Living room of Casa Astrid · Pacífico looking through floor-to-ceiling glass to the garden and ocean">
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Living room of Casa Valencia · Pacífico looking through floor-to-ceiling glass to the garden and ocean">
   <defs>
     <linearGradient id="iSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CC8F0"/><stop offset="1" stop-color="#E4F5FB"/></linearGradient>
     <linearGradient id="iSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E8FB8"/><stop offset="1" stop-color="#1B6E96"/></linearGradient>
@@ -988,9 +1008,9 @@ function renderInteriorPacifico(){
 </svg>`;
 }
 
-// Inside Casa Astrid · Atitlán: dining room behind a near-frameless glass wall, lake and volcanoes beyond.
+// Inside Casa Valencia · Atitlán: dining room behind a near-frameless glass wall, lake and volcanoes beyond.
 function renderInteriorAtitlan(){
-  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Dining room of Casa Astrid · Atitlán looking through a glass wall to Lake Atitlán and its volcanoes">
+  return `<svg viewBox="0 0 800 450" class="render" role="img" aria-label="Dining room of Casa Valencia · Atitlán looking through a glass wall to Lake Atitlán and its volcanoes">
   <defs>
     <linearGradient id="jSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8EC3E6"/><stop offset="1" stop-color="#EAF3F7"/></linearGradient>
     <linearGradient id="jLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C95B5"/><stop offset="1" stop-color="#2A6C8C"/></linearGradient>
@@ -1033,10 +1053,10 @@ function renderConcepts(){
     <div class="card">
       <h3 style="font-size:1.9rem;margin-bottom:4px">Glass-Walled Views</h3>
       <p style="color:var(--muted);font-size:.85rem;margin-bottom:14px">How the imported floor-to-ceiling glass reads by night and from inside. Illustrations, not photographs — for real-world references, browse <a href="https://unsplash.com/s/photos/modern-glass-villa" target="_blank" rel="noopener" style="color:var(--red-bright)">modern glass villas on Unsplash</a> or <a href="https://www.pinterest.com/search/pins/?q=modern%20glass%20villa%20tropical" target="_blank" rel="noopener" style="color:var(--red-bright)">tropical glass villas on Pinterest</a>.</p>
-      <figure>${renderNightPacifico()}<figcaption>Casa Astrid · Pacífico at night — sliding glass wall lit from within, garden path lights</figcaption></figure>
+      <figure>${renderNightPacifico()}<figcaption>Casa Valencia · Pacífico at night — sliding glass wall lit from within, garden path lights</figcaption></figure>
       <div class="two">
-        <figure>${renderInteriorPacifico()}<figcaption>Casa Astrid · Pacífico living room — glass wall onto deck, garden and ocean</figcaption></figure>
-        <figure>${renderInteriorAtitlan()}<figcaption>Casa Astrid · Atitlán dining room — near-frameless glass toward the lake and volcanoes</figcaption></figure>
+        <figure>${renderInteriorPacifico()}<figcaption>Casa Valencia · Pacífico living room — glass wall onto deck, garden and ocean</figcaption></figure>
+        <figure>${renderInteriorAtitlan()}<figcaption>Casa Valencia · Atitlán dining room — near-frameless glass toward the lake and volcanoes</figcaption></figure>
       </div>
     </div>`;
   $('conceptList').innerHTML = gallery + Object.entries(CONCEPTS).map(([k, c]) => `
@@ -1155,7 +1175,66 @@ function renderPriceInputs(){
   $('shipInputs').innerHTML = SHIP_FIELDS.map(([k, l]) => `<div><label for="ship-${k}">${esc(l)}</label><input id="ship-${k}" type="number" min="0" step="any" data-ship="${k}" value="${S.ship[k]}"/></div>`).join('');
 }
 
-function renderAll(){ populateSelects(); renderDesign(); renderConceptStats(); renderCompare(); renderTimeline(); renderPermits(); renderExpenses(); }
+/* ---------- At a glance: price & time by finish level ---------- */
+function renderGlance(){
+  const tiers = Object.keys(FINISH), keys = Object.keys(CONCEPTS), fx = +S.fx || 7.7;
+  const data = keys.map(k => ({k, c:CONCEPTS[k], site: REGIONS[CONCEPTS[k].site].label.split(' (')[0].split(' / ')[0],
+    tiers: tiers.map(f => {
+      const st = conceptState(k, false, f), e = estimate(st), ph = schedule(st);
+      return {f, total:e.total, local: estimate(conceptState(k, true, f)).total, months: monthsOf(ph), end: ph[ph.length - 1].end, start: ph[0].start};
+    })}));
+  // Grouped bar chart: one group per site, one bar per finish tier.
+  const W = 720, H = 300, L = 64, R = 16, T = 28, B = 44, pw = W - L - R, ph = H - T - B;
+  const max = Math.ceil(Math.max(...data.flatMap(d => d.tiers.map(t => t.total))) / 100000) * 100000;
+  const y = v => T + ph - v / max * ph, bw = 56, gap = 2, gw = tiers.length * bw + (tiers.length - 1) * gap;
+  const gx = i => L + pw * (i + .5) / data.length - gw / 2;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" class="glance-chart" role="img" aria-label="Total cost by finish level for each site">`;
+  for(let v = 0; v <= max; v += 100000){
+    svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="${v ? 'rgba(255,255,255,.07)' : 'rgba(255,255,255,.25)'}"/>
+      <text x="${L - 10}" y="${y(v) + 4}" text-anchor="end" class="ax">${v ? '$' + v / 1000 + 'K' : '$0'}</text>`;
+  }
+  data.forEach((d, i) => {
+    d.tiers.forEach((t, j) => {
+      const x = gx(i) + j * (bw + gap), top = y(t.total), h = T + ph - top, r = 4;
+      svg += `<path class="bar tier-${j + 1}" data-i="${i}" data-j="${j}" d="M${x} ${T + ph}V${top + r}Q${x} ${top} ${x + r} ${top}H${x + bw - r}Q${x + bw} ${top} ${x + bw} ${top + r}V${T + ph}Z"/>
+        <rect class="hit" data-i="${i}" data-j="${j}" x="${x}" y="${T}" width="${bw}" height="${ph}" fill="transparent"/>
+        <text x="${x + bw / 2}" y="${top - 8}" text-anchor="middle" class="val">${short(t.total)}</text>`;
+    });
+    svg += `<text x="${gx(i) + gw / 2}" y="${H - 14}" text-anchor="middle" class="grp">${esc(d.site)}</text>`;
+  });
+  svg += '</svg>';
+  const legend = tiers.map((f, j) => `<span><i class="sw tier-${j + 1}"></i>${FINISH[f].label}</span>`).join('');
+  const tiles = data.map(d => {
+    const a = d.tiers[0], z = d.tiers[d.tiers.length - 1];
+    return `<div class="stat"><div class="stat-num">${a.months}–${z.months} mo</div><div class="stat-label">Build time · ${esc(d.site)}</div>
+      <div class="stat-sub">Start ${fmtDate(a.start)} → move in ${fmtDate(a.end).replace(/ \d+,/, '')}–${fmtDate(z.end).replace(/ \d+,/, '')}</div></div>`;
+  }).join('');
+  const table = `<table><thead><tr><th>Finish level</th>${data.map(d => `<th class="num">${esc(d.site)} · USD</th><th class="num">GTQ</th><th class="num">Time</th>`).join('')}</tr></thead><tbody>
+    ${tiers.map((f, j) => `<tr><td><i class="sw tier-${j + 1}"></i>${FINISH[f].label}</td>${data.map(d => { const t = d.tiers[j];
+      return `<td class="num">${usd(t.total)}</td><td class="num">${gtq(t.total * fx)}</td><td class="num">${t.months} mo</td>`; }).join('')}</tr>`).join('')}
+    <tr><td style="color:var(--muted)">Luxury vs standard</td>${data.map(d => `<td class="num" style="color:var(--muted)">+${usd(d.tiers[2].total - d.tiers[0].total)}</td><td></td><td class="num" style="color:var(--muted)">+${d.tiers[2].months - d.tiers[0].months} mo</td>`).join('')}</tr>
+  </tbody></table>`;
+  $('glance').innerHTML = `<div class="legend glance-legend">${legend}</div>
+    <div class="glance-plot">${svg}<div class="tip" id="glanceTip" hidden></div></div>
+    <div class="stats" style="margin-top:18px">${tiles}</div>
+    <div class="table-wrap">${table}</div>
+    <p class="note">Totals include land, the fit-out sourced from China where it pays, and ${S.contingency}% contingency. Luxury finishes also take longer: specialty stone, joinery and fixtures add weeks to the finishing phase.</p>`;
+  const tip = $('glanceTip');
+  $('glance').querySelectorAll('.hit').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      const d = data[+el.dataset.i], t = d.tiers[+el.dataset.j];
+      tip.innerHTML = `<b>${esc(d.c.name)} · ${FINISH[t.f].label}</b><br>${usd(t.total)} · ${gtq(t.total * fx)}<br>All local: ${usd(t.local)}<br>Build time: ${t.months} months`;
+      tip.hidden = false;
+      const box = el.getBoundingClientRect(), host = el.closest('.glance-plot').getBoundingClientRect();
+      tip.style.left = Math.min(host.width - 190, Math.max(0, box.left - host.left + box.width / 2 - 95)) + 'px';
+      tip.style.top = Math.max(0, box.top - host.top + 10) + 'px';
+      $('glance').querySelectorAll('.bar').forEach(b => b.classList.toggle('dim', b.dataset.i !== el.dataset.i || b.dataset.j !== el.dataset.j));
+    });
+    el.addEventListener('mouseleave', () => { tip.hidden = true; $('glance').querySelectorAll('.bar').forEach(b => b.classList.remove('dim')); });
+  });
+}
+
+function renderAll(){ populateSelects(); renderDesign(); renderConceptStats(); renderCompare(); renderGlance(); renderTimeline(); renderPermits(); renderExpenses(); }
 
 /* ---------- Events ---------- */
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
@@ -1187,7 +1266,7 @@ $('srcTable').addEventListener('change', e => {
 $('conceptList').addEventListener('click', e => {
   const k = e.target.dataset.use; if(!k) return;
   const c = CONCEPTS[k];
-  Object.assign(S, c.specs, {qty: Object.assign({}, c.specs.qty), region:c.site, lotPrice:S.sites[c.site], finish:S.cmpFinish, name:'Casa Astrid'});
+  Object.assign(S, c.specs, {qty: Object.assign({}, c.specs.qty), region:c.site, lotPrice:S.sites[c.site], finish:S.cmpFinish, name:'Casa Valencia'});
   save(); syncInputs(); renderAll();
   document.querySelector('.tab[data-tab="design"]').click();
   window.scrollTo({top:0, behavior:'smooth'});
