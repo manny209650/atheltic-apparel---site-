@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#E02020"/>
+<title>Villa Guatemala — Build Planner</title>
+<meta name="description" content="Plan, budget and track the construction of a villa in Guatemala — cost estimator, phase timeline, permit checklist and expense tracker."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#E02020;--red-bright:#FF3333;--red-dark:#AA0000;
+  --red-grad:linear-gradient(135deg,#FF3333 0%,#E02020 50%,#AA0000 100%);
+  --space:#06060F;--card:#0D0D25;--card2:#131330;--text:#DDE0F0;--muted:#8A8AAA;--white:#fff;
+  --border:rgba(224,32,32,0.18);--ok:#3CC47C;--warn:#F2B233;--rain:#3A8DFF;
+}
+body{background:var(--space);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:50;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
+.nav-logo span{background:var(--red-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:600 .65rem 'Inter',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid rgba(255,255,255,.14);padding:9px 16px;cursor:pointer;transition:all .2s}
+.btn:hover{border-color:var(--red);color:var(--white)}
+.btn.primary{background:var(--red-grad);border-color:transparent;color:#fff}
+.btn.small{padding:5px 10px;font-size:.58rem}
+
+header.hero{text-align:center;padding:64px 16px 40px;background:radial-gradient(ellipse at 50% 0%,#1A0808 0%,#060610 60%)}
+.hero-label{font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--red)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.2rem,10vw,7rem);line-height:.95;letter-spacing:.05em;background:var(--red-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:10px 0}
+.hero-sub{color:var(--muted);max-width:620px;margin:0 auto;font-size:.95rem}
+
+.tabs{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;padding:0 16px;margin:24px auto 0;max-width:1100px}
+.tab{font:600 .68rem 'Inter',sans-serif;letter-spacing:.18em;text-transform:uppercase;padding:12px 18px;background:var(--card);color:var(--muted);border:1px solid var(--border);cursor:pointer}
+.tab.active{color:#fff;border-color:var(--red);background:var(--card2)}
+
+main{max-width:1100px;margin:0 auto;padding:28px 16px 80px}
+section.panel{display:none}
+section.panel.active{display:block}
+h2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.06em;color:#fff;margin-bottom:6px}
+h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;color:#fff;margin-bottom:12px}
+.lead{color:var(--muted);font-size:.88rem;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);padding:22px;margin-bottom:20px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.two{display:grid;gap:20px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+
+label{display:block;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input,select{width:100%;background:#08081A;border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;font:400 .9rem 'Inter',sans-serif}
+input:focus,select:focus{outline:none;border-color:var(--red)}
+.check{display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:.9rem;color:var(--text);margin-top:8px}
+.check input{width:auto}
+
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--border);padding:18px;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.1rem;letter-spacing:.04em;background:var(--red-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.stat-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.stat-sub{font-size:.75rem;color:var(--muted)}
+
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);padding:10px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:middle}
+td.num,th.num{text-align:right;white-space:nowrap}
+tfoot td{font-weight:600;color:#fff;border-top:1px solid var(--border)}
+.bar{height:6px;background:rgba(255,255,255,.06);margin-top:4px}
+.bar>i{display:block;height:100%;background:var(--red-grad)}
+.bar>i.over{background:var(--warn)}
+
+.gantt-row{display:grid;grid-template-columns:170px 1fr;gap:10px;align-items:center;margin-bottom:8px}
+@media(max-width:600px){.gantt-row{grid-template-columns:1fr}}
+.gantt-name{font-size:.82rem}
+.gantt-name small{display:block;color:var(--muted);font-size:.7rem}
+.gantt-track{position:relative;height:26px;background:rgba(255,255,255,.03)}
+.gantt-rain{position:absolute;top:0;bottom:0;background:rgba(58,141,255,.10)}
+.gantt-bar{position:absolute;top:4px;bottom:4px;background:var(--red-grad);min-width:4px}
+.gantt-bar.wet{outline:1px dashed var(--rain);outline-offset:1px}
+.gantt-axis{display:grid;grid-template-columns:170px 1fr;gap:10px;margin-bottom:8px}
+@media(max-width:600px){.gantt-axis{grid-template-columns:1fr}}
+.gantt-months{position:relative;height:18px;font-size:.6rem;color:var(--muted)}
+.gantt-months span{position:absolute;top:0;white-space:nowrap}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.75rem;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:12px;height:12px;vertical-align:-2px;margin-right:6px}
+
+.todo{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.todo input{width:18px;height:18px;margin-top:3px;flex-shrink:0;accent-color:var(--red)}
+.todo.done .todo-title{text-decoration:line-through;color:var(--muted)}
+.todo-title{font-weight:600;font-size:.92rem}
+.todo-desc{font-size:.8rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--border);color:var(--red-bright);margin-left:6px}
+.progress{height:8px;background:rgba(255,255,255,.06);margin:8px 0 4px}
+.progress>i{display:block;height:100%;background:var(--ok);transition:width .3s}
+
+.note{font-size:.78rem;color:var(--muted);border-left:2px solid var(--warn);padding:8px 12px;background:rgba(242,178,51,.05);margin-top:12px}
+.row-form{display:grid;gap:10px;grid-template-columns:130px 1fr 170px 120px auto;align-items:end}
+@media(max-width:820px){.row-form{grid-template-columns:1fr 1fr}}
+.del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
+.del:hover{color:var(--red-bright)}
+.empty{color:var(--muted);font-size:.85rem;padding:14px 0}
+footer{text-align:center;color:var(--muted);font-size:.72rem;padding:30px 16px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">VILLA <span>GUATEMALA</span></a>
+  <div class="nav-actions">
+    <button class="btn" id="exportCsv">Export CSV</button>
+    <button class="btn" id="exportJson">Save JSON</button>
+    <label class="btn" style="margin:0;letter-spacing:.16em">Load JSON<input type="file" id="importJson" accept="application/json" hidden/></label>
+    <button class="btn" id="resetAll">Reset</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="hero-label">Build Planner</span>
+  <h1 class="hero-title">Villa Guatemala</h1>
+  <p class="hero-sub">Estimate the budget, schedule around the rainy season, work through permits, and track every quetzal spent — from lot to keys.</p>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab active" data-tab="design">1 · Design & Budget</button>
+  <button class="tab" data-tab="timeline">2 · Timeline</button>
+  <button class="tab" data-tab="permits">3 · Permits & Legal</button>
+  <button class="tab" data-tab="expenses">4 · Expenses</button>
+</div>
+
+<main>
+
+<!-- ============ DESIGN & BUDGET ============ -->
+<section class="panel active" id="panel-design">
+  <h2>Design & Budget</h2>
+  <p class="lead">Set the villa specs. The estimate updates live, in both US dollars and quetzales.</p>
+
+  <div class="card">
+    <div class="grid">
+      <div><label for="name">Project name</label><input id="name" data-field="name"/></div>
+      <div><label for="region">Region</label>
+        <select id="region" data-field="region"></select></div>
+      <div><label for="finish">Finish level</label>
+        <select id="finish" data-field="finish">
+          <option value="standard">Standard</option>
+          <option value="premium">Premium</option>
+          <option value="luxury">Luxury</option>
+        </select></div>
+      <div><label for="area">Built area (m²)</label><input id="area" type="number" min="40" step="5" data-field="area"/></div>
+      <div><label for="bedrooms">Bedrooms</label><input id="bedrooms" type="number" min="1" max="12" data-field="bedrooms"/></div>
+      <div><label for="bathrooms">Bathrooms</label><input id="bathrooms" type="number" min="1" max="12" step="0.5" data-field="bathrooms"/></div>
+      <div><label for="lotPrice">Land cost (USD, 0 if owned)</label><input id="lotPrice" type="number" min="0" step="1000" data-field="lotPrice"/></div>
+      <div><label for="fx">Exchange rate (GTQ per USD)</label><input id="fx" type="number" min="1" step="0.01" data-field="fx"/></div>
+      <div><label for="contingency">Contingency (%)</label><input id="contingency" type="number" min="0" max="40" data-field="contingency"/></div>
+    </div>
+    <div class="grid" style="margin-top:14px">
+      <label class="check"><input type="checkbox" data-field="pool"/> Swimming pool</label>
+      <label class="check"><input type="checkbox" data-field="solar"/> Solar power system</label>
+      <label class="check"><input type="checkbox" data-field="well"/> Water well + cistern</label>
+      <label class="check"><input type="checkbox" data-field="wall"/> Perimeter wall & gate</label>
+    </div>
+    <p class="note" id="regionNote"></p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="sTotalUsd">—</div><div class="stat-label">Total estimate (USD)</div></div>
+    <div class="stat"><div class="stat-num" id="sTotalGtq">—</div><div class="stat-label">Total estimate (GTQ)</div></div>
+    <div class="stat"><div class="stat-num" id="sPerM2">—</div><div class="stat-label">Build cost / m²</div><div class="stat-sub">excl. land & extras</div></div>
+    <div class="stat"><div class="stat-num" id="sMonths">—</div><div class="stat-label">Est. duration</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Cost Breakdown</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Category</th><th class="num">USD</th><th class="num">GTQ</th><th class="num">Share</th></tr></thead>
+        <tbody id="costBody"></tbody>
+        <tfoot><tr><td>Total</td><td class="num" id="fUsd"></td><td class="num" id="fGtq"></td><td class="num">100%</td></tr></tfoot>
+      </table>
+    </div>
+    <p class="note">Planning-grade estimates only (±25%). Prices vary with site slope, access roads, material transport and contractor. Get at least three written quotes (cotizaciones) from licensed contractors before committing.</p>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="panel" id="panel-timeline">
+  <h2>Construction Timeline</h2>
+  <p class="lead">Guatemala's rainy season (invierno) runs roughly May–October. Earthworks, foundations and roofing are best done in the dry season (verano, November–April). Phases that overlap the rains are outlined in blue.</p>
+  <div class="card">
+    <div class="grid" style="margin-bottom:18px">
+      <div><label for="start">Planned start date</label><input id="start" type="date" data-field="start"/></div>
+      <div style="align-self:end"><button class="btn" id="bestStart">Suggest dry-season start</button></div>
+    </div>
+    <div id="gantt"></div>
+    <div class="legend">
+      <span><i style="background:var(--red)"></i>Phase</span>
+      <span><i style="background:rgba(58,141,255,.35)"></i>Rainy season</span>
+      <span><i style="border:1px dashed var(--rain)"></i>Weather-sensitive phase in rains</span>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Phase Details</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Phase</th><th>Start</th><th>End</th><th class="num">Weeks</th><th>Notes</th></tr></thead>
+        <tbody id="phaseBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERMITS ============ -->
+<section class="panel" id="panel-permits">
+  <h2>Permits & Legal Checklist</h2>
+  <p class="lead">Typical steps for buying land and building a home in Guatemala. Requirements differ by municipality — always confirm with your notario and the local municipalidad.</p>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;font-size:.8rem"><span>Progress</span><span id="permitPct">0%</span></div>
+    <div class="progress"><i id="permitBar" style="width:0"></i></div>
+    <div id="permitList"></div>
+  </div>
+</section>
+
+<!-- ============ EXPENSES ============ -->
+<section class="panel" id="panel-expenses">
+  <h2>Expense Tracker</h2>
+  <p class="lead">Log actual payments and compare them against the budget for each category.</p>
+  <div class="card">
+    <form class="row-form" id="expenseForm">
+      <div><label for="exDate">Date</label><input id="exDate" type="date" required/></div>
+      <div><label for="exDesc">Description</label><input id="exDesc" placeholder="e.g. 500 blocks + rebar" required/></div>
+      <div><label for="exCat">Category</label><select id="exCat"></select></div>
+      <div><label for="exAmt">Amount</label><input id="exAmt" type="number" min="0" step="0.01" required/></div>
+      <div style="display:flex;gap:6px">
+        <select id="exCur" style="width:80px"><option>USD</option><option>GTQ</option></select>
+        <button class="btn primary" type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="eSpent">—</div><div class="stat-label">Spent (USD)</div></div>
+    <div class="stat"><div class="stat-num" id="eLeft">—</div><div class="stat-label">Remaining budget</div></div>
+    <div class="stat"><div class="stat-num" id="ePct">—</div><div class="stat-label">Of budget used</div></div>
+  </div>
+  <div class="two">
+    <div class="card">
+      <h3>Budget vs Actual</h3>
+      <div id="bva"></div>
+    </div>
+    <div class="card">
+      <h3>Payments</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Description</th><th class="num">USD</th><th></th></tr></thead>
+          <tbody id="expBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>Villa Guatemala Build Planner · Your data is saved in this browser only. Use “Save JSON” to back it up.</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Reference data ---------- */
+// Base structural+finish cost per m² in USD (Guatemala, 2026 planning figures).
+const FINISH = {standard:{m2:450,label:'Standard'}, premium:{m2:700,label:'Premium'}, luxury:{m2:1050,label:'Luxury'}};
+
+const REGIONS = {
+  antigua:  {label:'Antigua Guatemala / Sacatepéquez', mult:1.20, note:'Antigua’s historic zone requires design approval from the Consejo Nacional para la Protección de La Antigua Guatemala (CNPAG): colonial façades, clay-tile roofs and height limits. Expect longer permitting.'},
+  atitlan:  {label:'Lake Atitlán (Panajachel, San Marcos…)', mult:1.15, note:'Materials often arrive by boat or steep roads, adding transport cost. Lakeshore setbacks and wastewater rules are strictly enforced by AMSCLAE.'},
+  guatecity:{label:'Guatemala City / Carretera a El Salvador', mult:1.00, note:'Best contractor and material availability. Gated communities (condominios) often have their own architectural rules and approval fees.'},
+  pacific:  {label:'Pacific coast (Monterrico, El Paredón…)', mult:1.08, note:'Salt air and heat: specify corrosion-resistant fittings, and good ventilation. Beachfront land within the protected coastal strip is state-owned and usually leased, not titled.'},
+  peten:    {label:'Petén (Flores, Tikal area)', mult:1.10, note:'Remote logistics raise material prices. Check protected-area (CONAP) restrictions, especially near the Maya Biosphere Reserve.'},
+  xela:     {label:'Quetzaltenango (Xela) / Highlands', mult:0.95, note:'Cooler climate: budget for fireplaces or heating rather than A/C. Good local labour availability.'}
+};
+
+// Share of the base build cost per category.
+const CATEGORIES = [
+  {id:'design',  label:'Architect, engineering & soil study', share:.08},
+  {id:'site',    label:'Site prep & earthworks',              share:.05},
+  {id:'found',   label:'Foundation (cimentación)',            share:.12},
+  {id:'struct',  label:'Structure — block, rebar, columns',   share:.22},
+  {id:'roof',    label:'Roof (losa / teja)',                  share:.10},
+  {id:'elec',    label:'Electrical',                          share:.07},
+  {id:'plumb',   label:'Plumbing & septic',                   share:.07},
+  {id:'finish',  label:'Finishes — floors, tile, paint',      share:.15},
+  {id:'carp',    label:'Doors, windows & carpentry',          share:.08},
+  {id:'kitchen', label:'Kitchen & bathrooms fixtures',        share:.06}
+];
+const EXTRAS = {
+  pool:  {label:'Swimming pool',            usd:22000},
+  solar: {label:'Solar power system',       usd:9000},
+  well:  {label:'Water well + cistern',     usd:12000},
+  wall:  {label:'Perimeter wall & gate',    usd:15000}
+};
+
+// Duration in weeks for a 200 m² villa; scaled by size. wet = weather-sensitive.
+const PHASES = [
+  {id:'design', label:'Design & permits',       weeks:12, wet:false, note:'Plans stamped by a colegiado architect/engineer; municipal licence.'},
+  {id:'site',   label:'Site prep & earthworks', weeks:3,  wet:true,  note:'Clearing, levelling, retaining walls, access road.'},
+  {id:'found',  label:'Foundation',             weeks:4,  wet:true,  note:'Footings & ground beams to AGIES seismic norms.'},
+  {id:'struct', label:'Structure & walls',      weeks:10, wet:false, note:'Reinforced block walls, columns, beams.'},
+  {id:'roof',   label:'Roof',                   weeks:4,  wet:true,  note:'Concrete slab or timber + clay tile. Pour in dry weather.'},
+  {id:'mep',    label:'Electrical & plumbing',  weeks:6,  wet:false, note:'Rough-in, septic/treatment plant, utility connection.'},
+  {id:'finish', label:'Finishes',               weeks:10, wet:false, note:'Floors, tile, plaster, paint, carpentry, fixtures.'},
+  {id:'ext',    label:'Exterior & landscaping', weeks:5,  wet:false, note:'Pool, walls, gardens, driveway.'}
+];
+
+const PERMITS = [
+  {id:'title',   title:'Verify land title', tag:'Land', desc:'Search the Registro General de la Propiedad (RGP) for ownership, liens (gravámenes) and boundaries. Get a certificación registral.'},
+  {id:'survey',  title:'Survey & boundary check', tag:'Land', desc:'Hire a surveyor (agrimensor) to confirm the plot matches the registered plan and there are no encroachments.'},
+  {id:'nit',     title:'Get a NIT from SAT', tag:'Tax', desc:'Tax ID (Número de Identificación Tributaria) is needed to buy property and pay invoices. Foreigners register with their passport.'},
+  {id:'notary',  title:'Purchase deed with a notario', tag:'Land', desc:'The escritura pública is drafted by a Guatemalan notary and then registered at the RGP. Pay the IVA or timbres fiscales that apply to the sale.'},
+  {id:'soil',    title:'Soil study (estudio de suelos)', tag:'Design', desc:'Determines foundation design — essential in a seismic country.'},
+  {id:'plans',   title:'Stamped architectural & structural plans', tag:'Design', desc:'Signed by a colegiado architect and structural engineer, following AGIES seismic design norms (NSE).'},
+  {id:'env',     title:'Environmental registration (MARN)', tag:'Permit', desc:'Many municipalities require an environmental assessment instrument registered with the Ministerio de Ambiente before issuing a licence.'},
+  {id:'special', title:'Special-zone approval if applicable', tag:'Permit', desc:'CNPAG (Antigua), AMSCLAE (Lake Atitlán), CONAP (protected areas), or HOA approval in a gated community.'},
+  {id:'licence', title:'Licencia de construcción', tag:'Permit', desc:'Building permit from the local municipalidad. Fee is usually a percentage of the declared construction value. Display it on site.'},
+  {id:'water',   title:'Water connection or well permit', tag:'Utilities', desc:'Municipal water service, or a permit for a private well.'},
+  {id:'power',   title:'Electricity connection', tag:'Utilities', desc:'Apply to EEGSA (central region) or ENERGUATE (rest of the country) for a meter and service contract.'},
+  {id:'igss',    title:'Worker registration (IGSS)', tag:'Labour', desc:'Formal employees must be registered with the Instituto Guatemalteco de Seguridad Social. Confirm your contractor handles this.'},
+  {id:'contract',title:'Signed contractor agreement', tag:'Build', desc:'Fixed scope, payment schedule tied to milestones, retention (~10%) until completion, and a warranty period.'},
+  {id:'final',   title:'Final inspection & occupancy', tag:'Close', desc:'Municipal final inspection, then update the property registration and IUSI (property tax) valuation.'}
+];
+
+/* ---------- State ---------- */
+const KEY = 'villa-guatemala-v1';
+const DEFAULTS = {
+  name:'Casa del Volcán', region:'antigua', finish:'premium', area:220, bedrooms:4, bathrooms:3.5,
+  lotPrice:60000, fx:7.7, contingency:10, pool:true, solar:false, well:false, wall:true,
+  start:'', permits:{}, expenses:[]
+};
+let S = load();
+
+function load(){
+  try{ const raw = localStorage.getItem(KEY); if(raw) return Object.assign({}, DEFAULTS, JSON.parse(raw)); }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULTS));
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* ---------- Helpers ---------- */
+const $ = id => document.getElementById(id);
+const usd = n => '$' + Math.round(n).toLocaleString('en-US');
+const gtq = n => 'Q' + Math.round(n).toLocaleString('en-US');
+const short = n => n >= 1e6 ? '$' + (n/1e6).toFixed(2) + 'M' : '$' + Math.round(n/1000) + 'K';
+const shortQ = n => n >= 1e6 ? 'Q' + (n/1e6).toFixed(2) + 'M' : 'Q' + Math.round(n/1000) + 'K';
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const addDays = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
+const fmtDate = d => d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+const iso = d => d.toISOString().slice(0,10);
+const isRainy = d => { const m = d.getMonth(); return m >= 4 && m <= 9; }; // May–Oct
+
+/* ---------- Estimate ---------- */
+function estimate(){
+  const f = FINISH[S.finish] || FINISH.premium;
+  const r = REGIONS[S.region] || REGIONS.guatecity;
+  const area = Math.max(0, +S.area || 0);
+  // Extra bathrooms beyond 1 per bedroom push cost up slightly.
+  const bathAdj = 1 + Math.max(0, (+S.bathrooms || 0) - (+S.bedrooms || 0)) * 0.02;
+  const base = area * f.m2 * r.mult * bathAdj;
+  const lines = CATEGORIES.map(c => ({id:c.id, label:c.label, usd: base * c.share}));
+  Object.keys(EXTRAS).forEach(k => { if(S[k]) lines.push({id:k, label:EXTRAS[k].label, usd: EXTRAS[k].usd * r.mult}); });
+  const land = +S.lotPrice || 0;
+  if(land > 0) lines.unshift({id:'land', label:'Land purchase', usd: land});
+  // Closing costs & taxes ~ 4% of land + licence fee ~1% of build value
+  const fees = land * 0.04 + base * 0.01;
+  lines.push({id:'fees', label:'Permits, notary & taxes', usd: fees});
+  const sub = lines.reduce((a,l) => a + l.usd, 0);
+  const cont = sub * (Math.max(0, +S.contingency || 0) / 100);
+  lines.push({id:'contingency', label:'Contingency', usd: cont});
+  return {lines, total: sub + cont, perM2: area ? base / area : 0};
+}
+
+function schedule(){
+  const scale = Math.max(0.6, Math.min(2, (+S.area || 200) / 200));
+  let cur = S.start ? new Date(S.start + 'T00:00:00') : nextDryStart();
+  return PHASES.map(p => {
+    let weeks = p.id === 'design' ? p.weeks : Math.ceil(p.weeks * scale);
+    if(p.id === 'ext' && !S.pool && !S.wall) weeks = Math.ceil(weeks * 0.5);
+    const start = new Date(cur), end = addDays(start, weeks * 7);
+    let wet = false;
+    for(let d = new Date(start); d < end; d = addDays(d, 7)) if(isRainy(d)) { wet = true; break; }
+    cur = end;
+    return Object.assign({}, p, {weeks, start, end, inRain: p.wet && wet});
+  });
+}
+
+// Earliest start such that design & permits wrap up in the dry season (Nov–Apr),
+// so earthworks and foundations begin while it is dry.
+function nextDryStart(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const designDays = PHASES[0].weeks * 7;
+  if(!isRainy(addDays(today, designDays))) return today;
+  // Design would finish in the rains: time it to finish on 1 November.
+  let target = new Date(today.getFullYear(), 10, 1);
+  if(addDays(target, -designDays) < today) target = new Date(today.getFullYear() + 1, 10, 1);
+  return addDays(target, -designDays);
+}
+
+/* ---------- Render ---------- */
+function renderDesign(){
+  const e = estimate(), fx = +S.fx || 7.7;
+  $('sTotalUsd').textContent = short(e.total);
+  $('sTotalGtq').textContent = shortQ(e.total * fx);
+  $('sPerM2').textContent = usd(e.perM2);
+  const ph = schedule();
+  const months = Math.round((ph[ph.length-1].end - ph[0].start) / (30.44 * 864e5));
+  $('sMonths').textContent = months + ' mo';
+  $('costBody').innerHTML = e.lines.map(l => {
+    const pct = e.total ? l.usd / e.total * 100 : 0;
+    return `<tr><td>${esc(l.label)}<div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div></td>
+      <td class="num">${usd(l.usd)}</td><td class="num">${gtq(l.usd * fx)}</td><td class="num">${pct.toFixed(1)}%</td></tr>`;
+  }).join('');
+  $('fUsd').textContent = usd(e.total);
+  $('fGtq').textContent = gtq(e.total * fx);
+  $('regionNote').textContent = (REGIONS[S.region] || {}).note || '';
+}
+
+function renderTimeline(){
+  const ph = schedule();
+  const t0 = ph[0].start.getTime(), t1 = ph[ph.length-1].end.getTime(), span = t1 - t0;
+  const pos = t => ((t - t0) / span * 100).toFixed(2) + '%';
+
+  // Rainy-season bands
+  let bands = '';
+  for(let y = ph[0].start.getFullYear(); y <= ph[ph.length-1].end.getFullYear(); y++){
+    const a = Math.max(t0, new Date(y,4,1).getTime()), b = Math.min(t1, new Date(y,10,1).getTime());
+    if(b > a) bands += `<div class="gantt-rain" style="left:${pos(a)};width:${((b-a)/span*100).toFixed(2)}%"></div>`;
+  }
+  // Month labels (every 2nd month on long projects)
+  let months = '', m = new Date(ph[0].start.getFullYear(), ph[0].start.getMonth() + 1, 1);
+  const step = span > 400 * 864e5 ? 3 : 2;
+  for(let i = 0; m.getTime() < t1; i++, m = new Date(m.getFullYear(), m.getMonth() + 1, 1)){
+    if(i % step) continue;
+    months += `<span style="left:${pos(m.getTime())}">${m.toLocaleDateString('en-US',{month:'short'})} ${String(m.getFullYear()).slice(2)}</span>`;
+  }
+  $('gantt').innerHTML = `<div class="gantt-axis"><div></div><div class="gantt-months">${months}</div></div>` +
+    ph.map(p => `<div class="gantt-row"><div class="gantt-name">${esc(p.label)}<small>${p.weeks} weeks</small></div>
+      <div class="gantt-track">${bands}<div class="gantt-bar${p.inRain ? ' wet' : ''}" style="left:${pos(p.start.getTime())};width:${((p.end-p.start)/span*100).toFixed(2)}%" title="${fmtDate(p.start)} → ${fmtDate(p.end)}"></div></div></div>`).join('');
+
+  $('phaseBody').innerHTML = ph.map(p => `<tr><td>${esc(p.label)}${p.inRain ? '<span class="tag" style="color:var(--rain);border-color:var(--rain)">Rain risk</span>' : ''}</td>
+    <td>${fmtDate(p.start)}</td><td>${fmtDate(p.end)}</td><td class="num">${p.weeks}</td><td style="color:var(--muted);font-size:.8rem">${esc(p.note)}</td></tr>`).join('');
+  if(!S.start) $('start').value = iso(ph[0].start);
+}
+
+function renderPermits(){
+  const done = PERMITS.filter(p => S.permits[p.id]).length;
+  const pct = Math.round(done / PERMITS.length * 100);
+  $('permitPct').textContent = `${done}/${PERMITS.length} · ${pct}%`;
+  $('permitBar').style.width = pct + '%';
+  $('permitList').innerHTML = PERMITS.map(p => `<label class="todo${S.permits[p.id] ? ' done' : ''}">
+    <input type="checkbox" data-permit="${p.id}"${S.permits[p.id] ? ' checked' : ''}/>
+    <div><div class="todo-title">${esc(p.title)}<span class="tag">${esc(p.tag)}</span></div><div class="todo-desc">${esc(p.desc)}</div></div></label>`).join('');
+}
+
+function renderExpenses(){
+  const e = estimate(), fx = +S.fx || 7.7;
+  const byCat = {};
+  S.expenses.forEach(x => { byCat[x.cat] = (byCat[x.cat] || 0) + x.usd; });
+  const spent = S.expenses.reduce((a,x) => a + x.usd, 0);
+  $('eSpent').textContent = short(spent);
+  $('eLeft').textContent = short(Math.max(0, e.total - spent));
+  $('ePct').textContent = e.total ? Math.round(spent / e.total * 100) + '%' : '—';
+
+  $('bva').innerHTML = e.lines.map(l => {
+    const a = byCat[l.id] || 0, pct = l.usd ? a / l.usd * 100 : 0;
+    return `<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:.8rem">
+      <span>${esc(l.label)}</span><span style="color:${pct > 100 ? 'var(--warn)' : 'var(--muted)'}">${usd(a)} / ${usd(l.usd)}</span></div>
+      <div class="bar"><i class="${pct > 100 ? 'over' : ''}" style="width:${Math.min(100, pct).toFixed(1)}%"></i></div></div>`;
+  }).join('');
+
+  const rows = S.expenses.slice().sort((a,b) => b.date.localeCompare(a.date));
+  $('expBody').innerHTML = rows.length ? rows.map(x => `<tr><td style="white-space:nowrap">${esc(x.date)}</td>
+    <td>${esc(x.desc)}<div style="font-size:.7rem;color:var(--muted)">${esc(labelFor(x.cat))}${x.cur === 'GTQ' ? ' · ' + gtq(x.amount) : ''}</div></td>
+    <td class="num">${usd(x.usd)}</td><td><button class="del" data-del="${x.id}" aria-label="Delete">×</button></td></tr>`).join('')
+    : `<tr><td colspan="4" class="empty">No payments logged yet.</td></tr>`;
+}
+
+function labelFor(id){
+  const l = estimate().lines.find(l => l.id === id);
+  return l ? l.label : (CATEGORIES.find(c => c.id === id) || {label:id}).label;
+}
+
+function populateSelects(){
+  const opts = estimate().lines.filter(l => l.id !== 'contingency');
+  const cur = $('exCat').value;
+  $('exCat').innerHTML = opts.map(l => `<option value="${l.id}">${esc(l.label)}</option>`).join('') + '<option value="contingency">Contingency / other</option>';
+  if(cur) $('exCat').value = cur;
+}
+
+function syncInputs(){
+  document.querySelectorAll('[data-field]').forEach(el => {
+    const v = S[el.dataset.field];
+    if(el.type === 'checkbox') el.checked = !!v; else el.value = v ?? '';
+  });
+}
+
+function renderAll(){ populateSelects(); renderDesign(); renderTimeline(); renderPermits(); renderExpenses(); }
+
+/* ---------- Events ---------- */
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x === t));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + t.dataset.tab));
+}));
+
+document.querySelectorAll('[data-field]').forEach(el => el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', () => {
+  const f = el.dataset.field;
+  S[f] = el.type === 'checkbox' ? el.checked : (el.type === 'number' ? (el.value === '' ? '' : +el.value) : el.value);
+  save(); renderAll();
+}));
+
+$('bestStart').addEventListener('click', () => { S.start = iso(nextDryStart()); $('start').value = S.start; save(); renderAll(); });
+
+$('permitList').addEventListener('change', e => {
+  const id = e.target.dataset.permit; if(!id) return;
+  S.permits[id] = e.target.checked; save(); renderPermits();
+});
+
+$('expenseForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const amount = +$('exAmt').value, cur = $('exCur').value;
+  if(!(amount > 0)) return;
+  S.expenses.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+    date: $('exDate').value, desc: $('exDesc').value.trim(), cat: $('exCat').value,
+    amount, cur, usd: cur === 'GTQ' ? amount / (+S.fx || 7.7) : amount
+  });
+  $('exDesc').value = ''; $('exAmt').value = '';
+  save(); renderExpenses();
+});
+
+$('expBody').addEventListener('click', e => {
+  const id = e.target.dataset.del; if(!id) return;
+  S.expenses = S.expenses.filter(x => x.id !== id); save(); renderExpenses();
+});
+
+function download(name, text, type){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], {type}));
+  a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+const slug = () => (S.name || 'villa').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'villa';
+const csvCell = v => /[",\n]/.test(String(v)) ? '"' + String(v).replace(/"/g,'""') + '"' : String(v);
+
+$('exportCsv').addEventListener('click', () => {
+  const e = estimate(), fx = +S.fx || 7.7;
+  const rows = [['Section','Item','USD','GTQ','Date']];
+  e.lines.forEach(l => rows.push(['Budget', l.label, l.usd.toFixed(2), (l.usd*fx).toFixed(2), '']));
+  rows.push(['Budget','TOTAL', e.total.toFixed(2), (e.total*fx).toFixed(2), '']);
+  schedule().forEach(p => rows.push(['Timeline', p.label, '', '', iso(p.start) + ' to ' + iso(p.end)]));
+  S.expenses.forEach(x => rows.push(['Expense', x.desc + ' (' + labelFor(x.cat) + ')', x.usd.toFixed(2), (x.usd*fx).toFixed(2), x.date]));
+  download(slug() + '.csv', rows.map(r => r.map(csvCell).join(',')).join('\n'), 'text/csv');
+});
+$('exportJson').addEventListener('click', () => download(slug() + '.json', JSON.stringify(S, null, 2), 'application/json'));
+$('importJson').addEventListener('change', e => {
+  const file = e.target.files[0]; if(!file) return;
+  file.text().then(t => {
+    try{ S = Object.assign({}, DEFAULTS, JSON.parse(t)); save(); syncInputs(); renderAll(); }
+    catch(err){ alert('That file is not a valid planner backup.'); }
+  });
+  e.target.value = '';
+});
+$('resetAll').addEventListener('click', () => {
+  if(!confirm('Reset all villa data? This clears specs, checklist and expenses.')) return;
+  S = JSON.parse(JSON.stringify(DEFAULTS)); save(); syncInputs(); renderAll();
+});
+
+/* ---------- Init ---------- */
+$('exDate').value = iso(new Date());
+$('region').innerHTML = Object.entries(REGIONS).map(([k,v]) => `<option value="${k}">${esc(v.label)}</option>`).join('');
+syncInputs();
+renderAll();
+})();
+</script>
+</body>
+</html>
