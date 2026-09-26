@@ -7,6 +7,7 @@ const CORE = [
   '/wealth.html',
   '/god.html',
   '/community.html',
+  '/flights.html',
   '/lang.js',
   '/tipjar.js',
   '/manifest.json',

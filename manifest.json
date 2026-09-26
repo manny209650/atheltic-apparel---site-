@@ -49,6 +49,13 @@
       "description": "Live stock prices and portfolio strategy",
       "url": "/market.html?source=shortcut",
       "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Flight Deals",
+      "short_name": "Flights",
+      "description": "Compare flight deals across SFO, Sacramento, Oakland, Stockton and Merced",
+      "url": "/flights.html?source=shortcut",
+      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
     }
   ]
 }
